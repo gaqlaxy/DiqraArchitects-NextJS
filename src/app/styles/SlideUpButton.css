@@ -1,0 +1,49 @@
+.cta-btn-styled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  padding: 14px 22px;
+  background: #080807;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: clamp(1rem, 0.986rem + 0.07vw, 1.071rem);
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.cta-btn-styled span {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-btn-styled .text-original,
+.cta-btn-styled .text-hover {
+  display: block;
+  line-height: 1;
+}
+
+.cta-btn-styled::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 50%;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.cta-btn-styled:hover::after {
+  background: #fff;
+  border-color: #fff;
+}

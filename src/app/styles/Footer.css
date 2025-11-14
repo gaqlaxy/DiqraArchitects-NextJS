@@ -1,0 +1,267 @@
+footer {
+  background: #000;
+  padding: 60px 40px 40px;
+  border-top: 1px solid #222;
+  height: 100vh;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footer-brand h1 {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.footer-brand p {
+  color: #999;
+  font-size: 14px;
+}
+
+.footer-column h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.footer-column ul {
+  list-style: none;
+}
+
+.footer-column ul li {
+  margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+  color: #999;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: #fff;
+}
+
+.footer-contact {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding-top: 40px;
+  border-top: 1px solid #222;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.contact-label svg {
+  width: 20px;
+  height: 20px;
+}
+
+.contact-info {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.contact-info a {
+  color: #999;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: #fff;
+}
+
+.newsletter h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.newsletter p {
+  color: #999;
+  font-size: 13px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.email-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 12px 16px;
+  transition: border-color 0.3s ease;
+}
+
+.email-input-wrapper:focus-within {
+  border-color: #666;
+}
+
+.email-input-wrapper svg {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.email-input-wrapper input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+}
+
+.email-input-wrapper input::placeholder {
+  color: #666;
+}
+
+.email-input-wrapper button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.email-input-wrapper button:hover {
+  transform: translateX(3px);
+}
+
+.email-input-wrapper button svg {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  margin-top: 40px;
+  border-top: 1px solid #222;
+}
+
+.footer-credit {
+  color: #999;
+  font-size: 14px;
+}
+
+.footer-credit a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-credit a:hover {
+  color: #666;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-socials a {
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.footer-socials a:hover {
+  color: #fff;
+}
+
+.footer-socials svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  footer {
+    padding: 40px 24px 24px;
+    height: auto;
+  }
+
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand h1 {
+    font-size: 36px;
+  }
+
+  .footer-contact {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .newsletter {
+    grid-column: span 2;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    padding: 32px 20px 20px;
+  }
+
+  .footer-brand h1 {
+    font-size: 32px;
+  }
+
+  .footer-column h3,
+  .newsletter h3 {
+    font-size: 15px;
+  }
+
+  .contact-label {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,35 @@
+.slideup-link {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 400;
+  /* text-transform: uppercase; */
+  transition: color 0.3s ease;
+}
+
+.slideup-link span {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.slideup-link::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  display: block;
+  color: #fff;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.slideup-link:hover span {
+  transform: translateY(-100%);
+}
+
+.slideup-link:hover::after {
+  transform: translateY(-100%);
+}

@@ -1,0 +1,273 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "slug": "jaloura-main-house",
+      "title": "JALOURA MAIN HOUSE",
+      "year": "2024",
+      "category": "Residential",
+      "projectType": "architecture",
+      "location": "Sydney, Australia",
+      "thumbnail": "/Project2.jpg",
+      "featured": false,
+      "description": "A contemporary residential project that blends modern architecture with natural surroundings.",
+      "details": {
+        "client": "Private Client",
+        "area": "450 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "/Project2.jpg",
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&h=800&fit=crop"
+      ],
+      "tags": ["Modern", "Residential", "Sustainable"]
+    },
+    {
+      "id": 2,
+      "slug": "jaloura-guest-house",
+      "title": "JALOURA GUEST HOUSE",
+      "year": "2024",
+      "category": "Residential",
+      "projectType": "interior",
+      "location": "Sydney, Australia",
+      "thumbnail": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
+      "featured": false,
+      "description": "An intimate guest house designed as a peaceful retreat within a larger estate.",
+      "details": {
+        "client": "Private Client",
+        "area": "180 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&h=800&fit=crop"
+      ],
+      "tags": ["Minimalist", "Guest House", "Contemporary"]
+    },
+    {
+      "id": 3,
+      "slug": "myrtle-pool-house",
+      "title": "MYRTLE POOL HOUSE",
+      "year": "2024",
+      "category": "Recreational",
+      "projectType": "architecture",
+      "location": "Melbourne, Australia",
+      "thumbnail": "/HeroMain.png",
+      "featured": true,
+      "description": "A luxurious pool house that seamlessly integrates indoor and outdoor living spaces.",
+      "details": {
+        "client": "Private Client",
+        "area": "220 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "/HeroMain.png",
+        "https://website-data-pluckwalk.s3-ap-south-1.amazonaws.com/test/kYPfqrWt8C7uRmJ5U4cofX.jpeg",
+        "https://website-data-pluckwalk.s3-ap-south-1.amazonaws.com/test/kYPfqrWt8C7uRmJ5U4cofX.jpeg"
+      ],
+      "tags": ["Luxury", "Pool House", "Indoor-Outdoor"]
+    },
+    {
+      "id": 4,
+      "slug": "clifton",
+      "title": "CLIFTON",
+      "year": "2024",
+      "category": "Residential",
+      "projectType": "architecture",
+      "location": "Brisbane, Australia",
+      "thumbnail": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+      "featured": false,
+      "description": "A bold architectural statement that redefines urban residential design.",
+      "details": {
+        "client": "Private Client",
+        "area": "380 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=800&fit=crop"
+      ],
+      "tags": ["Urban", "Contemporary", "Bold Design"]
+    },
+    {
+      "id": 5,
+      "slug": "sidney-house",
+      "title": "SIDNEY HOUSE",
+      "year": "2024",
+      "category": "Residential",
+      "projectType": "architecture",
+      "location": "Sydney, Australia",
+      "thumbnail": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
+      "featured": true,
+      "description": "A coastal residence that captures breathtaking ocean views and natural light.",
+      "details": {
+        "client": "Private Client",
+        "area": "520 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop"
+      ],
+      "tags": ["Coastal", "Views", "Natural Light"]
+    },
+    {
+      "id": 6,
+      "slug": "haig",
+      "title": "HAIG",
+      "year": "2023",
+      "category": "Residential",
+      "projectType": "architecture",
+      "location": "Perth, Australia",
+      "thumbnail": "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&h=600&fit=crop",
+      "featured": false,
+      "description": "A timeless design that balances tradition with modern functionality.",
+      "details": {
+        "client": "Private Client",
+        "area": "340 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200&h=800&fit=crop"
+      ],
+      "tags": ["Traditional", "Timeless", "Functional"]
+    },
+    {
+      "id": 7,
+      "slug": "mowbray",
+      "title": "MOWBRAY",
+      "year": "2023",
+      "category": "Residential",
+      "projectType": "architecture",
+      "location": "Adelaide, Australia",
+      "thumbnail": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=600&fit=crop",
+      "featured": true,
+      "description": "An innovative urban pavilion that creates a serene oasis in the city.",
+      "details": {
+        "client": "Private Client",
+        "area": "290 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200&h=800&fit=crop"
+      ],
+      "tags": ["Urban Oasis", "Pavilion", "Innovative"]
+    },
+    {
+      "id": 8,
+      "slug": "warraba-1",
+      "title": "WARRABA 1",
+      "year": "2023",
+      "category": "Residential",
+      "projectType": "architecture",
+      "location": "Canberra, Australia",
+      "thumbnail": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop",
+      "featured": true,
+      "description": "A valley view house that harmonizes with its natural landscape setting.",
+      "details": {
+        "client": "Private Client",
+        "area": "410 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&h=800&fit=crop"
+      ],
+      "tags": ["Valley Views", "Natural", "Landscape"]
+    },
+    {
+      "id": 9,
+      "slug": "garden-studio",
+      "title": "GARDEN STUDIO",
+      "year": "2023",
+      "category": "Studio",
+      "projectType": "architecture",
+      "location": "Melbourne, Australia",
+      "thumbnail": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&h=600&fit=crop",
+      "featured": true,
+      "description": "A creative studio space nestled within a lush garden environment.",
+      "details": {
+        "client": "Private Client",
+        "area": "120 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1200&h=800&fit=crop"
+      ],
+      "tags": ["Studio", "Garden", "Creative Space"]
+    },
+    {
+      "id": 10,
+      "slug": "hillside-retreat",
+      "title": "HILLSIDE RETREAT",
+      "year": "2022",
+      "category": "Residential",
+      "projectType": "architecture",
+      "location": "Tasmania, Australia",
+      "thumbnail": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+      "featured": true,
+      "description": "A secluded retreat designed to embrace panoramic hillside vistas.",
+      "details": {
+        "client": "Private Client",
+        "area": "360 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop"
+      ],
+      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+    },
+    {
+      "id": 11,
+      "slug": "perungalathur-house",
+      "title": "Perungalathur House",
+      "year": "2024",
+      "category": "Residential",
+      "projectType": "interior",
+      "location": "Chennai",
+      "thumbnail": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+      "featured": true,
+      "description": "A secluded retreat designed to embrace panoramic hillside vistas.",
+      "details": {
+        "client": "Private Client",
+        "area": "360 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+        "/Int2.jpg",
+        "/Int3.jpg",
+        "/Int4.jpg",
+        "/Int5.jpg",
+        "/Int6.jpg",
+        "/Int7.jpg",
+        "/Int8.jpg"
+      ],
+      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+.process-page {
+  background: #fff;
+  min-height: 100vh;
+}
+
+.process-page-content-wrapper {
+  perspective: 800px;
+}
+
+.process-page-content-slide {
+  color: #111;
+  padding: 3rem 1rem 6rem 1rem;
+}
+
+.process-page-content-slide-inner {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 2rem;
+}
+
+.process-page-content-slide.process-page-green {
+  background: #c9f6b4;
+}
+
+.process-page-content-slide.process-page-white {
+  background: #f5f5f5;
+}
+
+.process-page-content-slide.process-page-orange {
+  background: #ffd9b0;
+}
+
+.process-page-content-slide.process-page-lilac {
+  background: #c4bafe;
+}
+
+.process-page-content-title {
+  color: #111;
+  margin-top: 0.5rem;
+}
+
+.process-page-content-copy {
+  max-width: 50ch;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  line-height: 1.6;
+}
+
+.process-page-content-number {
+  font-size: clamp(1rem, 3vw, 3rem);
+  opacity: 0.5;
+  font-weight: 500;
+}
+
+.process-page-heading-lg {
+  font-size: 8vw;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+@media (min-width: 900px) {
+  .process-page-content-slide {
+    height: calc(100vh - 80px);
+    transform-style: preserve-3d;
+  }
+
+  .process-page-content-slide-inner {
+    gap: 4rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .process-page-heading-lg {
+    font-size: clamp(4rem, 8vw, 8rem);
+  }
+}
+
+.process-page-spacer {
+  height: 100vh;
+}
+
+/* Dummy Sections Styling */
+.process-page-dummy-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+}
+
+.process-page-dummy-section.process-page-before {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.process-page-dummy-section.process-page-after {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.process-page-dummy-content {
+  max-width: 800px;
+  text-align: center;
+  color: white;
+}
+
+.process-page-dummy-content h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.process-page-dummy-content p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}

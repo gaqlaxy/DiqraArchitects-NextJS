@@ -1,0 +1,246 @@
+.servicespage-container {
+  max-width: 1600px;
+
+  margin: 0 auto;
+}
+
+.servicespage-spacer {
+  width: 100%;
+  height: 30vh;
+}
+
+.servicespage-header-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 60px;
+  max-width: 1400px;
+  margin-inline: auto;
+}
+
+.servicespage-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.7;
+
+  z-index: 101;
+  font-weight: 400;
+  color: #333;
+}
+
+.servicespage-main-title {
+  font-size: 120px;
+  font-weight: 400;
+  letter-spacing: -3px;
+  line-height: 0.9;
+  margin: 0;
+}
+
+.servicespage-arch {
+  display: flex;
+  gap: 60px;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+.servicespage-arch__left {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.servicespage-arch__info {
+  max-width: 385px;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.servicespage-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.servicespage-icon-container {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.servicespage-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.servicespage-header {
+  font-size: 52px;
+  font-weight: 400;
+  letter-spacing: -0.64px;
+  margin: 0 0 12px 0;
+}
+
+.servicespage-desc {
+  color: rgba(18, 18, 18, 0.8);
+  font-size: 15px;
+  letter-spacing: -0.45px;
+  margin: 0 0 28px 0;
+  line-height: 1.6;
+}
+
+.servicespage-cta-btn-styled {
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  background: #080807;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+}
+
+.servicespage-cta-btn-styled span {
+  color: #fff;
+  display: block;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.servicespage-cta-btn-styled::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 50%;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.servicespage-cta-btn-styled:hover::after {
+  background: #fff;
+  border-color: #fff;
+}
+
+.servicespage-arch__right {
+  flex-shrink: 1;
+  height: 100vh;
+  width: 100%;
+  max-width: 540px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.servicespage-img-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 400px;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.servicespage-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 900px) {
+  .servicespage-arch {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .servicespage-main-title {
+    font-size: clamp(2.5rem, 1.813rem + 5.84vw, 9.229rem);
+    letter-spacing: -1px;
+    font-weight: 700;
+    line-height: 0.9;
+  }
+
+  .servicespage-header-section {
+    margin-bottom: 40px;
+  }
+
+  .servicespage-arch {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .servicespage-arch__left,
+  .servicespage-arch__right {
+    display: contents;
+  }
+
+  .servicespage-arch__right {
+    height: auto;
+    max-width: 100%;
+  }
+
+  .servicespage-img-wrapper {
+    position: static;
+    transform: none;
+    height: 360px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .servicespage-arch__info {
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .servicespage-header {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .servicespage-arch {
+    gap: 12px;
+  }
+
+  .servicespage-container {
+    padding: 10px;
+  }
+
+  .servicespage-img-wrapper {
+    border-radius: 10px;
+    height: 280px;
+  }
+
+  .servicespage-header {
+    font-size: 24px;
+  }
+
+  .servicespage-desc {
+    font-size: 14px;
+  }
+
+  .servicespage-cta-btn-styled {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+}
