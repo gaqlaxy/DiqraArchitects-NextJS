@@ -90,7 +90,9 @@ export default function CTASection() {
         {/* <a href="#" className="cta-btn-styled">
           <span>tell us about your project</span>
         </a> */}
-        <SlideUpButton to="/contact">tell us about your project</SlideUpButton>
+        <SlideUpButton href="/contact">
+          tell us about your project
+        </SlideUpButton>
       </div>
     </section>
   );

@@ -1,0 +1,271 @@
+@import url("https://fonts.cdnfonts.com/css/thegoodmonolith");
+@import url("https://fonts.cdnfonts.com/css/pp-neue-montreal");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.GalleryRoot {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
+  font-family: "PP Neue Montreal", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+/* Noise layer */
+.GalleryNoiseLayer {
+  pointer-events: none;
+  position: fixed;
+  inset: -50%;
+  background: transparent
+    url("http://assets.iceable.com/img/noise-transparent.png") repeat 0 0;
+  background-size: 300px 300px;
+  opacity: 0.7;
+  animation: gallery-noise 0.3s steps(5) infinite;
+  z-index: 1;
+}
+
+@keyframes gallery-noise {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-2%, -3%);
+  }
+  20% {
+    transform: translate(-4%, 2%);
+  }
+  30% {
+    transform: translate(2%, -4%);
+  }
+  40% {
+    transform: translate(-2%, 5%);
+  }
+  50% {
+    transform: translate(-4%, 2%);
+  }
+  60% {
+    transform: translate(3%, 0);
+  }
+  70% {
+    transform: translate(0, 3%);
+  }
+  80% {
+    transform: translate(-3%, 0);
+  }
+  90% {
+    transform: translate(2%, 2%);
+  }
+  100% {
+    transform: translate(1%, 0);
+  }
+}
+
+/* Vignette */
+.GalleryVignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 300px rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+
+/* Main container */
+.GalleryContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  z-index: 3;
+  touch-action: none; /* allow drag on mobile */
+}
+
+.GalleryContainer:active {
+  cursor: grabbing;
+}
+
+/* Canvas that moves with transform */
+.GalleryCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+/* Items */
+.GalleryItem {
+  position: absolute;
+  overflow: hidden;
+  background-color: #000;
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+}
+
+.GalleryItemImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.GalleryItemImageWrapper img {
+  pointer-events: none;
+  transform-origin: center center;
+  transition: transform 0.35s ease-out;
+}
+
+.GalleryItem:hover .GalleryItemImageWrapper img {
+  transform: scale(1.04);
+}
+
+.GalleryItemCaption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
+}
+
+.GalleryItemTitle {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+}
+
+.GalleryItemNumber {
+  font-family: "TheGoodMonolith", monospace;
+  font-size: 10px;
+  color: #8b8b8b;
+}
+
+/* Overlay for expanded view */
+.GalleryOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: #000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 8;
+  transition: opacity 0.2s linear;
+}
+
+.GalleryOverlay--active {
+  pointer-events: auto;
+}
+
+/* Expanded item */
+.GalleryExpandedItem {
+  position: fixed;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  width: min(90vw, 900px);
+  height: min(70vh, 620px);
+  background-color: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 9;
+  cursor: pointer;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+}
+
+.GalleryExpandedMedia {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Center title for expanded item */
+.GalleryProjectTitle {
+  position: fixed;
+  inset-inline: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.GalleryProjectTitle p {
+  display: inline-block;
+  font-size: clamp(20px, 4vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  opacity: 0;
+}
+
+/* Footer hint */
+.GalleryFooter {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 1.4rem 1.6rem;
+  z-index: 11;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.GalleryFooterContent {
+  pointer-events: auto;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: radial-gradient(circle at top left, #1a1a1a, #000);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.GalleryFooterContent p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #f8f8f8;
+}
+
+.GalleryHintKey {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding-inline: 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+  .GalleryContainer {
+    cursor: default;
+  }
+
+  .GalleryFooterContent {
+    padding-inline: 0.9rem;
+  }
+
+  .GalleryFooterContent p {
+    font-size: 11px;
+  }
+
+  .GalleryExpandedItem {
+    width: 92vw;
+    height: 64vh;
+  }
+}
