@@ -273,7 +273,7 @@ const ServicesPage = () => {
               >
                 <span>Learn More</span>
               </Link> */}
-              <SlideUpButton to="/services/exterior-design">
+              <SlideUpButton href="/services/exterior-design">
                 Learn More
               </SlideUpButton>
             </div>
@@ -308,7 +308,7 @@ const ServicesPage = () => {
               >
                 <span>Learn More</span>
               </Link> */}
-              <SlideUpButton to="/services/design-planning">
+              <SlideUpButton href="/services/design-planning">
                 Learn More
               </SlideUpButton>
             </div>
@@ -353,7 +353,7 @@ const ServicesPage = () => {
               >
                 <span>Learn More</span>
               </Link> */}
-              <SlideUpButton to="/services/consultation">
+              <SlideUpButton href="/services/consultation">
                 Learn More
               </SlideUpButton>
             </div>
@@ -392,7 +392,7 @@ const ServicesPage = () => {
               >
                 <span>Learn More</span>
               </Link> */}
-              <SlideUpButton to="/services/interior-design">
+              <SlideUpButton href="/services/interior-design">
                 Learn More
               </SlideUpButton>
             </div>
@@ -428,7 +428,7 @@ const ServicesPage = () => {
               >
                 <span>Learn More</span>
               </Link> */}
-              <SlideUpButton to="/services/renovation">
+              <SlideUpButton href="/services/renovation">
                 Learn More
               </SlideUpButton>
             </div>
