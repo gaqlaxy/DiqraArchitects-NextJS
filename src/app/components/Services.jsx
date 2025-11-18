@@ -191,7 +191,7 @@ const Services = () => {
           {/* <Link to="/services" className="cta-btn-styled">
             <span>View All</span>
           </Link> */}
-          <SlideUpButton to="/services" className="ml-4">
+          <SlideUpButton href="/services" className="ml-4">
             view all
           </SlideUpButton>
         </div>

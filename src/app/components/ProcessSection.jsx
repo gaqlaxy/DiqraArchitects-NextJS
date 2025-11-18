@@ -117,7 +117,7 @@ const ProcessSection = () => {
           {/* <a href="#" className="process-cta-btn-styled">
             <span>get to know our process</span>
           </a> */}
-          <SlideUpButton to="/contact" className="ml-4">
+          <SlideUpButton href="/process" className="ml-4">
             get to know our process
           </SlideUpButton>
         </div>
