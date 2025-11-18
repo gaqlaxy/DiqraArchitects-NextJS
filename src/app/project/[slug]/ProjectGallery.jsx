@@ -76,7 +76,6 @@
 //   );
 // }
 
-
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -114,16 +113,20 @@ export default function ProjectGallery({ images = [] }) {
 
       // Subtle parallax on images
       gsap.utils.toArray(".pg-img").forEach((img) => {
-        gsap.to(img, {
-          yPercent: -10,
-          ease: "none",
-          scrollTrigger: {
-            trigger: img,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
+        gsap.fromTo(
+          img,
+          { yPercent: 0 },
+          {
+            yPercent: -8, // gentle inner parallax
+            ease: "none",
+            scrollTrigger: {
+              trigger: img.closest(".pg-item"),
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
       });
     }, galleryRef);
 

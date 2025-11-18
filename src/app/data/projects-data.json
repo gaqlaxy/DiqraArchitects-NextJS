@@ -50,12 +50,12 @@
     },
     {
       "id": 3,
-      "slug": "myrtle-pool-house",
-      "title": "MYRTLE POOL HOUSE",
+      "slug": "Mohan's House",
+      "title": "Mohan's House",
       "year": "2024",
       "category": "Recreational",
       "projectType": "architecture",
-      "location": "Melbourne, Australia",
+      "location": "Ayapakkam, Chennai",
       "thumbnail": "/HeroMain.png",
       "featured": true,
       "description": "A luxurious pool house that seamlessly integrates indoor and outdoor living spaces.",
@@ -63,7 +63,7 @@
         "client": "Private Client",
         "area": "220 sqm",
         "status": "Completed",
-        "architect": "Your Studio Name"
+        "architect": "Diqra Architects"
       },
       "images": [
         "/HeroMain.png",
