@@ -12,13 +12,22 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const overlayRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  // const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  const [isMobile, setIsMobile] = useState(false);
+
   const pathname = usePathname();
 
   // Check if we're on homepage
-  const isHomePage = pathname.pathname === "/";
+  const isHomePage = pathname === "/";
 
+  // useEffect(() => {
+  //   const handleResize = () => setIsMobile(window.innerWidth < 1024);
+  //   window.addEventListener("resize", handleResize);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
   useEffect(() => {
+    setIsMobile(window.innerWidth < 1024);
+
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -270,7 +279,7 @@ const Navbar = () => {
   if (!isHomePage) {
     return (
       <>
-        <nav className="Navbar Navbar-simple Navbar-dark">
+        <nav className="Navbar Navbar-simple">
           <div className="Navbar-container">
             <div className="Navbar-content">
               <Link href="/" className="Navbar-logo">
