@@ -5,7 +5,7 @@ import ProcessSection from "@/app/components/ProcessSection";
 import Services from "@/app/components/Services";
 import Testimonials from "@/app/components/Testimonials";
 import CtaSection from "@/app/components/CtaSection";
-// import Footer from "@/app/components/Footer";
+import Footer from "@/app/components/Footer";
 
 export default function HomePage() {
   return (
@@ -18,7 +18,7 @@ export default function HomePage() {
       <Services />
       <Testimonials />
       <CtaSection />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
