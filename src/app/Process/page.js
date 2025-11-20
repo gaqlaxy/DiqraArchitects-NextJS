@@ -1,4 +1,4 @@
-import ProcessPage from "./processPage";
+import ProcessPage from "./ProcessPage";
 
 export const metadata = {
   title: "Diqra - Process",
