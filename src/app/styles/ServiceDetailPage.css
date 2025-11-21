@@ -1,111 +1,123 @@
 /* app/styles/ServiceDetailPage.css */
 
 :root {
-  --sd-bg: #fdfcfb; /* A very subtle warm off-white for luxury feel */
-  --sd-text-main: #111111;
-  --sd-text-muted: #7a7a7a;
-  --sd-border: rgba(0, 0, 0, 0.1);
-  --sd-accent: #111111;
+  /* --- ORIGINAL COLORS --- */
+  --sd-bg: #ffffff;
+  --sd-text-main: #000000;
+  --sd-text-muted: #666666;
+  --sd-accent: #000000;
+  --sd-border: #e5e5e5;
+  --sd-bg-alt: #fafafa;
   
-  /* We will use system fonts but style them heavily */
+  /* --- SPACING --- */
+  --sd-container-max: 1440px;
+  --sd-padding-x: 40px;
+  --sd-radius-lg: 32px; 
+  --sd-radius-md: 24px; 
   
-  --sd-container-padding: clamp(2rem, 5vw, 5rem);
-  --section-spacing: clamp(8rem, 15vw, 15rem);
+  /* --- FONTS --- */
+  --sd-font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-
+body {
+    background-color: var(--sd-bg);
+    color: var(--sd-text-main);
+    font-family: var(--sd-font-main);
+    -webkit-font-smoothing: antialiased;
+}
 
 .servicedetail-container {
   width: 100%;
   overflow-x: hidden;
   opacity: 0; /* Hidden for GSAP init */
+  background-color: var(--sd-bg);
 }
 
 /* --- UTILS --- */
 .sd-overline {
-    /* font-family: var(--sd-font-sans); */
-    font-size: 0.875rem;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    /* color: var(--sd-text-muted); */
-    margin-bottom: 1.5rem;
-    display: block;
-    font-weight: 500;
+    letter-spacing: 2px;
+    color: #999;
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    background: #f5f5f5;
+    border-radius: 20px;
 }
 
 .sd-section-title {
-    font-family: var(--sd-font-serif);
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: 56px;
     font-weight: 400;
-    line-height: 1.1;
-    margin: 0 0 4rem 0;
-    max-width: 800px;
+    letter-spacing: -2px;
+    line-height: 1.2;
+    margin: 0 0 60px 0;
+    color: var(--sd-text-main);
 }
 
-/* --- HERO SECTION --- */
+/* --- HERO SECTION (Original Style) --- */
 .sd-hero {
+    max-width: var(--sd-container-max);
+    margin: 0 auto;
+    padding: 120px var(--sd-padding-x) 80px;
     position: relative;
-    padding: 0 var(--sd-container-padding);
-    min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: var(--section-spacing);
-    padding-top: 10rem; /* Space for navbar */
 }
 
 .sd-hero-header {
     position: relative;
     z-index: 2;
-    margin-bottom: 4rem;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
 .sd-hero-title {
-    font-family: var(--sd-font-serif);
-    /* Massive typography */
-    font-size: clamp(4rem, 11vw, 9rem); 
-    line-height: 0.9;
-    font-weight: 300;
-    letter-spacing: -0.03em;
+    font-size: 72px;
+    font-weight: 400;
+    letter-spacing: -2px;
+    line-height: 1.1;
     margin: 0;
-    text-transform: uppercase;
+    color: var(--sd-text-main);
 }
 
 .sd-hero-image-container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 600px;
     overflow: hidden;
-    /* Subtle border radius for a modern touch */
-    border-radius: 4px; 
+    border-radius: var(--sd-radius-lg);
+    margin-bottom: 40px;
 }
 
 .sd-hero-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Start slightly scaled up for parallax */
     transform: scale(1.15); 
 }
 
 .sd-hero-footer {
-    margin-top: 3rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    text-align: center;
 }
 
 .sd-hero-desc {
-    font-size: 1.125rem;
+    font-size: 18px;
     line-height: 1.6;
-    color: var(--sd-text-main);
-    max-width: 450px;
-    font-weight: 400;
+    color: var(--sd-text-muted);
+    max-width: 700px;
+    margin: 0;
 }
 
-/* --- FEATURES SECTION (The List) --- */
+/* --- FEATURES SECTION (The Editorial/Rebuild Style) --- */
 .sd-features {
-    padding: 0 var(--sd-container-padding);
-    margin-bottom: var(--section-spacing);
+    max-width: var(--sd-container-max);
+    margin: 140px auto;
+    padding: 0 var(--sd-padding-x);
 }
 
 .sd-features-list {
@@ -114,233 +126,258 @@
     border-top: 1px solid var(--sd-border);
 }
 
+/* The Editorial Grid Layout */
 .sd-feature-item {
     padding: 3rem 0;
     border-bottom: 1px solid var(--sd-border);
     display: grid;
-    grid-template-columns: 1fr 2fr 3fr;
+    grid-template-columns: 0.5fr 1.5fr 2fr; /* Number | Title | Desc */
     align-items: baseline;
     transition: opacity 0.3s ease;
     cursor: default;
 }
 
-/* Hover Interaction: fade out siblings */
+/* The Editorial "Focus" Hover Effect */
 .sd-features-list:hover .sd-feature-item {
-    opacity: 0.3;
+    opacity: 0.3; /* Dim siblings */
 }
 .sd-features-list .sd-feature-item:hover {
-    opacity: 1;
+    opacity: 1;   /* Highlight current */
 }
 
 .sd-feature-num {
-    font-family: var(--sd-font-serif);
-    font-size: 2rem;
-    color: var(--sd-accent);
-    font-style: italic;
+    font-size: 18px; /* Clean, small number */
+    color: var(--sd-text-muted);
+    font-weight: 500;
 }
 
 .sd-feature-title {
-    font-size: 1.75rem;
+    font-size: 32px;
     font-weight: 500;
     margin: 0;
+    color: var(--sd-text-main);
 }
 
 .sd-feature-desc {
-    font-size: 1rem;
+    font-size: 16px;
     line-height: 1.6;
     color: var(--sd-text-muted);
     margin: 0;
     max-width: 500px;
 }
 
-/* --- PROCESS SECTION (The Timeline) --- */
+
+/* --- PROCESS SECTION (Vertical Line) --- */
 .sd-process {
-    padding: 0 var(--sd-container-padding);
-    margin-bottom: var(--section-spacing);
-    position: relative;
+    margin: 140px auto;
+    padding: 80px var(--sd-padding-x);
+    background: var(--sd-bg-alt); 
 }
 
 .sd-process-container {
     position: relative;
-    padding-left: 4rem; /* Space for the line */
+    padding-left: 60px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* The vertical line */
 .sd-process-line {
     position: absolute;
-    left: 1rem;
+    left: 19px;
     top: 0;
-    width: 1px;
+    width: 2px;
     height: 100%;
-    background-color: var(--sd-border);
+    background-color: #e5e5e5;
 }
 
-/* The part of the line that fills up */
 .sd-process-line-progress {
     position: absolute;
-    left: 1rem;
+    left: 19px;
     top: 0;
-    width: 1px;
-    height: 0%; /* Starts empty */
-    background-color: var(--sd-accent);
+    width: 2px;
+    height: 0%;
+    background-color: #000;
     z-index: 1;
 }
 
 .sd-process-step {
     position: relative;
-    padding-bottom: 6rem;
-    max-width: 600px;
+    padding-bottom: 80px;
+    padding-left: 40px;
 }
 
 .sd-process-marker {
     position: absolute;
-    left: -3.5rem;
-    top: 0.5rem;
-    width: 1rem;
-    height: 1rem;
+    left: -50px;
+    top: 0;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background-color: var(--sd-bg);
-    border: 1px solid var(--sd-text-muted);
+    background-color: #fff;
+    border: 2px solid #e5e5e5;
     z-index: 2;
-    transition: all 0.5s ease;
+    transition: all 0.4s ease;
 }
-/* Active state for marker */
+
 .sd-process-step.active .sd-process-marker {
-    background-color: var(--sd-accent);
-    border-color: var(--sd-accent);
+    background-color: #000;
+    border-color: #000;
     transform: scale(1.2);
 }
 
 .sd-process-step-num {
-    font-family: var(--sd-font-serif);
-    font-size: 1.25rem;
-    color: var(--sd-text-muted);
-    margin-bottom: 1rem;
-    display: block;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    background: #000;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
 }
 
 .sd-process-title {
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin: 0 0 1rem 0;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    color: var(--sd-text-main);
 }
 
 .sd-process-desc {
-    font-size: 1rem;
+    font-size: 15px;
     line-height: 1.6;
     color: var(--sd-text-muted);
 }
 
-/* --- PROJECTS SECTION (Editorial Layout) --- */
+/* --- PROJECTS SECTION (Alternating) --- */
 .sd-projects {
-    padding: 0 var(--sd-container-padding);
-    margin-bottom: var(--section-spacing);
+    max-width: var(--sd-container-max);
+    margin: 140px auto;
+    padding: 0 var(--sd-padding-x);
 }
 
 .sd-projects-list {
     display: flex;
     flex-direction: column;
-    gap: 8rem;
+    gap: 80px;
 }
 
 .sd-project-item {
     display: grid;
-    grid-template-columns: 1.2fr 1fr; /* Image larger than text */
-    gap: 4rem;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
     align-items: center;
     text-decoration: none;
     color: inherit;
 }
 
-/* Alternating layout */
 .sd-project-item:nth-child(even) {
     grid-template-columns: 1fr 1.2fr;
-    direction: rtl; /* Simple trick to swap columns visually */
+    direction: rtl;
 }
 .sd-project-item:nth-child(even) .sd-project-info {
-    direction: ltr; /* Reset text direction */
+    direction: ltr;
 }
 
 .sd-project-image-wrap {
     width: 100%;
-    height: 70vh;
+    height: 450px;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: var(--sd-radius-md);
+    background-color: #f5f5f5;
+    position: relative;
 }
 
 .sd-project-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sd-project-item:hover .sd-project-image {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .sd-project-info {
-    padding: 2rem;
+    padding: 0 20px;
 }
 
 .sd-project-meta {
-    font-family: var(--sd-font-serif);
-    font-style: italic;
+    font-size: 14px;
     color: var(--sd-text-muted);
-    font-size: 1.125rem;
-    margin-bottom: 1rem;
+    margin-bottom: 12px;
     display: block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .sd-project-title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 400;
+    font-size: 32px;
+    font-weight: 600;
     margin: 0;
-    line-height: 1.1;
+    line-height: 1.2;
+    color: var(--sd-text-main);
 }
 
 .sd-project-view {
-    margin-top: 3rem;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    margin-top: 24px;
+    font-size: 16px;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
-    gap: 1rem;
+    gap: 12px;
+    color: var(--sd-text-main);
 }
+
 .sd-project-arrow {
     transition: transform 0.3s ease;
 }
 .sd-project-item:hover .sd-project-arrow {
-    transform: translateX(10px);
+    transform: translateX(8px);
 }
 
 .sd-projects-cta-wrap {
-    margin-top: 8rem;
+    margin-top: 80px;
     display: flex;
     justify-content: center;
 }
 
 /* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
-    .sd-hero-title { font-size: 6rem; }
-    .sd-feature-item { grid-template-columns: 1fr 3fr; gap: 1rem; }
-    .sd-feature-desc { grid-column: 2; }
-    .sd-feature-num { grid-row: span 2; }
+    .sd-feature-item { 
+        grid-template-columns: 1fr; 
+        gap: 20px;
+    }
+    .sd-feature-num {
+        margin-bottom: 10px;
+    }
+    .sd-hero-title {
+        font-size: 56px;
+    }
 }
 
 @media (max-width: 768px) {
-    .sd-hero-title { font-size: 4rem; }
-    .sd-hero-image-container { height: 50vh; }
-    .sd-feature-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    .sd-feature-num { grid-row: auto; margin-bottom: 0.5rem; }
+    .sd-hero { padding-top: 80px; }
+    .sd-hero-title { font-size: 48px; }
+    .sd-section-title { font-size: 40px; }
+    .sd-hero-image-container { height: 400px; border-radius: 24px; }
+    
+    /* Responsive adjustments for the Editorial Grid */
+    .sd-feature-item { grid-template-columns: 1fr; gap: 10px; }
+    .sd-feature-title { font-size: 24px; }
     
     .sd-project-item, .sd-project-item:nth-child(even) {
         grid-template-columns: 1fr;
         direction: ltr;
-        gap: 2rem;
+        gap: 32px;
     }
-    .sd-project-image-wrap { height: 50vh; }
+    .sd-project-image-wrap { height: 300px; }
     .sd-project-info { padding: 0; }
+    
+    .sd-process-container { padding-left: 30px; }
+    .sd-process-step { padding-left: 20px; }
+    .sd-process-marker { left: -38px; }
+    .sd-process-line { left: 10px; }
+    .sd-process-line-progress { left: 10px; }
 }

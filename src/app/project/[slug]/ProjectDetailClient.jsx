@@ -168,30 +168,396 @@
 // }
 
 
+// "use client";
+
+// import React, { useState, useEffect, useRef } from "react";
+// import Link from "next/link";
+// import projectsData from "@/app/data/projects-data.json";
+// import Footer from "@/app/components/Footer";
+// import { gsap } from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import ProjectGallery from "./ProjectGallery";
+
+// gsap.registerPlugin(ScrollTrigger);
+
+
+// import "@/app/styles/ProjectDetail.css";
+
+// export default function ProjectDetailClient({ slug }) {
+//   const [scrollY, setScrollY] = useState(0);
+//   const heroRef = useRef(null);
+
+//   // Find project + neighbours synchronously from JSON
+//   const projectIndex = projectsData.projects.findIndex(
+//     (p) => p.slug === slug
+//   );
+
+//   if (projectIndex === -1) {
+//     return (
+//       <div className="project-detail project-detail--notfound">
+//         <div className="project-notfound-inner">
+//           <p>Project not found.</p>
+//           <Link href="/works" className="back-to-works-link">
+//             ← Back to Works
+//           </Link>
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   const project = projectsData.projects[projectIndex];
+//   const nextProject =
+//     projectsData.projects[(projectIndex + 1) % projectsData.projects.length];
+//   const prevProject =
+//     projectsData.projects[
+//       (projectIndex - 1 + projectsData.projects.length) %
+//         projectsData.projects.length
+//     ];
+
+//   // Scroll-to-top on slug change
+//   useEffect(() => {
+//     window.scrollTo(0, 0);
+//   }, [slug]);
+
+//   // Track scroll for parallax
+//   useEffect(() => {
+//     const handleScroll = () => setScrollY(window.scrollY);
+
+//     window.addEventListener("scroll", handleScroll, { passive: true });
+//     return () => window.removeEventListener("scroll", handleScroll);
+//   }, []);
+
+//   // Parallax for gallery images
+// useEffect(() => {
+//   if (!project) return;
+
+//   const images = document.querySelectorAll(".gallery-split-image img");
+
+//   images.forEach((img) => {
+//     gsap.fromTo(
+//       img,
+//       { y: 0 },
+//       {
+//         y: -80, // Amount of parallax
+//         ease: "none",
+//         scrollTrigger: {
+//           trigger: img,
+//           start: "top bottom",  // when image enters view
+//           end: "bottom top",    // when image leaves view
+//           scrub: 1.2,           // smooth motion
+//         },
+//       }
+//     );
+//   });
+
+//   return () => {
+//     ScrollTrigger.getAll().forEach((t) => t.kill());
+//   };
+// }, [project]);
+
+
+//   const parallaxOffset = scrollY * 0.4;
+//   const opacity = Math.max(0, 1 - scrollY / 450);
+
+//   return (
+//     <div className="project-detail">
+//       {/* HERO */}
+//       <section className="project-hero" ref={heroRef}>
+//         <div
+//           className="hero-background"
+//           style={{
+//             transform: `translateY(${parallaxOffset}px) scale(1.03)`,
+//             backgroundImage: `url(${project.images[0]})`,
+//           }}
+//         />
+
+//         <div className="hero-gradient" />
+
+//         <div className="hero-content" style={{ opacity }}>
+//           <div className="hero-inner">
+//             <div className="hero-left">
+//               <span className="hero-label">(Project)</span>
+//               <h1 className="project-title">{project.title}</h1>
+
+//               <div className="project-meta">
+//                 <span className="meta-primary">{project.location}</span>
+//                 <span className="meta-divider">•</span>
+//                 <span className="meta-secondary">{project.category}</span>
+//                 {project.year && (
+//                   <>
+//                     <span className="meta-divider">•</span>
+//                     <span className="meta-secondary">{project.year}</span>
+//                   </>
+//                 )}
+//               </div>
+
+//               <Link href="/works" className="back-link">
+//                 ← Back to works
+//               </Link>
+//             </div>
+
+//             <div className="hero-right">
+//               <div className="hero-right-block">
+//                 <span className="hero-right-label">Scope</span>
+//                 <p className="hero-right-value">
+//                   {project.details?.status || "Architecture & Design"}
+//                 </p>
+//               </div>
+//               {project.details?.area && (
+//                 <div className="hero-right-block">
+//                   <span className="hero-right-label">Area</span>
+//                   <p className="hero-right-value">{project.details.area}</p>
+//                 </div>
+//               )}
+//             </div>
+//           </div>
+
+//           <div className="scroll-indicator">
+//             <span className="scroll-indicator-text">(SCROLL TO EXPLORE)</span>
+//             <div className="scroll-line" />
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* PROJECT INFO */}
+//       <section className="project-info">
+//         <div className="info-inner">
+//           <div className="info-grid">
+//             <div className="info-description">
+//               <h2 className="section-label">About the project</h2>
+//               <p className="project-description">{project.description}</p>
+
+//               {project.tags?.length > 0 && (
+//                 <div className="project-tags">
+//                   {project.tags.map((tag, i) => (
+//                     <span key={i} className="tag">
+//                       {tag}
+//                     </span>
+//                   ))}
+//                 </div>
+//               )}
+//             </div>
+
+//             <div className="info-details">
+//               <h3 className="details-title">Project details</h3>
+//               <dl className="details-grid">
+//                 {project.year && (
+//                   <>
+//                     <dt>Year</dt>
+//                     <dd>{project.year}</dd>
+//                   </>
+//                 )}
+//                 {project.details?.client && (
+//                   <>
+//                     <dt>Client</dt>
+//                     <dd>{project.details.client}</dd>
+//                   </>
+//                 )}
+//                 {project.details?.area && (
+//                   <>
+//                     <dt>Area</dt>
+//                     <dd>{project.details.area}</dd>
+//                   </>
+//                 )}
+//                 {project.details?.status && (
+//                   <>
+//                     <dt>Status</dt>
+//                     <dd>{project.details.status}</dd>
+//                   </>
+//                 )}
+//                 {project.details?.architect && (
+//                   <>
+//                     <dt>Architect</dt>
+//                     <dd>{project.details.architect}</dd>
+//                   </>
+//                 )}
+//               </dl>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+      
+//         <ProjectGallery images={project.images} />
+
+
+
+//       {/* PREVIOUS / NEXT */}
+//       <section className="navigation-projects">
+//         <div className="navigation-inner">
+//           {prevProject && (
+//             <article className="nav-project nav-project--prev">
+//               <div className="nav-project-image">
+//                 <Link href={`/project/${prevProject.slug}`}>
+//                   <img
+//                     src={prevProject.thumbnail}
+//                     alt={prevProject.title}
+//                     loading="lazy"
+//                   />
+//                 </Link>
+//               </div>
+//               <div className="nav-project-content">
+//                 <span className="nav-label">Previous project</span>
+//                 <Link
+//                   href={`/project/${prevProject.slug}`}
+//                   className="nav-link"
+//                 >
+//                   <span className="nav-arrow nav-arrow--left">←</span>
+//                   <h2>{prevProject.title}</h2>
+//                 </Link>
+//               </div>
+//             </article>
+//           )}
+
+//           {nextProject && (
+//             <article className="nav-project nav-project--next">
+//               <div className="nav-project-content">
+//                 <span className="nav-label">Next project</span>
+//                 <Link
+//                   href={`/project/${nextProject.slug}`}
+//                   className="nav-link"
+//                 >
+//                   <h2>{nextProject.title}</h2>
+//                   <span className="nav-arrow nav-arrow--right">→</span>
+//                 </Link>
+//               </div>
+//               <div className="nav-project-image">
+//                 <Link href={`/project/${nextProject.slug}`}>
+//                   <img
+//                     src={nextProject.thumbnail}
+//                     alt={nextProject.title}
+//                     loading="lazy"
+//                   />
+//                 </Link>
+//               </div>
+//             </article>
+//           )}
+//         </div>
+//       </section>
+
+//       <Footer />
+//     </div>
+//   );
+// }
+
+
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import projectsData from "@/app/data/projects-data.json";
 import Footer from "@/app/components/Footer";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProjectGallery from "./ProjectGallery";
+import "@/app/styles/ProjectDetail.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
-import "@/app/styles/ProjectDetail.css";
-
 export default function ProjectDetailClient({ slug }) {
-  const [scrollY, setScrollY] = useState(0);
-  const heroRef = useRef(null);
+  const containerRef = useRef(null);
+  const heroImageRef = useRef(null);
 
-  // Find project + neighbours synchronously from JSON
+  // --- DATA LOGIC ---
   const projectIndex = projectsData.projects.findIndex(
     (p) => p.slug === slug
   );
 
+  const project = projectsData.projects[projectIndex];
+  
+  // Safe navigation logic
+  const nextProject = projectIndex !== -1
+    ? projectsData.projects[(projectIndex + 1) % projectsData.projects.length]
+    : null;
+  const prevProject = projectIndex !== -1
+    ? projectsData.projects[
+        (projectIndex - 1 + projectsData.projects.length) %
+          projectsData.projects.length
+      ]
+    : null;
+
+  // Scroll-to-top on slug change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
+  // --- GSAP ANIMATIONS ---
+  useEffect(() => {
+    if (!project) return;
+
+    const ctx = gsap.context(() => {
+      // 1. HERO: Masked Scale-Down Parallax
+      // This replicates the "Service Page" cinematic effect
+      gsap.to(heroImageRef.current, {
+        yPercent: 20,   // Move image down slowly
+        scale: 1,       // Zoom out from 1.15 to 1.0
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".project-hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // Hero Content Fade Out
+      gsap.to(".hero-content", {
+        y: -50,
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".project-hero",
+          start: "top top",
+          end: "50% top", // Fade out quicker
+          scrub: true,
+        },
+      });
+
+      // 2. GALLERY: Vertical Parallax (Existing logic, refined)
+      const galleryImages = gsap.utils.toArray(".gallery-split-image img");
+      galleryImages.forEach((img) => {
+        gsap.fromTo(
+          img,
+          { y: -40, scale: 1.1 }, // Start slightly zoomed
+          {
+            y: 40,
+            ease: "none",
+            scrollTrigger: {
+              trigger: img.parentElement, // Trigger based on the container
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      });
+
+      // 3. FOOTER NAVIGATION: Scale-Down Parallax
+      // Applies the effect to Next/Prev images as they enter viewport
+      const navImages = gsap.utils.toArray(".nav-project-image img");
+      navImages.forEach((img) => {
+        gsap.fromTo(
+          img,
+          { scale: 1.15 }, // Start Zoomed In
+          {
+            scale: 1,      // Zoom Out
+            ease: "none",
+            scrollTrigger: {
+              trigger: img.parentElement, // The .nav-project-image mask
+              start: "top bottom",
+              end: "bottom center", // Finish effect when centered
+              scrub: true,
+            },
+          }
+        );
+      });
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [project]);
+
+  // --- 404 STATE ---
   if (projectIndex === -1) {
     return (
       <div className="project-detail project-detail--notfound">
@@ -205,75 +571,23 @@ export default function ProjectDetailClient({ slug }) {
     );
   }
 
-  const project = projectsData.projects[projectIndex];
-  const nextProject =
-    projectsData.projects[(projectIndex + 1) % projectsData.projects.length];
-  const prevProject =
-    projectsData.projects[
-      (projectIndex - 1 + projectsData.projects.length) %
-        projectsData.projects.length
-    ];
-
-  // Scroll-to-top on slug change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
-
-  // Track scroll for parallax
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Parallax for gallery images
-useEffect(() => {
-  if (!project) return;
-
-  const images = document.querySelectorAll(".gallery-split-image img");
-
-  images.forEach((img) => {
-    gsap.fromTo(
-      img,
-      { y: 0 },
-      {
-        y: -80, // Amount of parallax
-        ease: "none",
-        scrollTrigger: {
-          trigger: img,
-          start: "top bottom",  // when image enters view
-          end: "bottom top",    // when image leaves view
-          scrub: 1.2,           // smooth motion
-        },
-      }
-    );
-  });
-
-  return () => {
-    ScrollTrigger.getAll().forEach((t) => t.kill());
-  };
-}, [project]);
-
-
-  const parallaxOffset = scrollY * 0.4;
-  const opacity = Math.max(0, 1 - scrollY / 450);
-
   return (
-    <div className="project-detail">
+    <div ref={containerRef} className="project-detail">
       {/* HERO */}
-      <section className="project-hero" ref={heroRef}>
-        <div
-          className="hero-background"
-          style={{
-            transform: `translateY(${parallaxOffset}px) scale(1.03)`,
-            backgroundImage: `url(${project.images[0]})`,
-          }}
-        />
+      <section className="project-hero">
+        {/* NEW IMAGE STRUCTURE FOR PARALLAX */}
+        <div className="hero-image-container">
+          <img 
+            ref={heroImageRef}
+            src={project.images[0]} 
+            alt={project.title} 
+            className="hero-image"
+          />
+        </div>
 
         <div className="hero-gradient" />
 
-        <div className="hero-content" style={{ opacity }}>
+        <div className="hero-content">
           <div className="hero-inner">
             <div className="hero-left">
               <span className="hero-label">(Project)</span>
@@ -377,22 +691,7 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* VERTICAL GALLERY (G2) */}
-      {/* <section className="project-gallery">
-        <div className="gallery-inner">
-          {project.images.slice(1).map((img, i) => (
-            <figure key={i} className="gallery-item">
-              <div className="gallery-image-wrap">
-                <img src={img} alt={`${project.title} – image ${i + 2}`} />
-              </div>
-            </figure>
-          ))}
-        </div>
-      </section> */}
-      {/* GALLERY */}
-        <ProjectGallery images={project.images} />
-
-
+      <ProjectGallery images={project.images} />
 
       {/* PREVIOUS / NEXT */}
       <section className="navigation-projects">
