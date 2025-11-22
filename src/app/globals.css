@@ -8,5 +8,5 @@
     url("/ppneuemontreal-book.woff") format("woff");
 }
 body {
-  font-family: "PP Neue Montreal Book";
+  font-family: "PP Neue Montreal Book", sans-serif;
 }
