@@ -3,9 +3,17 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { gsap } from "gsap";
 import { CustomEase } from "gsap/CustomEase";
+import OptimizedGalleryImage from "@/app/components/OptimizedGalleryImage";
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create("hop", "0.9, 0, 0.1, 1");
+
+const TOTAL_IMAGES = 59;
+
+const optimizedGalleryImages = Array.from({ length: TOTAL_IMAGES }, (_, i) => ({
+  full: `/images/gallery/${i + 1}.webp`,
+  blur: `/blur/gallery/${i + 1}.jpg`,
+}));
 
 const items = [
   "Chromatic Loopscape",
@@ -145,7 +153,12 @@ const InfiniteGallery = () => {
           size: itemSize,
           position,
           title: items[itemNum],
-          image: imageUrls[itemNum % imageUrls.length],
+          // image: imageUrls[itemNum % imageUrls.length],
+          image:
+            optimizedGalleryImages[itemNum % optimizedGalleryImages.length]
+              .full,
+          blur: optimizedGalleryImages[itemNum % optimizedGalleryImages.length]
+            .blur,
           number: `#${(itemNum + 1).toString().padStart(5, "0")}`,
         });
       }
@@ -469,14 +482,7 @@ const InfiniteGallery = () => {
           mix-blend-mode: exclusion;
         }
 
-        .GallerySectionlogo-container:hover .GallerySectioncircle-1 {
-          transform: translate(-0.5rem, -50%);
-        }
-
-        .GallerySectionlogo-container:hover .GallerySectioncircle-2 {
-          transform: translate(0.5rem, -50%);
-        }
-
+        
         .GallerySectionkey-hint {
           display: inline-flex;
           align-items: center;
@@ -561,9 +567,7 @@ const InfiniteGallery = () => {
           transition: transform 0.3s ease;
         }
 
-        .GallerySectionitem:hover img {
-          transform: scale(${SETTINGS.hoverScale});
-        }
+       
 
         .GallerySectionitem-caption {
           position: absolute;
@@ -703,7 +707,12 @@ const InfiniteGallery = () => {
               onClick={() => handleItemClick(item)}
             >
               <div className="GallerySectionitem-image-container">
-                <img src={item.image} alt={item.title} />
+                {/* <img src={item.image} alt={item.title} /> */}
+                <OptimizedGalleryImage
+                  full={item.image}
+                  blur={item.blur}
+                  alt={item.title}
+                />
               </div>
               <div className="GallerySectionitem-caption">
                 <div className="GallerySectionitem-name">{item.title}</div>
