@@ -7,7 +7,7 @@ import OptimizedGalleryImage from "@/app/components/OptimizedGalleryImage";
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create("hop", "0.9, 0, 0.1, 1");
-
+const PRELOAD_DISTANCE = 6;
 const TOTAL_IMAGES = 59;
 
 const optimizedGalleryImages = Array.from({ length: TOTAL_IMAGES }, (_, i) => ({
@@ -165,6 +165,15 @@ const InfiniteGallery = () => {
     }
 
     visibleItemsRef.current = newItems;
+    Array.from(newItems.values())
+      .slice(0, PRELOAD_DISTANCE)
+      .forEach((item) => {
+        const img = new Image();
+        img.src =
+          optimizedGalleryImages[
+            item.itemNum % optimizedGalleryImages.length
+          ].full;
+      });
     // trigger a lightweight re-render only when items set changes
     forceRender((n) => n + 1);
   }, [cellWidth, cellHeight]);
