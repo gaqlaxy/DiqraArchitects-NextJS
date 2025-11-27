@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://diqraarchitects.com/
+
+# Sitemaps
+Sitemap: https://diqraarchitects.com/sitemap.xml
