@@ -54,6 +54,8 @@ h1 {
   .process-page {
     background: #fff;
     min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
   }
 
   /* Hero Section */
@@ -68,7 +70,7 @@ h1 {
 
   .hero-background {
     position: absolute;
-    top: -20%;
+    top: 0;
     left: 0;
     width: 100%;
     height: 140%;
@@ -207,16 +209,34 @@ export default function ProcessPage() {
     // Parallax effect for hero section
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       if (heroBackgroundRef.current) {
-        gsap.to(heroBackgroundRef.current, {
-          yPercent: 50,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero-section",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
+        // gsap.to(heroBackgroundRef.current, {
+        //   yPercent: 50,
+        //   ease: "none",
+        //   scrollTrigger: {
+        //     trigger: ".hero-section",
+        //     start: "top top",
+        //     end: "bottom top",
+        //     scrub: 1,
+        //   },
+        // });
+        gsap.fromTo(
+          heroBackgroundRef.current,
+          {
+            yPercent: -15, // Start slightly up
+            scale: 1.15, // Start zoomed in
           },
-        });
+          {
+            yPercent: 15, // Scroll down slower than the page
+            scale: 1, // End at normal scale (Zoom out effect)
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".hero-section",
+              start: "top top",
+              end: "bottom top",
+              scrub: 1,
+            },
+          }
+        );
       }
 
       if (heroContentRef.current) {
