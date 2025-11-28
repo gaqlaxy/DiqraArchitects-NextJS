@@ -1,9 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
-
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/next";
 import PreloaderWrapper from "./components/PreloaderWrapper";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,10 +46,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-          <PreloaderWrapper />
-          <Navbar />
-          {children}
-        
+        <PreloaderWrapper />
+        <Navbar />
+        {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
