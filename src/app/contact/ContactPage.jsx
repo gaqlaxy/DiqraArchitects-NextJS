@@ -166,7 +166,7 @@ export default function ContactPage() {
                 
           max-width: 1400px;
           margin: 0 auto;
-          padding: 60px 20px;
+          padding: 100px 20px 60px 20px;
         }
 
        
