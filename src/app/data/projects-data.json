@@ -528,12 +528,160 @@
     },
     {
       "id": 21,
-      "slug": "mr-esake-residence",
-      "title": "Mr. Esake Residence",
+      "slug": "mr-shyam-residence",
+      "title": "Mr. Shyam Residence",
       "year": "2024",
       "category": "Residential",
       "projectType": "interior",
-      "location": "Kaja nagar, Trichy",
+      "location": "Sithalapakam, Chennai",
+      "thumbnail": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+      "featured": true,
+      "description": "A secluded retreat designed to embrace panoramic hillside vistas.",
+      "details": {
+        "client": "Private Client",
+        "area": "360 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+        "/Int2.jpg",
+        "/Int3.jpg",
+        "/Int4.jpg",
+        "/Int5.jpg",
+        "/Int6.jpg",
+        "/Int7.jpg",
+        "/Int8.jpg"
+      ],
+      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+    },
+    {
+      "id": 22,
+      "slug": "mr-shyam-residence",
+      "title": "Mr. Shyam Residence",
+      "year": "2024",
+      "category": "Residential",
+      "projectType": "interior",
+      "location": "Sithalapakam, Chennai",
+      "thumbnail": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+      "featured": true,
+      "description": "A secluded retreat designed to embrace panoramic hillside vistas.",
+      "details": {
+        "client": "Private Client",
+        "area": "360 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+        "/Int2.jpg",
+        "/Int3.jpg",
+        "/Int4.jpg",
+        "/Int5.jpg",
+        "/Int6.jpg",
+        "/Int7.jpg",
+        "/Int8.jpg"
+      ],
+      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+    },
+    {
+      "id": 23,
+      "slug": "mr-yashwanth-residence",
+      "title": "Mr. Yashwanth Residence",
+      "year": "2024",
+      "category": "Residential",
+      "projectType": "interior",
+      "location": "Gn mills, Coimbatore",
+      "thumbnail": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+      "featured": true,
+      "description": "A secluded retreat designed to embrace panoramic hillside vistas.",
+      "details": {
+        "client": "Private Client",
+        "area": "360 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+        "/Int2.jpg",
+        "/Int3.jpg",
+        "/Int4.jpg",
+        "/Int5.jpg",
+        "/Int6.jpg",
+        "/Int7.jpg",
+        "/Int8.jpg"
+      ],
+      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+    },
+    {
+      "id": 24,
+      "slug": "mrs-divya-d-touch-beauty-salon",
+      "title": "Mrs. Divya,D touch Beauty Salon",
+      "year": "2024",
+      "category": "Residential",
+      "projectType": "interior",
+      "location": "Samayapuram, Trichy",
+      "thumbnail": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+      "featured": true,
+      "description": "A secluded retreat designed to embrace panoramic hillside vistas.",
+      "details": {
+        "client": "Private Client",
+        "area": "360 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+        "/Int2.jpg",
+        "/Int3.jpg",
+        "/Int4.jpg",
+        "/Int5.jpg",
+        "/Int6.jpg",
+        "/Int7.jpg",
+        "/Int8.jpg"
+      ],
+      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+    }
+
+    ,
+    {
+      "id": 25,
+      "slug": "mrs-yamini-residence",
+      "title": "Mrs. Yamini Residence",
+      "year": "2024",
+      "category": "Residential",
+      "projectType": "interior",
+      "location": "KK Nagar, Chennai",
+      "thumbnail": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+      "featured": true,
+      "description": "A secluded retreat designed to embrace panoramic hillside vistas.",
+      "details": {
+        "client": "Private Client",
+        "area": "360 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
+        "/Int2.jpg",
+        "/Int3.jpg",
+        "/Int4.jpg",
+        "/Int5.jpg",
+        "/Int6.jpg",
+        "/Int7.jpg",
+        "/Int8.jpg"
+      ],
+      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+    }
+    ,
+    {
+      "id": 26,
+      "slug": "ms-kaviya-residence",
+      "title": "Ms. Kaviya Residence",
+      "year": "2024",
+      "category": "Residential",
+      "projectType": "interior",
+      "location": "Trichy",
       "thumbnail": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop",
       "featured": true,
       "description": "A secluded retreat designed to embrace panoramic hillside vistas.",
