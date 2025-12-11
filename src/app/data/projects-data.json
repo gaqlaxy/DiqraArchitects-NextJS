@@ -641,9 +641,8 @@
         "/Int8.jpg"
       ],
       "tags": ["Retreat", "Hillside", "Panoramic Views"]
-    }
+    },
 
-    ,
     {
       "id": 25,
       "slug": "mrs-yamini-residence",
@@ -672,8 +671,7 @@
         "/Int8.jpg"
       ],
       "tags": ["Retreat", "Hillside", "Panoramic Views"]
-    }
-    ,
+    },
     {
       "id": 26,
       "slug": "ms-kaviya-residence",

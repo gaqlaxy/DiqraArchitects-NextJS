@@ -23,8 +23,7 @@ export default function OhHeroSection() {
   const viewProjectRef = useRef(null);
   const hoverPreviewRef = useRef(null);
   const previewImageRef = useRef(null);
-  const previewTitleRef = useRef(null);
-  const previewSubtitleRef = useRef(null);
+
   const heroRef = useRef(null);
   const timelineRef = useRef(null);
   const ctaBtnRef = useRef(null);
@@ -101,38 +100,17 @@ export default function OhHeroSection() {
       y: 0,
       duration: 0.9,
       ease: "power4.inOut",
-    })
-      .to(
-        previewImageRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.4,
-          ease: "power3.out",
-        },
-        "-=0.7"
-      )
-      .to(
-        previewTitleRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-        },
-        "-=1"
-      )
-      .to(
-        previewSubtitleRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        "-=0.7"
-      );
+    }).to(
+      previewImageRef.current,
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.4,
+        ease: "power3.out",
+      },
+      "-=0.7"
+    );
 
     // CTA Button slide-up effect (same function but run after load)
     function createSlideUpEffect(element) {

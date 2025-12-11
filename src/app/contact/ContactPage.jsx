@@ -573,50 +573,43 @@ h1 {
             <div className="info-block">
               <h3>Give Us a Call</h3>
               <p>
-                <a href="tel:+12395550108">(239) 555-0108</a>
+                <a href="tel:+917871772428">(+91) 7871772428</a>
               </p>
             </div>
 
             <div className="info-block">
               <h3>Email Us</h3>
               <p>
-                <a href="mailto:support@example.com">support@example.com</a>
+                <a href="mailto:support@example.com">
+                  info@diqraarchitects.com
+                </a>
               </p>
             </div>
 
             <div className="info-block offices">
-              <h3>Offices</h3>
-              <p>
-                <strong>New Jersey</strong>
-                <br />
-                2972 Westheimer Rd. Santa Ana, Illinois 85486
-              </p>
+              <h3>Office</h3>
 
               <p>
-                <strong>New York</strong>
+                <strong>Urapakkam</strong>
                 <br />
-                4517 Washington. Manchester, Kentucky 39495
-              </p>
-
-              <p>
-                <strong>Los Angeles</strong>
+                No. 534/2, 19th Street, Periyar nagar,
                 <br />
-                3517 W. Gray St. Utica, Pennsylvania 57867
+                Urapakkam, Karanaipuducheri, Tamil Nadu 603202
               </p>
             </div>
 
             <div className="social-section">
               <span>Follow on us</span>
               <div className="social-links">
-                <a href="#" aria-label="Twitter">
+                {/* <a href="#" aria-label="Twitter">
                   𝕏
-                </a>
+                </a> */}
                 <a href="#" aria-label="Facebook">
                   f
                 </a>
-                <a href="#" aria-label="YouTube">
+                {/* <a href="#" aria-label="YouTube">
                   ▶
-                </a>
+                </a> */}
                 <a href="#" aria-label="Instagram">
                   📷
                 </a>
