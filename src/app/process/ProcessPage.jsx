@@ -5,9 +5,7 @@
 // import Testimonials from "@/app/components/Testimonials";
 // import Footer from "@/app/components/Footer";
 // import CTASection from "../components/CtaSection";
-// import Link from "next/link";
-// import styles from "../styles/ProcessPage.css";
-// // import "../styles/ProcessPage.css";
+// import "../styles/ProcessPage.css";
 
 // // Register GSAP plugins
 // gsap.registerPlugin(ScrollTrigger);
@@ -41,7 +39,7 @@
 //     number: "05",
 //     title: "Construction & Handover",
 //     copy: "We oversee the construction phase, ensuring quality and compliance, and guide you through to a smooth handover of your completed project.",
-//     color: "green", // You can use: green, white, orange, lilac, or add a new color in your CSS
+//     color: "green",
 //   },
 // ];
 
@@ -52,30 +50,23 @@
 //   const heroContentRef = useRef(null);
 
 //   useEffect(() => {
+//     // Scroll to top on mount
+//     scrollTo(0, 0);
+
 //     const mm = gsap.matchMedia();
 
 //     // Parallax effect for hero section
 //     mm.add("(prefers-reduced-motion: no-preference)", () => {
 //       if (heroBackgroundRef.current) {
-//         // gsap.to(heroBackgroundRef.current, {
-//         //   yPercent: 50,
-//         //   ease: "none",
-//         //   scrollTrigger: {
-//         //     trigger: ".hero-section",
-//         //     start: "top top",
-//         //     end: "bottom top",
-//         //     scrub: 1,
-//         //   },
-//         // });
 //         gsap.fromTo(
 //           heroBackgroundRef.current,
 //           {
-//             yPercent: -15, // Start slightly up
-//             scale: 1.15, // Start zoomed in
+//             yPercent: -15,
+//             scale: 1.15,
 //           },
 //           {
-//             yPercent: 15, // Scroll down slower than the page
-//             scale: 1, // End at normal scale (Zoom out effect)
+//             yPercent: 15,
+//             scale: 1,
 //             ease: "none",
 //             scrollTrigger: {
 //               trigger: ".hero-section",
@@ -102,9 +93,6 @@
 //       }
 //     });
 
-//     mm.add("(prefers-reduced-motion: reduce)", () => {
-//       // Disable animations
-//     });
 //     // Card stacking animation
 //     mm.add(
 //       "(min-width: 1200px) and (prefers-reduced-motion: no-preference)",
@@ -148,174 +136,66 @@
 //       mm.revert();
 //       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 //     };
-//   }, []);
-//   // useEffect(() => {
-//   //   const mm = gsap.matchMedia();
-
-//   //   mm.add(
-//   //     "(min-width: 1200px) and (prefers-reduced-motion: no-preference)",
-//   //     () => {
-//   //       wrapperRefs.current.forEach((wrapper, i) => {
-//   //         if (!wrapper || !slideRefs.current[i]) return;
-
-//   //         const card = slideRefs.current[i];
-//   //         let scale = 1;
-//   //         let rotationZ = 0;
-//   //         let rotationX = 0;
-
-//   //         if (i !== slideRefs.current.length - 1) {
-//   //           scale = 0.4 + 0.025 * i;
-//   //           rotationZ = 5;
-//   //           rotationX = 40;
-//   //         }
-
-//   //         gsap.to(card, {
-//   //           scale,
-//   //           rotationX,
-//   //           rotationZ,
-//   //           transformOrigin: "50% center",
-//   //           ease: "none",
-//   //           scrollTrigger: {
-//   //             trigger: wrapper,
-//   //             start: "top top",
-//   //             end: "bottom bottom",
-//   //             endTrigger: slideRefs.current[slideRefs.current.length - 1],
-//   //             scrub: 1,
-//   //             pin: wrapper,
-//   //             pinSpacing: false,
-//   //             id: i + 1,
-//   //           },
-//   //         });
-//   //       });
-//   //     }
-//   //   );
-
-//   //   return () => {
-//   //     mm.revert();
-//   //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-//   //   };
-//   // }, []);
-//   // useEffect(() => {
-//   //   const prefersReducedMotion = window.matchMedia(
-//   //     "(prefers-reduced-motion: reduce)"
-//   //   ).matches;
-
-//   //   if (prefersReducedMotion) return;
-
-//   //   // Detect if mobile
-//   //   const isMobile = window.innerWidth < 900;
-
-//   //   wrapperRefs.current.forEach((wrapper, i) => {
-//   //     if (!wrapper || !slideRefs.current[i]) return;
-
-//   //     const card = slideRefs.current[i];
-//   //     let scale = 1;
-//   //     let rotationZ = 0;
-//   //     let rotationX = 0;
-
-//   //     if (i !== slideRefs.current.length - 1) {
-//   //       // Mobile: less dramatic effect
-//   //       scale = isMobile ? 0.6 + 0.05 * i : 0.4 + 0.025 * i;
-//   //       rotationZ = isMobile ? 3 : 5;
-//   //       rotationX = isMobile ? 20 : 40;
-//   //     }
-
-//   //     gsap.to(card, {
-//   //       scale,
-//   //       rotationX,
-//   //       rotationZ,
-//   //       transformOrigin: "50% center",
-//   //       ease: "none",
-//   //       scrollTrigger: {
-//   //         trigger: wrapper,
-//   //         start: "top top",
-//   //         end: "bottom bottom",
-//   //         endTrigger: slideRefs.current[slideRefs.current.length - 1],
-//   //         scrub: 1,
-//   //         pin: wrapper,
-//   //         pinSpacing: false,
-//   //         id: i + 1,
-//   //       },
-//   //     });
-//   //   });
-
-//   //   return () => {
-//   //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-//   //   };
-//   // }, []);
-//   useEffect(() => {
-//     scrollTo(0, 0);
-//   });
+//   }, []); // ✅ Fixed: Added dependency array
 
 //   return (
-//     <>
-//       <style>{styles}</style>
-//       <div className="process-page">
-//         {/* Dummy Section Before */}
-//         {/* <section className="process-page-dummy-section process-page-before">
-//         <div className="process-page-dummy-content">
-//           <h1>Welcome Section</h1>
-//           <p>
-//             This is a dummy section before the scroll cards. You can modify this
-//             content however you like.
-//           </p>
-//           <p>Add your hero content, intro text, or any other elements here.</p>
+//     <div className="process-page">
+//       {/* Hero Section */}
+//       <section className="hero-section">
+//         <div
+//           className="hero-background"
+//           ref={heroBackgroundRef}
+//           style={{
+//             backgroundImage:
+//               "url(https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80)",
+//           }}
+//         />
+//         <div className="hero-overlay" />
+//         <div className="hero-content" ref={heroContentRef}>
+//           <h1 className="hero-title">
+//             Overview of our <br /> 5 step process
+//           </h1>
+//           <p className="hero-subtitle">Your vision, our expertise</p>
 //         </div>
-//       </section> */}
-//         <section className="hero-section">
-//           <div
-//             className="hero-background"
-//             ref={heroBackgroundRef}
-//             style={{
-//               backgroundImage:
-//                 "url(https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80)",
-//             }}
-//           />
-//           <div className="hero-overlay" />
-//           <div className="hero-content" ref={heroContentRef}>
-//             <h1 className="hero-title">
-//               Overview of our <br /> 5 step process
-//             </h1>
-//             <p className="hero-subtitle">Your vision, our expertise</p>
-//           </div>
-//         </section>
+//       </section>
 
-//         <section className="process-page-content">
-//           <div className="process-page-content-inner">
-//             {cardData.map((card, index) => (
+//       {/* Process Cards */}
+//       <section className="process-page-content">
+//         <div className="process-page-content-inner">
+//           {cardData.map((card, index) => (
+//             <div
+//               key={index}
+//               className="process-page-content-wrapper"
+//               ref={(el) => (wrapperRefs.current[index] = el)}
+//             >
 //               <div
-//                 key={index}
-//                 className="process-page-content-wrapper"
-//                 ref={(el) => (wrapperRefs.current[index] = el)}
+//                 className={`process-page-content-slide process-page-${card.color}`}
+//                 ref={(el) => (slideRefs.current[index] = el)}
 //               >
-//                 <div
-//                   className={`process-page-content-slide process-page-${card.color}`}
-//                   ref={(el) => (slideRefs.current[index] = el)}
-//                 >
-//                   <div className="process-page-content-slide-inner">
-//                     <div>
-//                       <p className="process-page-content-number">
-//                         {"{ " + card.number + " }"}
-//                       </p>
-//                       <h2 className="process-page-content-title process-page-heading-lg">
-//                         {card.title}
-//                       </h2>
-//                     </div>
-//                     <div>
-//                       <p className="process-page-content-copy">{card.copy}</p>
-//                     </div>
+//                 <div className="process-page-content-slide-inner">
+//                   <div>
+//                     <p className="process-page-content-number">
+//                       {"{ " + card.number + " }"}
+//                     </p>
+//                     <h2 className="process-page-content-title process-page-heading-lg">
+//                       {card.title}
+//                     </h2>
+//                   </div>
+//                   <div>
+//                     <p className="process-page-content-copy">{card.copy}</p>
 //                   </div>
 //                 </div>
 //               </div>
-//             ))}
-//           </div>
-//         </section>
-//         <div className="process-page-spacer"></div>
-//         <Testimonials />
-//         <CTASection />
-//         <Footer />
-//       </div>
-//     </>
+//             </div>
+//           ))}
+//         </div>
+//       </section>
+
+//       {/* Remaining sections */}
+//       <Testimonials />
+//       <CTASection />
+//       <Footer />
+//     </div>
 //   );
 // }
 
@@ -461,6 +341,62 @@ export default function ProcessPage() {
 
   return (
     <div className="process-page">
+      {/* Process Overview Section */}
+      <section className="process-overview-section">
+        <div className="process-overview-container">
+          {/* Process Statement */}
+          <div className="process-statement">
+            <span className="process-label">(PROCESS)</span>
+            <h2 className="process-statement-heading">
+              Great architecture isn't just about talent and experience, but
+              collaborations and relationships.
+            </h2>
+          </div>
+
+          {/* Large Image */}
+          <div className="process-image-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80"
+              alt="Modern architectural design"
+              className="process-large-image"
+            />
+          </div>
+
+          {/* Our Approach */}
+          <div className="process-approach">
+            <span className="process-label">(OUR APPROACH)</span>
+            <div className="process-approach-content">
+              <p className="process-approach-text">
+                You can expect our team to expertly guide your project and work
+                closely with you at every stage from delivering the initial
+                design concepts to achieving a final build that goes beyond your
+                aspirations
+              </p>
+              <button className="process-cta-button">
+                SEND US AN ENQUIRY
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="button-arrow"
+                >
+                  <path
+                    d="M1 8H15M15 8L8 1M15 8L8 15"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+            <span className="process-copyright">©2025</span>
+          </div>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="hero-section">
         <div

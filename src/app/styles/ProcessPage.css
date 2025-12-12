@@ -269,3 +269,161 @@ h1 {
 .process-page-spacer {
   height: 100vh;
 }
+
+/* Process Overview Section */
+.process-overview-section {
+  background: #f8f8f8;
+  padding: 4rem 2rem;
+  min-height: 100vh;
+}
+
+.process-overview-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Process Statement */
+.process-statement {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.process-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding-top: 0.5rem;
+}
+
+.process-statement-heading {
+  flex: 1;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: right;
+  max-width: 900px;
+  margin-left: auto;
+  letter-spacing: -0.02em;
+}
+
+/* Large Image */
+.process-image-wrapper {
+  width: 100%;
+  margin-bottom: 4rem;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.process-large-image {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Our Approach Section */
+.process-approach {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.process-approach-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 600px;
+}
+
+.process-approach-text {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  line-height: 1.6;
+  color: #111;
+}
+
+.process-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #000;
+  color: #fff;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.process-cta-button:hover {
+  background: #333;
+  transform: translateX(4px);
+}
+
+.button-arrow {
+  transition: transform 0.3s ease;
+}
+
+.process-cta-button:hover .button-arrow {
+  transform: translateX(4px);
+}
+
+.process-copyright {
+  font-size: 0.875rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .process-statement {
+    flex-direction: column;
+  }
+
+  .process-statement-heading {
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .process-approach {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .process-copyright {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .process-overview-section {
+    padding: 2rem 1rem;
+  }
+
+  .process-statement {
+    margin-bottom: 2rem;
+  }
+
+  .process-image-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .process-large-image {
+    max-height: 400px;
+  }
+
+  .process-approach-content {
+    gap: 1.5rem;
+  }
+}
