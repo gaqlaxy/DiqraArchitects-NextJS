@@ -1,4 +1,4 @@
-.process-page {
+/* .process-page {
   background: #fff;
   min-height: 100vh;
 }
@@ -83,7 +83,7 @@
   height: 100vh;
 }
 
-/* Dummy Sections Styling */
+
 .process-page-dummy-section {
   min-height: 100vh;
   display: flex;
@@ -117,4 +117,155 @@
   line-height: 1.6;
   margin-bottom: 1rem;
   opacity: 0.9;
+} */
+
+h1 {
+  font-size: 120px;
+  font-weight: 400;
+  letter-spacing: -3px;
+  line-height: 0.9;
+}
+.process-page {
+  background: #fff;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 140%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  max-width: 1200px;
+  will-change: transform, opacity;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 300;
+  opacity: 0.95;
+  letter-spacing: 0.05em;
+}
+
+/* Process Cards */
+.process-page-content-wrapper {
+  perspective: 800px;
+}
+
+.process-page-content-slide {
+  color: #111;
+  padding: 3rem 1rem 6rem 1rem;
+}
+
+.process-page-content-slide-inner {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 2rem;
+}
+
+.process-page-content-slide.process-page-green {
+  background: #c9f6b4;
+}
+
+.process-page-content-slide.process-page-white {
+  background: #f5f5f5;
+}
+
+.process-page-content-slide.process-page-orange {
+  background: #ffd9b0;
+}
+
+.process-page-content-slide.process-page-lilac {
+  background: #c4bafe;
+}
+
+.process-page-content-title {
+  color: #111;
+  margin-top: 0.5rem;
+}
+
+.process-page-content-copy {
+  max-width: 50ch;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  line-height: 1.6;
+}
+
+.process-page-content-number {
+  font-size: clamp(1rem, 3vw, 3rem);
+  opacity: 0.5;
+  font-weight: 500;
+}
+
+.process-page-heading-lg {
+  font-size: 8vw;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+@media (min-width: 900px) {
+  .process-page-content-slide {
+    height: calc(100vh - 80px);
+    transform-style: preserve-3d;
+  }
+
+  .process-page-content-slide-inner {
+    gap: 4rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .process-page-heading-lg {
+    font-size: clamp(4rem, 8vw, 8rem);
+  }
+}
+
+.process-page-spacer {
+  height: 100vh;
 }
