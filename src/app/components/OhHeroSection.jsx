@@ -302,7 +302,7 @@ export default function OhHeroSection() {
           {/* Bottom Hero Text */}
           <div className="oh-hero-content">
             <h1 ref={heroH1Ref} className="oh-hero-h1">
-              Strong, Grounded Forms Shaped by Culture, Balance, and Enduring
+              Strong, Grounded Forms Shaped by Culture, Balance, & Enduring
               Elegance
             </h1>
           </div>
