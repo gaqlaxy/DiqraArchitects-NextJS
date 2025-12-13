@@ -564,7 +564,7 @@ body {
   }
 
   .oh-hero-content {
-    bottom: 5.5rem;
+    bottom: 6.5rem;
     left: 1rem;
     right: 1rem;
     max-width: calc(100% - 2rem);
@@ -572,7 +572,7 @@ body {
   }
 
   .oh-hero-h1 {
-    font-size: 30px;
+    font-size: 24px;
     line-height: 1.4;
   }
 
