@@ -1,130 +1,13 @@
-/* .process-page {
-  background: #fff;
-  min-height: 100vh;
-}
-
-.process-page-content-wrapper {
-  perspective: 800px;
-}
-
-.process-page-content-slide {
-  color: #111;
-  padding: 3rem 1rem 6rem 1rem;
-}
-
-.process-page-content-slide-inner {
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  gap: 2rem;
-}
-
-.process-page-content-slide.process-page-green {
-  background: #c9f6b4;
-}
-
-.process-page-content-slide.process-page-white {
-  background: #f5f5f5;
-}
-
-.process-page-content-slide.process-page-orange {
-  background: #ffd9b0;
-}
-
-.process-page-content-slide.process-page-lilac {
-  background: #c4bafe;
-}
-
-.process-page-content-title {
-  color: #111;
-  margin-top: 0.5rem;
-}
-
-.process-page-content-copy {
-  max-width: 50ch;
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  line-height: 1.6;
-}
-
-.process-page-content-number {
-  font-size: clamp(1rem, 3vw, 3rem);
-  opacity: 0.5;
-  font-weight: 500;
-}
-
-.process-page-heading-lg {
-  font-size: 8vw;
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-@media (min-width: 900px) {
-  .process-page-content-slide {
-    height: calc(100vh - 80px);
-    transform-style: preserve-3d;
-  }
-
-  .process-page-content-slide-inner {
-    gap: 4rem;
-  }
-}
-
-@media (min-width: 1200px) {
-  .process-page-heading-lg {
-    font-size: clamp(4rem, 8vw, 8rem);
-  }
-}
-
-.process-page-spacer {
-  height: 100vh;
-}
-
-
-.process-page-dummy-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-}
-
-.process-page-dummy-section.process-page-before {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.process-page-dummy-section.process-page-after {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.process-page-dummy-content {
-  max-width: 800px;
-  text-align: center;
-  color: white;
-}
-
-.process-page-dummy-content h1 {
-  font-size: clamp(2rem, 5vw, 4rem);
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-}
-
-.process-page-dummy-content p {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  opacity: 0.9;
-} */
-
+/* ===================================
+   GLOBAL STYLES
+   =================================== */
 h1 {
   font-size: 120px;
   font-weight: 400;
   letter-spacing: -3px;
   line-height: 0.9;
 }
+
 .process-page {
   background: #fff;
   min-height: 100vh;
@@ -132,7 +15,105 @@ h1 {
   overflow-x: hidden;
 }
 
-/* Hero Section */
+/* ===================================
+   PROCESS OVERVIEW SECTION
+   =================================== */
+.process-overview-section {
+  background: #fff;
+  margin: 0; /* ❌ REMOVE */
+  padding: 10rem 2rem; /* ✅ KEEP spacing here */
+}
+
+.process-overview-container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* Process Statement */
+.process-statement {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 3rem;
+  width: 100%;
+  align-items: start;
+}
+
+.process-label {
+  font-size: clamp(0.875rem, 0.8rem + 0vw, 0.875rem);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: left;
+  padding-top: 0.5rem;
+}
+
+.process-statement-heading {
+  font-size: clamp(1.9rem, 2.6rem + 1.02vw, 3.5rem);
+  line-height: 1.05em;
+  text-align: left;
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Large Image */
+.process-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-left: 200px;
+  padding-left: 3rem;
+}
+
+.process-large-image {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.process-large-image:hover {
+  transform: scale(1.02);
+}
+
+/* Our Approach Section */
+.process-approach {
+  display: grid;
+  grid-template-columns: 200px 1fr auto;
+  gap: 3rem;
+  width: 100%;
+  align-items: start;
+}
+
+.process-approach-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  text-align: left;
+}
+
+.process-approach-text {
+  font-size: clamp(1.25rem, 1.06rem + 0.26vw, 1.6rem);
+  line-height: 1.2em;
+  font-weight: 500;
+  color: #111;
+  text-align: left;
+}
+
+.process-copyright {
+  font-size: 0.875rem;
+  color: #666;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+/* ===================================
+   HERO SECTION
+   =================================== */
 .hero-section {
   position: relative;
   height: 100vh;
@@ -144,14 +125,16 @@ h1 {
 
 .hero-background {
   position: absolute;
-  top: 0;
+  top: -20%; /* Start position for parallax */
   left: 0;
   width: 100%;
-  height: 140%;
+  height: 120%; /* Taller to allow scroll movement */
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   will-change: transform;
+  transform: translateZ(0); /* Hardware acceleration */
+  backface-visibility: hidden; /* Smoother rendering */
 }
 
 .hero-overlay {
@@ -162,6 +145,7 @@ h1 {
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
   z-index: 1;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -172,6 +156,7 @@ h1 {
   padding: 2rem;
   max-width: 1200px;
   will-change: transform, opacity;
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 .hero-title {
@@ -189,14 +174,19 @@ h1 {
   letter-spacing: 0.05em;
 }
 
-/* Process Cards */
+/* ===================================
+   PROCESS CARDS
+   =================================== */
 .process-page-content-wrapper {
-  perspective: 800px;
+  perspective: 1000px; /* Increased for smoother 3D */
 }
 
 .process-page-content-slide {
   color: #111;
   padding: 3rem 1rem 6rem 1rem;
+  will-change: transform;
+  transform: translateZ(0); /* Hardware acceleration */
+  backface-visibility: hidden;
 }
 
 .process-page-content-slide-inner {
@@ -210,6 +200,7 @@ h1 {
   gap: 2rem;
 }
 
+/* Card Color Variants */
 .process-page-content-slide.process-page-green {
   background: #c9f6b4;
 }
@@ -226,6 +217,7 @@ h1 {
   background: #c4bafe;
 }
 
+/* Card Content */
 .process-page-content-title {
   color: #111;
   margin-top: 0.5rem;
@@ -249,6 +241,11 @@ h1 {
   line-height: 1.1;
 }
 
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablet & Desktop */
 @media (min-width: 900px) {
   .process-page-content-slide {
     height: calc(100vh - 80px);
@@ -266,157 +263,61 @@ h1 {
   }
 }
 
-.process-page-spacer {
-  height: 100vh;
-}
-
-/* Process Overview Section */
-.process-overview-section {
-  background: #f8f8f8;
-  padding: 4rem 2rem;
-  min-height: 100vh;
-}
-
-.process-overview-container {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/* Process Statement */
-.process-statement {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
-  margin-bottom: 4rem;
-}
-
-.process-label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  padding-top: 0.5rem;
-}
-
-.process-statement-heading {
-  flex: 1;
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 500;
-  line-height: 1.2;
-  text-align: right;
-  max-width: 900px;
-  margin-left: auto;
-  letter-spacing: -0.02em;
-}
-
-/* Large Image */
-.process-image-wrapper {
-  width: 100%;
-  margin-bottom: 4rem;
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-.process-large-image {
-  width: 100%;
-  height: auto;
-  max-height: 600px;
-  object-fit: cover;
-  display: block;
-}
-
-/* Our Approach Section */
-.process-approach {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 2rem;
-  align-items: center;
-  padding-top: 2rem;
-}
-
-.process-approach-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 600px;
-}
-
-.process-approach-text {
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  line-height: 1.6;
-  color: #111;
-}
-
-.process-cta-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: #000;
-  color: #fff;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 50px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: fit-content;
-}
-
-.process-cta-button:hover {
-  background: #333;
-  transform: translateX(4px);
-}
-
-.button-arrow {
-  transition: transform 0.3s ease;
-}
-
-.process-cta-button:hover .button-arrow {
-  transform: translateX(4px);
-}
-
-.process-copyright {
-  font-size: 0.875rem;
-  color: #666;
-  white-space: nowrap;
-}
-
-/* Responsive Design */
+/* Tablet */
 @media (max-width: 1024px) {
+  .process-overview-container {
+    align-items: center;
+  }
+
   .process-statement {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 100%;
   }
 
   .process-statement-heading {
-    text-align: left;
+    text-align: center;
+  }
+
+  .process-label {
+    text-align: center;
+  }
+
+  .process-image-wrapper {
+    max-width: 100%;
     margin-left: 0;
+    padding-left: 0;
   }
 
   .process-approach {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .process-approach-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .process-approach-text {
+    text-align: center;
   }
 
   .process-copyright {
-    order: -1;
+    align-self: center;
   }
 }
 
+/* Mobile */
 @media (max-width: 768px) {
   .process-overview-section {
     padding: 2rem 1rem;
+    margin: 5rem auto;
   }
 
-  .process-statement {
-    margin-bottom: 2rem;
-  }
-
-  .process-image-wrapper {
-    margin-bottom: 2rem;
+  .process-overview-container {
+    gap: 2rem;
   }
 
   .process-large-image {
@@ -426,4 +327,25 @@ h1 {
   .process-approach-content {
     gap: 1.5rem;
   }
+}
+
+/* ===================================
+   ACCESSIBILITY
+   =================================== */
+@media (prefers-reduced-motion: reduce) {
+  .process-large-image {
+    transition: none;
+  }
+
+  .process-large-image:hover {
+    transform: none;
+  }
+}
+
+/* .section-spacer {
+  height: 10rem;
+} */
+
+.process-pin-area {
+  position: relative;
 }

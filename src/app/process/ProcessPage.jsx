@@ -5,6 +5,8 @@
 // import Testimonials from "@/app/components/Testimonials";
 // import Footer from "@/app/components/Footer";
 // import CTASection from "../components/CtaSection";
+// import SlideUpButton from "../components/SlideUpButton";
+
 // import "../styles/ProcessPage.css";
 
 // // Register GSAP plugins
@@ -140,6 +142,63 @@
 
 //   return (
 //     <div className="process-page">
+//       {/* Process Overview Section */}
+//       <section className="process-overview-section">
+//         <div className="process-overview-container">
+//           {/* Process Statement */}
+//           <div className="process-statement">
+//             <span className="process-label">(PROCESS)</span>
+//             <p className="process-statement-heading">
+//               Great architecture isn't just about talent and experience, but
+//               collaborations and relationships.
+//             </p>
+//           </div>
+
+//           {/* Large Image */}
+//           <div className="process-image-wrapper">
+//             <img
+//               src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80"
+//               alt="Modern architectural design"
+//               className="process-large-image"
+//             />
+//           </div>
+
+//           {/* Our Approach */}
+//           <div className="process-approach">
+//             <span className="process-label">(OUR APPROACH)</span>
+//             <div className="process-approach-content">
+//               <p className="process-approach-text">
+//                 You can expect our team to expertly guide your project and work
+//                 closely with you at every stage from delivering the initial
+//                 design concepts to achieving a final build that goes beyond your
+//                 aspirations
+//               </p>
+//               {/* <button className="process-cta-button">
+//                 SEND US AN ENQUIRY
+//                 <svg
+//                   width="16"
+//                   height="16"
+//                   viewBox="0 0 16 16"
+//                   fill="none"
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   className="button-arrow"
+//                 >
+//                   <path
+//                     d="M1 8H15M15 8L8 1M15 8L8 15"
+//                     stroke="currentColor"
+//                     strokeWidth="2"
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                   />
+//                 </svg>
+//               </button> */}
+//               <SlideUpButton href="/contact">Send us an enquiry</SlideUpButton>
+//             </div>
+//             <span className="process-copyright">©2025</span>
+//           </div>
+//         </div>
+//       </section>
+
 //       {/* Hero Section */}
 //       <section className="hero-section">
 //         <div
@@ -206,6 +265,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Testimonials from "@/app/components/Testimonials";
 import Footer from "@/app/components/Footer";
 import CTASection from "../components/CtaSection";
+import SlideUpButton from "../components/SlideUpButton";
 import "../styles/ProcessPage.css";
 
 // Register GSAP plugins
@@ -256,45 +316,39 @@ export default function ProcessPage() {
 
     const mm = gsap.matchMedia();
 
-    // Parallax effect for hero section
+    // True parallax scroll effect for hero section
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       if (heroBackgroundRef.current) {
-        gsap.fromTo(
-          heroBackgroundRef.current,
-          {
-            yPercent: -15,
-            scale: 1.15,
+        // Simple vertical scroll parallax - image moves slower than scroll
+        gsap.to(heroBackgroundRef.current, {
+          y: "30%", // Image scrolls down slower than the page
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero-section",
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.5,
+            invalidateOnRefresh: true,
           },
-          {
-            yPercent: 15,
-            scale: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: ".hero-section",
-              start: "top top",
-              end: "bottom top",
-              scrub: 1,
-            },
-          }
-        );
+        });
       }
 
       if (heroContentRef.current) {
         gsap.to(heroContentRef.current, {
           opacity: 0,
-          y: 100,
+          y: 150,
           ease: "none",
           scrollTrigger: {
             trigger: ".hero-section",
             start: "top top",
-            end: "center top",
-            scrub: 1,
+            end: () => `+=${window.innerHeight}`,
+            scrub: true,
           },
         });
       }
     });
 
-    // Card stacking animation
+    // Smooth card stacking animation
     mm.add(
       "(min-width: 1200px) and (prefers-reduced-motion: no-preference)",
       () => {
@@ -307,9 +361,9 @@ export default function ProcessPage() {
           let rotationX = 0;
 
           if (i !== slideRefs.current.length - 1) {
-            scale = 0.4 + 0.025 * i;
-            rotationZ = 5;
-            rotationX = 40;
+            scale = 0.5 + 0.05 * i; // Smoother scale progression
+            rotationZ = 3; // Reduced rotation for subtlety
+            rotationX = 30; // Reduced rotation for smoother effect
           }
 
           gsap.to(card, {
@@ -317,16 +371,18 @@ export default function ProcessPage() {
             rotationX,
             rotationZ,
             transformOrigin: "50% center",
-            ease: "none",
+            ease: "power1.out",
             scrollTrigger: {
               trigger: wrapper,
               start: "top top",
               end: "bottom bottom",
               endTrigger: slideRefs.current[slideRefs.current.length - 1],
-              scrub: 1,
+              scrub: 0.5, // Smoother scrub
               pin: wrapper,
               pinSpacing: false,
-              id: i + 1,
+              anticipatePin: 1, // Prevents jumps
+              invalidateOnRefresh: true,
+              id: `card-${i + 1}`,
             },
           });
         });
@@ -372,25 +428,7 @@ export default function ProcessPage() {
                 design concepts to achieving a final build that goes beyond your
                 aspirations
               </p>
-              <button className="process-cta-button">
-                SEND US AN ENQUIRY
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="button-arrow"
-                >
-                  <path
-                    d="M1 8H15M15 8L8 1M15 8L8 15"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
+              <SlideUpButton href="/contact">Send us an enquiry</SlideUpButton>
             </div>
             <span className="process-copyright">©2025</span>
           </div>
@@ -418,7 +456,7 @@ export default function ProcessPage() {
 
       {/* Process Cards */}
       <section className="process-page-content">
-        <div className="process-page-content-inner">
+        <div className="process-pin-area">
           {cardData.map((card, index) => (
             <div
               key={index}
