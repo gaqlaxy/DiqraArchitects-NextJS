@@ -467,16 +467,41 @@ export default function ProcessPage() {
                 className={`process-page-content-slide process-page-${card.color}`}
                 ref={(el) => (slideRefs.current[index] = el)}
               >
-                <div className="process-page-content-slide-inner">
-                  <div>
+                {/* <div className="process-page-content-slide-inner"> */}
+                {/* <div>
                     <p className="process-page-content-number">
                       {"{ " + card.number + " }"}
                     </p>
                     <h2 className="process-page-content-title process-page-heading-lg">
                       {card.title}
                     </h2>
+                  </div> */}
+                {/* <div>
+                    <p className="process-page-content-copy">{card.copy}</p>
+                  </div> */}
+                {/* </div> */}
+                <div className="process-page-content-slide-inner process-card-layout">
+                  {/* Left column – number */}
+                  <div className="process-card-left">
+                    <p className="process-page-content-number">
+                      ( {card.number} )
+                    </p>
                   </div>
-                  <div>
+
+                  {/* Right column – content */}
+                  <div className="process-card-right">
+                    <h2 className="process-page-content-title process-page-heading-lg">
+                      {card.title}
+                    </h2>
+
+                    {/* Image block (can reuse same image for now) */}
+                    <div className="process-card-image">
+                      <img
+                        src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&q=80"
+                        alt={card.title}
+                      />
+                    </div>
+
                     <p className="process-page-content-copy">{card.copy}</p>
                   </div>
                 </div>
