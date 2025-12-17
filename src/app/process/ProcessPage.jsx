@@ -317,36 +317,36 @@ export default function ProcessPage() {
     const mm = gsap.matchMedia();
 
     // True parallax scroll effect for hero section
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      if (heroBackgroundRef.current) {
-        // Simple vertical scroll parallax - image moves slower than scroll
-        gsap.to(heroBackgroundRef.current, {
-          y: "30%", // Image scrolls down slower than the page
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero-section",
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.5,
-            invalidateOnRefresh: true,
-          },
-        });
-      }
+    // mm.add("(prefers-reduced-motion: no-preference)", () => {
+    //   if (heroBackgroundRef.current) {
+    //     // Simple vertical scroll parallax - image moves slower than scroll
+    //     gsap.to(heroBackgroundRef.current, {
+    //       y: "30%", // Image scrolls down slower than the page
+    //       ease: "none",
+    //       scrollTrigger: {
+    //         trigger: ".hero-section",
+    //         start: "top top",
+    //         end: "bottom top",
+    //         scrub: 0.5,
+    //         invalidateOnRefresh: true,
+    //       },
+    //     });
+    //   }
 
-      if (heroContentRef.current) {
-        gsap.to(heroContentRef.current, {
-          opacity: 0,
-          y: 150,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero-section",
-            start: "top top",
-            end: () => `+=${window.innerHeight}`,
-            scrub: true,
-          },
-        });
-      }
-    });
+    //   if (heroContentRef.current) {
+    //     gsap.to(heroContentRef.current, {
+    //       opacity: 0,
+    //       y: 150,
+    //       ease: "none",
+    //       scrollTrigger: {
+    //         trigger: ".hero-section",
+    //         start: "top top",
+    //         end: () => `+=${window.innerHeight}`,
+    //         scrub: true,
+    //       },
+    //     });
+    //   }
+    // });
 
     // Smooth card stacking animation
     mm.add(
