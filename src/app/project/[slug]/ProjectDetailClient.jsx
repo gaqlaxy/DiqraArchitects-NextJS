@@ -167,7 +167,6 @@
 //   );
 // }
 
-
 // "use client";
 
 // import React, { useState, useEffect, useRef } from "react";
@@ -179,7 +178,6 @@
 // import ProjectGallery from "./ProjectGallery";
 
 // gsap.registerPlugin(ScrollTrigger);
-
 
 // import "@/app/styles/ProjectDetail.css";
 
@@ -254,7 +252,6 @@
 //     ScrollTrigger.getAll().forEach((t) => t.kill());
 //   };
 // }, [project]);
-
 
 //   const parallaxOffset = scrollY * 0.4;
 //   const opacity = Math.max(0, 1 - scrollY / 450);
@@ -377,10 +374,7 @@
 //         </div>
 //       </section>
 
-      
 //         <ProjectGallery images={project.images} />
-
-
 
 //       {/* PREVIOUS / NEXT */}
 //       <section className="navigation-projects">
@@ -440,7 +434,6 @@
 //   );
 // }
 
-
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -459,22 +452,22 @@ export default function ProjectDetailClient({ slug }) {
   const heroImageRef = useRef(null);
 
   // --- DATA LOGIC ---
-  const projectIndex = projectsData.projects.findIndex(
-    (p) => p.slug === slug
-  );
+  const projectIndex = projectsData.projects.findIndex((p) => p.slug === slug);
 
   const project = projectsData.projects[projectIndex];
-  
+
   // Safe navigation logic
-  const nextProject = projectIndex !== -1
-    ? projectsData.projects[(projectIndex + 1) % projectsData.projects.length]
-    : null;
-  const prevProject = projectIndex !== -1
-    ? projectsData.projects[
-        (projectIndex - 1 + projectsData.projects.length) %
-          projectsData.projects.length
-      ]
-    : null;
+  const nextProject =
+    projectIndex !== -1
+      ? projectsData.projects[(projectIndex + 1) % projectsData.projects.length]
+      : null;
+  const prevProject =
+    projectIndex !== -1
+      ? projectsData.projects[
+          (projectIndex - 1 + projectsData.projects.length) %
+            projectsData.projects.length
+        ]
+      : null;
 
   // Scroll-to-top on slug change
   useEffect(() => {
@@ -489,8 +482,8 @@ export default function ProjectDetailClient({ slug }) {
       // 1. HERO: Masked Scale-Down Parallax
       // This replicates the "Service Page" cinematic effect
       gsap.to(heroImageRef.current, {
-        yPercent: 20,   // Move image down slowly
-        scale: 1,       // Zoom out from 1.15 to 1.0
+        yPercent: 20, // Move image down slowly
+        scale: 1, // Zoom out from 1.15 to 1.0
         ease: "none",
         scrollTrigger: {
           trigger: ".project-hero",
@@ -540,7 +533,7 @@ export default function ProjectDetailClient({ slug }) {
           img,
           { scale: 1.15 }, // Start Zoomed In
           {
-            scale: 1,      // Zoom Out
+            scale: 1, // Zoom Out
             ease: "none",
             scrollTrigger: {
               trigger: img.parentElement, // The .nav-project-image mask
@@ -551,7 +544,6 @@ export default function ProjectDetailClient({ slug }) {
           }
         );
       });
-
     }, containerRef);
 
     return () => ctx.revert();
@@ -577,10 +569,10 @@ export default function ProjectDetailClient({ slug }) {
       <section className="project-hero">
         {/* NEW IMAGE STRUCTURE FOR PARALLAX */}
         <div className="hero-image-container">
-          <img 
+          <img
             ref={heroImageRef}
-            src={project.images[0]} 
-            alt={project.title} 
+            src={project.images[0]}
+            alt={project.title}
             className="hero-image"
           />
         </div>
