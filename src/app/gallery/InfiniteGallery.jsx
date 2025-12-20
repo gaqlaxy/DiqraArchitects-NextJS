@@ -393,7 +393,7 @@ const InfiniteGallery = () => {
         }
 
         body {
-          font-family: "Geist", sans-serif;
+          font-family: "myfont", sans-serif;
           background-color: #000000;
           color: #ffffff;
           overflow: hidden;
@@ -583,7 +583,7 @@ const InfiniteGallery = () => {
         }
 
         .GallerySectionitem-name {
-          font-family: "Geist", sans-serif;
+          font-family: "myfont", sans-serif;
           color: #ffffff;
           font-size: 12px;
           font-weight: 500;
@@ -593,7 +593,7 @@ const InfiniteGallery = () => {
         }
 
         .GallerySectionitem-number {
-          font-family: "Geist", sans-serif;
+          font-family: "myfont", sans-serif;
           color: #888888;
           font-size: 10px;
           font-weight: 400;

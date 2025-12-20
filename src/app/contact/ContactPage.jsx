@@ -1060,7 +1060,7 @@ export default function ContactPage() {
           border-bottom: 1px solid var(--line-color);
           padding: 15px 0;
           font-size: 20px;
-          font-family: "Geist", sans-serif;
+          font-family: "myfont", sans-serif;
           color: var(--arch-black);
           transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           border-radius: 0;

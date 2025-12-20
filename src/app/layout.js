@@ -6,6 +6,11 @@ import { Analytics } from "@vercel/analytics/next";
 import PreloaderWrapper from "./components/PreloaderWrapper";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import localFont from "next/font/local";
+
+const myFont = localFont({
+  src: "./Geom-Regular.ttf",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,7 +51,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="en" className={myFont.className}>
       <body>
         <PreloaderWrapper />
         <Navbar />

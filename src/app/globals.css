@@ -8,5 +8,5 @@
     url("/ppneuemontreal-book.woff") format("woff");
 } */
 body {
-  font-family: "Geist", sans-serif;
+  font-family: "myfont", sans-serif;
 }
