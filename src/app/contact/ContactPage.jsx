@@ -739,629 +739,629 @@
 // }
 
 // V22222222222222
-// "use client";
-
-// import { useState, useEffect, useRef, useLayoutEffect } from "react";
-// import gsap from "gsap";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import Footer from "../components/Footer";
-// import Lenis from "@studio-freight/lenis";
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// export default function ContactPage() {
-//   const [formData, setFormData] = useState({
-//     firstName: "",
-//     lastName: "",
-//     email: "",
-//     phone: "",
-//     message: "",
-//   });
-
-//   const containerRef = useRef(null);
-//   const formRef = useRef(null);
-//   const [activeFAQ, setActiveFAQ] = useState(null);
-
-//   // --- 1. Smooth Scroll Setup ---
-//   useEffect(() => {
-//     const lenis = new Lenis({
-//       duration: 1.2,
-//       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-//       orientation: "vertical",
-//       gestureDirection: "vertical",
-//       smoothWheel: true,
-//     });
-
-//     function raf(time) {
-//       lenis.raf(time);
-//       requestAnimationFrame(raf);
-//     }
-//     requestAnimationFrame(raf);
-
-//     return () => lenis.destroy();
-//   }, []);
-
-//   // --- 2. GSAP Animations ---
-//   useLayoutEffect(() => {
-//     const ctx = gsap.context(() => {
-//       // Reveal Title
-//       gsap.from(".reveal-text", {
-//         y: 100,
-//         opacity: 0,
-//         duration: 1.5,
-//         stagger: 0.1,
-//         ease: "power4.out",
-//         delay: 0.2,
-//       });
-
-//       // Line drawing animations
-//       gsap.utils.toArray(".divider-line").forEach((line) => {
-//         gsap.from(line, {
-//           scaleX: 0,
-//           transformOrigin: "left center",
-//           duration: 1.5,
-//           ease: "expo.out",
-//           scrollTrigger: {
-//             trigger: line,
-//             start: "top 85%",
-//           },
-//         });
-//       });
-
-//       // Form inputs stagger
-//       gsap.from(".form-group-anim", {
-//         y: 30,
-//         opacity: 0,
-//         duration: 0.8,
-//         stagger: 0.1,
-//         ease: "power2.out",
-//         scrollTrigger: {
-//           trigger: formRef.current,
-//           start: "top 70%",
-//         },
-//       });
-
-//       // Image Parallax
-//       gsap.to(".parallax-img", {
-//         yPercent: 20,
-//         ease: "none",
-//         scrollTrigger: {
-//           trigger: ".image-container",
-//           start: "top bottom",
-//           end: "bottom top",
-//           scrub: true,
-//         },
-//       });
-//     }, containerRef);
-
-//     return () => ctx.revert();
-//   }, []);
-
-//   // --- 3. Handlers ---
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // Simulate API call
-//     const btn = document.querySelector(".submit-text");
-//     const originalText = btn.innerText;
-//     btn.innerText = "Sending...";
-
-//     setTimeout(() => {
-//       alert("Blueprint received. We will be in touch.");
-//       setFormData({
-//         firstName: "",
-//         lastName: "",
-//         email: "",
-//         phone: "",
-//         message: "",
-//       });
-//       btn.innerText = originalText;
-//     }, 1500);
-//   };
-
-//   const handleChange = (e) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
-
-//   // GSAP Powered FAQ Toggle
-//   const toggleFAQ = (index) => {
-//     if (activeFAQ === index) {
-//       // Close active
-//       gsap.to(`#faq-ans-${index}`, {
-//         height: 0,
-//         duration: 0.4,
-//         ease: "power2.inOut",
-//       });
-//       gsap.to(`#faq-icon-${index}`, { rotation: 0, duration: 0.4 });
-//       setActiveFAQ(null);
-//     } else {
-//       // Close previous if exists
-//       if (activeFAQ !== null) {
-//         gsap.to(`#faq-ans-${activeFAQ}`, {
-//           height: 0,
-//           duration: 0.4,
-//           ease: "power2.inOut",
-//         });
-//         gsap.to(`#faq-icon-${activeFAQ}`, { rotation: 0, duration: 0.4 });
-//       }
-//       // Open new
-//       setActiveFAQ(index);
-//       // Small timeout to allow state to set before animating height to auto
-//       setTimeout(() => {
-//         gsap.fromTo(
-//           `#faq-ans-${index}`,
-//           { height: 0 },
-//           { height: "auto", duration: 0.4, ease: "power2.inOut" }
-//         );
-//         gsap.to(`#faq-icon-${index}`, { rotation: 45, duration: 0.4 });
-//       }, 10);
-//     }
-//   };
-
-//   const faqs = [
-//     {
-//       q: "Scope of Services",
-//       a: "We offer comprehensive design services including interior design, architecture consultation, space planning, 3D visualization, and project management.",
-//     },
-//     {
-//       q: "Project Timeline",
-//       a: "Residential projects typically take 8-12 weeks, while commercial ventures range from 3-6 months depending on complexity.",
-//     },
-//     {
-//       q: "Client Types",
-//       a: "We work with visionaries. From private homeowners to commercial developers and hospitality groups.",
-//     },
-//     {
-//       q: "Portfolio Access",
-//       a: "Our private case studies are available upon request during the initial consultation.",
-//     },
-//   ];
-
-//   return (
-//     <>
-//       <style jsx global>{`
-//         @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap");
-
-//         :root {
-//           --arch-black: #111111;
-//           --arch-grey: #888888;
-//           --arch-light: #f4f4f4;
-//           --arch-white: #ffffff;
-//           --line-color: rgba(0, 0, 0, 0.1);
-//         }
-
-//         body {
-//           background-color: var(--arch-light);
-//           color: var(--arch-black);
-//           font-family: "Manrope", sans-serif;
-//           overflow-x: hidden;
-//         }
-
-//         /* UTILS */
-//         .divider-line {
-//           width: 100%;
-//           height: 1px;
-//           background: var(--line-color);
-//           margin: 0;
-//         }
-
-//         .container-arch {
-//           max-width: 1600px;
-//           margin: 0 auto;
-//           padding: 0 40px;
-//         }
-
-//         /* HEADER */
-//         .page-header {
-//           padding-top: 180px;
-//           padding-bottom: 80px;
-//         }
-
-//         .title-wrapper {
-//           overflow: hidden;
-//         }
-
-//         h1 {
-//           font-size: clamp(3rem, 9vw, 11rem);
-//           font-weight: 300;
-//           line-height: 0.9;
-//           letter-spacing: -0.03em;
-//           text-transform: uppercase;
-//           margin: 0;
-//         }
-
-//         /* MAIN GRID */
-//         .arch-grid {
-//           display: grid;
-//           grid-template-columns: 1fr 2fr;
-//           gap: 60px;
-//           padding-bottom: 150px;
-//           position: relative;
-//         }
-
-//         /* STICKY SIDEBAR */
-//         .sticky-info {
-//           position: sticky;
-//           top: 40px;
-//           height: fit-content;
-//           display: flex;
-//           flex-direction: column;
-//           gap: 60px;
-//           padding-top: 20px;
-//         }
-
-//         .info-group h3 {
-//           font-size: 12px;
-//           text-transform: uppercase;
-//           letter-spacing: 2px;
-//           color: var(--arch-grey);
-//           margin-bottom: 20px;
-//           font-weight: 500;
-//         }
-
-//         .info-group p,
-//         .info-group a {
-//           font-size: 18px;
-//           line-height: 1.6;
-//           color: var(--arch-black);
-//           text-decoration: none;
-//           display: block;
-//           transition: opacity 0.3s;
-//         }
-
-//         .info-group a:hover {
-//           opacity: 0.6;
-//         }
-
-//         .social-row {
-//           display: flex;
-//           gap: 20px;
-//         }
-
-//         /* FORM SECTION */
-//         .form-section {
-//           padding-top: 20px;
-//         }
-
-//         .form-intro {
-//           font-size: clamp(1.5rem, 2.5vw, 3rem);
-//           font-weight: 300;
-//           margin-bottom: 80px;
-//           max-width: 90%;
-//           line-height: 1.2;
-//         }
-
-//         .input-grid {
-//           display: grid;
-//           grid-template-columns: 1fr 1fr;
-//           gap: 40px;
-//           margin-bottom: 40px;
-//         }
-
-//         .form-group {
-//           position: relative;
-//           padding-bottom: 10px;
-//         }
-
-//         .form-group label {
-//           display: block;
-//           font-size: 12px;
-//           text-transform: uppercase;
-//           letter-spacing: 1px;
-//           color: var(--arch-grey);
-//           margin-bottom: 10px;
-//         }
-
-//         .form-group input,
-//         .form-group textarea {
-//           width: 100%;
-//           background: transparent;
-//           border: none;
-//           border-bottom: 1px solid var(--line-color);
-//           padding: 15px 0;
-//           font-size: 20px;
-//           font-family: "Manrope", sans-serif;
-//           color: var(--arch-black);
-//           transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-//           border-radius: 0;
-//         }
-
-//         .form-group input:focus,
-//         .form-group textarea:focus {
-//           outline: none;
-//           border-bottom-color: var(--arch-black);
-//           padding-left: 10px;
-//         }
-
-//         /* CUSTOM BUTTON */
-//         .submit-wrapper {
-//           margin-top: 60px;
-//           display: flex;
-//           justify-content: flex-start;
-//         }
-
-//         .arch-btn {
-//           background: var(--arch-black);
-//           color: #fff;
-//           border: none;
-//           padding: 25px 60px;
-//           border-radius: 4px;
-//           font-size: 16px;
-//           text-transform: uppercase;
-//           letter-spacing: 1px;
-//           cursor: pointer;
-//           position: relative;
-//           overflow: hidden;
-//           transition: transform 0.3s;
-//         }
-
-//         .arch-btn:hover {
-//           transform: translateY(-2px);
-//         }
-
-//         /* FAQ SECTION */
-//         .faq-container {
-//           margin-top: 150px;
-//           border-top: 1px solid var(--line-color);
-//           padding-top: 80px;
-//         }
-
-//         .faq-item {
-//           border-bottom: 1px solid var(--line-color);
-//           padding: 30px 0;
-//           cursor: pointer;
-//         }
-
-//         .faq-question {
-//           display: flex;
-//           justify-content: space-between;
-//           align-items: center;
-//         }
-
-//         .faq-q-text {
-//           font-size: 24px;
-//           font-weight: 300;
-//         }
-
-//         .faq-answer {
-//           overflow: hidden;
-//           height: 0;
-//         }
-
-//         .faq-answer p {
-//           padding-top: 20px;
-//           font-size: 16px;
-//           color: var(--arch-grey);
-//           max-width: 600px;
-//           line-height: 1.8;
-//         }
-
-//         /* IMAGE DECORATION */
-//         .image-container {
-//           margin: 100px 0;
-//           height: 500px;
-//           width: 100%;
-//           overflow: hidden;
-//           position: relative;
-//         }
-
-//         .parallax-img {
-//           width: 100%;
-//           height: 140%;
-//           object-fit: cover;
-//           position: absolute;
-//           top: -20%;
-//         }
-
-//         @media (max-width: 1024px) {
-//           .arch-grid {
-//             grid-template-columns: 1fr;
-//           }
-//           .sticky-info {
-//             position: relative;
-//             flex-direction: row;
-//             flex-wrap: wrap;
-//             top: 0;
-//             margin-bottom: 60px;
-//           }
-//         }
-
-//         @media (max-width: 768px) {
-//           .input-grid {
-//             grid-template-columns: 1fr;
-//           }
-//           .page-header {
-//             padding-top: 120px;
-//           }
-//           h1 {
-//             font-size: 14vw;
-//           }
-//           .sticky-info {
-//             flex-direction: column;
-//             gap: 40px;
-//           }
-//         }
-//       `}</style>
-
-//       <div ref={containerRef} className="container-arch">
-//         {/* HEADER */}
-//         <header className="page-header">
-//           <div className="title-wrapper">
-//             <h1 className="reveal-text">Let's build</h1>
-//           </div>
-//           <div className="title-wrapper">
-//             <h1 className="reveal-text" style={{ paddingLeft: "5vw" }}>
-//               Something
-//             </h1>
-//           </div>
-//           <div className="title-wrapper">
-//             <h1 className="reveal-text">Concrete.</h1>
-//           </div>
-//         </header>
-
-//         <div className="divider-line"></div>
-
-//         {/* MAIN LAYOUT */}
-//         <div className="arch-grid">
-//           {/* LEFT SIDEBAR (Sticky) */}
-//           <aside className="sticky-info fade-in-section">
-//             <div className="info-group">
-//               <h3>Coordinates</h3>
-//               <p>No. 534/2, 19th Street</p>
-//               <p>Periyar Nagar, Urapakkam</p>
-//               <p>Tamil Nadu 603202</p>
-//             </div>
-
-//             <div className="info-group">
-//               <h3>Contact</h3>
-//               <a href="mailto:info@diqraarchitects.com">
-//                 info@diqraarchitects.com
-//               </a>
-//               <a href="tel:+917871772428">(+91) 7871772428</a>
-//             </div>
-
-//             <div className="info-group">
-//               <h3>Hours</h3>
-//               <p>Mon - Fri: 09:00 - 18:00</p>
-//               <p>Weekend: By Appointment</p>
-//             </div>
-
-//             <div className="info-group">
-//               <h3>Socials</h3>
-//               <div className="social-row">
-//                 <a href="#">Inst.</a>
-//                 <a href="#">Fb.</a>
-//                 <a href="#">Ln.</a>
-//               </div>
-//             </div>
-//           </aside>
-
-//           {/* RIGHT CONTENT (Form) */}
-//           <section className="form-section">
-//             <p className="form-intro reveal-text">
-//               We approach every inquiry with the same precision as our
-//               blueprints. Tell us about your vision.
-//             </p>
-
-//             <form ref={formRef} onSubmit={handleSubmit}>
-//               <div className="input-grid">
-//                 <div className="form-group form-group-anim">
-//                   <label>01. First Name</label>
-//                   <input
-//                     type="text"
-//                     name="firstName"
-//                     value={formData.firstName}
-//                     onChange={handleChange}
-//                     placeholder="John"
-//                     required
-//                   />
-//                 </div>
-//                 <div className="form-group form-group-anim">
-//                   <label>02. Last Name</label>
-//                   <input
-//                     type="text"
-//                     name="lastName"
-//                     value={formData.lastName}
-//                     onChange={handleChange}
-//                     placeholder="Doe"
-//                     required
-//                   />
-//                 </div>
-//               </div>
-
-//               <div className="input-grid">
-//                 <div className="form-group form-group-anim">
-//                   <label>03. Email Address</label>
-//                   <input
-//                     type="email"
-//                     name="email"
-//                     value={formData.email}
-//                     onChange={handleChange}
-//                     placeholder="john@example.com"
-//                     required
-//                   />
-//                 </div>
-//                 <div className="form-group form-group-anim">
-//                   <label>04. Phone (Optional)</label>
-//                   <input
-//                     type="tel"
-//                     name="phone"
-//                     value={formData.phone}
-//                     onChange={handleChange}
-//                     placeholder="+91..."
-//                   />
-//                 </div>
-//               </div>
-
-//               <div className="form-group form-group-anim">
-//                 <label>05. Project Details</label>
-//                 <textarea
-//                   name="message"
-//                   value={formData.message}
-//                   onChange={handleChange}
-//                   placeholder="Tell us about the space, timeline, and vision..."
-//                   rows="4"
-//                   required
-//                 />
-//               </div>
-
-//               <div className="submit-wrapper form-group-anim">
-//                 <button type="submit" className="arch-btn">
-//                   <span className="submit-text">Send Proposal</span>
-//                 </button>
-//               </div>
-//             </form>
-
-//             {/* PARALLAX IMAGE BREAK */}
-//             <div className="image-container">
-//               <img
-//                 src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80"
-//                 className="parallax-img"
-//                 alt="Architecture Detail"
-//               />
-//             </div>
-
-//             {/* FAQ */}
-//             <div className="faq-container">
-//               <h3
-//                 style={{
-//                   fontSize: "12px",
-//                   textTransform: "uppercase",
-//                   letterSpacing: "2px",
-//                   color: "var(--arch-grey)",
-//                   marginBottom: "40px",
-//                 }}
-//               >
-//                 Common Inquiries
-//               </h3>
-
-//               {faqs.map((faq, index) => (
-//                 <div
-//                   key={index}
-//                   className="faq-item"
-//                   onClick={() => toggleFAQ(index)}
-//                 >
-//                   <div className="faq-question">
-//                     <span className="faq-q-text">{faq.q}</span>
-//                     <span
-//                       id={`faq-icon-${index}`}
-//                       style={{ fontSize: "24px", display: "inline-block" }}
-//                     >
-//                       +
-//                     </span>
-//                   </div>
-//                   <div id={`faq-ans-${index}`} className="faq-answer">
-//                     <p>{faq.a}</p>
-//                   </div>
-//                 </div>
-//               ))}
-//             </div>
-//           </section>
-//         </div>
-//       </div>
-//       <Footer />
-//     </>
-//   );
-// }
+"use client";
+
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Footer from "../components/Footer";
+import Lenis from "@studio-freight/lenis";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const containerRef = useRef(null);
+  const formRef = useRef(null);
+  const [activeFAQ, setActiveFAQ] = useState(null);
+
+  // --- 1. Smooth Scroll Setup ---
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureDirection: "vertical",
+      smoothWheel: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => lenis.destroy();
+  }, []);
+
+  // --- 2. GSAP Animations ---
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // Reveal Title
+      gsap.from(".reveal-text", {
+        y: 100,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.1,
+        ease: "power4.out",
+        delay: 0.2,
+      });
+
+      // Line drawing animations
+      gsap.utils.toArray(".divider-line").forEach((line) => {
+        gsap.from(line, {
+          scaleX: 0,
+          transformOrigin: "left center",
+          duration: 1.5,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: line,
+            start: "top 85%",
+          },
+        });
+      });
+
+      // Form inputs stagger
+      gsap.from(".form-group-anim", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: formRef.current,
+          start: "top 70%",
+        },
+      });
+
+      // Image Parallax
+      gsap.to(".parallax-img", {
+        yPercent: 20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".image-container",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // --- 3. Handlers ---
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Simulate API call
+    const btn = document.querySelector(".submit-text");
+    const originalText = btn.innerText;
+    btn.innerText = "Sending...";
+
+    setTimeout(() => {
+      alert("Blueprint received. We will be in touch.");
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+      btn.innerText = originalText;
+    }, 1500);
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // GSAP Powered FAQ Toggle
+  const toggleFAQ = (index) => {
+    if (activeFAQ === index) {
+      // Close active
+      gsap.to(`#faq-ans-${index}`, {
+        height: 0,
+        duration: 0.4,
+        ease: "power2.inOut",
+      });
+      gsap.to(`#faq-icon-${index}`, { rotation: 0, duration: 0.4 });
+      setActiveFAQ(null);
+    } else {
+      // Close previous if exists
+      if (activeFAQ !== null) {
+        gsap.to(`#faq-ans-${activeFAQ}`, {
+          height: 0,
+          duration: 0.4,
+          ease: "power2.inOut",
+        });
+        gsap.to(`#faq-icon-${activeFAQ}`, { rotation: 0, duration: 0.4 });
+      }
+      // Open new
+      setActiveFAQ(index);
+      // Small timeout to allow state to set before animating height to auto
+      setTimeout(() => {
+        gsap.fromTo(
+          `#faq-ans-${index}`,
+          { height: 0 },
+          { height: "auto", duration: 0.4, ease: "power2.inOut" }
+        );
+        gsap.to(`#faq-icon-${index}`, { rotation: 45, duration: 0.4 });
+      }, 10);
+    }
+  };
+
+  const faqs = [
+    {
+      q: "Scope of Services",
+      a: "We offer comprehensive design services including interior design, architecture consultation, space planning, 3D visualization, and project management.",
+    },
+    {
+      q: "Project Timeline",
+      a: "Residential projects typically take 8-12 weeks, while commercial ventures range from 3-6 months depending on complexity.",
+    },
+    {
+      q: "Client Types",
+      a: "We work with visionaries. From private homeowners to commercial developers and hospitality groups.",
+    },
+    {
+      q: "Portfolio Access",
+      a: "Our private case studies are available upon request during the initial consultation.",
+    },
+  ];
+
+  return (
+    <>
+      <style jsx global>{`
+        @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap");
+
+        :root {
+          --arch-black: #111111;
+          --arch-grey: #888888;
+          --arch-light: #f4f4f4;
+          --arch-white: #ffffff;
+          --line-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+          background-color: var(--arch-light);
+          color: var(--arch-black);
+          font-family: "Manrope", sans-serif;
+          overflow-x: hidden;
+        }
+
+        /* UTILS */
+        .divider-line {
+          width: 100%;
+          height: 1px;
+          background: var(--line-color);
+          margin: 0;
+        }
+
+        .container-arch {
+          max-width: 1600px;
+          margin: 0 auto;
+          padding: 0 40px;
+        }
+
+        /* HEADER */
+        .page-header {
+          padding-top: 180px;
+          padding-bottom: 80px;
+        }
+
+        .title-wrapper {
+          overflow: hidden;
+        }
+
+        h1 {
+          font-size: clamp(3rem, 9vw, 11rem);
+          font-weight: 300;
+          line-height: 0.9;
+          letter-spacing: -0.03em;
+          text-transform: uppercase;
+          margin: 0;
+        }
+
+        /* MAIN GRID */
+        .arch-grid {
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+          gap: 60px;
+          padding-bottom: 150px;
+          position: relative;
+        }
+
+        /* STICKY SIDEBAR */
+        .sticky-info {
+          position: sticky;
+          top: 40px;
+          height: fit-content;
+          display: flex;
+          flex-direction: column;
+          gap: 60px;
+          padding-top: 20px;
+        }
+
+        .info-group h3 {
+          font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          color: var(--arch-grey);
+          margin-bottom: 20px;
+          font-weight: 500;
+        }
+
+        .info-group p,
+        .info-group a {
+          font-size: 18px;
+          line-height: 1.6;
+          color: var(--arch-black);
+          text-decoration: none;
+          display: block;
+          transition: opacity 0.3s;
+        }
+
+        .info-group a:hover {
+          opacity: 0.6;
+        }
+
+        .social-row {
+          display: flex;
+          gap: 20px;
+        }
+
+        /* FORM SECTION */
+        .form-section {
+          padding-top: 20px;
+        }
+
+        .form-intro {
+          font-size: clamp(1.5rem, 2.5vw, 3rem);
+          font-weight: 300;
+          margin-bottom: 80px;
+          max-width: 90%;
+          line-height: 1.2;
+        }
+
+        .input-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 40px;
+          margin-bottom: 40px;
+        }
+
+        .form-group {
+          position: relative;
+          padding-bottom: 10px;
+        }
+
+        .form-group label {
+          display: block;
+          font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: var(--arch-grey);
+          margin-bottom: 10px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+          width: 100%;
+          background: transparent;
+          border: none;
+          border-bottom: 1px solid var(--line-color);
+          padding: 15px 0;
+          font-size: 20px;
+          font-family: "Manrope", sans-serif;
+          color: var(--arch-black);
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          border-radius: 0;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+          outline: none;
+          border-bottom-color: var(--arch-black);
+          padding-left: 10px;
+        }
+
+        /* CUSTOM BUTTON */
+        .submit-wrapper {
+          margin-top: 60px;
+          display: flex;
+          justify-content: flex-start;
+        }
+
+        .arch-btn {
+          background: var(--arch-black);
+          color: #fff;
+          border: none;
+          padding: 25px 60px;
+          border-radius: 4px;
+          font-size: 16px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.3s;
+        }
+
+        .arch-btn:hover {
+          transform: translateY(-2px);
+        }
+
+        /* FAQ SECTION */
+        .faq-container {
+          margin-top: 150px;
+          border-top: 1px solid var(--line-color);
+          padding-top: 80px;
+        }
+
+        .faq-item {
+          border-bottom: 1px solid var(--line-color);
+          padding: 30px 0;
+          cursor: pointer;
+        }
+
+        .faq-question {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .faq-q-text {
+          font-size: 24px;
+          font-weight: 300;
+        }
+
+        .faq-answer {
+          overflow: hidden;
+          height: 0;
+        }
+
+        .faq-answer p {
+          padding-top: 20px;
+          font-size: 16px;
+          color: var(--arch-grey);
+          max-width: 600px;
+          line-height: 1.8;
+        }
+
+        /* IMAGE DECORATION */
+        .image-container {
+          margin: 100px 0;
+          height: 500px;
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .parallax-img {
+          width: 100%;
+          height: 140%;
+          object-fit: cover;
+          position: absolute;
+          top: -20%;
+        }
+
+        @media (max-width: 1024px) {
+          .arch-grid {
+            grid-template-columns: 1fr;
+          }
+          .sticky-info {
+            position: relative;
+            flex-direction: row;
+            flex-wrap: wrap;
+            top: 0;
+            margin-bottom: 60px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .input-grid {
+            grid-template-columns: 1fr;
+          }
+          .page-header {
+            padding-top: 120px;
+          }
+          h1 {
+            font-size: 14vw;
+          }
+          .sticky-info {
+            flex-direction: column;
+            gap: 40px;
+          }
+        }
+      `}</style>
+
+      <div ref={containerRef} className="container-arch">
+        {/* HEADER */}
+        <header className="page-header">
+          <div className="title-wrapper">
+            <h1 className="reveal-text">Let's build</h1>
+          </div>
+          <div className="title-wrapper">
+            <h1 className="reveal-text" style={{ paddingLeft: "5vw" }}>
+              Something
+            </h1>
+          </div>
+          <div className="title-wrapper">
+            <h1 className="reveal-text">Concrete.</h1>
+          </div>
+        </header>
+
+        <div className="divider-line"></div>
+
+        {/* MAIN LAYOUT */}
+        <div className="arch-grid">
+          {/* LEFT SIDEBAR (Sticky) */}
+          <aside className="sticky-info fade-in-section">
+            <div className="info-group">
+              <h3>Coordinates</h3>
+              <p>No. 534/2, 19th Street</p>
+              <p>Periyar Nagar, Urapakkam</p>
+              <p>Tamil Nadu 603202</p>
+            </div>
+
+            <div className="info-group">
+              <h3>Contact</h3>
+              <a href="mailto:info@diqraarchitects.com">
+                info@diqraarchitects.com
+              </a>
+              <a href="tel:+917871772428">(+91) 7871772428</a>
+            </div>
+
+            <div className="info-group">
+              <h3>Hours</h3>
+              <p>Mon - Fri: 09:00 - 18:00</p>
+              <p>Weekend: By Appointment</p>
+            </div>
+
+            <div className="info-group">
+              <h3>Socials</h3>
+              <div className="social-row">
+                <a href="#">Inst.</a>
+                <a href="#">Fb.</a>
+                <a href="#">Ln.</a>
+              </div>
+            </div>
+          </aside>
+
+          {/* RIGHT CONTENT (Form) */}
+          <section className="form-section">
+            <p className="form-intro reveal-text">
+              We approach every inquiry with the same precision as our
+              blueprints. Tell us about your vision.
+            </p>
+
+            <form ref={formRef} onSubmit={handleSubmit}>
+              <div className="input-grid">
+                <div className="form-group form-group-anim">
+                  <label>01. First Name</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    placeholder="John"
+                    required
+                  />
+                </div>
+                <div className="form-group form-group-anim">
+                  <label>02. Last Name</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    placeholder="Doe"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="input-grid">
+                <div className="form-group form-group-anim">
+                  <label>03. Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="john@example.com"
+                    required
+                  />
+                </div>
+                <div className="form-group form-group-anim">
+                  <label>04. Phone (Optional)</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="+91..."
+                  />
+                </div>
+              </div>
+
+              <div className="form-group form-group-anim">
+                <label>05. Project Details</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Tell us about the space, timeline, and vision..."
+                  rows="4"
+                  required
+                />
+              </div>
+
+              <div className="submit-wrapper form-group-anim">
+                <button type="submit" className="arch-btn">
+                  <span className="submit-text">Send Proposal</span>
+                </button>
+              </div>
+            </form>
+
+            {/* PARALLAX IMAGE BREAK */}
+            <div className="image-container">
+              <img
+                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80"
+                className="parallax-img"
+                alt="Architecture Detail"
+              />
+            </div>
+
+            {/* FAQ */}
+            <div className="faq-container">
+              <h3
+                style={{
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  letterSpacing: "2px",
+                  color: "var(--arch-grey)",
+                  marginBottom: "40px",
+                }}
+              >
+                Common Inquiries
+              </h3>
+
+              {faqs.map((faq, index) => (
+                <div
+                  key={index}
+                  className="faq-item"
+                  onClick={() => toggleFAQ(index)}
+                >
+                  <div className="faq-question">
+                    <span className="faq-q-text">{faq.q}</span>
+                    <span
+                      id={`faq-icon-${index}`}
+                      style={{ fontSize: "24px", display: "inline-block" }}
+                    >
+                      +
+                    </span>
+                  </div>
+                  <div id={`faq-ans-${index}`} className="faq-answer">
+                    <p>{faq.a}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
+}
 
 // V333333333333333333333
 
@@ -1856,497 +1856,497 @@
 
 // V44444444444444444444
 
-"use client";
+// "use client";
 
-import { useState, useEffect, useRef, useLayoutEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "@studio-freight/lenis";
-import Footer from "../components/Footer";
+// import { useState, useEffect, useRef, useLayoutEffect } from "react";
+// import gsap from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import Lenis from "@studio-freight/lenis";
+// import Footer from "../components/Footer";
 
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 
-export default function ContactPage() {
-  const containerRef = useRef(null);
+// export default function ContactPage() {
+//   const containerRef = useRef(null);
 
-  // --- 1. Smooth Scroll ---
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      smoothWheel: true,
-    });
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-    return () => lenis.destroy();
-  }, []);
+//   // --- 1. Smooth Scroll ---
+//   useEffect(() => {
+//     const lenis = new Lenis({
+//       duration: 1.2,
+//       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+//       orientation: "vertical",
+//       smoothWheel: true,
+//     });
+//     function raf(time) {
+//       lenis.raf(time);
+//       requestAnimationFrame(raf);
+//     }
+//     requestAnimationFrame(raf);
+//     return () => lenis.destroy();
+//   }, []);
 
-  // --- 2. Animations ---
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // A. Horizontal Lines Drawing
-      gsap.utils.toArray(".line-h").forEach((line) => {
-        gsap.from(line, {
-          scaleX: 0,
-          transformOrigin: "left",
-          duration: 1.5,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: line,
-            start: "top 95%",
-          },
-        });
-      });
+//   // --- 2. Animations ---
+//   useLayoutEffect(() => {
+//     const ctx = gsap.context(() => {
+//       // A. Horizontal Lines Drawing
+//       gsap.utils.toArray(".line-h").forEach((line) => {
+//         gsap.from(line, {
+//           scaleX: 0,
+//           transformOrigin: "left",
+//           duration: 1.5,
+//           ease: "expo.out",
+//           scrollTrigger: {
+//             trigger: line,
+//             start: "top 95%",
+//           },
+//         });
+//       });
 
-      // B. Vertical Lines Drawing
-      gsap.utils.toArray(".line-v").forEach((line) => {
-        gsap.from(line, {
-          scaleY: 0,
-          transformOrigin: "top",
-          duration: 1.5,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: line,
-            start: "top 95%",
-          },
-        });
-      });
+//       // B. Vertical Lines Drawing
+//       gsap.utils.toArray(".line-v").forEach((line) => {
+//         gsap.from(line, {
+//           scaleY: 0,
+//           transformOrigin: "top",
+//           duration: 1.5,
+//           ease: "expo.out",
+//           scrollTrigger: {
+//             trigger: line,
+//             start: "top 95%",
+//           },
+//         });
+//       });
 
-      // C. Text Reveal
-      gsap.utils.toArray(".fade-up").forEach((el) => {
-        gsap.from(el, {
-          y: 30,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 90%",
-          },
-        });
-      });
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
+//       // C. Text Reveal
+//       gsap.utils.toArray(".fade-up").forEach((el) => {
+//         gsap.from(el, {
+//           y: 30,
+//           opacity: 0,
+//           duration: 1,
+//           ease: "power3.out",
+//           scrollTrigger: {
+//             trigger: el,
+//             start: "top 90%",
+//           },
+//         });
+//       });
+//     }, containerRef);
+//     return () => ctx.revert();
+//   }, []);
 
-  const [activeFAQ, setActiveFAQ] = useState(null);
+//   const [activeFAQ, setActiveFAQ] = useState(null);
 
-  return (
-    <>
-      <style jsx global>{`
-        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+//   return (
+//     <>
+//       <style jsx global>{`
+//         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
 
-        :root {
-          --bg: #ffffff;
-          --ink: #111111;
-          --line: #e5e5e5;
-          --active-line: #111111;
-          --hover-bg: #fafafa;
-        }
+//         :root {
+//           --bg: #ffffff;
+//           --ink: #111111;
+//           --line: #e5e5e5;
+//           --active-line: #111111;
+//           --hover-bg: #fafafa;
+//         }
 
-        body {
-          background-color: var(--bg);
-          color: var(--ink);
-          font-family: "Inter", sans-serif;
-          margin: 0;
-        }
+//         body {
+//           background-color: var(--bg);
+//           color: var(--ink);
+//           font-family: "Inter", sans-serif;
+//           margin: 0;
+//         }
 
-        /* GRID SYSTEM */
-        .structure-grid {
-          display: grid;
-          grid-template-columns: 25% 25% 50%; /* The Floor Plan */
-          width: 100%;
-          border-bottom: 1px solid var(--line);
-        }
+//         /* GRID SYSTEM */
+//         .structure-grid {
+//           display: grid;
+//           grid-template-columns: 25% 25% 50%; /* The Floor Plan */
+//           width: 100%;
+//           border-bottom: 1px solid var(--line);
+//         }
 
-        /* CELLS */
-        .cell {
-          position: relative;
-          padding: 40px;
-          border-right: 1px solid var(--line);
-          transition: background 0.3s;
-        }
+//         /* CELLS */
+//         .cell {
+//           position: relative;
+//           padding: 40px;
+//           border-right: 1px solid var(--line);
+//           transition: background 0.3s;
+//         }
 
-        .cell:last-child {
-          border-right: none;
-        }
+//         .cell:last-child {
+//           border-right: none;
+//         }
 
-        .cell:hover {
-          background: var(--hover-bg);
-        }
+//         .cell:hover {
+//           background: var(--hover-bg);
+//         }
 
-        /* BORDERS (For Animation) */
-        .line-h {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 1px;
-          background: var(--line);
-          z-index: 1;
-        }
-        .line-v {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 1px;
-          height: 100%;
-          background: var(--line);
-          z-index: 1;
-        }
+//         /* BORDERS (For Animation) */
+//         .line-h {
+//           position: absolute;
+//           bottom: 0;
+//           left: 0;
+//           width: 100%;
+//           height: 1px;
+//           background: var(--line);
+//           z-index: 1;
+//         }
+//         .line-v {
+//           position: absolute;
+//           top: 0;
+//           right: 0;
+//           width: 1px;
+//           height: 100%;
+//           background: var(--line);
+//           z-index: 1;
+//         }
 
-        .border-top {
-          border-top: 1px solid var(--line);
-        }
+//         .border-top {
+//           border-top: 1px solid var(--line);
+//         }
 
-        /* TYPOGRAPHY */
-        .label {
-          font-size: 11px;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          color: #888;
-          margin-bottom: 20px;
-          display: block;
-        }
+//         /* TYPOGRAPHY */
+//         .label {
+//           font-size: 11px;
+//           text-transform: uppercase;
+//           letter-spacing: 1px;
+//           color: #888;
+//           margin-bottom: 20px;
+//           display: block;
+//         }
 
-        h1.hero-title {
-          font-size: clamp(3rem, 6vw, 8rem);
-          font-weight: 400;
-          letter-spacing: -0.03em;
-          margin: 0;
-          line-height: 0.9;
-        }
+//         h1.hero-title {
+//           font-size: clamp(3rem, 6vw, 8rem);
+//           font-weight: 400;
+//           letter-spacing: -0.03em;
+//           margin: 0;
+//           line-height: 0.9;
+//         }
 
-        p.hero-desc {
-          font-size: 1.5rem;
-          color: #555;
-          line-height: 1.4;
-          margin-top: 20px;
-          max-width: 90%;
-        }
+//         p.hero-desc {
+//           font-size: 1.5rem;
+//           color: #555;
+//           line-height: 1.4;
+//           margin-top: 20px;
+//           max-width: 90%;
+//         }
 
-        /* FORM */
-        .grid-form {
-          width: 100%;
-        }
+//         /* FORM */
+//         .grid-form {
+//           width: 100%;
+//         }
 
-        .input-row {
-          position: relative;
-          padding: 40px;
-          border-bottom: 1px solid var(--line);
-          transition: background 0.3s;
-        }
+//         .input-row {
+//           position: relative;
+//           padding: 40px;
+//           border-bottom: 1px solid var(--line);
+//           transition: background 0.3s;
+//         }
 
-        .input-row:focus-within {
-          background: #f4f4f4;
-        }
+//         .input-row:focus-within {
+//           background: #f4f4f4;
+//         }
 
-        .input-row label {
-          display: block;
-          font-size: 11px;
-          text-transform: uppercase;
-          color: #888;
-          margin-bottom: 10px;
-        }
+//         .input-row label {
+//           display: block;
+//           font-size: 11px;
+//           text-transform: uppercase;
+//           color: #888;
+//           margin-bottom: 10px;
+//         }
 
-        .input-row input,
-        .input-row textarea {
-          width: 100%;
-          background: transparent;
-          border: none;
-          font-family: "Inter", sans-serif;
-          font-size: 24px;
-          color: var(--ink);
-          outline: none;
-          padding: 0;
-        }
+//         .input-row input,
+//         .input-row textarea {
+//           width: 100%;
+//           background: transparent;
+//           border: none;
+//           font-family: "Inter", sans-serif;
+//           font-size: 24px;
+//           color: var(--ink);
+//           outline: none;
+//           padding: 0;
+//         }
 
-        .input-row textarea {
-          resize: none;
-          min-height: 80px;
-        }
+//         .input-row textarea {
+//           resize: none;
+//           min-height: 80px;
+//         }
 
-        /* BUTTON */
-        .action-cell {
-          padding: 40px;
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-        }
+//         /* BUTTON */
+//         .action-cell {
+//           padding: 40px;
+//           display: flex;
+//           justify-content: flex-end;
+//           align-items: center;
+//         }
 
-        .submit-btn {
-          background: var(--ink);
-          color: var(--bg);
-          border: none;
-          padding: 20px 60px;
-          border-radius: 4px;
-          font-size: 14px;
-          text-transform: uppercase;
-          cursor: pointer;
-          transition: transform 0.2s;
-        }
+//         .submit-btn {
+//           background: var(--ink);
+//           color: var(--bg);
+//           border: none;
+//           padding: 20px 60px;
+//           border-radius: 4px;
+//           font-size: 14px;
+//           text-transform: uppercase;
+//           cursor: pointer;
+//           transition: transform 0.2s;
+//         }
 
-        .submit-btn:hover {
-          transform: translateY(-2px);
-        }
+//         .submit-btn:hover {
+//           transform: translateY(-2px);
+//         }
 
-        /* FAQ */
-        .faq-cell {
-          padding: 0;
-        }
-        .faq-item {
-          padding: 30px 40px;
-          border-bottom: 1px solid var(--line);
-          cursor: pointer;
-        }
-        .faq-item:hover {
-          background: var(--hover-bg);
-        }
-        .faq-q {
-          display: flex;
-          justify-content: space-between;
-          font-size: 18px;
-        }
-        .faq-a {
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.3s ease;
-        }
-        .faq-a p {
-          padding-top: 15px;
-          color: #666;
-          font-size: 14px;
-          line-height: 1.6;
-        }
+//         /* FAQ */
+//         .faq-cell {
+//           padding: 0;
+//         }
+//         .faq-item {
+//           padding: 30px 40px;
+//           border-bottom: 1px solid var(--line);
+//           cursor: pointer;
+//         }
+//         .faq-item:hover {
+//           background: var(--hover-bg);
+//         }
+//         .faq-q {
+//           display: flex;
+//           justify-content: space-between;
+//           font-size: 18px;
+//         }
+//         .faq-a {
+//           max-height: 0;
+//           overflow: hidden;
+//           transition: max-height 0.3s ease;
+//         }
+//         .faq-a p {
+//           padding-top: 15px;
+//           color: #666;
+//           font-size: 14px;
+//           line-height: 1.6;
+//         }
 
-        @media (max-width: 1024px) {
-          .structure-grid {
-            grid-template-columns: 1fr;
-            border-bottom: none;
-          }
-          .cell {
-            border-right: none;
-            border-bottom: 1px solid var(--line);
-          }
-          .hero-title {
-            font-size: 14vw;
-          }
-        }
-      `}</style>
+//         @media (max-width: 1024px) {
+//           .structure-grid {
+//             grid-template-columns: 1fr;
+//             border-bottom: none;
+//           }
+//           .cell {
+//             border-right: none;
+//             border-bottom: 1px solid var(--line);
+//           }
+//           .hero-title {
+//             font-size: 14vw;
+//           }
+//         }
+//       `}</style>
 
-      <div ref={containerRef} style={{ width: "100%", overflow: "hidden" }}>
-        {/* ROW 1: HEADER */}
-        <div className="structure-grid border-top">
-          <div className="cell">
-            <span className="label fade-up">Agency</span>
-            <div className="fade-up">Diqra.Arch</div>
-            <div
-              className="fade-up"
-              style={{ marginTop: "5px", color: "#888" }}
-            >
-              Est. 2025
-            </div>
-          </div>
-          <div className="cell">
-            <span className="label fade-up">Location</span>
-            <div className="fade-up">Chennai, IN</div>
-            <div
-              className="fade-up"
-              style={{ marginTop: "5px", color: "#888" }}
-            >
-              12:42 PM IST
-            </div>
-          </div>
-          <div className="cell">
-            <span className="label fade-up">Context</span>
-            <h1 className="hero-title fade-up">Design</h1>
-            <h1 className="hero-title fade-up" style={{ color: "#999" }}>
-              Dialogue.
-            </h1>
-          </div>
-        </div>
+//       <div ref={containerRef} style={{ width: "100%", overflow: "hidden" }}>
+//         {/* ROW 1: HEADER */}
+//         <div className="structure-grid border-top">
+//           <div className="cell">
+//             <span className="label fade-up">Agency</span>
+//             <div className="fade-up">Diqra.Arch</div>
+//             <div
+//               className="fade-up"
+//               style={{ marginTop: "5px", color: "#888" }}
+//             >
+//               Est. 2025
+//             </div>
+//           </div>
+//           <div className="cell">
+//             <span className="label fade-up">Location</span>
+//             <div className="fade-up">Chennai, IN</div>
+//             <div
+//               className="fade-up"
+//               style={{ marginTop: "5px", color: "#888" }}
+//             >
+//               12:42 PM IST
+//             </div>
+//           </div>
+//           <div className="cell">
+//             <span className="label fade-up">Context</span>
+//             <h1 className="hero-title fade-up">Design</h1>
+//             <h1 className="hero-title fade-up" style={{ color: "#999" }}>
+//               Dialogue.
+//             </h1>
+//           </div>
+//         </div>
 
-        {/* ROW 2: CONTENT SPLIT */}
-        <div className="structure-grid">
-          {/* COL 1 & 2 Combined (Left Side) */}
-          <div
-            style={{
-              gridColumn: "1 / 3",
-              display: "flex",
-              flexDirection: "column",
-              borderRight: "1px solid var(--line)",
-            }}
-          >
-            <div
-              className="cell"
-              style={{
-                flex: 1,
-                borderRight: "none",
-                borderBottom: "1px solid var(--line)",
-              }}
-            >
-              <span className="label fade-up">Intro</span>
-              <p className="hero-desc fade-up">
-                We approach every project with a blank slate and a grid.
-                Structure informs freedom. Tell us about your space.
-              </p>
-            </div>
+//         {/* ROW 2: CONTENT SPLIT */}
+//         <div className="structure-grid">
+//           {/* COL 1 & 2 Combined (Left Side) */}
+//           <div
+//             style={{
+//               gridColumn: "1 / 3",
+//               display: "flex",
+//               flexDirection: "column",
+//               borderRight: "1px solid var(--line)",
+//             }}
+//           >
+//             <div
+//               className="cell"
+//               style={{
+//                 flex: 1,
+//                 borderRight: "none",
+//                 borderBottom: "1px solid var(--line)",
+//               }}
+//             >
+//               <span className="label fade-up">Intro</span>
+//               <p className="hero-desc fade-up">
+//                 We approach every project with a blank slate and a grid.
+//                 Structure informs freedom. Tell us about your space.
+//               </p>
+//             </div>
 
-            {/* INFO BLOCKS */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-              <div className="cell" style={{ borderBottom: "none" }}>
-                <span className="label fade-up">Direct</span>
-                <a
-                  href="mailto:info@diqra.com"
-                  className="fade-up"
-                  style={{
-                    display: "block",
-                    color: "inherit",
-                    textDecoration: "none",
-                    marginBottom: "5px",
-                  }}
-                >
-                  info@diqra.com
-                </a>
-                <a
-                  href="tel:+"
-                  className="fade-up"
-                  style={{
-                    display: "block",
-                    color: "inherit",
-                    textDecoration: "none",
-                  }}
-                >
-                  (+91) 787 177 2428
-                </a>
-              </div>
-              <div
-                className="cell"
-                style={{ borderRight: "none", borderBottom: "none" }}
-              >
-                <span className="label fade-up">Socials</span>
-                <div className="fade-up">Instagram ↗</div>
-                <div className="fade-up">LinkedIn ↗</div>
-              </div>
-            </div>
+//             {/* INFO BLOCKS */}
+//             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+//               <div className="cell" style={{ borderBottom: "none" }}>
+//                 <span className="label fade-up">Direct</span>
+//                 <a
+//                   href="mailto:info@diqra.com"
+//                   className="fade-up"
+//                   style={{
+//                     display: "block",
+//                     color: "inherit",
+//                     textDecoration: "none",
+//                     marginBottom: "5px",
+//                   }}
+//                 >
+//                   info@diqra.com
+//                 </a>
+//                 <a
+//                   href="tel:+"
+//                   className="fade-up"
+//                   style={{
+//                     display: "block",
+//                     color: "inherit",
+//                     textDecoration: "none",
+//                   }}
+//                 >
+//                   (+91) 787 177 2428
+//                 </a>
+//               </div>
+//               <div
+//                 className="cell"
+//                 style={{ borderRight: "none", borderBottom: "none" }}
+//               >
+//                 <span className="label fade-up">Socials</span>
+//                 <div className="fade-up">Instagram ↗</div>
+//                 <div className="fade-up">LinkedIn ↗</div>
+//               </div>
+//             </div>
 
-            {/* IMAGE FILLER */}
-            <div
-              style={{
-                height: "300px",
-                borderTop: "1px solid var(--line)",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1517551066060-6c9561b3699c?q=80&w=1000"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  filter: "grayscale(100%)",
-                }}
-                alt="Architecture"
-              />
-            </div>
-          </div>
+//             {/* IMAGE FILLER */}
+//             <div
+//               style={{
+//                 height: "300px",
+//                 borderTop: "1px solid var(--line)",
+//                 position: "relative",
+//                 overflow: "hidden",
+//               }}
+//             >
+//               <img
+//                 src="https://images.unsplash.com/photo-1517551066060-6c9561b3699c?q=80&w=1000"
+//                 style={{
+//                   width: "100%",
+//                   height: "100%",
+//                   objectFit: "cover",
+//                   filter: "grayscale(100%)",
+//                 }}
+//                 alt="Architecture"
+//               />
+//             </div>
+//           </div>
 
-          {/* COL 3 (Right Side - FORM) */}
-          <div style={{ gridColumn: "3 / 4" }}>
-            <form className="grid-form">
-              <div className="input-row">
-                <div className="line-h"></div>
-                <label className="fade-up">01 / Name</label>
-                <input type="text" placeholder="John Doe" className="fade-up" />
-              </div>
+//           {/* COL 3 (Right Side - FORM) */}
+//           <div style={{ gridColumn: "3 / 4" }}>
+//             <form className="grid-form">
+//               <div className="input-row">
+//                 <div className="line-h"></div>
+//                 <label className="fade-up">01 / Name</label>
+//                 <input type="text" placeholder="John Doe" className="fade-up" />
+//               </div>
 
-              <div className="input-row">
-                <div className="line-h"></div>
-                <label className="fade-up">02 / Email</label>
-                <input
-                  type="email"
-                  placeholder="john@example.com"
-                  className="fade-up"
-                />
-              </div>
+//               <div className="input-row">
+//                 <div className="line-h"></div>
+//                 <label className="fade-up">02 / Email</label>
+//                 <input
+//                   type="email"
+//                   placeholder="john@example.com"
+//                   className="fade-up"
+//                 />
+//               </div>
 
-              <div className="input-row">
-                <div className="line-h"></div>
-                <label className="fade-up">03 / Project Type</label>
-                <input
-                  type="text"
-                  placeholder="Residential, Commercial..."
-                  className="fade-up"
-                />
-              </div>
+//               <div className="input-row">
+//                 <div className="line-h"></div>
+//                 <label className="fade-up">03 / Project Type</label>
+//                 <input
+//                   type="text"
+//                   placeholder="Residential, Commercial..."
+//                   className="fade-up"
+//                 />
+//               </div>
 
-              <div className="input-row">
-                <div className="line-h"></div>
-                <label className="fade-up">04 / Details</label>
-                <textarea
-                  placeholder="Tell us about the site..."
-                  className="fade-up"
-                ></textarea>
-              </div>
+//               <div className="input-row">
+//                 <div className="line-h"></div>
+//                 <label className="fade-up">04 / Details</label>
+//                 <textarea
+//                   placeholder="Tell us about the site..."
+//                   className="fade-up"
+//                 ></textarea>
+//               </div>
 
-              <div className="action-cell">
-                <button type="button" className="submit-btn fade-up">
-                  Submit Blueprint
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+//               <div className="action-cell">
+//                 <button type="button" className="submit-btn fade-up">
+//                   Submit Blueprint
+//                 </button>
+//               </div>
+//             </form>
+//           </div>
+//         </div>
 
-        {/* ROW 3: FAQ */}
-        <div
-          className="structure-grid"
-          style={{ borderBottom: "1px solid var(--line)" }}
-        >
-          <div className="cell" style={{ gridColumn: "1 / 2" }}>
-            <span className="label fade-up">Details</span>
-          </div>
-          <div className="faq-cell" style={{ gridColumn: "2 / 4" }}>
-            {[
-              {
-                q: "What is your scope of work?",
-                a: "We handle architecture, interior design, and landscape planning.",
-              },
-              {
-                q: "Do you work internationally?",
-                a: "Yes, we collaborate digitally on projects worldwide.",
-              },
-              {
-                q: "What is the starting budget?",
-                a: "We tailor solutions to various budgets, prioritizing value and longevity.",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="faq-item"
-                onClick={() => setActiveFAQ(activeFAQ === i ? null : i)}
-              >
-                <div className="faq-q">
-                  <span>{item.q}</span>
-                  <span>{activeFAQ === i ? "—" : "+"}</span>
-                </div>
-                <div
-                  className="faq-a"
-                  style={{ maxHeight: activeFAQ === i ? "150px" : "0" }}
-                >
-                  <p>{item.a}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </>
-  );
-}
+//         {/* ROW 3: FAQ */}
+//         <div
+//           className="structure-grid"
+//           style={{ borderBottom: "1px solid var(--line)" }}
+//         >
+//           <div className="cell" style={{ gridColumn: "1 / 2" }}>
+//             <span className="label fade-up">Details</span>
+//           </div>
+//           <div className="faq-cell" style={{ gridColumn: "2 / 4" }}>
+//             {[
+//               {
+//                 q: "What is your scope of work?",
+//                 a: "We handle architecture, interior design, and landscape planning.",
+//               },
+//               {
+//                 q: "Do you work internationally?",
+//                 a: "Yes, we collaborate digitally on projects worldwide.",
+//               },
+//               {
+//                 q: "What is the starting budget?",
+//                 a: "We tailor solutions to various budgets, prioritizing value and longevity.",
+//               },
+//             ].map((item, i) => (
+//               <div
+//                 key={i}
+//                 className="faq-item"
+//                 onClick={() => setActiveFAQ(activeFAQ === i ? null : i)}
+//               >
+//                 <div className="faq-q">
+//                   <span>{item.q}</span>
+//                   <span>{activeFAQ === i ? "—" : "+"}</span>
+//                 </div>
+//                 <div
+//                   className="faq-a"
+//                   style={{ maxHeight: activeFAQ === i ? "150px" : "0" }}
+//                 >
+//                   <p>{item.a}</p>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </div>
+//       <Footer />
+//     </>
+//   );
+// }
