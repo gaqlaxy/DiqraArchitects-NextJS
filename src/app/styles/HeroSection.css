@@ -4,17 +4,17 @@
   box-sizing: border-box;
 }
 
-@font-face {
+/* @font-face {
   font-family: "PP Neue Montreal Book";
   font-style: normal;
   font-weight: normal;
   src: local("PP Neue Montreal Book"),
     url("ppneuemontreal-book.woff") format("woff");
-}
+} */
 
 body {
   overflow-x: hidden;
-  font-family: "PP Neue Montreal Book";
+  font-family: "Geist", sans-serif;
 }
 
 /* === PRELOADER === */

@@ -745,7 +745,8 @@ import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "../components/Footer";
-import Lenis from "@studio-freight/lenis";
+
+// import Lenis from "@studio-freight/lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -763,23 +764,23 @@ export default function ContactPage() {
   const [activeFAQ, setActiveFAQ] = useState(null);
 
   // --- 1. Smooth Scroll Setup ---
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureDirection: "vertical",
-      smoothWheel: true,
-    });
+  // useEffect(() => {
+  //   const lenis = new Lenis({
+  //     duration: 1.2,
+  //     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  //     orientation: "vertical",
+  //     gestureDirection: "vertical",
+  //     smoothWheel: true,
+  //   });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+  //   function raf(time) {
+  //     lenis.raf(time);
+  //     requestAnimationFrame(raf);
+  //   }
+  //   requestAnimationFrame(raf);
 
-    return () => lenis.destroy();
-  }, []);
+  //   return () => lenis.destroy();
+  // }, []);
 
   // --- 2. GSAP Animations ---
   useLayoutEffect(() => {
@@ -809,17 +810,17 @@ export default function ContactPage() {
       });
 
       // Form inputs stagger
-      gsap.from(".form-group-anim", {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: formRef.current,
-          start: "top 70%",
-        },
-      });
+      // gsap.from(".form-group-anim", {
+      //   y: 30,
+      //   opacity: 0,
+      //   duration: 0.8,
+      //   stagger: 0.1,
+      //   ease: "power2.out",
+      //   scrollTrigger: {
+      //     trigger: formRef.current,
+      //     start: "top 70%",
+      //   },
+      // });
 
       // Image Parallax
       gsap.to(".parallax-img", {
@@ -932,7 +933,7 @@ export default function ContactPage() {
         body {
           background-color: var(--arch-light);
           color: var(--arch-black);
-          font-family: "Manrope", sans-serif;
+
           overflow-x: hidden;
         }
 
@@ -1059,7 +1060,7 @@ export default function ContactPage() {
           border-bottom: 1px solid var(--line-color);
           padding: 15px 0;
           font-size: 20px;
-          font-family: "Manrope", sans-serif;
+          font-family: "Geist", sans-serif;
           color: var(--arch-black);
           transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           border-radius: 0;

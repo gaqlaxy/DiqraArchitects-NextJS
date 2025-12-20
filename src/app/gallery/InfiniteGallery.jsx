@@ -383,12 +383,7 @@ const InfiniteGallery = () => {
   return (
     <>
       <style>{`
-        @import url("https://fonts.cdnfonts.com/css/thegoodmonolith");
-        @font-face {
-          src: url("https://fonts.cdnfonts.com/css/pp-neue-montreal") format("woff2");
-          font-family: "PP Neue Montreal", sans-serif;
-          font-weight: 400;
-        }
+        
 
         * {
           margin: 0;
@@ -398,7 +393,7 @@ const InfiniteGallery = () => {
         }
 
         body {
-          font-family: "PP Neue Montreal", sans-serif;
+          font-family: "Geist", sans-serif;
           background-color: #000000;
           color: #ffffff;
           overflow: hidden;
@@ -588,7 +583,7 @@ const InfiniteGallery = () => {
         }
 
         .GallerySectionitem-name {
-          font-family: "PP Neue Montreal", sans-serif;
+          font-family: "Geist", sans-serif;
           color: #ffffff;
           font-size: 12px;
           font-weight: 500;
@@ -598,7 +593,7 @@ const InfiniteGallery = () => {
         }
 
         .GallerySectionitem-number {
-          font-family: "TheGoodMonolith", monospace;
+          font-family: "Geist", sans-serif;
           color: #888888;
           font-size: 10px;
           font-weight: 400;

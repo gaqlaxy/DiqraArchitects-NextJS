@@ -14,8 +14,7 @@
   overflow: hidden;
   background-color: #000;
   color: #fff;
-  font-family: "PP Neue Montreal", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  font-family: "Geist", sans-serif;
 }
 
 /* Noise layer */
@@ -144,7 +143,7 @@
 }
 
 .GalleryItemNumber {
-  font-family: "TheGoodMonolith", monospace;
+  font-family: "Geist", sans-serif;
   font-size: 10px;
   color: #8b8b8b;
 }

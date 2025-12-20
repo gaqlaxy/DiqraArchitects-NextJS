@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
-@font-face {
+/* @font-face {
   font-family: "PP Neue Montreal Book";
   font-style: normal;
   font-weight: normal;
   src: local("PP Neue Montreal Book"),
     url("/ppneuemontreal-book.woff") format("woff");
-}
+} */
 body {
-  font-family: "PP Neue Montreal Book", sans-serif;
+  font-family: "Geist", sans-serif;
 }

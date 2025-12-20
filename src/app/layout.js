@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/next";
 import PreloaderWrapper from "./components/PreloaderWrapper";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,8 +46,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={GeistSans.className}>
+      <body>
         <PreloaderWrapper />
         <Navbar />
         {children}
