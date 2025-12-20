@@ -1,4 +1,4 @@
-.cta-section {
+/* .cta-section {
   display: grid;
   align-items: center;
   justify-content: center;
@@ -95,7 +95,7 @@
   margin: 6rem 0 3rem 0;
 }
 
-/* Mobile responsive */
+
 @media (max-width: 768px) {
   .desktop-text {
     display: none;
@@ -142,5 +142,278 @@
   .cta-heading2 {
     grid-column-start: 1;
     grid-row-start: 2;
+  }
+} */
+/* V2222222222222222222 */
+/* ArchitecturalCta.css */
+/* :root {
+  --line-color: rgba(0, 0, 0, 0.15);
+  --text-primary: #050505;
+  --bg-color: #f4f4f4; 
+}
+
+.arch-section {
+  background-color: var(--bg-color);
+  padding: 8rem 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.arch-container {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.arch-row {
+  position: relative;
+  width: 100%;
+  padding: 1.5rem 0;
+  display: flex;
+  align-items: center;
+}
+
+
+.arch-row.left {
+  justify-content: flex-start;
+}
+.arch-row.right {
+  justify-content: flex-end;
+}
+.arch-row.center {
+  justify-content: center;
+  padding-top: 4rem;
+}
+
+
+.separator-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--line-color);
+  transform: scaleX(0); 
+  transform-origin: left;
+}
+
+
+.text-mask {
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+
+.arch-heading {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(3rem, 7vw, 7.5rem);
+  font-weight: 400; 
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  margin: 0;
+  transform: translateY(110%); 
+}
+
+
+.indent {
+  margin-left: 5vw;
+}
+.indent-right {
+  margin-right: 5vw;
+}
+
+
+.arch-btn {
+  position: relative;
+  display: inline-block;
+  padding: 1.2rem 2.5rem;
+  background: var(--text-primary);
+  color: #fff;
+  border-radius: 4px; 
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  clip-path: inset(0 0 100% 0); 
+}
+
+.arch-btn:hover {
+  background: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (max-width: 768px) {
+  .arch-section {
+    padding: 4rem 1rem;
+  }
+  .arch-heading {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+  .indent,
+  .indent-right {
+    margin: 0;
+  }
+  .arch-row.left,
+  .arch-row.right {
+    justify-content: flex-start;
+  }
+}
+
+
+
+
+ */
+/* V33333333333333333  */
+/* ReplicaCta.css */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+.replica-section {
+  position: relative;
+  width: 100%;
+  min-height: 80vh; /* Gives it breathing room */
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  .replica-section {
+    padding: 4rem 1rem;
+  }
+}
+
+.replica-container {
+  width: 100%;
+  /* max-width: 1400px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* grid-template-columns: 1fr 1.5fr; 40% Left / 60% Right split roughly */
+  gap: 4rem;
+}
+
+/* LEFT SIDE - LOGO */
+.replica-logo-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 10px; /* Aligns visually with the top of the text */
+}
+
+.replica-logo {
+  width: 50px;
+  height: 50px;
+  opacity: 0; /* Hidden for GSAP */
+  transform: translateY(20px);
+}
+
+/* RIGHT SIDE - CONTENT */
+.replica-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+/* Heading Typography */
+.replica-heading {
+  /* font-family: "Inter", -apple-system, sans-serif; */
+  font-size: 100px; /* Responsive scaling */
+  font-weight: 400; /* Not too bold, exactly like image */
+  line-height: 1.1;
+  letter-spacing: -0.04em; /* Tight tracking is crucial */
+  color: #000;
+  margin: 0;
+  /* max-width: 900px; */
+}
+
+.line-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.line-text {
+  display: block;
+  transform: translateY(100%); /* Start hidden down */
+}
+
+/* Subtext Paragraph */
+.replica-subtext {
+  /* font-family: "Inter", sans-serif; */
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #111;
+  /* max-width: 500px; */
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Button */
+.replica-btn-wrapper {
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.replica-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #000;
+  color: #fff;
+  padding: 16px 32px;
+  border-radius: 100px; /* Pill shape */
+  text-decoration: none;
+  /* font-family: "Inter", sans-serif; */
+  font-size: 1rem;
+  font-weight: 500;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.replica-btn:hover {
+  transform: scale(1.05);
+  background-color: #222;
+}
+
+/* The White Dot inside button */
+.btn-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .replica-container {
+    grid-template-columns: 1fr; /* Stack vertically */
+    gap: 3rem;
+  }
+
+  .replica-logo-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .replica-heading {
+    font-size: 2.5rem;
   }
 }
