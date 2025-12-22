@@ -183,6 +183,7 @@ export default function OhHeroSection() {
     //     ScrollTrigger.getAll().forEach((t) => t.kill());
     //   };
     // }, [heroLoaded]);
+
     return () => ctx.revert();
   }, [heroLoaded]);
 
@@ -361,16 +362,6 @@ export default function OhHeroSection() {
               natural harmony, resulting in spaces that feel grounded, enduring,
               and beautifully purposeful.
             </p>
-
-            {/* <Link
-              to="/about"
-              className="about-cta-btn-styled"
-              ref={ctaBtnRef}
-              onMouseEnter={handleCtaMouseEnter}
-              onMouseLeave={handleCtaMouseLeave}
-            >
-              <span>Learn more About us</span>
-            </Link> */}
 
             <SlideUpButton href="/about" className="ml-4">
               learn more about us
