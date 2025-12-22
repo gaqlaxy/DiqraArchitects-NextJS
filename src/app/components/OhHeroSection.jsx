@@ -9,6 +9,7 @@ import { SplitText } from "gsap/SplitText";
 import projectsData from "../data/projects-data.json";
 import "../styles/OhHeroSection.css";
 import SlideUpButton from "./SlideUpButton";
+// import "../styles/SlideUpLink.css";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -61,147 +62,129 @@ export default function OhHeroSection() {
   useEffect(() => {
     if (!heroLoaded) return;
 
-    // small fade-in for hero wrapper (visual polish)
-    gsap.set(heroRef.current, { autoAlpha: 0 });
-    gsap.to(heroRef.current, {
-      autoAlpha: 1,
-      duration: 0.45,
-      ease: "power1.out",
-    });
+    const ctx = gsap.context(() => {
+      gsap.set(heroRef.current, { autoAlpha: 0 });
+      gsap.to(heroRef.current, {
+        autoAlpha: 1,
+        duration: 0.45,
+        ease: "power1.out",
+      });
 
-    // Parallax background effect
-    const parallaxTween = gsap.to(heroBgRef.current, {
-      yPercent: 10,
-      ease: "none",
-      scrollTrigger: {
+      // Parallax background effect
+      const parallaxTween = gsap.to(heroBgRef.current, {
+        yPercent: 10,
+        scrub: 1,
+        // ease: "none",
+        // scrollTrigger: {
+        //   trigger: heroRef.current,
+        //   start: "top top",
+        //   end: "bottom top",
+        //   scrub: 1,
+        //   invalidateOnRefresh: true,
+        // },
+      });
+
+      // pin the hero while preserving proper measurement after load
+      const pinTrigger = ScrollTrigger.create({
         trigger: heroRef.current,
         start: "top top",
-        end: "bottom top",
-        scrub: 1,
+        // end: "bottom top",
+        end: "+=80%",
+        pin: true,
+        pinSpacing: false,
         invalidateOnRefresh: true,
-      },
-    });
+      });
 
-    // pin the hero while preserving proper measurement after load
-    const pinTrigger = ScrollTrigger.create({
-      trigger: heroRef.current,
-      start: "top top",
-      end: "bottom top",
-      pin: true,
-      pinSpacing: false,
-      invalidateOnRefresh: true,
-    });
+      // Hover preview timeline
+      const tl = gsap.timeline({ paused: true });
+      timelineRef.current = tl;
 
-    // Hover preview timeline
-    const tl = gsap.timeline({ paused: true });
-    timelineRef.current = tl;
-
-    tl.to(hoverPreviewRef.current, {
-      y: 0,
-      duration: 0.9,
-      ease: "power4.inOut",
-    }).to(
-      previewImageRef.current,
-      {
-        opacity: 1,
+      tl.to(hoverPreviewRef.current, {
         y: 0,
-        scale: 1,
-        duration: 1.4,
-        ease: "power3.out",
-      },
-      "-=0.7"
-    );
+        duration: 0.9,
+        ease: "power4.inOut",
+      }).to(
+        previewImageRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.4,
+          ease: "power3.out",
+        },
+        "-=0.7"
+      );
 
-    // CTA Button slide-up effect (same function but run after load)
-    function createSlideUpEffect(element) {
-      if (!element) return null;
-      let span = element.querySelector("span");
-      if (!span) {
-        const originalText = element.textContent;
-        element.innerHTML = `<span>${originalText}</span>`;
-        span = element.querySelector("span");
-      }
-      if (span.querySelector(".text-original")) return null;
-      const originalText = span.textContent;
-      span.innerHTML = `
+      // CTA Button slide-up effect (same function but run after load)
+      function createSlideUpEffect(element) {
+        if (!element) return null;
+        let span = element.querySelector("span");
+        if (!span) {
+          const originalText = element.textContent;
+          element.innerHTML = `<span>${originalText}</span>`;
+          span = element.querySelector("span");
+        }
+        if (span.querySelector(".text-original")) return null;
+        const originalText = span.textContent;
+        span.innerHTML = `
         <span class="text-original">${originalText}</span>
         <span class="text-hover">${originalText}</span>
       `;
-      const originalSpan = span.querySelector(".text-original");
-      const hoverSpan = span.querySelector(".text-hover");
+        const originalSpan = span.querySelector(".text-original");
+        const hoverSpan = span.querySelector(".text-hover");
 
-      gsap.set(span, {
-        overflow: "hidden",
-        height: "auto",
-        position: "relative",
-        display: "block",
+        gsap.set(span, {
+          overflow: "hidden",
+          height: "auto",
+          position: "relative",
+          display: "block",
+        });
+        gsap.set(originalSpan, {
+          y: 0,
+          position: "relative",
+          display: "block",
+        });
+        gsap.set(hoverSpan, {
+          y: "100%",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+        });
+
+        const ctaTl = gsap.timeline({ paused: true });
+        ctaTl
+          .to(originalSpan, { y: "-100%", duration: 0.3, ease: "power2.out" })
+          .to(hoverSpan, { y: 0, duration: 0.3, ease: "power2.out" }, 0);
+
+        return ctaTl;
+      }
+
+      const ctaTimeline = createSlideUpEffect(ctaBtnRef.current);
+
+      // Refresh ScrollTrigger after all is set (ensures correct measurements)
+      ScrollTrigger.refresh();
+
+      // Apply styles for text animation
+      gsap.set(".lineParent", { overflow: "hidden" });
+      gsap.set(".lineChild", {
+        display: "inline-block",
+        transformOrigin: "0% 100%",
       });
-      gsap.set(originalSpan, { y: 0, position: "relative", display: "block" });
-      gsap.set(hoverSpan, {
-        y: "100%",
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-      });
-
-      const ctaTl = gsap.timeline({ paused: true });
-      ctaTl
-        .to(originalSpan, { y: "-100%", duration: 0.3, ease: "power2.out" })
-        .to(hoverSpan, { y: 0, duration: 0.3, ease: "power2.out" }, 0);
-
-      return ctaTl;
-    }
-
-    const ctaTimeline = createSlideUpEffect(ctaBtnRef.current);
-
-    // Refresh ScrollTrigger after all is set (ensures correct measurements)
-    ScrollTrigger.refresh();
-
-    // Apply styles for text animation
-    gsap.set(".lineParent", { overflow: "hidden" });
-    gsap.set(".lineChild", {
-      display: "inline-block",
-      transformOrigin: "0% 100%",
-    });
+    }, heroRef);
+    // small fade-in for hero wrapper (visual polish)
 
     // cleanup on unmount
-    return () => {
-      tl.kill();
-      if (ctaTimeline) ctaTimeline.kill();
-      parallaxTween.kill();
-      pinTrigger.kill();
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
+    //   return () => {
+    //     tl.kill();
+    //     if (ctaTimeline) ctaTimeline.kill();
+    //     parallaxTween.kill();
+    //     pinTrigger.kill();
+    //     ScrollTrigger.getAll().forEach((t) => t.kill());
+    //   };
+    // }, [heroLoaded]);
+    return () => ctx.revert();
   }, [heroLoaded]);
-
-  // CTA hover handlers
-  // const handleCtaMouseEnter = () => {
-  //   const span = ctaBtnRef.current?.querySelector("span");
-  //   if (span) {
-  //     const originalSpan = span.querySelector(".text-original");
-  //     const hoverSpan = span.querySelector(".text-hover");
-  //     if (originalSpan && hoverSpan) {
-  //       gsap.to(originalSpan, {
-  //         y: "-100%",
-  //         duration: 0.3,
-  //         ease: "power2.out",
-  //       });
-  //       gsap.to(hoverSpan, { y: 0, duration: 0.3, ease: "power2.out" });
-  //     }
-  //   }
-  // };
-  // const handleCtaMouseLeave = () => {
-  //   const span = ctaBtnRef.current?.querySelector("span");
-  //   if (span) {
-  //     const originalSpan = span.querySelector(".text-original");
-  //     const hoverSpan = span.querySelector(".text-hover");
-  //     if (originalSpan && hoverSpan) {
-  //       gsap.to(originalSpan, { y: 0, duration: 0.3, ease: "power2.out" });
-  //       gsap.to(hoverSpan, { y: "100%", duration: 0.3, ease: "power2.out" });
-  //     }
-  //   }
-  // };
 
   const handleMouseEnter = () => timelineRef.current?.play();
   const handleMouseLeave = () => timelineRef.current?.reverse();
@@ -242,18 +225,10 @@ export default function OhHeroSection() {
               alt={`${featuredProject.title} preview`}
               className="oh-preview-image"
             />
-            {/* <div className="oh-preview-overlay-text">
-              <h3 ref={previewTitleRef} className="oh-preview-title">
-                {featuredProject.title}
-              </h3>
-              <p ref={previewSubtitleRef} className="oh-preview-subtitle">
-                Explore the Project
-              </p>
-            </div> */}
           </div>
 
           {/* Top Bar */}
-          <div className="oh-hero-top-bar" ref={heroTopBarRef}>
+          {/* <div className="oh-hero-top-bar" ref={heroTopBarRef}>
             <div className="oh-hero-top-left">
               <div className="oh-featured-label" ref={featuredLabelRef}>
                 FEATURED PROJECT
@@ -297,14 +272,49 @@ export default function OhHeroSection() {
                 </svg>
               </span>
             </Link>
-          </div>
+          </div> */}
 
           {/* Bottom Hero Text */}
           <div className="oh-hero-content">
-            <h1 ref={heroH1Ref} className="oh-hero-h1">
-              Strong, Grounded Forms Shaped by Culture, Balance, & Enduring
-              Elegance
-            </h1>
+            <div className="flex items-center justify-between">
+              <h1 ref={heroH1Ref} className="oh-hero-h1">
+                Strong, Grounded Architecture <br />
+                Shaped by Culture, Balance & Enduring Elegance
+              </h1>
+              {/* <Link
+              href={`/project/${featuredProject.slug}`}
+              // className="oh-view-project"
+              className="oh-hero-cta"
+              aria-label="View detailed project information"
+              ref={viewProjectRef}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            >
+              <span className="oh-view-project-text">
+                VIEW Featured PROJECT
+              </span>
+              <span className="oh-hero-cta-arrow">&#8593;</span>
+            </Link> */}
+              <Link
+                href={`/project/${featuredProject.slug}`}
+                className="oh-view-project "
+                //className="oh-hero-cta"
+                // className="slideup-link"
+                data-text="View Featured Project"
+                aria-label="View detailed project information"
+                ref={viewProjectRef}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+              >
+                <span className="oh-view-project-text">
+                  VIEW Featured PROJECT
+                </span>
+              </Link>
+            </div>
           </div>
 
           <div
