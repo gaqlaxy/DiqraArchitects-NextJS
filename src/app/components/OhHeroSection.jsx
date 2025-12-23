@@ -277,7 +277,7 @@ export default function OhHeroSection() {
 
           {/* Bottom Hero Text */}
           <div className="oh-hero-content">
-            <div className="flex items-center justify-between">
+            <div className="oh-hero-container">
               <h1 ref={heroH1Ref} className="oh-hero-h1">
                 Strong, Grounded Architecture <br />
                 Shaped by Culture, Balance & Enduring Elegance
