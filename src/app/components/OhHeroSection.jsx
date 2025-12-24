@@ -345,7 +345,7 @@ export default function OhHeroSection() {
                   <span>(our studio)</span>
                 </div>
                 <div className="about-img-col">
-                  <img src="/About.jpg" alt="Architecture Studio" />
+                  <img src="/About.webp" alt="Architecture Studio" />
                 </div>
                 <div className="about-heading2">
                   <h1>INTENT + IMPACT</h1>
