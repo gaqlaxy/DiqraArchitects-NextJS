@@ -37,11 +37,12 @@
   flex-shrink: 0; /* Prevents the dot from shrinking */
 }
 
-h1 {
-  font-size: 120px;
-  font-weight: 400;
-  letter-spacing: -3px;
-  line-height: 0.9;
+.servicescomp-heading {
+  white-space: normal;
+  word-spacing: 1px;
+
+  font-size: clamp(48px, 5vw, 72px);
+  line-height: 1.15;
 }
 
 .view-all {

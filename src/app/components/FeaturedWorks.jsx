@@ -92,9 +92,9 @@ const FeaturedWorks = () => {
   return (
     <section className="featured-section">
       <div className="section-header">
-        <h2 className="section-title">
+        <h1 className="section-title">
           FEATURED <br /> WORKS
-        </h2>
+        </h1>
         <span className="section-number">
           ({featuredWorks.length.toString().padStart(2, "0")})
         </span>

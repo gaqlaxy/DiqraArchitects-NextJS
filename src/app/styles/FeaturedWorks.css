@@ -20,10 +20,12 @@ body {
 }
 
 .section-title {
-  font-size: 120px;
-  font-weight: 400;
-  letter-spacing: -3px;
-  line-height: 0.9;
+  font-size: clamp(48px, 5vw, 72px);
+  word-spacing: 1px;
+  white-space: normal;
+  font-weight: 500;
+  letter-spacing: -1px;
+  line-height: 1.15;
 }
 
 .section-number {

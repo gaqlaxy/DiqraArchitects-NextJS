@@ -334,12 +334,12 @@
 /* Heading Typography */
 .replica-heading {
   /* font-family: "Inter", -apple-system, sans-serif; */
-  font-size: 100px; /* Responsive scaling */
-  font-weight: 400; /* Not too bold, exactly like image */
-  line-height: 1.1;
-  letter-spacing: -0.04em; /* Tight tracking is crucial */
-  color: #000;
-  margin: 0;
+  white-space: normal;
+  word-spacing: 1px;
+
+  max-width: 100%;
+  font-size: clamp(48px, 5vw, 72px);
+  line-height: 1.15;
   /* max-width: 900px; */
 }
 

@@ -34,6 +34,13 @@
   background-color: #000;
   border-radius: 2px;
 }
+.testimonial-heading {
+  white-space: normal;
+  word-spacing: 1px;
+
+  font-size: clamp(48px, 5vw, 72px);
+  line-height: 1.15;
+}
 
 h2 {
   font-size: 48px;

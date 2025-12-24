@@ -87,7 +87,7 @@ const Services = () => {
         <div className="header">
           <div className="header-left">
             <div className="label">WHAT WE DO</div>
-            <h1>Our Services</h1>
+            <h1 className="servicescomp-heading">Our Services</h1>
           </div>
         </div>
 
