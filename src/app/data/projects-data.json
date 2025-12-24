@@ -56,7 +56,7 @@
       "category": "Recreational",
       "projectType": "architecture",
       "location": "Ayapakkam, Chennai",
-      "thumbnail": "/HeroMain.png",
+      "thumbnail": "/HeroMain.webp",
       "featured": true,
       "description": "A luxurious pool house that seamlessly integrates indoor and outdoor living spaces.",
       "details": {
@@ -65,7 +65,7 @@
         "status": "Completed",
         "architect": "Diqra Architects"
       },
-      "images": ["/HeroMain.png", "/About.jpg", "/About1.jpg"],
+      "images": ["/HeroMain.webp", "/About.jpg", "/About1.jpg"],
       "tags": ["Luxury", "Pool House", "Indoor-Outdoor"]
     },
     {
