@@ -8,10 +8,13 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import localFont from "next/font/local";
 
-const myFont = localFont({
-  src: "./Geom-Regular.ttf",
-});
+// const myFont = localFont({
+//   src: "./Geom-Regular.ttf",
+// });
 
+const myFont = localFont({
+  src: "./SpaceGrotesk.ttf",
+});
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
