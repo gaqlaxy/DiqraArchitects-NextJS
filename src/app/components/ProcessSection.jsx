@@ -486,11 +486,18 @@ const ProcessSection = () => {
             </SlideUpButton>
           </div> */}
           <div className="arch-cta-block">
-            <SlideUpButton href="/process" className="ml-4">
-              get to know our process
-            </SlideUpButton>
+            {/* <div className="">
+              <SlideUpButton href="/process" className="ml-4">
+                get to know our process
+              </SlideUpButton>
+            </div> */}
           </div>
         </div>
+      </div>
+      <div className="cta-block-process">
+        <SlideUpButton href="/process" className="ml-4">
+          get to know our process
+        </SlideUpButton>
       </div>
     </div>
   );
