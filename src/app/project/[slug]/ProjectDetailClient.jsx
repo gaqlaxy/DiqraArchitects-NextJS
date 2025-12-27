@@ -442,9 +442,10 @@ import projectsData from "@/app/data/projects-data.json";
 import Footer from "@/app/components/Footer";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "@studio-freight/lenis";
+
 import ProjectGallery from "./ProjectGallery"; // We will incorporate images manually for control, or use this if it fits
 import "@/app/styles/ProjectDetail.css";
+import CTASection from "../../components/CtaSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -460,31 +461,6 @@ export default function ProjectDetailClient({ slug }) {
     projectIndex !== -1
       ? projectsData.projects[(projectIndex + 1) % projectsData.projects.length]
       : null;
-
-  // --- SMOOTH SCROLL ---
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: "vertical",
-      smooth: true,
-    });
-    lenisRef.current = lenis;
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
-
-    return () => {
-      lenis.destroy();
-      gsap.ticker.remove(lenis.raf);
-    };
-  }, []);
 
   // --- ANIMATIONS ---
   useLayoutEffect(() => {
@@ -576,16 +552,16 @@ export default function ProjectDetailClient({ slug }) {
 
       // 3. NEXT PROJECT HOVER REVEAL
       // Keep footer simple, animate text strongly
-      gsap.from(".next-project-section", {
-        yPercent: 50,
-        opacity: 0,
-        scrollTrigger: {
-          trigger: ".next-project-section",
-          start: "top bottom",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-      });
+      // gsap.from(".next-project-section", {
+      //   yPercent: 50,
+      //   opacity: 0,
+      //   scrollTrigger: {
+      //     trigger: ".next-project-section",
+      //     start: "top bottom",
+      //     end: "bottom bottom",
+      //     scrub: 1,
+      //   },
+      // });
     }, containerRef);
 
     return () => ctx.revert();
@@ -600,109 +576,117 @@ export default function ProjectDetailClient({ slug }) {
   if (projectIndex === -1) return null;
 
   return (
-    <div ref={containerRef} className="minimal-project-page">
-      {/* HEADER SECTION */}
-      <header className="project-header">
-        <div className="header-top">
-          <Link href="/works" className="back-btn">
-            &larr; Index
-          </Link>
-          <span className="header-year">{project.year}</span>
-        </div>
+    <>
+      <div ref={containerRef} className="minimal-project-page">
+        {/* HEADER SECTION */}
+        <header className="project-header">
+          <div className="header-top">
+            <Link href="/works" className="back-btn">
+              &larr; Index
+            </Link>
+            <span className="header-year">{project.year}</span>
+          </div>
 
-        <h1 className="project-title">
-          {/* Split title for animation logic if needed, or keep simple block */}
-          <div className="title-line">
-            <span>{project.title}</span>
-          </div>
-        </h1>
-
-        <div className="header-meta">
-          <div className="meta-row">
-            <span className="meta-label">Location</span>
-            <span className="meta-value">{project.location}</span>
-          </div>
-          <div className="meta-row">
-            <span className="meta-label">Category</span>
-            <span className="meta-value">{project.category}</span>
-          </div>
-          {project.details?.client && (
-            <div className="meta-row">
-              <span className="meta-label">Client</span>
-              <span className="meta-value">{project.details.client}</span>
+          <h1 className="project-title">
+            {/* Split title for animation logic if needed, or keep simple block */}
+            <div className="title-line">
+              <span>{project.title}</span>
             </div>
-          )}
+          </h1>
+
+          <div className="header-meta">
+            <div className="meta-row">
+              <span className="meta-label">Location</span>
+              <span className="meta-value">{project.location}</span>
+            </div>
+            <div className="meta-row">
+              <span className="meta-label">Category</span>
+              <span className="meta-value">{project.category}</span>
+            </div>
+            {project.details?.client && (
+              <div className="meta-row">
+                <span className="meta-label">Client</span>
+                <span className="meta-value">{project.details.client}</span>
+              </div>
+            )}
+          </div>
+        </header>
+
+        {/* HERO IMAGE */}
+        <div className="hero-section">
+          <div className="hero-img-wrapper">
+            <img
+              src={project.images[0]}
+              alt={project.title}
+              className="hero-img"
+              data-speed="0.5"
+            />
+          </div>
         </div>
-      </header>
 
-      {/* HERO IMAGE */}
-      <div className="hero-section">
-        <div className="hero-img-wrapper">
-          <img
-            src={project.images[0]}
-            alt={project.title}
-            className="hero-img"
-            data-speed="0.5"
-          />
-        </div>
-      </div>
+        {/* CONTENT GRID (Sticky Sidebar) */}
+        <section className="content-grid">
+          {/* LEFT: Sticky Description */}
+          <aside className="content-sidebar">
+            <div className="sidebar-sticky-inner">
+              <h2 className="sidebar-label">Overview</h2>
+              <div className="project-description">{project.description}</div>
 
-      {/* CONTENT GRID (Sticky Sidebar) */}
-      <section className="content-grid">
-        {/* LEFT: Sticky Description */}
-        <aside className="content-sidebar">
-          <div className="sidebar-sticky-inner">
-            <h2 className="sidebar-label">Overview</h2>
-            <div className="project-description">{project.description}</div>
-
-            <div className="tech-stack">
-              <h3 className="sidebar-label">Tags</h3>
-              <div className="tags-list">
-                {project.tags?.map((t, i) => (
-                  <span key={i} className="minimal-tag">
-                    {t}
-                  </span>
-                ))}
+              <div className="tech-stack">
+                <h3 className="sidebar-label">Tags</h3>
+                <div className="tags-list">
+                  {project.tags?.map((t, i) => (
+                    <span key={i} className="minimal-tag">
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
+          </aside>
+
+          {/* RIGHT: Flowing Images */}
+          <div className="content-flow">
+            {/* Map through images, skip the first one since it's the hero */}
+            {project.images.slice(1).map((imgUrl, idx) => (
+              <div key={idx} className="content-image-wrapper">
+                <img
+                  src={imgUrl}
+                  alt={`${project.title} detail ${idx}`}
+                  loading="lazy"
+                />
+              </div>
+            ))}
           </div>
-        </aside>
-
-        {/* RIGHT: Flowing Images */}
-        <div className="content-flow">
-          {/* Map through images, skip the first one since it's the hero */}
-          {project.images.slice(1).map((imgUrl, idx) => (
-            <div key={idx} className="content-image-wrapper">
-              <img
-                src={imgUrl}
-                alt={`${project.title} detail ${idx}`}
-                loading="lazy"
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* NEXT PROJECT FOOTER */}
-      {nextProject && (
-        <section className="next-project-section">
-          <Link
-            href={`/project/${nextProject.slug}`}
-            className="next-project-link"
-          >
-            <span className="next-label">Next Project</span>
-            <h2 className="next-title">{nextProject.title}</h2>
-            <div className="next-img-preview">
-              <img
-                src={nextProject.thumbnail || nextProject.images[0]}
-                alt=""
-              />
-            </div>
-          </Link>
         </section>
-      )}
+
+        {/* NEXT PROJECT FOOTER */}
+        {nextProject && (
+          <section className="next-project-section">
+            <Link
+              href={`/project/${nextProject.slug}`}
+              className="next-project-link"
+            >
+              {/* Background image that reveals on hover */}
+              <div className="next-project-bg">
+                <img
+                  src={nextProject.thumbnail || nextProject.images[0]}
+                  alt=""
+                />
+              </div>
+
+              {/* Typographic content */}
+              <div className="next-project-content">
+                <span className="next-label">Next Project</span>
+                <h2 className="next-title">{nextProject.title}</h2>
+              </div>
+            </Link>
+          </section>
+        )}
+      </div>
+      <CTASection />
 
       <Footer />
-    </div>
+    </>
   );
 }
