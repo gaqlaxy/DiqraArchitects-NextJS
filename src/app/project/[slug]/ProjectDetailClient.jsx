@@ -436,87 +436,136 @@
 
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useLayoutEffect, useEffect, useRef } from "react";
 import Link from "next/link";
 import projectsData from "@/app/data/projects-data.json";
 import Footer from "@/app/components/Footer";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ProjectGallery from "./ProjectGallery";
+import Lenis from "@studio-freight/lenis";
+import ProjectGallery from "./ProjectGallery"; // We will incorporate images manually for control, or use this if it fits
 import "@/app/styles/ProjectDetail.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectDetailClient({ slug }) {
   const containerRef = useRef(null);
-  const heroImageRef = useRef(null);
+  const lenisRef = useRef(null);
 
-  // --- DATA LOGIC ---
+  // --- DATA ---
   const projectIndex = projectsData.projects.findIndex((p) => p.slug === slug);
-
   const project = projectsData.projects[projectIndex];
 
-  // Safe navigation logic
   const nextProject =
     projectIndex !== -1
       ? projectsData.projects[(projectIndex + 1) % projectsData.projects.length]
       : null;
-  const prevProject =
-    projectIndex !== -1
-      ? projectsData.projects[
-          (projectIndex - 1 + projectsData.projects.length) %
-            projectsData.projects.length
-        ]
-      : null;
 
-  // Scroll-to-top on slug change
+  // --- SMOOTH SCROLL ---
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: "vertical",
+      smooth: true,
+    });
+    lenisRef.current = lenis;
 
-  // --- GSAP ANIMATIONS ---
-  useEffect(() => {
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(lenis.raf);
+    };
+  }, []);
+
+  // --- ANIMATIONS ---
+  useLayoutEffect(() => {
     if (!project) return;
 
     const ctx = gsap.context(() => {
-      // 1. HERO: Masked Scale-Down Parallax
-      // This replicates the "Service Page" cinematic effect
-      gsap.to(heroImageRef.current, {
-        yPercent: 20, // Move image down slowly
-        scale: 1, // Zoom out from 1.15 to 1.0
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".project-hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
+      const tl = gsap.timeline();
+
+      // 1. OPENING SEQUENCE
+      // Title lines slide up
+      tl.from(".title-line span", {
+        yPercent: 100,
+        duration: 1,
+        ease: "power4.out",
+        stagger: 0.1,
       });
 
-      // Hero Content Fade Out
-      gsap.to(".hero-content", {
-        y: -50,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".project-hero",
-          start: "top top",
-          end: "50% top", // Fade out quicker
-          scrub: true,
+      // Meta info fades in
+      tl.from(
+        ".meta-row",
+        {
+          opacity: 0,
+          y: 20,
+          duration: 0.8,
+          stagger: 0.05,
+          ease: "power2.out",
         },
-      });
+        "-=0.5"
+      );
 
-      // 2. GALLERY: Vertical Parallax (Existing logic, refined)
-      const galleryImages = gsap.utils.toArray(".gallery-split-image img");
-      galleryImages.forEach((img) => {
+      // Hero Image Unmask (Clip path animation)
+      tl.fromTo(
+        ".hero-img-wrapper",
+        { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" },
+        {
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          duration: 1.4,
+          ease: "power4.inOut",
+        },
+        "-=1.0"
+      );
+
+      // Scale the image slightly inside the wrapper
+      tl.from(
+        ".hero-img",
+        { scale: 1.3, duration: 1.8, ease: "power2.out" },
+        "-=1.4"
+      );
+
+      // 2. SCROLL ANIMATIONS (IMAGES)
+      // Every image in the content flow gets a parallax + reveal
+      const contentImages = gsap.utils.toArray(".content-image-wrapper");
+      contentImages.forEach((wrapper) => {
+        const img = wrapper.querySelector("img");
+
+        // Reveal (Fade + Slide)
+        gsap.fromTo(
+          wrapper,
+          { opacity: 0, y: 100 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: wrapper,
+              start: "top 90%",
+            },
+          }
+        );
+
+        // Internal Parallax
         gsap.fromTo(
           img,
-          { y: -40, scale: 1.1 }, // Start slightly zoomed
+          { yPercent: -15, scale: 1.1 },
           {
-            y: 40,
+            yPercent: 15,
+            scale: 1,
             ease: "none",
             scrollTrigger: {
-              trigger: img.parentElement, // Trigger based on the container
+              trigger: wrapper,
               start: "top bottom",
               end: "bottom top",
               scrub: true,
@@ -525,218 +574,133 @@ export default function ProjectDetailClient({ slug }) {
         );
       });
 
-      // 3. FOOTER NAVIGATION: Scale-Down Parallax
-      // Applies the effect to Next/Prev images as they enter viewport
-      const navImages = gsap.utils.toArray(".nav-project-image img");
-      navImages.forEach((img) => {
-        gsap.fromTo(
-          img,
-          { scale: 1.15 }, // Start Zoomed In
-          {
-            scale: 1, // Zoom Out
-            ease: "none",
-            scrollTrigger: {
-              trigger: img.parentElement, // The .nav-project-image mask
-              start: "top bottom",
-              end: "bottom center", // Finish effect when centered
-              scrub: true,
-            },
-          }
-        );
+      // 3. NEXT PROJECT HOVER REVEAL
+      // Keep footer simple, animate text strongly
+      gsap.from(".next-project-section", {
+        yPercent: 50,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: ".next-project-section",
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: 1,
+        },
       });
     }, containerRef);
 
     return () => ctx.revert();
   }, [project]);
 
-  // --- 404 STATE ---
-  if (projectIndex === -1) {
-    return (
-      <div className="project-detail project-detail--notfound">
-        <div className="project-notfound-inner">
-          <p>Project not found.</p>
-          <Link href="/works" className="back-to-works-link">
-            ← Back to Works
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  // Reset scroll on navigation
+  useEffect(() => {
+    if (lenisRef.current) lenisRef.current.scrollTo(0, { immediate: true });
+    else window.scrollTo(0, 0);
+  }, [slug]);
+
+  if (projectIndex === -1) return null;
 
   return (
-    <div ref={containerRef} className="project-detail">
-      {/* HERO */}
-      <section className="project-hero">
-        {/* NEW IMAGE STRUCTURE FOR PARALLAX */}
-        <div className="hero-image-container">
+    <div ref={containerRef} className="minimal-project-page">
+      {/* HEADER SECTION */}
+      <header className="project-header">
+        <div className="header-top">
+          <Link href="/works" className="back-btn">
+            &larr; Index
+          </Link>
+          <span className="header-year">{project.year}</span>
+        </div>
+
+        <h1 className="project-title">
+          {/* Split title for animation logic if needed, or keep simple block */}
+          <div className="title-line">
+            <span>{project.title}</span>
+          </div>
+        </h1>
+
+        <div className="header-meta">
+          <div className="meta-row">
+            <span className="meta-label">Location</span>
+            <span className="meta-value">{project.location}</span>
+          </div>
+          <div className="meta-row">
+            <span className="meta-label">Category</span>
+            <span className="meta-value">{project.category}</span>
+          </div>
+          {project.details?.client && (
+            <div className="meta-row">
+              <span className="meta-label">Client</span>
+              <span className="meta-value">{project.details.client}</span>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* HERO IMAGE */}
+      <div className="hero-section">
+        <div className="hero-img-wrapper">
           <img
-            ref={heroImageRef}
             src={project.images[0]}
             alt={project.title}
-            className="hero-image"
+            className="hero-img"
+            data-speed="0.5"
           />
         </div>
+      </div>
 
-        <div className="hero-gradient" />
+      {/* CONTENT GRID (Sticky Sidebar) */}
+      <section className="content-grid">
+        {/* LEFT: Sticky Description */}
+        <aside className="content-sidebar">
+          <div className="sidebar-sticky-inner">
+            <h2 className="sidebar-label">Overview</h2>
+            <div className="project-description">{project.description}</div>
 
-        <div className="hero-content">
-          <div className="hero-inner">
-            <div className="hero-left">
-              <span className="hero-label">(Project)</span>
-              <h1 className="project-title">{project.title}</h1>
-
-              <div className="project-meta">
-                <span className="meta-primary">{project.location}</span>
-                <span className="meta-divider">•</span>
-                <span className="meta-secondary">{project.category}</span>
-                {project.year && (
-                  <>
-                    <span className="meta-divider">•</span>
-                    <span className="meta-secondary">{project.year}</span>
-                  </>
-                )}
+            <div className="tech-stack">
+              <h3 className="sidebar-label">Tags</h3>
+              <div className="tags-list">
+                {project.tags?.map((t, i) => (
+                  <span key={i} className="minimal-tag">
+                    {t}
+                  </span>
+                ))}
               </div>
-
-              <Link href="/works" className="back-link">
-                ← Back to works
-              </Link>
-            </div>
-
-            <div className="hero-right">
-              <div className="hero-right-block">
-                <span className="hero-right-label">Scope</span>
-                <p className="hero-right-value">
-                  {project.details?.status || "Architecture & Design"}
-                </p>
-              </div>
-              {project.details?.area && (
-                <div className="hero-right-block">
-                  <span className="hero-right-label">Area</span>
-                  <p className="hero-right-value">{project.details.area}</p>
-                </div>
-              )}
             </div>
           </div>
+        </aside>
 
-          <div className="scroll-indicator">
-            <span className="scroll-indicator-text">(SCROLL TO EXPLORE)</span>
-            <div className="scroll-line" />
-          </div>
+        {/* RIGHT: Flowing Images */}
+        <div className="content-flow">
+          {/* Map through images, skip the first one since it's the hero */}
+          {project.images.slice(1).map((imgUrl, idx) => (
+            <div key={idx} className="content-image-wrapper">
+              <img
+                src={imgUrl}
+                alt={`${project.title} detail ${idx}`}
+                loading="lazy"
+              />
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* PROJECT INFO */}
-      <section className="project-info">
-        <div className="info-inner">
-          <div className="info-grid">
-            <div className="info-description">
-              <h2 className="section-label">About the project</h2>
-              <p className="project-description">{project.description}</p>
-
-              {project.tags?.length > 0 && (
-                <div className="project-tags">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className="tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
+      {/* NEXT PROJECT FOOTER */}
+      {nextProject && (
+        <section className="next-project-section">
+          <Link
+            href={`/project/${nextProject.slug}`}
+            className="next-project-link"
+          >
+            <span className="next-label">Next Project</span>
+            <h2 className="next-title">{nextProject.title}</h2>
+            <div className="next-img-preview">
+              <img
+                src={nextProject.thumbnail || nextProject.images[0]}
+                alt=""
+              />
             </div>
-
-            <div className="info-details">
-              <h3 className="details-title">Project details</h3>
-              <dl className="details-grid">
-                {project.year && (
-                  <>
-                    <dt>Year</dt>
-                    <dd>{project.year}</dd>
-                  </>
-                )}
-                {project.details?.client && (
-                  <>
-                    <dt>Client</dt>
-                    <dd>{project.details.client}</dd>
-                  </>
-                )}
-                {project.details?.area && (
-                  <>
-                    <dt>Area</dt>
-                    <dd>{project.details.area}</dd>
-                  </>
-                )}
-                {project.details?.status && (
-                  <>
-                    <dt>Status</dt>
-                    <dd>{project.details.status}</dd>
-                  </>
-                )}
-                {project.details?.architect && (
-                  <>
-                    <dt>Architect</dt>
-                    <dd>{project.details.architect}</dd>
-                  </>
-                )}
-              </dl>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <ProjectGallery images={project.images} />
-
-      {/* PREVIOUS / NEXT */}
-      <section className="navigation-projects">
-        <div className="navigation-inner">
-          {prevProject && (
-            <article className="nav-project nav-project--prev">
-              <div className="nav-project-image">
-                <Link href={`/project/${prevProject.slug}`}>
-                  <img
-                    src={prevProject.thumbnail}
-                    alt={prevProject.title}
-                    loading="lazy"
-                  />
-                </Link>
-              </div>
-              <div className="nav-project-content">
-                <span className="nav-label">Previous project</span>
-                <Link
-                  href={`/project/${prevProject.slug}`}
-                  className="nav-link"
-                >
-                  <span className="nav-arrow nav-arrow--left">←</span>
-                  <h2>{prevProject.title}</h2>
-                </Link>
-              </div>
-            </article>
-          )}
-
-          {nextProject && (
-            <article className="nav-project nav-project--next">
-              <div className="nav-project-content">
-                <span className="nav-label">Next project</span>
-                <Link
-                  href={`/project/${nextProject.slug}`}
-                  className="nav-link"
-                >
-                  <h2>{nextProject.title}</h2>
-                  <span className="nav-arrow nav-arrow--right">→</span>
-                </Link>
-              </div>
-              <div className="nav-project-image">
-                <Link href={`/project/${nextProject.slug}`}>
-                  <img
-                    src={nextProject.thumbnail}
-                    alt={nextProject.title}
-                    loading="lazy"
-                  />
-                </Link>
-              </div>
-            </article>
-          )}
-        </div>
-      </section>
+          </Link>
+        </section>
+      )}
 
       <Footer />
     </div>
