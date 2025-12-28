@@ -1,4 +1,4 @@
-/* Main Navigation */
+/* --- Base Navbar --- */
 .Navbar {
   position: fixed;
   top: 20px;
@@ -6,7 +6,8 @@
   right: 0;
   z-index: 40;
   background-color: transparent;
-  pointer-events: none;
+  pointer-events: none; /* Important: Lets users click through the navbar area */
+  transition: transform 0.3s ease;
 }
 
 .Navbar-container {
@@ -21,26 +22,50 @@
   height: 64px;
 }
 
+/* --- Theme Colors --- */
+/* Light Theme (Homepage) */
+.Navbar-light .Navbar-link,
+.Navbar-light .Navbar-close-btn {
+  color: #ffffff;
+}
+
+/* Dark Theme (Inner Pages) */
+.Navbar-dark .Navbar-link {
+  color: #000000;
+}
+/* Note: Contact/Menu buttons handle their own colors below */
+
+/* --- Logo --- */
 .Navbar-logo {
   width: 200px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .Navbar-logo-hidden {
   opacity: 0;
+  transform: translateY(-20px);
   pointer-events: none;
 }
 
-/* Desktop Nav Links */
+.Navbar-logo img {
+  width: 100%;
+  display: block;
+}
+
+/* --- Center Links (Homepage) --- */
 .Navbar-links {
-  display: none;
-  align-items: center;
-  gap: 32px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 32px;
   opacity: 1;
   pointer-events: auto;
+  transition: opacity 0.3s ease;
 }
 
 .Navbar-links-hidden {
@@ -52,70 +77,72 @@
   font-size: clamp(1rem, 0.986rem + 0.07vw, 1.071rem);
   font-weight: 600;
   letter-spacing: 0.05em;
-  color: #ffffff; /* White color for nav links on homepage */
   text-decoration: none;
-  transition: opacity 0.2s ease;
-  pointer-events: auto;
 }
 
-.Navbar-link:hover {
-  opacity: 0.6;
-}
-
-/* Dark theme for non-homepage pages */
-.Navbar-dark .Navbar-link {
-  color: #000000; /* Black color for other pages */
-}
-
-.Navbar-dark .Navbar-contact-btn {
-  background-color: #000000;
-  color: white;
-}
-
-.Navbar-dark .Navbar-menu-btn {
-  background-color: #000000;
-  color: white;
-}
-
-.Navbar-dark .Navbar-contact-dot {
-  background-color: white;
-}
-
-/* Right Side Actions */
+/* --- Actions (Right Side) --- */
 .Navbar-actions {
   display: flex;
   align-items: center;
   gap: 16px;
   pointer-events: auto;
+  margin-left: auto;
 }
 
-.Navbar-contact-btn {
-  background-color: #080807;
-  color: white;
+.Navbar-contact-btn,
+.Navbar-menu-btn {
   padding: 10px 24px;
   border-radius: 50px;
   font-size: clamp(1rem, 0.986rem + 0.07vw, 1.071rem);
   font-weight: 700;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, opacity 0.3s ease;
-  display: none; /* Hidden by default on mobile */
+  display: flex;
   align-items: center;
   gap: 8px;
   position: relative;
   overflow: hidden;
+  
+  /* Initial hidden state for animation */
   opacity: 0;
+  transform: translateY(10px);
   pointer-events: none;
+  transition: all 0.4s ease;
 }
 
-.Navbar-contact-btn-visible {
-  display: flex;
+.Navbar-contact-btn.visible,
+.Navbar-menu-btn.visible {
   opacity: 1;
+  transform: translateY(0);
   pointer-events: auto;
 }
 
-.Navbar-contact-btn:hover {
-  background-color: #333;
+/* Button Colors - Light Theme */
+.Navbar-light .Navbar-contact-btn {
+  background-color: #080807;
+  color: white;
+}
+.Navbar-light .Navbar-menu-btn {
+  background-color: #f2f0eb; /* Off-white */
+  color: black;
+}
+
+/* Button Colors - Dark Theme (Black) */
+.Navbar-dark .Navbar-contact-btn {
+  background-color: #000000;
+  color: white;
+}
+.Navbar-dark .Navbar-menu-btn {
+  background-color: #000000;
+  color: white;
+}
+.Navbar-dark .Navbar-contact-dot {
+  background-color: white;
+}
+
+.Navbar-contact-btn a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .Navbar-contact-dot {
@@ -123,8 +150,7 @@
   height: 6px;
   border-radius: 50%;
   background-color: white;
-  flex-shrink: 0;
-  transform: scale(1);
+  display: block;
   transition: transform 0.3s ease;
 }
 
@@ -132,28 +158,25 @@
   transform: scale(1.6);
 }
 
-.Navbar-menu-btn {
-  background-color: #f2f0eb;
-  color: black;
-  padding: 10px 24px;
-  border-radius: 50px;
-  font-size: clamp(1rem, 0.986rem + 0.07vw, 1.071rem);
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* --- Animated Text Wrapper --- */
+.navbar-text-wrapper {
+  display: block;
   position: relative;
   overflow: hidden;
 }
-
-.Navbar-menu-btn:hover {
-  background-color: #555;
+.navbar-text-original,
+.navbar-text-hover {
+  display: block;
+  will-change: transform, opacity;
+}
+.navbar-text-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
-/* Full Screen Overlay Menu */
+/* --- Overlay Menu --- */
 .Navbar-overlay-menu {
   position: fixed;
   inset: 0;
@@ -162,12 +185,9 @@
   z-index: 50;
   display: none;
   clip-path: inset(0% 0% 100% 0%);
-  will-change: clip-path;
-  pointer-events: none;
 }
 
 .Navbar-overlay-menu-open {
-  display: block;
   pointer-events: auto;
 }
 
@@ -185,29 +205,18 @@
   align-items: center;
   justify-content: space-between;
   height: 64px;
+  margin-top: 20px;
 }
 
-.Navbar-overlay-logo {
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  letter-spacing: -0.025em;
-  text-decoration: none;
-}
+.Navbar-overlay-logo { width: 200px; }
 
 .Navbar-close-btn {
   color: white;
   font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-weight: 700;
   background: none;
   border: none;
   cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.Navbar-close-btn:hover {
-  opacity: 0.6;
 }
 
 .Navbar-overlay-content {
@@ -215,191 +224,103 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px 0;
+  padding: 40px 0;
 }
 
 .Navbar-overlay-nav {
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
   gap: 8px;
-  width: fit-content; /* Fix hover area to content width only */
 }
 
 .Navbar-overlay-nav-item {
-  font-size: 56px;
-  font-weight: bold;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
   color: white;
-  letter-spacing: -0.025em;
   text-decoration: none;
-  transition: opacity 0.2s ease;
-  display: inline-block; /* Change from block to inline-block */
-  width: fit-content; /* Ensure width fits content */
-}
-
-.Navbar-overlay-nav-item:hover {
-  opacity: 0.6;
+  width: fit-content;
+  opacity: 0;
 }
 
 .Navbar-overlay-footer {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  color: white;
-  width: fit-content; /* Fix hover area for footer links */
+  gap: 24px;
+  flex-wrap: wrap;
 }
 
 .Navbar-overlay-footer-link {
   font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
   color: white;
   text-decoration: none;
-  transition: opacity 0.2s ease;
-  width: fit-content; /* Ensure width fits content */
-}
-
-.Navbar-overlay-footer-link:hover {
-  opacity: 0.6;
-}
-
-/* GSAP Animation Classes */
-.text-original,
-.text-hover {
-  display: block;
-  will-change: transform, opacity;
-}
-
-.text-hover {
   opacity: 0;
 }
 
-/* Performance optimizations */
-.Navbar-link,
-.Navbar-contact-btn,
-.Navbar-menu-btn,
-.Navbar-overlay-nav-item,
-.Navbar-overlay-footer-link {
-  will-change: auto;
-}
-
-.Navbar-link:hover,
-.Navbar-contact-btn:hover,
-.Navbar-menu-btn:hover,
-.Navbar-overlay-nav-item:hover,
-.Navbar-overlay-footer-link:hover {
-  will-change: transform, opacity;
-}
-
-.ctagetintouch {
-  position: absolute;
-  top: -1.5rem;
-  right: 7rem;
-}
-
-/* Tablet and Desktop */
-@media (min-width: 1024px) {
-  .Navbar-content {
-    height: 80px;
-  }
-
-  .Navbar-logo,
-  .Navbar-overlay-logo {
-    width: 200px;
-  }
-
-  .Navbar-links {
-    display: flex;
-  }
-
-  /* Contact button always visible on desktop */
-  .Navbar-contact-btn {
-    display: flex;
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* Hide menu button on desktop unless scrolled */
+/* --- Media Queries --- */
+@media (max-width: 1024px) {
+  .Navbar-links { display: none !important; }
+  
+  /* On Mobile, Menu button is usually always visible */
+  .Navbar-menu-btn.visible,
   .Navbar-menu-btn {
-    display: none;
-  }
-
-  .Navbar-menu-btn-visible {
-    display: block;
-  }
-
-  .Navbar-overlay-header {
-    height: 80px;
-  }
-
-  .Navbar-overlay-nav-item {
-    font-size: 56px;
-  }
-
-  .Navbar-overlay-footer {
-    flex-direction: row;
-    gap: 32px;
-  }
-}
-
-/* Extra Large Screens */
-@media (min-width: 1280px) {
-  .Navbar-overlay-nav-item {
-    font-size: 56px;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
   }
 }
 
 @media (max-width: 768px) {
-  .Navbar-logo {
-    /* width: 150px; */
-    display: none;
-  }
-  .Navbar-actions {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-  .Navbar-menu-btn .Navbar-contact-btn {
-    padding: 15px 24px;
-  }
+  /* .Navbar-logo { width: 140px; }
+  .Navbar-contact-btn { display: none; } */
+
   .Navbar-container {
-    padding: 0 24px;
+    padding: 0 16px; /* Slightly tighter container padding */
   }
-  .Navbar {
-    top: 10px;
+
+  /* Adjust Logo Size */
+  .Navbar-logo { 
+    width: 120px; /* Smaller logo to make room for buttons */
   }
-  .Navbar-overlay-header {
-    height: 150px;
+
+  /* Navbar Actions Container */
+  .Navbar-actions {
+    gap: 8px; /* Reduce gap between the two buttons */
   }
-  .Navbar-overlay-logo {
-    width: 200px;
+
+  /* --- FIX: Make GET IN TOUCH Visible & Adjustable --- */
+  .Navbar-contact-btn {
+    display: flex !important; /* Force Display */
+    
+    /* Force Visibility on Mobile (Optional: Remove these 3 lines if you want it to hide on scroll like desktop) */
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+
+    /* Mobile Sizing */
+    padding: 8px 16px;
+    font-size: 12px; /* Smaller text */
   }
-  .Navbar-overlay-nav-item {
-    font-size: clamp(2.39rem, 1.95rem + 2.2vw, 4.59rem);
+  
+  /* Adjust MENU button to match */
+  .Navbar-menu-btn {
+    padding: 8px 16px;
+    font-size: 12px; /* Smaller text */
   }
-  .ctagetintouch {
-    position: absolute;
-    top: 0;
-    right: 7rem;
-  }
-  .ctamenu {
-    position: absolute;
-    top: 2.3rem;
-    right: 0;
+  
+  /* Hide the white dot in the Contact button to save space (Optional) */
+  .Navbar-contact-dot {
+    display: none; 
   }
 }
 
-/* Simple navbar styles for non-homepage */
-.Navbar-simple {
-  pointer-events: auto;
-}
-
-.Navbar-simple .Navbar-logo {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.Navbar-menu-btn--hidden {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+@media (max-width: 380px) {
+  .Navbar-logo {
+    display: none; /* Hide logo on tiny screens so buttons fit */
+    /* OR keep logo and remove "GET IN TOUCH" text, leaving only icon? 
+       But current code is text-based. */
+  }
+  
+  /* Ensure actions align left if logo is gone */
+  .Navbar-content {
+    justify-content: flex-end; 
+  }
 }
