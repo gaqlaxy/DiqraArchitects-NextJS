@@ -278,7 +278,7 @@
  */
 /* V33333333333333333  */
 /* ReplicaCta.css */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
 
 .replica-section {
   position: relative;
@@ -333,7 +333,7 @@
 
 /* Heading Typography */
 .replica-heading {
-  /* font-family: "Inter", -apple-system, sans-serif; */
+  
   white-space: normal;
   word-spacing: 1px;
 
@@ -355,7 +355,7 @@
 
 /* Subtext Paragraph */
 .replica-subtext {
-  /* font-family: "Inter", sans-serif; */
+  
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.6;
@@ -381,7 +381,7 @@
   padding: 16px 32px;
   border-radius: 100px; /* Pill shape */
   text-decoration: none;
-  /* font-family: "Inter", sans-serif; */
+  
   font-size: 1rem;
   font-weight: 500;
   transition: transform 0.3s ease, background-color 0.3s ease;

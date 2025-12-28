@@ -1939,7 +1939,7 @@ export default function ContactPage() {
 //   return (
 //     <>
 //       <style jsx global>{`
-//         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+
 
 //         :root {
 //           --bg: #ffffff;
@@ -1952,7 +1952,7 @@ export default function ContactPage() {
 //         body {
 //           background-color: var(--bg);
 //           color: var(--ink);
-//           font-family: "Inter", sans-serif;
+
 //           margin: 0;
 //         }
 
@@ -2059,7 +2059,7 @@ export default function ContactPage() {
 //           width: 100%;
 //           background: transparent;
 //           border: none;
-//           font-family: "Inter", sans-serif;
+
 //           font-size: 24px;
 //           color: var(--ink);
 //           outline: none;
