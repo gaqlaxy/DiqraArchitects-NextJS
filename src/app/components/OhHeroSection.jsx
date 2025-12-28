@@ -328,7 +328,7 @@ export default function OhHeroSection() {
         </section>
 
         {/* ABOUT SECTION */}
-        <section id="about" className="about-section">
+        {/* <section id="about" className="about-section">
           <div className="about-parent">
             <div className="about-div1">
               <div className="about-heading1">
@@ -367,7 +367,7 @@ export default function OhHeroSection() {
               learn more about us
             </SlideUpButton>
           </div>
-        </section>
+        </section> */}
       </main>
     </div>
   );

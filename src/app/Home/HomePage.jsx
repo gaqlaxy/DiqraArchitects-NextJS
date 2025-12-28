@@ -6,13 +6,15 @@ import Services from "@/app/components/Services";
 import Testimonials from "@/app/components/Testimonials";
 import CtaSection from "@/app/components/CtaSection";
 import Footer from "@/app/components/Footer";
+import AboutSection from "../components/About";
+
 
 export default function HomePage() {
   return (
     <>
       <OhHerosection />
       {/* <Herosection /> */}
-      {/* <AboutSection /> */}
+      <AboutSection />
       <FeaturedWorks />
       <ProcessSection />
       <Services />
