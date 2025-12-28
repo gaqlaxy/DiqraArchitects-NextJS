@@ -1,381 +1,318 @@
-/* about-page Hero Section */
-.about-page-hero {
-  margin-top: 5rem;
-  background: #fff;
-  position: relative;
-  padding-bottom: 70vh;
+/* --- VARIABLES --- */
+:root {
+  --bg-main: #ffffff;
+  --text-primary: #050505;
+  --text-secondary: #777777;
+  --accent-line: #e5e5e5;
+  --ease-lux: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.about-page-hero-content {
-  max-width: 1400px;
-  margin: 0 auto;
+.editorial-plus {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
   width: 100%;
-  position: relative;
+  margin-top: 1.5rem;
 }
 
-.about-page-title {
-  text-align: center;
-  font-size: 360px;
-  font-weight: 700;
-  line-height: 1.1;
-  color: #111;
-}
-
-.about-page-hero-image {
-  position: absolute;
-  top: 83%;
-  left: 20%;
-  width: 60%;
-  height: 70vh;
-  min-height: 500px;
-  overflow: hidden;
-}
-
-.about-page-hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(20%);
-  transition: all 0.3s ease;
-}
-
-.about-page-hero-image:hover img {
-  filter: grayscale(0%);
-  transform: scale(1.02);
-}
-
-/* about-page Content Section */
-.about-page-content {
-  margin: 0 auto;
-}
-
-.about-page-section {
-  margin-bottom: 8rem;
-  padding-bottom: 4rem;
-  border-bottom: 1px solid #eee;
-}
-
-.about-page-section-content {
-  text-align: center;
-  margin: 0 auto;
-  padding: 0 4rem;
-  font-size: 44px;
-  line-height: 1.1;
-  font-weight: 700;
-  color: #000;
-}
-
-/* Second about-page Section - Two Column */
-.second-about-page {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  gap: 30px;
-  padding: 0 4rem;
-  margin-bottom: 8rem;
-}
-
-.leftabout-page img {
-  width: 100%;
-  height: 50%;
-  object-fit: cover;
-}
-
-.rightabout-page {
+.split-layout {
   display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.rightabout-page img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.about-page-second-section-content {
-  font-size: 30px;
-  line-height: 1.6;
-  color: #333;
-  font-weight: 400;
-}
-
-/* Team Section */
-.team-section {
-  padding: 80px 40px;
-  background: #fff;
-}
-
-.team-container {
+  max-width: 1800px;
   margin: 0 auto;
-}
-
-.team-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8rem;
-  align-items: center;
-}
-
-.team-left {
-  padding-right: 2rem;
-}
-
-.team-title {
-  font-size: 120px;
-  font-weight: 400;
-  color: #111;
-}
-
-.team-members {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-.team-member {
-  padding: 2rem 0;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: all 0.3s ease;
-}
-
-.team-member:last-child {
-  border-bottom: none;
-}
-
-.team-member.active {
-  opacity: 1;
-}
-
-.member-name {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #111;
-  transition: color 0.3s ease;
-}
-
-.team-member.active .member-name {
-  color: #2a4d3b;
-}
-
-.member-role {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 1rem;
-  font-weight: 500;
-}
-
-.member-description {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #777;
-}
-
-.team-right {
   position: relative;
-  height: 600px;
+  align-items: flex-start; /* Ensures sidebar doesn't stretch weirdly */
 }
 
-.team-image-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-.team-image {
-  position: absolute;
+/* --- LEFT SIDEBAR (Sticky) --- */
+.sticky-sidebar {
+  width: 40%;
+  /* Stick to viewport, but stay inside parent */
+  height: 100vh;
+  position: sticky; 
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  transform: scale(1.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5rem 4rem;
+  z-index: 10;
 }
 
-.team-image.active {
+.brand-title {
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.chapter-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.chapter-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0.3;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  cursor: default;
+}
+
+.chapter-item.active {
   opacity: 1;
+  transform: translateX(10px);
+}
+
+.c-num {
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.c-label {
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+/* --- RIGHT CONTENT STREAM --- */
+.content-stream {
+  width: 60%;
+  /* Removed the huge 10rem bottom padding */
+  padding: 5rem 5rem 2rem 0; 
+  display: flex;
+  flex-direction: column;
+}
+
+.stream-section {
+  min-height: 80vh; /* Keeps first sections tall/immersive */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 8rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* --- THE FIX: Tighten the Last Section (Team) --- */
+.stream-section:last-child {
+  min-height: auto; /* Allow it to shrink to fit content */
+  margin-bottom: 0; /* Remove bottom gap */
+  justify-content: flex-start; /* Align content to top */
+  padding-top: 4rem; /* Add breathing room from previous section */
+}
+
+.stream-section.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- SECTION 01: HERO --- */
+.hero-reveal-mask {
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  background: #f4f4f4;
+}
+
+.parallax-img {
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  transform: scale(1.1);
+  transition: transform 2s var(--ease-lux);
+}
+
+.stream-section.in-view .parallax-img {
   transform: scale(1);
 }
 
-.team-member-image {
-  display: none;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .about-page-hero {
-    padding: 6rem 3rem 3rem;
-  }
-
-  .about-page-hero-image {
-    height: 50vh;
-    min-height: 400px;
-  }
-
-  .second-about-page {
-    padding: 0 3rem;
-  }
-
-  .team-section {
-    padding: 6rem 3rem;
-  }
-
-  .team-content {
-    grid-template-columns: 1fr;
-    gap: 4rem;
-  }
-
-  .team-left {
-    padding-right: 0;
-  }
-
-  .team-right {
-    height: 500px;
-  }
-}
-
-@media (max-width: 768px) {
-  .about-page-hero {
-    padding: 4rem 2rem 2rem;
-    padding-bottom: 50vh;
-  }
-
-  .team-title {
-    font-size: clamp(2.5rem, 1.813rem + 5.84vw, 9.229rem);
-    letter-spacing: -1px;
-    font-weight: 700;
-    line-height: 0.9;
-    margin-bottom: 20px;
-  }
-
-  .about-page-title {
-    font-size: 120px;
-  }
-
-  .about-page-hero-image {
-    height: 40vh;
-    min-height: 300px;
-    top: 70%;
-    left: 10%;
-    width: 80%;
-  }
-
-  .about-page-section-content {
-    padding: 0 2rem;
-    font-size: 32px;
-  }
-
-  .second-about-page {
-    grid-template-columns: 1fr;
-    padding: 0 2rem;
-  }
-
-  .leftabout-page {
-    display: none;
-  }
-
-  .team-section {
-    padding: 4rem 2rem;
-  }
-
-  .team-content {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .team-members {
-    gap: 0;
-  }
-
-  .team-member {
-    padding: 1.5rem 0;
-    opacity: 1 !important; /* Force full opacity on mobile */
-    cursor: default;
-  }
-
-  .team-member .member-name {
-    color: #111 !important; /* Keep consistent color on mobile */
-  }
-
-  .team-right {
-    display: none;
-  }
-
-  .team-member-image {
-    display: block;
-    width: 100%;
-    height: 300px;
-    margin-top: 1rem;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .team-member-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-@media (max-width: 480px) {
-  .about-page-hero {
-    padding: 3rem 1rem 1rem;
-    padding-bottom: 40vh;
-  }
-
-  .about-page-title {
-    font-size: 120px;
-  }
-
-  .about-page-hero-image {
-    /* height: 35vh; */
-    min-height: 250px;
-    top: 89%;
-    left: 5%;
-    width: 90%;
-  }
-
-  .about-page-section-content {
-    padding: 0 1rem;
-    /* font-size: 28px; */
-  }
-  .about-page-section {
-    margin-bottom: 8rem;
-    padding-bottom: 0;
-  }
-
-  .second-about-page {
-    padding: 0 1rem;
-  }
-}
-
-/* MaskText specific overrides for About page */
-.about-page-section-content .mask-text-body {
-  /* font-size: clamp(24px, 4vw, 48px); */
-}
-
-.about-page-second-section-content .mask-text-body {
-  /* font-size: clamp(20px, 3vw, 36px); */
-  /* margin-top: 20px; */
-}
-
-.team-intro-animation {
-  /* text-align: center; */
-  margin-bottom: 60px;
-}
-.team-intro-animation .meettheteam {
-  font-size: 120px;
+.big-statement {
+  font-size: clamp(2.5rem, 4vw, 4.5rem);
+  line-height: 1;
   font-weight: 400;
-  letter-spacing: -3px;
-  line-height: 0.9;
+  margin: 0;
 }
 
-.team-intro-animation .mask-text-body {
-  /* font-size: clamp(28px, 4.5vw, 52px); */
+.italic-accent {
+  font-style: italic;
+  font-family: serif;
+  color: var(--text-secondary);
+}
+
+/* --- SECTION 02: PHILOSOPHY --- */
+.text-columns {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  margin-bottom: 5rem;
+}
+
+.lead-paragraph {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.sub-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.secondary-image-wrap {
+  width: 100%;
+  position: relative;
+}
+
+.secondary-image-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.caption {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+
+/* --- SECTION 03: TEAM --- */
+.team-focus-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.team-focus-list:hover .team-item {
+  opacity: 0.25;
+  filter: blur(2px);
+}
+
+.team-focus-list .team-item:hover {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1.02);
+}
+
+.team-item {
+  position: relative;
+  padding: 3rem 0;
+  border-top: 1px solid var(--accent-line);
+  transition: all 0.4s var(--ease-lux);
+  cursor: pointer;
+}
+
+.team-item:last-child {
+  border-bottom: 1px solid var(--accent-line);
+}
+
+.team-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.t-name {
+  font-size: 3.5rem;
+  margin: 0;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* Hover Portrait */
+.hover-portrait {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  width: 280px;
+  height: 360px;
+  transform: translateY(-50%) rotate(5deg) scale(0.8);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  transition: all 0.5s var(--ease-lux);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.hover-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+.team-item:hover .hover-portrait {
+  opacity: 1;
+  transform: translateY(-50%) rotate(0deg) scale(1);
+  right: 15%;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+  .split-layout {
+    flex-direction: column;
+  }
+
+  .sticky-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 6rem 2rem 2rem;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .chapter-indicator {
+    display: none;
+  }
+
+  .content-stream {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .stream-section {
+    min-height: auto;
+    margin-bottom: 6rem;
+  }
+  
+  /* Reset last child logic on mobile since it flows naturally */
+  .stream-section:last-child {
+    padding-top: 0;
+  }
+
+  .text-columns {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .t-name {
+    font-size: 2.2rem;
+  }
+
+  .team-focus-list:hover .team-item {
+    opacity: 1;
+    filter: none;
+  }
+  
+  .team-focus-list .team-item:hover {
+    transform: none;
+  }
+
+  .hover-portrait {
+    display: none;
+  }
 }
