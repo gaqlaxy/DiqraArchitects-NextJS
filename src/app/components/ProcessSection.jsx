@@ -1,9 +1,6 @@
-
-
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import "../styles/ProcessSection.css";
-import { gsap } from "gsap";
 import SlideUpButton from "./SlideUpButton";
 
 const processSteps = [
@@ -21,7 +18,7 @@ const processSteps = [
   },
   {
     id: "03",
-    title: "Development Application",
+    title: "Development App",
     desc: "Handling council submissions and ensuring regulatory compliances.",
     img: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=800&q=80",
   },
@@ -39,137 +36,79 @@ const processSteps = [
   },
   {
     id: "06",
-    title: "Construction Plans",
+    title: "Construction",
     desc: "Overseeing the build to ensure the vision is executed.",
     img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80",
   },
 ];
 
 const ProcessSection = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const imageRefs = useRef([]);
-
-  // Handle the Image Transition
-  useEffect(() => {
-    // 1. Reset all images (fade out)
-    processSteps.forEach((_, i) => {
-      if (i !== activeIndex && imageRefs.current[i]) {
-        gsap.to(imageRefs.current[i], {
-          opacity: 0,
-          scale: 1.1,
-          zIndex: 0,
-          duration: 0.5,
-        });
-      }
-    });
-
-    // 2. Animate Active Image (fade in)
-    if (imageRefs.current[activeIndex]) {
-      const activeImg = imageRefs.current[activeIndex];
-      gsap.to(activeImg, {
-        opacity: 1,
-        scale: 1,
-        zIndex: 1,
-        duration: 0.5,
-        ease: "power2.out",
-      });
-    }
-  }, [activeIndex]);
+  const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <div className="arch-process-section">
-      <div className="arch-container">
-        {/* LEFT COLUMN: Sticky Visuals */}
-        <div className="arch-left-col">
-          {/* --- NEW HEADING ADDED HERE --- */}
-          <h2 className="arch-left-heading">Our Process</h2>
+    <>
+    <section className="homeprocess-section">
 
-          <div className="arch-label">( OUR PROCESS )</div>
+    <div className="min-process-section">
+      <div className="section-header">
 
-          <div className="arch-image-frame">
+      <h2 className="section-title">Our Process</h2>
+      </div>
+      <div className="min-container">
+        
+        {/* LEFT: VISUALS */}
+
+        <div className="min-visual-col">
+
+          <div className="min-image-wrapper">
             {processSteps.map((step, index) => (
               <img
-                key={index}
-                ref={(el) => (imageRefs.current[index] = el)}
+                key={step.id}
                 src={step.img}
                 alt={step.title}
-                className="arch-visual-img"
+                className={`min-image ${activeStep === index ? "active" : ""}`}
               />
             ))}
-
-            {/* Minimal Overlay Info */}
-            <div className="arch-img-meta">
-              <span>PHASE {processSteps[activeIndex].id}</span>
-              
-            </div>
+            <div className="min-img-overlay"></div>
           </div>
-
-          <div className="arch-description-area">
-            <p className="arch-desc-text">{processSteps[activeIndex].desc}</p>
+          
+          <div className="min-visual-label">
+            Phase {processSteps[activeStep].id}
           </div>
         </div>
 
-        {/* RIGHT COLUMN: The Grid List */}
-        <div className="arch-right-col">
-          <div className="arch-header-block">
-            <h2 className="arch-main-heading">
-              Collaborative process, crafted around you.
-            </h2>
-            <p className="arch-sub-heading">
-              Our 6-stage approach ensures a smooth journey from the first
-              conversation to the final build. With structured steps,
-              transparent communication, and a focus on your vision, we guide
-              each phase with clarity and precision—so you always know what’s
-              happening and what comes next.
-            </p>
-          </div>
-
-          <div className="arch-grid-list">
+        {/* RIGHT: CONTENT LIST */}
+        <div className="min-content-col">
+          <ul className="min-list">
             {processSteps.map((step, index) => (
-              <div
-                key={index}
-                className={`arch-grid-item ${
-                  index === activeIndex ? "active" : ""
-                }`}
-                onMouseEnter={() => setActiveIndex(index)}
+              <li
+                key={step.id}
+                className={`min-item ${activeStep === index ? "active" : ""}`}
+                onMouseEnter={() => setActiveStep(index)}
+                onClick={() => setActiveStep(index)} // Touch support
               >
-                <div className="arch-item-top">
-                  <span className="arch-number">({step.id})</span>
-                  {/* The animated line */}
-                  <div className="arch-line"></div>
+                <div className="min-item-header">
+                  <span className="min-id">{step.id}</span>
+                  <span className="min-title">{step.title}</span>
                 </div>
-                <h3 className="arch-title">{step.title}</h3>
-
-                <div className="arch-arrow">→</div>
-              </div>
+                
+                <div className="min-item-body">
+                  <p>{step.desc}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          {/*
-            <SlideUpButton href="/process">View Full Methodology</SlideUpButton>
-          </div> */}
-          {/* <div className="arch-cta-block">
-            <SlideUpButton href="/process" className="ml-4">
-              get to know our process{" "}
-            </SlideUpButton>
-          </div> */}
-          <div className="arch-cta-block">
-            {/* <div className="">
-              <SlideUpButton href="/process" className="ml-4">
-                get to know our process
-              </SlideUpButton>
-            </div> */}
+          <div className="min-cta">
+            <SlideUpButton href="/process">View Full Process</SlideUpButton>
           </div>
         </div>
-      </div>
-      <div className="cta-block-process">
-        <SlideUpButton href="/process" className="ml-4">
-          get to know our process
-        </SlideUpButton>
       </div>
     </div>
+    </section>
+
+    </>
   );
 };
 
 export default ProcessSection;
-

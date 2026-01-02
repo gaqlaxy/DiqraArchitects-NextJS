@@ -285,7 +285,7 @@ export default function ReplicaCTA() {
         <div className="replica-content">
           <h2 className="replica-heading">
             <span className="line-mask">
-              <span className="line-text" ref={addToLines}>
+              <span className="line-text section-title uppercase" ref={addToLines}>
                 Designing spaces. Building trust.
               </span>
             </span>

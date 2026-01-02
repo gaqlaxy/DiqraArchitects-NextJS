@@ -7,87 +7,15 @@ import SlideUpButton from "./SlideUpButton";
 import Link from "next/link";
 
 const Services = () => {
-  useEffect(() => {
-    // Function to create slide-up effect for button
-    const createSlideUpEffect = (element) => {
-      if (element.hasAttribute("data-gsap-initialized")) return null;
-
-      let span = element.querySelector("span");
-      if (!span) {
-        const originalText = element.textContent.trim();
-        element.innerHTML = `<span>${originalText}</span>`;
-        span = element.querySelector("span");
-      }
-
-      if (span.querySelector(".text-original, .text-hover")) {
-        element.setAttribute("data-gsap-initialized", "true");
-        return null;
-      }
-
-      const originalText = span.textContent;
-      span.innerHTML = `
-        <span class="text-original">${originalText}</span>
-        <span class="text-hover">${originalText}</span>
-      `;
-
-      const originalSpan = span.querySelector(".text-original");
-      const hoverSpan = span.querySelector(".text-hover");
-      const slideDistance = originalSpan.offsetHeight;
-
-      gsap.set(span, {
-        overflow: "hidden",
-        position: "relative",
-        display: "block",
-        height: `${slideDistance}px`,
-      });
-      gsap.set(originalSpan, { y: 0, position: "relative", display: "block" });
-      gsap.set(hoverSpan, {
-        y: `${slideDistance}px`,
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        display: "block",
-      });
-
-      const tl = gsap.timeline({ paused: true });
-      tl.to(originalSpan, {
-        y: `-${slideDistance}px`,
-        duration: 0.4,
-        ease: "power2.inOut",
-      })
-        .to(hoverSpan, { y: 0, duration: 0.4, ease: "power2.inOut" }, 0)
-        .to(originalSpan, { opacity: 0, duration: 0.1 }, 0.2)
-        .to(hoverSpan, { opacity: 1, duration: 0.1 }, 0.2);
-
-      tl.eventCallback("onReverseComplete", () => {
-        gsap.set(originalSpan, { y: 0, opacity: 1 });
-        gsap.set(hoverSpan, { y: `${slideDistance}px`, opacity: 0 });
-      });
-
-      element.setAttribute("data-gsap-initialized", "true");
-      return tl;
-    };
-
-    setTimeout(() => {
-      const styledCtaBtns = document.querySelectorAll(".cta-btn-styled");
-      styledCtaBtns.forEach((btn) => {
-        const timeline = createSlideUpEffect(btn);
-        if (timeline) {
-          btn.addEventListener("mouseenter", () => timeline.play());
-          btn.addEventListener("mouseleave", () => timeline.reverse());
-        }
-      });
-    }, 100);
-  }, []);
+  
 
   return (
     <>
       <section className="services-section">
-        <div className="header">
-          <div className="header-left">
+        <div className="section-header">
+          <div className="">
             <div className="label">WHAT WE DO</div>
-            <h1 className="servicescomp-heading">Our Services</h1>
+            <h1 className="section-title">Our Services</h1>
           </div>
         </div>
 
