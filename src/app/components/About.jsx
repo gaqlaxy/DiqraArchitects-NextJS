@@ -28,7 +28,7 @@ const About = () => {
           
           {/* The Visual */}
           <div className="scroll-image-wrapper">
-            <img src="/About.webp" alt="Architecture Studio" />
+            <img src="/AboutW.webp" alt="Architecture Studio" />
           </div>
 
           {/* The Narrative */}
