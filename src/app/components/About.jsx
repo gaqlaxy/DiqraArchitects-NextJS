@@ -3,21 +3,21 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import "../styles/About.css";
-
-
+import SlideUpButton from "./SlideUpButton";
 
 const About = () => {
   return (
     <section id="about" className="about-sticky-section">
       <div className="about-container">
-        
         {/* LEFT: Pinned Headline (Stays fixed while you scroll) */}
         <div className="sticky-side">
           <div className="sticky-content">
-            <span className="chapter-marker">01 — STUDIO</span>
+            <span className="chapter-marker">(STUDIO)</span>
             <h1 className="sticky-headline">
-              CRAFTING<br />
-              TIMELESS<br />
+              CRAFTING
+              <br />
+              TIMELESS
+              <br />
               SPACES
             </h1>
           </div>
@@ -25,7 +25,6 @@ const About = () => {
 
         {/* RIGHT: Scrolling Content (Moves up) */}
         <div className="scroll-side">
-          
           {/* The Visual */}
           <div className="scroll-image-wrapper">
             <img src="/AboutW.webp" alt="Architecture Studio" />
@@ -38,7 +37,7 @@ const About = () => {
               <span className="amp">&</span>
               <h2 className="sub-title">Impact</h2>
             </div>
-            
+
             <p className="description">
               Diqra Architects creates spaces that balance strength, serenity,
               and refined craftsmanship. Our work draws from cultural richness
@@ -46,19 +45,18 @@ const About = () => {
             </p>
 
             <p className="description">
-              Every project is approached with clarity, precision, and a commitment to
-              natural harmony, resulting in spaces that feel grounded, enduring,
-              and beautifully purposeful.
+              Every project is approached with clarity, precision, and a
+              commitment to natural harmony, resulting in spaces that feel
+              grounded, enduring, and beautifully purposeful.
             </p>
 
             <div className="action-area">
               {/* <SlideUpButton href="/about">More About Us</SlideUpButton> */}
-              <button className="line-btn">Read Full Story</button>
+              {/* <button className="line-btn">Read Full Story</button> */}
+              <SlideUpButton href="/about">Read Full Story</SlideUpButton>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );
@@ -66,14 +64,14 @@ const About = () => {
 
 export default About;
 
-// V222 
+// V222
 
-// V333333333 
+// V333333333
 // const About = () => {
 //   return (
 //     <section className="classic-section about-section">
 //       <div className="classic-container">
-        
+
 //         {/* 1. The Hook (Serif Italic) */}
 //         <div className="classic-header">
 //           <p className="cursive-tag">Since 2024</p>
@@ -86,7 +84,7 @@ export default About;
 
 //         {/* 2. The Triptych (3 Columns: Text - Image - Text) */}
 //         <div className="classic-grid">
-          
+
 //           {/* Left: Logic */}
 //           <div className="classic-col text-col">
 //             <h3 className="col-label">The Intent</h3>
@@ -123,8 +121,7 @@ export default About;
 
 // export default About;
 
-
-// V44444444444 
+// V44444444444
 
 // import React, { useEffect, useRef, useState } from 'react';
 
@@ -385,8 +382,7 @@ export default About;
 
 // export default About;
 
-
-// V555555555555 
+// V555555555555
 // import React, { useEffect, useRef, useState } from 'react';
 
 // const About = () => {
@@ -715,7 +711,7 @@ export default About;
 //             With Intent and Impact
 //           </h1>
 //           <p className="about-intro-text">
-//             Architecture that honors heritage while embracing contemporary vision, 
+//             Architecture that honors heritage while embracing contemporary vision,
 //             rooted in classical principles of proportion, harmony, and enduring beauty.
 //           </p>
 //         </div>
@@ -744,11 +740,11 @@ export default About;
 //         <div className="about-description">
 //           <h2 className="description-title">Our Design Philosophy</h2>
 //           <p className="description-text">
-//             Diqra Architects creates spaces that balance strength, serenity, 
-//             and refined craftsmanship. Our work draws from cultural richness 
-//             and translates it into contemporary, timeless architecture. Every 
-//             project is approached with clarity, precision, and a commitment to 
-//             natural harmony, resulting in spaces that feel grounded, enduring, 
+//             Diqra Architects creates spaces that balance strength, serenity,
+//             and refined craftsmanship. Our work draws from cultural richness
+//             and translates it into contemporary, timeless architecture. Every
+//             project is approached with clarity, precision, and a commitment to
+//             natural harmony, resulting in spaces that feel grounded, enduring,
 //             and beautifully purposeful.
 //           </p>
 //           <a href="/about" className="about-cta">Learn More About Us</a>
@@ -759,4 +755,3 @@ export default About;
 // };
 
 // export default About;
-

@@ -47,66 +47,66 @@ const ProcessSection = () => {
 
   return (
     <>
-    <section className="homeprocess-section">
-
-    <div className="min-process-section">
-      <div className="section-header">
-
-      <h2 className="section-title">Our Process</h2>
-      </div>
-      <div className="min-container">
-        
-        {/* LEFT: VISUALS */}
-
-        <div className="min-visual-col">
-
-          <div className="min-image-wrapper">
-            {processSteps.map((step, index) => (
-              <img
-                key={step.id}
-                src={step.img}
-                alt={step.title}
-                className={`min-image ${activeStep === index ? "active" : ""}`}
-              />
-            ))}
-            <div className="min-img-overlay"></div>
+      <section className="homeprocess-section">
+        <div className="min-process-section">
+          <span className="process-subheader">(How we work)</span>
+          <div className="section-header">
+            <h2 className="section-title">Our Process</h2>
           </div>
-          
-          <div className="min-visual-label">
-            Phase {processSteps[activeStep].id}
+          <div className="min-container">
+            {/* LEFT: VISUALS */}
+
+            <div className="min-visual-col">
+              <div className="min-image-wrapper">
+                {processSteps.map((step, index) => (
+                  <img
+                    key={step.id}
+                    src={step.img}
+                    alt={step.title}
+                    className={`min-image ${
+                      activeStep === index ? "active" : ""
+                    }`}
+                  />
+                ))}
+                <div className="min-img-overlay"></div>
+              </div>
+
+              <div className="min-visual-label">
+                Phase {processSteps[activeStep].id}
+              </div>
+            </div>
+
+            {/* RIGHT: CONTENT LIST */}
+            <div className="min-content-col">
+              <ul className="min-list">
+                {processSteps.map((step, index) => (
+                  <li
+                    key={step.id}
+                    className={`min-item ${
+                      activeStep === index ? "active" : ""
+                    }`}
+                    onMouseEnter={() => setActiveStep(index)}
+                    onClick={() => setActiveStep(index)} // Touch support
+                  >
+                    <div className="min-item-header">
+                      <span className="min-id">{step.id}</span>
+                      <span className="min-title">{step.title}</span>
+                    </div>
+
+                    <div className="min-item-body">
+                      <p>{step.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="min-cta">
+                <SlideUpButton href="/process">View Full Process</SlideUpButton>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* RIGHT: CONTENT LIST */}
-        <div className="min-content-col">
-          <ul className="min-list">
-            {processSteps.map((step, index) => (
-              <li
-                key={step.id}
-                className={`min-item ${activeStep === index ? "active" : ""}`}
-                onMouseEnter={() => setActiveStep(index)}
-                onClick={() => setActiveStep(index)} // Touch support
-              >
-                <div className="min-item-header">
-                  <span className="min-id">{step.id}</span>
-                  <span className="min-title">{step.title}</span>
-                </div>
-                
-                <div className="min-item-body">
-                  <p>{step.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-
-          <div className="min-cta">
-            <SlideUpButton href="/process">View Full Process</SlideUpButton>
-          </div>
-        </div>
-      </div>
-    </div>
-    </section>
-
+      </section>
     </>
   );
 };

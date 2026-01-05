@@ -745,6 +745,7 @@ import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "../components/Footer";
+import { Instagram, Facebook } from "lucide-react";
 
 // import Lenis from "@studio-freight/lenis";
 
@@ -982,11 +983,11 @@ export default function ContactPage() {
         /* STICKY SIDEBAR */
         .sticky-info {
           position: sticky;
-          top: 40px;
+          top: 100px;
           height: fit-content;
           display: flex;
           flex-direction: column;
-          gap: 60px;
+          gap: 30px;
           padding-top: 20px;
         }
 
@@ -1206,7 +1207,7 @@ export default function ContactPage() {
           {/* LEFT SIDEBAR (Sticky) */}
           <aside className="sticky-info fade-in-section">
             <div className="info-group">
-              <h3>Coordinates</h3>
+              <h3>Find us</h3>
               <p>No. 534/2, 19th Street</p>
               <p>Periyar Nagar, Urapakkam</p>
               <p>Tamil Nadu 603202</p>
@@ -1229,8 +1230,9 @@ export default function ContactPage() {
             <div className="info-group">
               <h3>Socials</h3>
               <div className="social-row">
-                <a href="#">Inst.</a>
-                <a href="#">Fb.</a>
+                {/* <a href="#">Inst.</a> */}
+                <Instagram />
+                <Facebook />
                 <a href="#">Ln.</a>
               </div>
             </div>
@@ -1939,7 +1941,6 @@ export default function ContactPage() {
 //   return (
 //     <>
 //       <style jsx global>{`
-
 
 //         :root {
 //           --bg: #ffffff;
