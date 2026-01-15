@@ -30,6 +30,9 @@ export const metadata = {
     default: "DIQRA Architecture",
     template: "%s | DIQRA",
   },
+  icons: {
+    icon: "/diqrawhite.ico",
+  },
   description:
     "DIQRA is a modern architecture studio creating intentional, functional and elegant designs.",
   keywords: [
