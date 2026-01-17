@@ -18,7 +18,7 @@
 // }
 
 // app/sitemap.js
-import { categories } from "@/lib/categories";
+import { categories } from "@/app/libs/categories";
 
 export default async function sitemap() {
   const baseUrl = "http://diqraarchitects.com/";
