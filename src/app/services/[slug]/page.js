@@ -1,124 +1,79 @@
-// import { categories } from "@/app/libs/categories";
-// import { notFound } from "next/navigation";
-// import AnimatedHero from "@/app/components/AnimatedHero"; // We'll create this next
-
-// // 1. Generate SEO Metadata
-// export async function generateMetadata({ params }) {
-//   const { slug } = await params;
-//   const data = categories.find((c) => c.slug === slug);
-
-//   if (!data) return { title: "Service Not Found" };
-
-//   return {
-//     title: `${data.title} | Luxury Architecture Firm`,
-//     description: data.tagline,
-//     openGraph: {
-//       title: data.title,
-//       description: data.tagline,
-//       images: [`/og/${slug}.jpg`],
-//     },
-//   };
-// }
-
-// // 2. Pre-render all 40+ pages at build time
-// export async function generateStaticParams() {
-//   return categories.map((cat) => ({ slug: cat.slug }));
-// }
-
-// export default async function CategoryPage({ params }) {
-//   const { slug } = await params;
-//   const data = categories.find((c) => c.slug === slug);
-
-//   if (!data) notFound();
-
-//   return (
-//     <main className="bg-[#0a0a0a] text-white min-h-screen overflow-hidden">
-//       <AnimatedHero data={data} />
-
-//       {/* Content Section */}
-//       <section className="px-10 py-20 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
-//         <div className="reveal-text">
-//           <h2 className="text-sm uppercase tracking-[0.3em] text-gray-500 mb-6">
-//             Expertise
-//           </h2>
-//           <p className="text-2xl leading-relaxed font-light">
-//             {data.description}
-//           </p>
-//         </div>
-//         <div className="h-[400px] bg-neutral-900 overflow-hidden rounded-sm grayscale hover:grayscale-0 transition-all duration-700">
-//           {/* Replace with your architectural imagery */}
-//           <div className="w-full h-full bg-[url('/arch-sample.jpg')] bg-cover bg-center" />
-//         </div>
-//       </section>
-//     </main>
-//   );
-// }
 
 
 
 import { categories } from '@/app/libs/categories';
 import Image from 'next/image';
+import Link from 'next/link'; //
 import { notFound } from 'next/navigation';
 import HeroAnimation from '@/app/components/AnimatedHero';
 import CtaSection from '@/app/components/CtaSection';
 import Footer from '@/app/components/Footer';
 
+
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const data = categories.find((c) => c.slug === slug);
-  if (!data) return { title: "Not Found" };
+
+  if (!data) return { title: "Service Not Found" };
+
+  // SEO TRICK: Add "Location" and "intent" words automatically
+  const location = "Chennai"; // Or "India"
+  const title = `Best ${data.title} in ${location} | Top Rated Service`;
 
   return {
-    title: `${data.title} | Luxury Architecture & Construction`,
-    description: data.tagline,
+    title: title,
+    description: `Looking for ${data.title}? We provide ${data.tagline} with ${data.stats[0].value} successful projects. Get a free quote for ${data.title.toLowerCase()} today.`,
+    alternates: {
+      canonical: `https://yourwebsite.com/services/${slug}`,
+    },
     openGraph: {
-      images: [data.thumbnail || data.image],
+      title: title,
+      description: data.tagline,
+      images: [data.thumbnail],
+      type: 'website',
     },
   };
 }
 
-// export default async function ServicePage({ params }) {
-//   const { slug } = await params;
-//   const data = categories.find((c) => c.slug === slug);
 
-//   if (!data) notFound();
-
-//   return (
-//     <div className="bg-[#f8f8f8] text-neutral-900 min-h-screen font-sans">
-//       <HeroAnimation data={data} />
-
-//       <section className="max-w-7xl mx-auto px-6 py-32 grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
-//         {/* Descriptive Text */}
-//         <div className="md:col-span-5">
-//           <h2 className="text-xs uppercase tracking-[0.5em] text-neutral-400 mb-6 font-bold">
-//             Project Overview
-//           </h2>
-//           <p className="text-2xl font-light leading-relaxed text-neutral-700">
-//             {data.description}
-//           </p>
-//         </div>
-
-//         {/* Realistic Secondary Image */}
-//         <div className="md:col-span-7 relative aspect-4/3 overflow-hidden rounded-sm shadow-2xl">
-//           <Image 
-//             src={data.image} 
-//             alt={data.title}
-//             fill
-//             className="object-cover"
-//             sizes="(max-width: 768px) 100vw, 50vw"
-//           />
-//         </div>
-//       </section>
-//     </div>
-//   );
-// }
 
 export default async function ServicePage({ params }) {
   const { slug } = await params;
   const data = categories.find((c) => c.slug === slug);
+  if (!data) return notFound();
+  // Add this inside the component return, right at the top
 
   return (
     <div className="bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": data.title,
+            "provider": {
+              "@type": "ConstructionBusiness",
+              "name": "Diqra Architects",
+              "image": "https://diqraarchitects.com/logo.png",
+              "priceRange": "INR"
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "chengalpattu" // Change to your target city
+            },
+            "description": data.description,
+            "offer": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": data.title
+              }
+            }
+          })
+        }}
+      />
       <HeroAnimation data={data} /> {/* The GSAP Hero we built earlier */}
 
       {/* SECTION 1: Statistics Bar (Social Proof) */}
@@ -133,13 +88,30 @@ export default async function ServicePage({ params }) {
         </div>
       </section>
 
+      {/* SECTION 2: SEO CONTENT BLOCK (Crucial for Ranking) */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-light mb-8 text-black">
+            Professional {data.title} Services in Chengalpattu
+          </h2>
+          <p className="text-lg text-neutral-600 leading-relaxed mb-6">
+            Diqra Architects provides premium <strong>{data.title.toLowerCase()}</strong> solutions tailored to the unique landscape of Chengalpattu and surrounding areas.
+            Whether you are looking for residential expertise or large-scale commercial development, our team ensures
+            international standards with local compliance.
+          </p>
+          <p className="text-md text-neutral-500 italic">
+            Specializing in {data.features.map(f => f.title).join(", ")}.
+          </p>
+        </div>
+      </section>
+
       {/* SECTION 2: Detailed Services (GSAP Grid) */}
       <section className="py-32 px-6 max-w-7xl mx-auto">
         <h2 className="text-4xl font-light mb-16">Core Expertise</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {data.features.map((feature, i) => (
             <div key={i} className="p-10 border border-neutral-100 hover:border-black transition-colors duration-500 group">
-              <span className="text-neutral-300 group-hover:text-black transition-colors">0{i+1}</span>
+              <span className="text-neutral-300 group-hover:text-black transition-colors">0{i + 1}</span>
               <h3 className="text-xl font-medium mt-4 mb-2">{feature.title}</h3>
               <p className="text-neutral-500">{feature.desc}</p>
             </div>
@@ -162,18 +134,33 @@ export default async function ServicePage({ params }) {
           ))}
         </div>
       </section>
-      
-      {/* SECTION 4: Final CTA (Sticky Footer style) */}
-      {/* <section className="h-[60vh] flex items-center justify-center text-center px-6">
-        <div>
-          <h2 className="text-5xl md:text-7xl font-light tracking-tighter mb-8">Ready to Build?</h2>
-          <button className="px-12 py-5 bg-black text-white rounded-full uppercase text-xs tracking-widest hover:scale-105 transition-transform">
-            Request a Consultation
-          </button>
+
+      {/* SECTION 5: Related Services (Internal Linking) */}
+      <section className="py-20 px-6 border-t border-neutral-200">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-xl font-bold mb-8 italic">Other Expert Services by Diqra Architects</h3>
+          <div className="flex flex-wrap gap-4">
+            {categories
+              .filter((c) => c.slug !== slug)
+              .sort(() => 0.5 - Math.random())
+              .slice(0, 12)
+              .map((cat) => (
+                <Link
+                  key={cat.slug}
+                  href={`/services/${cat.slug}`}
+                  className="px-5 py-2 bg-neutral-50 border border-neutral-200 rounded-full text-sm hover:bg-black hover:text-white transition-all"
+                >
+                  {cat.title}
+                </Link>
+              ))}
+          </div>
         </div>
-      </section> */}
+      </section>
+
+
       <CtaSection />
       <Footer />
     </div>
+
   );
 }

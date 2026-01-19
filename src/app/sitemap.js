@@ -21,13 +21,13 @@
 import { categories } from "@/app/libs/categories";
 
 export default async function sitemap() {
-  const baseUrl = "http://diqraarchitects.com/";
-    // const baseUrl = "http://localhost:3000/";
+  // const baseUrl = "http://diqraarchitects.com/";
+  const baseUrl = "http://localhost:3000/";
 
   const servicePages = categories.map((cat) => ({
     url: `${baseUrl}/services/${cat.slug}`,
     lastModified: new Date(),
-    changeFrequency: "monthly",
+    changeFrequency: "weekly",
     priority: 0.8,
   }));
 
