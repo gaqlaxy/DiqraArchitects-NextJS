@@ -121,7 +121,7 @@ body {
 }
 
 /* The Hidden Content */
-.service-content {
+.design-service-content {
   height: 0;
   overflow: hidden;
   opacity: 0;

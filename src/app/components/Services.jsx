@@ -4,6 +4,8 @@ import "../styles/Services.css";
 import { gsap } from "gsap";
 import SlideUpButton from "./SlideUpButton";
 
+
+
 import Link from "next/link";
 
 const Services = () => {
@@ -20,6 +22,7 @@ const Services = () => {
         </div>
 
         <div className="services-grid">
+          <Link href="/services/exterior-design">
           <div className="service-card">
             <div className="icon-container">
               <svg
@@ -45,15 +48,21 @@ const Services = () => {
                 <line x1="55" y1="30" x2="45" y2="30" />
               </svg>
             </div>
+            
+          
             <div className="service-content">
               <h3>Exterior Design</h3>
               <p>
                 We craft bold, refined exteriors that balance form, function,
                 and lasting visual harmony.
               </p>
+             
+            
             </div>
           </div>
+          </Link>
 
+          <Link href="/services/design-planning">
           <div className="service-card">
             <div className="icon-container">
               <svg
@@ -76,6 +85,9 @@ const Services = () => {
               </p>
             </div>
           </div>
+          </Link>
+
+          <Link href="/services/consultation">
 
           <div className="service-card">
             <div className="icon-container">
@@ -109,6 +121,7 @@ const Services = () => {
               </p>
             </div>
           </div>
+          </Link>
         </div>
 
         <div className="header-right">

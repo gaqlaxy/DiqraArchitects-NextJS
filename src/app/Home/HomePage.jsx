@@ -10,6 +10,7 @@ import AboutSection from "../components/About";
 import DesignSection from "../components/DesignSection";
 
 
+
 export default function HomePage() {
   return (
     <>

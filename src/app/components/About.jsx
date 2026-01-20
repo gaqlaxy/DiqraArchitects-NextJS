@@ -20,6 +20,7 @@ const About = () => {
               <br />
               SPACES
             </h1>
+            
           </div>
         </div>
 

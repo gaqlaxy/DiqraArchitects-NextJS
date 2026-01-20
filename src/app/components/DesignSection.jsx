@@ -166,7 +166,7 @@ const DesignSection = () => {
 
                 {/* Expanded Content Part */}
                 <div 
-                  className="service-content" 
+                  className="design-service-content" 
                   ref={el => contentRefs.current[index] = el}
                 >
                   <p className="service-desc">{service.desc}</p>

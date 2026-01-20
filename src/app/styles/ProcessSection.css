@@ -190,6 +190,9 @@
     display: block;
     overflow: visible;
   }
+  .homeprocess-section{
+    padding: 40px 20px 80px 20px;
+  }
 
   .min-container {
     flex-direction: column;
