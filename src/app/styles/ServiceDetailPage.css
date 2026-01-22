@@ -1,7 +1,7 @@
 /* app/styles/ServiceDetailPage.css */
 
 :root {
-  --sd-bg: #fdfdfd; /* Slightly warm off-white */
+  --sd-bg: #fdfdfd;
   --sd-ink: #111111;
   --sd-ink-light: #777777;
   --sd-border: rgba(0, 0, 0, 0.08);
@@ -15,7 +15,8 @@
 .sd-container {
   background-color: var(--sd-bg);
   color: var(--sd-ink);
-  overflow: hidden; /* Prevent horizontal spill */
+  overflow: hidden;
+  position: relative;
 }
 
 /* --- HERO --- */
@@ -23,7 +24,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 120px var(--sd-pad-page) 60px;
+  /* Reduced top padding for mobile, scales up for desktop */
+  padding: clamp(100px, 15vh, 120px) var(--sd-pad-page) 60px;
   position: relative;
 }
 
@@ -61,14 +63,15 @@
 }
 
 .sd-hero-title {
-  font-family: inherit; /* Use your main brand font */
+  font-family: inherit;
   font-size: clamp(3rem, 11vw, 10rem);
   line-height: 0.9;
-  font-weight: 400; /* Lighter weights look more premium at this size */
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.03em;
   margin: 0;
   color: var(--sd-ink);
+  word-wrap: break-word; /* Prevents overflow on tiny screens */
 }
 
 .sd-line-mask {
@@ -82,16 +85,18 @@
 
 .sd-hero-media {
   width: 100%;
-  height: clamp(400px, 60vh, 800px);
+  height: clamp(300px, 50vh, 800px); /* Adjusted min-height for mobile */
   overflow: hidden;
   border-radius: 4px;
+  position: relative;
 }
 
 .sd-hero-img {
   width: 100%;
-  height: 120%; /* Taller for parallax */
+  height: 120%;
   object-fit: cover;
   display: block;
+  /* Will be handled by GSAP */
 }
 
 /* --- EXPERTISE (Sticky) --- */
@@ -108,10 +113,11 @@
 }
 
 .sd-sticky-title {
-  height: 100vh; /* For GSAP pinning logic */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   padding-top: 0;
+  /* GSAP will pin this */
 }
 
 .sd-sticky-title h2 {
@@ -127,7 +133,7 @@
 
 .sd-scroll-col {
   width: 65%;
-  padding-top: 20px; /* Slight offset */
+  padding-top: 20px;
 }
 
 .sd-feature-card {
@@ -135,9 +141,7 @@
   background: #fff;
   border: 1px solid var(--sd-border);
   margin-bottom: 20px;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .sd-feature-card:hover {
@@ -186,8 +190,10 @@
 
 .sd-process-item {
   position: relative;
+  /* Desktop defaults */
 }
 
+/* Desktop: Horizontal Line */
 .sd-process-marker {
   position: relative;
   height: 2px;
@@ -207,10 +213,8 @@
 .sd-process-line-fill {
   background: var(--sd-ink);
   height: 100%;
-  width: 0; /* JS animates this */
+  width: 0; /* JS animates width on desktop */
 }
-
-/* Switch line to vertical on mobile if needed, but horizontal usually looks better for 'process' timeline */
 
 .sd-step-num {
   position: absolute;
@@ -231,7 +235,7 @@
   line-height: 1.6;
 }
 
-/* --- PROJECTS (Row List) --- */
+/* --- PROJECTS --- */
 .sd-projects {
   padding: 0 var(--sd-pad-page) var(--sd-gap-lg);
 }
@@ -273,7 +277,7 @@
   border-bottom: 1px solid var(--sd-border);
   text-decoration: none;
   color: var(--sd-ink);
-  group: hover;
+  width: 100%;
 }
 
 .sd-row-content {
@@ -306,7 +310,6 @@
   font-size: 14px;
 }
 
-/* Hover Image Reveal */
 .sd-row-image-reveal {
   position: absolute;
   top: 50%;
@@ -339,13 +342,16 @@
   justify-content: center;
 }
 
-/* --- RESPONSIVE --- */
+/* --- RESPONSIVE FIXES --- */
+
+/* Tablet & Mobile shared */
 @media (max-width: 1024px) {
   .sd-features-wrapper {
     flex-direction: column;
   }
   .sd-sticky-col {
     width: 100%;
+    /* Reset height so it doesn't take up 100vh on mobile */
     height: auto;
     margin-bottom: 40px;
   }
@@ -354,16 +360,19 @@
   }
   .sd-scroll-col {
     width: 100%;
+    padding-top: 0;
   }
 
+  /* 2-col process on tablet */
   .sd-process-list {
     grid-template-columns: 1fr 1fr;
   }
   .sd-row-image-reveal {
-    display: none;
-  } /* Disable hover img on tablet */
+    display: none !important; /* Force hide hover img */
+  } 
 }
 
+/* Mobile Specific */
 @media (max-width: 768px) {
   .sd-hero-meta {
     flex-direction: column;
@@ -371,12 +380,20 @@
   }
   .sd-hero-desc {
     text-align: left;
+    max-width: 100%;
   }
 
+  /* Process Vertical Layout */
   .sd-process-list {
     grid-template-columns: 1fr;
     gap: 40px;
+    padding-left: 20px; /* Add padding to container to fit numbers */
   }
+  
+  .sd-process-item {
+    padding-left: 30px; /* Make space for vertical line */
+  }
+
   .sd-process-marker {
     width: 2px;
     height: 100%;
@@ -384,28 +401,50 @@
     left: 0;
     top: 0;
     margin: 0;
+    background: var(--sd-border);
   }
+  
+  .sd-process-line {
+    width: 100%;
+    height: 100%;
+  }
+
   .sd-process-line-fill {
     width: 100%;
-    height: 0;
+    height: 0; /* JS animates height on mobile */
+    background: var(--sd-ink);
   }
+
   .sd-process-content {
-    padding-left: 30px;
+    padding-left: 0; /* padding handled by parent item now */
   }
+  
+  /* Fix number position so it isn't cut off */
   .sd-step-num {
-    left: -40px;
+    left: -35px; /* Relative to the line at left:0 */
     top: 0;
+    text-align: right;
+    width: 30px;
   }
 
+  /* Projects Table Mobile */
   .sd-row-content {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr; /* Stack vertically */
+    gap: 8px;
   }
-  .sd-row-cat,
   .sd-row-year {
-    font-size: 11px;
+    text-align: left;
+    font-size: 12px;
+    color: var(--sd-ink-light);
   }
-
+  .sd-project-row {
+    padding: 30px 0;
+  }
+  
+  /* Hide Header Link, Show Button */
+  .sd-projects-header .sd-view-all {
+    display: none;
+  }
   .sd-mobile-cta {
     display: flex;
   }
