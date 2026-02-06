@@ -176,12 +176,22 @@ export async function generateMetadata({ params }) {
   if (!data) return { title: "Service Not Found" };
 
   const city = "Chennai"; // Dynamic location insertion for SEO
-  
+
   return {
     title: `Top ${data.title} in ${city} | Premium Services`,
     description: `Looking for ${data.title}? Diqra Architects delivers ${data.tagline} with ${data.stats[0].value} completed projects. Rated #1 in ${city}.`,
-    alternates: { canonical: `https://diqraarchitects.com/services/${slug}` },
+    alternates: { canonical: `/services/${slug}` },
     openGraph: {
+      title: data.title,
+      description: data.description,
+      images: [data.image],
+      url: `https://diqraarchitects.com/services/${slug}`,
+      siteName: "DIQRA Architects",
+      locale: "en_IN",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
       title: data.title,
       description: data.description,
       images: [data.image],

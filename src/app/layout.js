@@ -43,6 +43,9 @@ export const metadata = {
     "interior designers",
   ],
   metadataBase: new URL("https://diqraarchitects.com"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "DIQRA Architecture Studio",
     description:
@@ -50,16 +53,48 @@ export const metadata = {
     url: "https://diqraarchitects.com",
     siteName: "DIQRA Studio",
     images: [
-      "/Hero1.jpeg", // add later
+      "/Hero1.jpeg",
     ],
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DIQRA Architecture Studio",
+    description: "Modern, functional and intentional architecture based in Urapakkam.",
+    images: ["/Hero1.jpeg"],
   },
 };
 
 export default function RootLayout({ children }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ArchitectureFirm",
+    "name": "DIQRA Architecture",
+    "url": "https://diqraarchitects.com",
+    "logo": "https://diqraarchitects.com/diqrawhite.ico",
+    "image": "https://diqraarchitects.com/Hero1.jpeg",
+    "description": "DIQRA is a modern architecture studio creating intentional, functional and elegant designs.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Urapakkam",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    },
+    "openingHours": "Mo-Sa 09:00-18:00",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-9840000000", // Update with real number if available
+      "contactType": "customer service"
+    }
+  };
+
   return (
     <html lang="en" className={myFont.className}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SmoothScroll>
           <PreloaderWrapper />
           <Navbar />
