@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import SmoothScroll from "./components/SmoothScroll";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/next";
 import PreloaderWrapper from "./components/PreloaderWrapper";
@@ -59,11 +60,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={myFont.className}>
       <body>
-        <PreloaderWrapper />
-        <Navbar />
-        {children}
-        <Analytics />
-        <SpeedInsights />
+        <SmoothScroll>
+          <PreloaderWrapper />
+          <Navbar />
+          {children}
+          <Analytics />
+          <SpeedInsights />
+        </SmoothScroll>
       </body>
     </html>
   );
