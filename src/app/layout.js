@@ -78,6 +78,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={myFont.className}>
       <body>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -85,7 +88,9 @@ export default function RootLayout({ children }) {
         <SmoothScroll>
           <PreloaderWrapper />
           <Navbar />
-          {children}
+          <div id="main-content" role="main">
+            {children}
+          </div>
           <Analytics />
           <SpeedInsights />
         </SmoothScroll>

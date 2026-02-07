@@ -22,6 +22,11 @@ export default function ServiceClient({ data }) {
   }, [data?.slug]);
 
   useEffect(() => {
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       // 1. Line Drawing Animation (Architectural feel)
       gsap.utils.toArray(".anim-line").forEach((line) => {
@@ -123,6 +128,7 @@ export default function ServiceClient({ data }) {
             alt={data.title}
             fill
             priority={false}
+            sizes="(max-width: 768px) 100vw, 90vw"
             className="hero-img object-cover scale-110 grayscale hover:grayscale-0 transition-all duration-700"
           />
         </div>
@@ -177,7 +183,8 @@ export default function ServiceClient({ data }) {
               {data.features.map((feature, i) => (
                 <div
                   key={i}
-                  className="group border-t border-black/10 py-8 transition-all hover:bg-white hover:px-6 -mx-6 px-6 cursor-default"
+                  tabIndex={0}
+                  className="group border-t border-black/10 py-8 transition-all hover:bg-white hover:px-6 -mx-6 px-6 cursor-default focus-visible:outline focus-visible:outline-1 focus-visible:outline-black/30"
                 >
                   <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
                     <div className="flex items-center gap-4">
@@ -188,7 +195,7 @@ export default function ServiceClient({ data }) {
                         {feature.title}
                       </h4>
                     </div>
-                    <p className="text-neutral-500 text-sm max-w-xs text-right opacity-0 group-hover:opacity-100 transition-opacity">
+                    <p className="text-neutral-500 text-sm max-w-xs text-right opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity">
                       {feature.desc}
                     </p>
                   </div>

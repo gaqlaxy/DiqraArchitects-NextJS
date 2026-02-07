@@ -283,7 +283,7 @@ const Navbar = () => {
           <div className="Navbar-container">
             <div className="Navbar-content">
               <Link href="/" className="Navbar-logo">
-                <img src="/diqrablack.webp" alt="" />
+                <img src="/diqrablack.webp" alt="DIQRA logo" />
               </Link>
 
               <div className="Navbar-actions">
@@ -315,7 +315,7 @@ const Navbar = () => {
           <div className="Navbar-overlay-container">
             <div className="Navbar-overlay-header">
               <Link href="/" className="Navbar-overlay-logo">
-                <img src="diqrawhite.webp" alt="" />
+                <img src="diqrawhite.webp" alt="DIQRA logo" />
               </Link>
               <button
                 onClick={() => setIsMenuOpen(false)}
@@ -394,7 +394,7 @@ const Navbar = () => {
                 isMobile || isScrolled ? "Navbar-logo-hidden" : ""
               }`}
             >
-              <img src="/diqrawhite.webp" alt="" />
+              <img src="/diqrawhite.webp" alt="DIQRA logo" />
             </Link>
 
             <div
@@ -455,7 +455,7 @@ const Navbar = () => {
         <div className="Navbar-overlay-container">
           <div className="Navbar-overlay-header">
             <Link href="/" className="Navbar-overlay-logo">
-              <img src="diqrawhite.webp" alt="" />
+              <img src="diqrawhite.webp" alt="DIQRA logo" />
             </Link>
             <button
               onClick={() => setIsMenuOpen(false)}

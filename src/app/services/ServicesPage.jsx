@@ -593,6 +593,11 @@ const ServicesPage = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
     // Small timeout ensures DOM is painted before GSAP calculates positions
     const timer = setTimeout(() => {
       const ctx = gsap.context(() => {
