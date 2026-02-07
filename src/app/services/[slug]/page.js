@@ -165,26 +165,51 @@
 //   );
 // }
 
-import { categories } from '@/app/libs/categories';
-import { notFound } from 'next/navigation';
-import ServiceClient from '@/app/components/ServiceClient'; // The Visual Component
+import fs from "fs";
+import path from "path";
+import { categories } from "@/app/libs/categories";
+import { notFound } from "next/navigation";
+import ServiceClient from "@/app/components/ServiceClient"; // The Visual Component
+
+const FALLBACK_IMAGE = "/images/services/civil-contractors.jpg";
+const PUBLIC_DIR = path.join(process.cwd(), "public");
+
+function resolveImage(src) {
+  if (!src) return FALLBACK_IMAGE;
+  if (/^https?:\/\//i.test(src)) return src;
+  const clean = src.startsWith("/") ? src : `/${src}`;
+  const relativePath = clean.replace(/^[\\/]+/, "");
+  const filePath = path.join(PUBLIC_DIR, relativePath);
+  if (fs.existsSync(filePath)) return clean;
+  return FALLBACK_IMAGE;
+}
+
+function resolveServiceData(data) {
+  return {
+    ...data,
+    image: resolveImage(data?.image),
+    thumbnail: resolveImage(data?.thumbnail),
+  };
+}
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const data = categories.find((c) => c.slug === slug);
 
   if (!data) return { title: "Service Not Found" };
+  const resolved = resolveServiceData(data);
 
   const city = "Chennai"; // Dynamic location insertion for SEO
+  const completed = data.stats?.[0]?.value ?? "many";
 
   return {
     title: `Top ${data.title} in ${city} | Premium Services`,
-    description: `Looking for ${data.title}? Diqra Architects delivers ${data.tagline} with ${data.stats[0].value} completed projects. Rated #1 in ${city}.`,
+    description: `Looking for ${data.title}? Diqra Architects delivers ${data.tagline} with ${completed} completed projects. Rated #1 in ${city}.`,
     alternates: { canonical: `/services/${slug}` },
     openGraph: {
       title: data.title,
       description: data.description,
-      images: [data.image],
+      images: [resolved.image],
       url: `https://diqraarchitects.com/services/${slug}`,
       siteName: "DIQRA Architects",
       locale: "en_IN",
@@ -194,7 +219,7 @@ export async function generateMetadata({ params }) {
       card: "summary_large_image",
       title: data.title,
       description: data.description,
-      images: [data.image],
+      images: [resolved.image],
     },
   };
 }
@@ -203,12 +228,13 @@ export default async function ServicePage({ params }) {
   const { slug } = await params;
   const data = categories.find((c) => c.slug === slug);
   if (!data) return notFound();
+  const resolvedData = resolveServiceData(data);
 
   // JSON-LD for Google Rich Results (Essential for JustDial/Local SEO traffic)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": data.title,
+    "name": resolvedData.title,
     "provider": {
       "@type": "GeneralContractor",
       "name": "Diqra Architects",
@@ -220,12 +246,12 @@ export default async function ServicePage({ params }) {
         "addressCountry": "IN"
       }
     },
-    "description": data.description,
+    "description": resolvedData.description,
     "areaServed": ["Chennai", "Chengalpattu", "Kanchipuram"],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Construction Services",
-      "itemListElement": data.features.map((f) => ({
+      "itemListElement": resolvedData.features.map((f) => ({
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
@@ -241,7 +267,7 @@ export default async function ServicePage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ServiceClient data={data} />
+      <ServiceClient data={resolvedData} />
     </main>
   );
 }

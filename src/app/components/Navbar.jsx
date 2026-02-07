@@ -287,12 +287,13 @@ const Navbar = () => {
               </Link>
 
               <div className="Navbar-actions">
-                <button className="Navbar-contact-btn Navbar-contact-btn-visible">
-                  <Link href="/contact">
-                    <span>GET IN TOUCH</span>
-                  </Link>
+                <Link
+                  href="/contact"
+                  className="Navbar-contact-btn Navbar-contact-btn-visible"
+                >
+                  <span>GET IN TOUCH</span>
                   <span className="Navbar-contact-dot" aria-hidden="true" />
-                </button>
+                </Link>
 
                 <button
                   onClick={() => setIsMenuOpen(true)}
@@ -422,16 +423,15 @@ const Navbar = () => {
             </div>
 
             <div className="Navbar-actions">
-              <button
+              <Link
+                href="/contact"
                 className={`Navbar-contact-btn ${
                   isMobile || isScrolled ? "Navbar-contact-btn-visible" : ""
                 }`}
               >
-                <Link href="/contact">
-                  <span>GET IN TOUCH</span>
-                </Link>
+                <span>GET IN TOUCH</span>
                 <span className="Navbar-contact-dot" aria-hidden="true" />
-              </button>
+              </Link>
 
               <button
                 onClick={() => setIsMenuOpen(true)}

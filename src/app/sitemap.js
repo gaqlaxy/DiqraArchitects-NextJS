@@ -21,7 +21,7 @@
 import { categories } from "@/app/libs/categories";
 
 export default async function sitemap() {
-  const baseUrl = "http://diqraarchitects.com/";
+  const baseUrl = "https://diqraarchitects.com";
   // const baseUrl = "http://localhost:3000/";
 
   const servicePages = categories.map((cat) => ({
@@ -32,7 +32,7 @@ export default async function sitemap() {
   }));
 
   return [
-    { url: baseUrl, lastModified: new Date(), priority: 1.0 },
+    { url: `${baseUrl}/`, lastModified: new Date(), priority: 1.0 },
     ...servicePages,
   ];
 }

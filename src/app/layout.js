@@ -1,12 +1,9 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import SmoothScroll from "./components/SmoothScroll";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/next";
 import PreloaderWrapper from "./components/PreloaderWrapper";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
 import localFont from "next/font/local";
 
 // const myFont = localFont({
@@ -16,16 +13,6 @@ import localFont from "next/font/local";
 const myFont = localFont({
   src: "./SpaceGrotesk.ttf",
 });
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata = {
   title: {
     default: "DIQRA Architecture",

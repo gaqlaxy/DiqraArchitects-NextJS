@@ -13,14 +13,6 @@ export default function robots() {
   return {
     rules: [
       {
-        userAgent: "Googlebot",
-        allow: "/",
-      },
-      {
-        userAgent: "Bingbot",
-        allow: "/",
-      },
-      {
         userAgent: "*",
         disallow: "/",
       },

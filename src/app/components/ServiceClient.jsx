@@ -1,15 +1,25 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowDownRight, ArrowRight, Check } from "lucide-react";
+import { ArrowDownRight, ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ServiceClient({ data }) {
   const container = useRef(null);
+  const serviceNumber = useMemo(() => {
+    const slug = data?.slug ?? "";
+    if (!slug) return 1;
+    let hash = 0;
+    for (let i = 0; i < slug.length; i += 1) {
+      hash = (hash << 5) - hash + slug.charCodeAt(i);
+      hash |= 0;
+    }
+    return (Math.abs(hash) % 9) + 1;
+  }, [data?.slug]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -79,7 +89,7 @@ export default function ServiceClient({ data }) {
           <div className="md:col-span-12 mb-4">
             <span className="block anim-line h-[1px] w-full bg-black/10 mb-6"></span>
             <div className="flex justify-between items-center text-xs font-mono text-neutral-500 uppercase tracking-widest">
-              <span>( Service 0{Math.floor(Math.random() * 9) + 1} )</span>
+              <span>( Service 0{serviceNumber} )</span>
               <span>{data.slug}</span>
               <span>Chengalpattu, IN</span>
             </div>
