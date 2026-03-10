@@ -1,0 +1,15 @@
+.page_content {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+#page_content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+[data-transition="container"] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}

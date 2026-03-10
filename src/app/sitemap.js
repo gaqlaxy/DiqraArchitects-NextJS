@@ -1,5 +1,4 @@
 import projectsData from "@/app/data/projects-data.json";
-import { categories } from "@/app/libs/categories";
 
 const baseUrl = "https://diqraarchitects.com";
 const staticRoutes = [
@@ -27,12 +26,6 @@ export default async function sitemap() {
     changeFrequency: route === "" ? "weekly" : "monthly",
     priority: route === "" ? 1.0 : 0.7,
   }));
-  const servicePages = categories.map((category) => ({
-    url: `${baseUrl}/services/${category.slug}`,
-    lastModified,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
   const projectPages = uniqueProjectSlugs.map((slug) => ({
     url: `${baseUrl}/project/${slug}`,
     lastModified,
@@ -40,5 +33,5 @@ export default async function sitemap() {
     priority: 0.6,
   }));
 
-  return [...pages, ...servicePages, ...projectPages];
+  return [...pages, ...projectPages];
 }
