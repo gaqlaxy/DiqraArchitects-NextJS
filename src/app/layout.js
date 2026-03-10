@@ -24,10 +24,10 @@ export const metadata = {
   description:
     "DIQRA is a modern architecture studio creating intentional, functional and elegant designs.",
   keywords: [
-    "architecture",
+    "architecture in Urapakkam",
     "architects in Urapakkam",
     "builders in Urapakkam",
-    "interior designers",
+    "interior designers in Urapakkam",
   ],
   metadataBase: new URL("https://diqraarchitects.com"),
   alternates: {
@@ -38,7 +38,7 @@ export const metadata = {
     description:
       "Modern, functional and intentional architecture based in Urapakkam.",
     url: "https://diqraarchitects.com",
-    siteName: "DIQRA Studio",
+    siteName: "DIQRA Architects",
     images: [
       "/Hero1.jpeg",
     ],
@@ -46,7 +46,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DIQRA Architecture Studio",
+    title: "DIQRA Architects",
     description: "Modern, functional and intentional architecture based in Urapakkam.",
     images: ["/Hero1.jpeg"],
   },
@@ -56,7 +56,7 @@ export default function RootLayout({ children }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ArchitectureFirm",
-    "name": "DIQRA Architecture",
+    "name": "DIQRA Architects",
     "url": "https://diqraarchitects.com",
     "logo": "https://diqraarchitects.com/diqrawhite.ico",
     "image": "https://diqraarchitects.com/Hero1.jpeg",

@@ -2,11 +2,19 @@
 import React, { useState, useEffect, useRef } from "react";
 // import { Link, useLocation } from "react-router-dom";
 import Link from "next/link";
+import Image from "next/image";
 
 import { gsap } from "gsap";
 import "../styles/Navbar.css";
 import SlideUpButton from "./SlideUpButton";
 import { usePathname } from "next/navigation";
+
+const AnimatedText = ({ children }) => (
+  <span className="navbar-animated-inner">
+    <span className="navbar-text-original">{children}</span>
+    <span className="navbar-text-hover">{children}</span>
+  </span>
+);
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -116,30 +124,8 @@ const Navbar = () => {
 
   const createSlideUpEffect = (element) => {
     if (!element) return null;
-    let span = element.querySelector("span");
-
-    if (!span) {
-      const originalText = element.textContent.trim();
-      element.innerHTML = `<span>${originalText}</span>`;
-      span = element.querySelector("span");
-    }
-
-    // If already initialized, get the original text and reset
-    if (span.querySelector(".navbar-text-original")) {
-      const originalText = span.querySelector(
-        ".navbar-text-original"
-      ).textContent;
-      span.innerHTML = `
-        <span class="navbar-text-original">${originalText}</span>
-        <span class="navbar-text-hover">${originalText}</span>
-      `;
-    } else {
-      const originalText = span.textContent;
-      span.innerHTML = `
-        <span class="navbar-text-original">${originalText}</span>
-        <span class="navbar-text-hover">${originalText}</span>
-      `;
-    }
+    const span = element.querySelector(".navbar-animated-inner");
+    if (!span) return null;
 
     const originalSpan = span.querySelector(".navbar-text-original");
     const hoverSpan = span.querySelector(".navbar-text-hover");
@@ -283,7 +269,7 @@ const Navbar = () => {
           <div className="Navbar-container">
             <div className="Navbar-content">
               <Link href="/" className="Navbar-logo">
-                <img src="/diqrablack.webp" alt="DIQRA logo" />
+                <Image src="/diqrablack.webp" alt="DIQRA logo" width={110} height={25} priority />
               </Link>
 
               <div className="Navbar-actions">
@@ -291,7 +277,7 @@ const Navbar = () => {
                   href="/contact"
                   className="Navbar-contact-btn Navbar-contact-btn-visible"
                 >
-                  <span>GET IN TOUCH</span>
+                  <AnimatedText>GET IN TOUCH</AnimatedText>
                   <span className="Navbar-contact-dot" aria-hidden="true" />
                 </Link>
 
@@ -299,7 +285,7 @@ const Navbar = () => {
                   onClick={() => setIsMenuOpen(true)}
                   className="Navbar-menu-btn Navbar-menu-btn-visible"
                 >
-                  <span>MENU</span>
+                  <AnimatedText>MENU</AnimatedText>
                 </button>
               </div>
             </div>
@@ -307,21 +293,20 @@ const Navbar = () => {
         </nav>
 
         <div
-          className={`Navbar-overlay-menu ${
-            isMenuOpen ? "Navbar-overlay-menu-open" : ""
-          }`}
+          className={`Navbar-overlay-menu ${isMenuOpen ? "Navbar-overlay-menu-open" : ""
+            }`}
           ref={overlayRef}
         >
           <div className="Navbar-overlay-container">
             <div className="Navbar-overlay-header">
               <Link href="/" className="Navbar-overlay-logo">
-                <img src="diqrawhite.webp" alt="DIQRA logo" />
+                <Image src="/diqrawhite.webp" alt="DIQRA logo" width={110} height={25} priority />
               </Link>
               <button
                 onClick={() => setIsMenuOpen(false)}
                 className="Navbar-close-btn"
               >
-                <span>CLOSE</span>
+                <AnimatedText>CLOSE</AnimatedText>
               </button>
             </div>
 
@@ -332,47 +317,47 @@ const Navbar = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className="Navbar-overlay-nav-item"
                 >
-                  <span>HOME</span>
+                  <AnimatedText>HOME</AnimatedText>
                 </Link>
                 <Link
                   href="/works"
                   onClick={() => setIsMenuOpen(false)}
                   className="Navbar-overlay-nav-item"
                 >
-                  <span>WORKS</span>
+                  <AnimatedText>WORKS</AnimatedText>
                 </Link>
                 <Link
                   href="/about"
                   onClick={() => setIsMenuOpen(false)}
                   className="Navbar-overlay-nav-item"
                 >
-                  <span>ABOUT</span>
+                  <AnimatedText>ABOUT</AnimatedText>
                 </Link>
                 <Link
                   href="/process"
                   onClick={() => setIsMenuOpen(false)}
                   className="Navbar-overlay-nav-item"
                 >
-                  <span>PROCESS</span>
+                  <AnimatedText>PROCESS</AnimatedText>
                 </Link>
                 <Link
                   href="/gallery"
                   onClick={() => setIsMenuOpen(false)}
                   className="Navbar-overlay-nav-item"
                 >
-                  <span>GALLERY</span>
+                  <AnimatedText>GALLERY</AnimatedText>
                 </Link>
               </nav>
 
               <div className="Navbar-overlay-footer">
-                <Link href="/instagram" className="Navbar-overlay-footer-link">
-                  <span>INSTAGRAM</span>
+                <a href="https://www.instagram.com/diqraarchitects/" target="_blank" rel="noopener noreferrer" className="Navbar-overlay-footer-link">
+                  <AnimatedText>INSTAGRAM</AnimatedText>
+                </a>
+                <Link href="#" className="Navbar-overlay-footer-link">
+                  <AnimatedText>PRIVACY POLICY</AnimatedText>
                 </Link>
-                <Link href="/privacy" className="Navbar-overlay-footer-link">
-                  <span>PRIVACY POLICY</span>
-                </Link>
-                <Link href="/terms" className="Navbar-overlay-footer-link">
-                  <span>TERMS OF SERVICE</span>
+                <Link href="#" className="Navbar-overlay-footer-link">
+                  <AnimatedText>TERMS OF SERVICE</AnimatedText>
                 </Link>
               </div>
             </div>
@@ -390,56 +375,52 @@ const Navbar = () => {
           <div className="Navbar-content">
             <Link
               href="/"
-              className={`Navbar-logo ${
-                isMobile || isScrolled ? "Navbar-logo-hidden" : ""
-              }`}
+              className={`Navbar-logo ${isMobile || isScrolled ? "Navbar-logo-hidden" : ""
+                }`}
             >
-              <img src="/diqrawhite.webp" alt="DIQRA logo" />
+              <Image src="/diqrawhite.webp" alt="DIQRA logo" width={110} height={25} priority />
             </Link>
 
             <div
-              className={`Navbar-links ${
-                isMobile || isScrolled ? "Navbar-links-hidden" : ""
-              }`}
+              className={`Navbar-links ${isMobile || isScrolled ? "Navbar-links-hidden" : ""
+                }`}
             >
               <Link href="/works" className="Navbar-link Navbar-link-animated">
-                <span>WORKS</span>
+                <AnimatedText>WORKS</AnimatedText>
               </Link>
               <Link href="/about" className="Navbar-link Navbar-link-animated">
-                <span>ABOUT</span>
+                <AnimatedText>ABOUT</AnimatedText>
               </Link>
               <Link
                 href="/process"
                 className="Navbar-link Navbar-link-animated"
               >
-                <span>PROCESS</span>
+                <AnimatedText>PROCESS</AnimatedText>
               </Link>
               <Link
                 href="/gallery"
                 className="Navbar-link Navbar-link-animated"
               >
-                <span>GALLERY</span>
+                <AnimatedText>GALLERY</AnimatedText>
               </Link>
             </div>
 
             <div className="Navbar-actions">
               <Link
                 href="/contact"
-                className={`Navbar-contact-btn ${
-                  isMobile || isScrolled ? "Navbar-contact-btn-visible" : ""
-                }`}
+                className={`Navbar-contact-btn ${isMobile || isScrolled ? "Navbar-contact-btn-visible" : ""
+                  }`}
               >
-                <span>GET IN TOUCH</span>
+                <AnimatedText>GET IN TOUCH</AnimatedText>
                 <span className="Navbar-contact-dot" aria-hidden="true" />
               </Link>
 
               <button
                 onClick={() => setIsMenuOpen(true)}
-                className={`Navbar-menu-btn ${
-                  isMobile || isScrolled ? "Navbar-menu-btn-visible" : ""
-                }`}
+                className={`Navbar-menu-btn ${isMobile || isScrolled ? "Navbar-menu-btn-visible" : ""
+                  }`}
               >
-                <span>MENU</span>
+                <AnimatedText>MENU</AnimatedText>
               </button>
             </div>
           </div>
@@ -447,21 +428,20 @@ const Navbar = () => {
       </nav>
 
       <div
-        className={`Navbar-overlay-menu ${
-          isMenuOpen ? "Navbar-overlay-menu-open" : ""
-        }`}
+        className={`Navbar-overlay-menu ${isMenuOpen ? "Navbar-overlay-menu-open" : ""
+          }`}
         ref={overlayRef}
       >
         <div className="Navbar-overlay-container">
           <div className="Navbar-overlay-header">
             <Link href="/" className="Navbar-overlay-logo">
-              <img src="diqrawhite.webp" alt="DIQRA logo" />
+              <Image src="/diqrawhite.webp" alt="DIQRA logo" width={110} height={25} priority />
             </Link>
             <button
               onClick={() => setIsMenuOpen(false)}
               className="Navbar-close-btn"
             >
-              <span>CLOSE</span>
+              <AnimatedText>CLOSE</AnimatedText>
             </button>
           </div>
 
@@ -472,47 +452,47 @@ const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className="Navbar-overlay-nav-item"
               >
-                <span>HOME</span>
+                <AnimatedText>HOME</AnimatedText>
               </Link>
               <Link
                 href="/works"
                 onClick={() => setIsMenuOpen(false)}
                 className="Navbar-overlay-nav-item"
               >
-                <span>WORKS</span>
+                <AnimatedText>WORKS</AnimatedText>
               </Link>
               <Link
                 href="/about"
                 onClick={() => setIsMenuOpen(false)}
                 className="Navbar-overlay-nav-item"
               >
-                <span>ABOUT</span>
+                <AnimatedText>ABOUT</AnimatedText>
               </Link>
               <Link
                 href="/process"
                 onClick={() => setIsMenuOpen(false)}
                 className="Navbar-overlay-nav-item"
               >
-                <span>PROCESS</span>
+                <AnimatedText>PROCESS</AnimatedText>
               </Link>
               <Link
                 href="/gallery"
                 onClick={() => setIsMenuOpen(false)}
                 className="Navbar-overlay-nav-item"
               >
-                <span>GALLERY</span>
+                <AnimatedText>GALLERY</AnimatedText>
               </Link>
             </nav>
 
             <div className="Navbar-overlay-footer">
-              <Link href="/instagram" className="Navbar-overlay-footer-link">
-                <span>INSTAGRAM</span>
+              <a href="https://www.instagram.com/diqraarchitects/" target="_blank" rel="noopener noreferrer" className="Navbar-overlay-footer-link">
+                <AnimatedText>INSTAGRAM</AnimatedText>
+              </a>
+              <Link href="#" className="Navbar-overlay-footer-link">
+                <AnimatedText>PRIVACY POLICY</AnimatedText>
               </Link>
-              <Link href="/privacy" className="Navbar-overlay-footer-link">
-                <span>PRIVACY POLICY</span>
-              </Link>
-              <Link href="/terms" className="Navbar-overlay-footer-link">
-                <span>TERMS OF SERVICE</span>
+              <Link href="#" className="Navbar-overlay-footer-link">
+                <AnimatedText>TERMS OF SERVICE</AnimatedText>
               </Link>
             </div>
           </div>
