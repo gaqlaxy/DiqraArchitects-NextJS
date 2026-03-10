@@ -1,20 +1,10 @@
-// export default function robots() {
-//     return {
-//         rules: {
-//             userAgent: '*',
-//             allow: '/',
-//             disallow: '/private/',
-//         },
-//         sitemap: 'https://diqraarchitects.com/sitemap.xml',
-//     }
-// }
-
 export default function robots() {
   return {
     rules: [
       {
         userAgent: "*",
-        disallow: "/",
+        allow: "/",
+        disallow: ["/api/", "/admin/", "/_next/"],
       },
     ],
     sitemap: "https://diqraarchitects.com/sitemap.xml",

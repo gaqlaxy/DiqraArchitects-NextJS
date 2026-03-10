@@ -1,38 +1,44 @@
-// import { categories } from "@/app/libs/categories";
-
-// export default function sitemap() {
-//   const baseUrl = "http://localhost:3000/";
-//   //   const baseUrl = "https://www.diqraarchitects.com";
-
-//   const categoryUrls = categories.map((cat) => ({
-//     url: `${baseUrl}/services/${cat.slug}`,
-//     lastModified: new Date(),
-//     changeFrequency: "monthly",
-//     priority: 0.8,
-//   }));
-
-//   return [
-//     { url: baseUrl, lastModified: new Date(), priority: 1.0 },
-//     ...categoryUrls,
-//   ];
-// }
-
-// app/sitemap.js
+import projectsData from "@/app/data/projects-data.json";
 import { categories } from "@/app/libs/categories";
 
-export default async function sitemap() {
-  const baseUrl = "https://diqraarchitects.com";
-  // const baseUrl = "http://localhost:3000/";
+const baseUrl = "https://diqraarchitects.com";
+const staticRoutes = [
+  "",
+  "/about",
+  "/contact",
+  "/gallery",
+  "/interiorworks",
+  "/process",
+  "/services",
+  "/services/consultation",
+  "/services/design-planning",
+  "/services/exterior-design",
+  "/services/interior-design",
+  "/services/renovation",
+  "/works",
+];
+const uniqueProjectSlugs = [...new Set(projectsData.projects.map((project) => project.slug))];
 
-  const servicePages = categories.map((cat) => ({
-    url: `${baseUrl}/services/${cat.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
+export default async function sitemap() {
+  const lastModified = new Date();
+  const pages = staticRoutes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified,
+    changeFrequency: route === "" ? "weekly" : "monthly",
+    priority: route === "" ? 1.0 : 0.7,
+  }));
+  const servicePages = categories.map((category) => ({
+    url: `${baseUrl}/services/${category.slug}`,
+    lastModified,
+    changeFrequency: "monthly",
     priority: 0.8,
   }));
+  const projectPages = uniqueProjectSlugs.map((slug) => ({
+    url: `${baseUrl}/project/${slug}`,
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
 
-  return [
-    { url: `${baseUrl}/`, lastModified: new Date(), priority: 1.0 },
-    ...servicePages,
-  ];
+  return [...pages, ...servicePages, ...projectPages];
 }

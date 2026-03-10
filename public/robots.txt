@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-Disallow: /api/
-Disallow: /admin/
-Disallow: /_next/
-
-Host: https://diqraarchitects.com
-Sitemap: https://diqraarchitects.com/sitemap.xml

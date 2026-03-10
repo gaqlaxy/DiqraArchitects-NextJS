@@ -1,11 +1,5 @@
-"use client";
-import React from "react";
-import HomePage from "./HomePage";
+import { permanentRedirect } from "next/navigation";
 
-export default function page() {
-  return (
-    <>
-      <HomePage />
-    </>
-  );
+export default function Page() {
+  permanentRedirect("/");
 }
