@@ -1,8 +1,6 @@
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import SmoothScroll from "./components/SmoothScroll";
-import { SpeedInsights } from "@vercel/speed-insights/react";
-import { Analytics } from "@vercel/analytics/next";
 import PreloaderWrapper from "./components/PreloaderWrapper";
 import localFont from "next/font/local";
 
@@ -32,6 +30,17 @@ export const metadata = {
   metadataBase: new URL("https://diqraarchitects.com"),
   alternates: {
     canonical: "/",
+  },
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+      nosnippet: true,
+    },
   },
   openGraph: {
     title: "DIQRA Architecture Studio",
@@ -91,8 +100,6 @@ export default function RootLayout({ children }) {
           <div id="main-content" role="main">
             {children}
           </div>
-          <Analytics />
-          <SpeedInsights />
         </SmoothScroll>
       </body>
     </html>

@@ -3,10 +3,8 @@ export default function robots() {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/api/", "/admin/", "/_next/"],
+        disallow: "/",
       },
     ],
-    sitemap: "https://diqraarchitects.com/sitemap.xml",
   };
 }
