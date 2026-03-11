@@ -7,20 +7,15 @@ import Testimonials from "@/app/components/Testimonials";
 import CtaSection from "@/app/components/CtaSection";
 import Footer from "@/app/components/Footer";
 import AboutSection from "../components/About";
-import DesignSection from "../components/DesignSection";
-
-
 
 export default function HomePage() {
   return (
     <>
       <OhHerosection />
-      {/* <Herosection /> */}
       <AboutSection />
       <FeaturedWorks />
-      <ProcessSection />
       <Services />
-      {/* <DesignSection /> */}
+      <ProcessSection />
       <Testimonials />
       <CtaSection />
       <Footer />

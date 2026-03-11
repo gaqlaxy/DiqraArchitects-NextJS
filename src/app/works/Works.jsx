@@ -1,132 +1,125 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "@/app/styles/Works.css";
 
 import Footer from "@/app/components/Footer";
 import projectsData from "@/app/data/projects-data.json";
 
-export default function HorizontalGallery() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < 768 : false
-  );
-  const scrollContainerRef = useRef(null);
+gsap.registerPlugin(ScrollTrigger);
+
+export default function WorksPage() {
+  const [filter, setFilter] = useState("all");
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    scrollTo(0, 0);
   }, []);
 
+  // Filter Projects Logic
   useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container || isMobile) return;
+    let filtered = projectsData.projects;
+    if (filter !== "all") {
+      filtered = filtered.filter(p => p.projectType.toLowerCase() === filter);
+    }
+    setFilteredProjects(filtered);
+  }, [filter]);
 
-    const handleWheel = (e) => {
-      e.preventDefault();
-      container.scrollLeft += e.deltaY;
-    };
+  // Handle GSAP Reveal when projects change
+  useEffect(() => {
+    if (!containerRef.current || filteredProjects.length === 0) return;
 
-    const handleScroll = () => {
-      const scrollLeft = container.scrollLeft;
-      const scrollWidth = container.scrollWidth - container.clientWidth;
-      const progress = scrollWidth > 0 ? (scrollLeft / scrollWidth) * 100 : 0;
-      setScrollProgress(progress);
-    };
+    let ctx = gsap.context(() => {
+      const items = gsap.utils.toArray(".wp-project-card");
+      
+      // Reset state for new items
+      gsap.set(items, { y: 50, opacity: 0 });
 
-    container.addEventListener("wheel", handleWheel, { passive: false });
-    container.addEventListener("scroll", handleScroll);
+      // Stagger animate them in
+      ScrollTrigger.batch(items, {
+        onEnter: elements => {
+          gsap.to(elements, {
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "power3.out"
+          });
+        },
+        start: "top 85%",
+      });
 
-    return () => {
-      container.removeEventListener("wheel", handleWheel);
-      container.removeEventListener("scroll", handleScroll);
-    };
-  }, [isMobile]);
+    }, containerRef);
 
-  // Filter only architecture projects
-  const projects = projectsData.projects.filter(
-    (project) => project.projectType === "architecture"
-  );
+    return () => ctx.revert();
+  }, [filteredProjects]);
 
   return (
-    <div className="gallery-container">
-      {/* Mobile Header */}
-      {isMobile && (
-        <div className="mobile-header">
-          <h1 className="mobile-title">WORKS</h1>
-          <div className="mobile-links">
-            {/* <Link to="/works" className="uppercase tracking-wide">
-              ARCHITECTURE
-            </Link> */}
-            <Link href="/interiorworks" className="uppercase tracking-wide">
-              INTERIOR →
-            </Link>
-          </div>
+    <div className="wp-container" ref={containerRef}>
+      
+      {/* --- HERO --- */}
+      <section className="wp-hero">
+        <h1 className="wp-hero-title">Selected<br/>Works</h1>
+        
+        {/* Filter Navigation */}
+        <div className="wp-filter-nav">
+          <button 
+            className={`wp-filter-btn ${filter === "all" ? "active" : ""}`}
+            onClick={() => setFilter("all")}
+          >
+            All Projects
+          </button>
+          <button 
+            className={`wp-filter-btn ${filter === "architecture" ? "active" : ""}`}
+            onClick={() => setFilter("architecture")}
+          >
+            Architecture
+          </button>
+          <button 
+            className={`wp-filter-btn ${filter === "interior" ? "active" : ""}`}
+            onClick={() => setFilter("interior")}
+          >
+            Interior
+          </button>
         </div>
-      )}
+      </section>
 
-      {/* Main Content Container */}
-      <div
-        ref={scrollContainerRef}
-        className={
-          isMobile ? "scroll-container-mobile" : "scroll-container-desktop"
-        }
-      >
-        {/* Projects Grid */}
-        <div
-          className={
-            isMobile ? "projects-grid-mobile" : "projects-grid-desktop"
-          }
-        >
-          {projects.map((project, idx) => (
+      {/* --- MASONRY GRID --- */}
+      <section className="wp-grid-section">
+        <div className="wp-masonry-grid">
+          {filteredProjects.map((project, idx) => (
             <Link
               key={project.id}
               href={`/project/${project.slug}`}
-              className={`project-card ${idx % 2 === 0 ? "tall" : "wide"}`}
+              className={`wp-project-card ${idx % 3 === 0 ? "large" : "standard"}`}
             >
-              <div className="project-inner">
-                <img src={project.thumbnail} alt={project.title} />
-                <div className="overlay" />
-                <div className="project-title-container">
-                  <h3>{project.title}</h3>
+              <div className="wp-image-wrapper">
+                <img src={project.thumbnail} alt={project.title} loading="lazy" />
+                <div className="wp-overlay"></div>
+                <div className="wp-meta-hover">
+                  <span className="wp-meta-year">{project.year || "2024"}</span>
+                  <span className="wp-meta-type">{project.projectType}</span>
                 </div>
+              </div>
+              <div className="wp-project-info">
+                <h3 className="wp-project-title">{project.title}</h3>
+                <span className="wp-project-location">{project.location || "View Details →"}</span>
               </div>
             </Link>
           ))}
-        </div>
-      </div>
 
-      {!isMobile && (
-        <div className="desktop-header">
-          <div className="works-title">
-            <h1>WORKS</h1>
-          </div>
-
-          <div className="scroll-indicator">
-            <span className="scroll-text">SCROLL DOWN TO EXPLORE</span>
-            <div className="progress-bar">
-              <div
-                className="progress-fill"
-                style={{ width: `${scrollProgress}%` }}
-              />
+          {filteredProjects.length === 0 && (
+            <div className="wp-empty-state">
+              <p>No projects found for this category.</p>
             </div>
-            <span className="progress-percent">
-              ({Math.round(scrollProgress)}%)
-            </span>
-          </div>
-          <div className="desktop-links">
-            {/* <Link to="/works">ARCHITECTURE</Link> */}
-            <Link href="/interiorworks">INTERIOR →</Link>
-          </div>
+          )}
         </div>
-      )}
+      </section>
 
-      {isMobile && <Footer />}
+      <Footer />
     </div>
   );
 }

@@ -1,56 +1,77 @@
-/* --- VARIABLES --- */
-:root {
-  --bg-main: #ffffff;
-  --text-primary: #050505;
-  --text-secondary: #777777;
-  --accent-line: #e5e5e5;
-  --ease-lux: cubic-bezier(0.25, 1, 0.5, 1);
+/* ═══════════════════════════════════════════
+   ABOUT PAGE — Editorial Layout
+   ═══════════════════════════════════════════ */
+
+.ap-container {
+  background: var(--color-surface, #f7f5f0);
+  color: var(--color-ink, #0a0a0a);
+  min-height: 100vh;
+  padding-top: clamp(80px, 10vh, 120px);
 }
 
-.editorial-plus {
-  background-color: var(--bg-main);
-  color: var(--text-primary);
-  width: 100%;
-  margin-top: 1.5rem;
+.ap-mask {
+  display: block;
+  overflow: hidden;
 }
 
-.split-layout {
+.ap-split-layout {
   display: flex;
   width: 100%;
-  max-width: 1800px;
+  max-width: var(--max-width, 1440px);
   margin: 0 auto;
   position: relative;
-  align-items: flex-start; /* Ensures sidebar doesn't stretch weirdly */
+  align-items: flex-start;
+  padding: 0 clamp(1.5rem, 3vw, 3rem);
 }
 
-/* --- LEFT SIDEBAR (Sticky) --- */
-.sticky-sidebar {
-  width: 40%;
-  /* Stick to viewport, but stay inside parent */
-  height: 100vh;
-  position: sticky; 
-  top: 0;
+/* --- LEFT: STICKY SIDEBAR --- */
+.ap-sticky-sidebar {
+  width: 35%;
+  height: calc(100vh - 120px); /* Account for navbar */
+  position: sticky;
+  top: 120px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 5rem 4rem;
+  padding-bottom: 4rem;
   z-index: 10;
 }
 
-.brand-title {
-  font-size: clamp(3rem, 5vw, 5rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin: 0;
+.ap-sidebar-header {
+  margin-top: 1rem;
 }
 
-.chapter-indicator {
+.ap-brand-title {
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  margin: 0;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.ap-hero-line {
+  display: block;
+}
+
+.ap-indent {
+  padding-left: clamp(2rem, 5vw, 6rem);
+}
+
+.ap-chapter-indicator {
+  margin-top: auto;
+}
+
+.ap-chapter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.chapter-item {
+.ap-chapter-item {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -59,260 +80,274 @@
   cursor: default;
 }
 
-.chapter-item.active {
+.ap-chapter-item.active {
   opacity: 1;
-  transform: translateX(10px);
+  transform: translateX(12px);
 }
 
-.c-num {
+.ap-c-num {
   font-family: monospace;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: var(--color-accent, #c5a47e);
 }
 
-.c-label {
+.ap-c-label {
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.1em;
   font-weight: 600;
 }
 
-/* --- RIGHT CONTENT STREAM --- */
-.content-stream {
-  width: 60%;
-  /* Removed the huge 10rem bottom padding */
-  padding: 5rem 5rem 2rem 0; 
+/* --- RIGHT: CONTENT STREAM --- */
+.ap-content-stream {
+  width: 65%;
   display: flex;
   flex-direction: column;
+  padding-bottom: clamp(4rem, 8vw, 8rem);
 }
 
-.stream-section {
-  min-height: 80vh; /* Keeps first sections tall/immersive */
+.ap-stream-section {
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 8rem;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s ease, transform 1s ease;
+  margin-bottom: clamp(6rem, 12vw, 12rem);
 }
 
-/* --- THE FIX: Tighten the Last Section (Team) --- */
-.stream-section:last-child {
-  min-height: auto; /* Allow it to shrink to fit content */
-  margin-bottom: 0; /* Remove bottom gap */
-  justify-content: flex-start; /* Align content to top */
-  padding-top: 4rem; /* Add breathing room from previous section */
+.ap-stream-section:last-child {
+  padding-top: 4rem;
+  min-height: auto;
+  margin-bottom: 0;
+  justify-content: flex-start;
 }
 
-.stream-section.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* --- SECTION 01: HERO --- */
-.hero-reveal-mask {
+/* SECTION 01: HERO */
+.ap-hero-image-wrapper {
   width: 100%;
-  height: 60vh;
+  aspect-ratio: 4/3;
   overflow: hidden;
   margin-bottom: 3rem;
-  background: #f4f4f4;
+  background: var(--color-border, #e0ddd6);
 }
 
-.parallax-img {
+.ap-parallax-img {
   width: 100%;
-  height: 110%;
+  height: 120%; /* Extra height for parallax */
   object-fit: cover;
-  transform: scale(1.1);
-  transition: transform 2s var(--ease-lux);
+  will-change: transform;
 }
 
-.stream-section.in-view .parallax-img {
-  transform: scale(1);
+.ap-intro-text {
+  max-width: 800px;
 }
 
-.big-statement {
-  font-size: clamp(2.5rem, 4vw, 4.5rem);
-  line-height: 1;
+.ap-big-statement {
+  font-size: var(--text-h1, clamp(2.8rem, 5vw, 5rem));
+  line-height: 1.05;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.ap-italic-accent {
+  font-style: italic;
+  font-family: serif;
+  color: var(--color-muted, #888);
+}
+
+/* SECTION 02: PHILOSOPHY */
+.ap-text-columns {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-bottom: clamp(4rem, 8vw, 6rem);
+}
+
+.ap-lead-paragraph {
+  font-size: var(--text-h3, clamp(1.3rem, 1.5vw, 1.75rem));
+  line-height: 1.4;
   font-weight: 400;
   margin: 0;
 }
 
-.italic-accent {
-  font-style: italic;
-  font-family: serif;
-  color: var(--text-secondary);
-}
-
-/* --- SECTION 02: PHILOSOPHY --- */
-.text-columns {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 4rem;
-  margin-bottom: 5rem;
-}
-
-.lead-paragraph {
-  font-size: 1.5rem;
-  line-height: 1.4;
-  font-weight: 400;
-}
-
-.sub-paragraph {
-  font-size: 1.1rem;
+.ap-sub-paragraph {
+  font-size: 1.05rem;
   line-height: 1.6;
-  color: var(--text-secondary);
-  margin-top: 0.5rem;
+  color: #555;
+  margin: 0.5rem 0 0 0;
 }
 
-.secondary-image-wrap {
+.ap-secondary-image-wrap {
   width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
   position: relative;
 }
 
-.secondary-image-wrap img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.caption {
+.ap-caption {
   display: block;
   margin-top: 1rem;
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: var(--color-muted, #888);
   font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* --- SECTION 03: TEAM --- */
-.team-focus-list {
+/* SECTION 03: TEAM */
+.ap-team-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.ap-team-header {
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.ap-section-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-muted, #888);
+  margin-bottom: 1rem;
+}
+
+.ap-team-title {
+  font-size: var(--text-h2, clamp(2rem, 3.5vw, 3.5rem));
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.ap-team-list {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.team-focus-list:hover .team-item {
-  opacity: 0.25;
-  filter: blur(2px);
-}
-
-.team-focus-list .team-item:hover {
-  opacity: 1;
-  filter: blur(0);
-  transform: scale(1.02);
-}
-
-.team-item {
+.ap-team-item {
   position: relative;
   padding: 3rem 0;
-  border-top: 1px solid var(--accent-line);
-  transition: all 0.4s var(--ease-lux);
+  border-top: 1px solid var(--color-border, #e0ddd6);
+  transition: padding 0.4s var(--ease-out);
   cursor: pointer;
 }
 
-.team-item:last-child {
-  border-bottom: 1px solid var(--accent-line);
+.ap-team-item:last-child {
+  border-bottom: 1px solid var(--color-border, #e0ddd6);
 }
 
-.team-meta {
+.ap-team-item:hover {
+  padding-left: 2rem;
+}
+
+.ap-team-meta {
   display: flex;
   gap: 1.5rem;
   margin-bottom: 1rem;
   font-family: monospace;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-size: 0.85rem;
+  color: var(--color-muted, #888);
 }
 
-.t-name {
-  font-size: 3.5rem;
+.ap-t-num {
+  color: var(--color-accent, #c5a47e);
+}
+
+.ap-t-name {
+  font-size: clamp(2.5rem, 5vw, 4rem);
   margin: 0;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.02em;
+  transition: color 0.4s ease;
+}
+
+.ap-team-item:hover .ap-t-name {
+  color: var(--color-accent, #c5a47e);
 }
 
 /* Hover Portrait */
-.hover-portrait {
+.ap-hover-portrait {
   position: absolute;
   top: 50%;
-  right: 10%;
+  right: 15%;
   width: 280px;
-  height: 360px;
-  transform: translateY(-50%) rotate(5deg) scale(0.8);
+  height: 380px;
+  transform: translateY(-50%) rotate(5deg) scale(0.9);
   opacity: 0;
   pointer-events: none;
   z-index: 5;
-  transition: all 0.5s var(--ease-lux);
+  transition: all 0.6s var(--ease-out);
   overflow: hidden;
-  background: #000;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  border-radius: 4px;
 }
 
-.hover-portrait img {
+.ap-hover-portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.9;
+  transition: transform 0.6s var(--ease-out);
+  transform: scale(1.1);
 }
 
-.team-item:hover .hover-portrait {
+.ap-team-item:hover .ap-hover-portrait {
   opacity: 1;
   transform: translateY(-50%) rotate(0deg) scale(1);
-  right: 15%;
+  right: 5%;
+}
+
+.ap-team-item:hover .ap-hover-portrait img {
+  transform: scale(1);
 }
 
 /* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
-  .split-layout {
+  .ap-split-layout {
     flex-direction: column;
   }
 
-  .sticky-sidebar {
+  .ap-sticky-sidebar {
     width: 100%;
     height: auto;
     position: relative;
-    padding: 6rem 2rem 2rem;
-    flex-direction: row;
-    align-items: flex-end;
+    top: 0;
+    padding-bottom: 3rem;
   }
 
-  .chapter-indicator {
+  /* Hide the chapter indicator on mobile as scrolling is linear */
+  .ap-chapter-indicator {
     display: none;
   }
 
-  .content-stream {
+  .ap-content-stream {
     width: 100%;
-    padding: 2rem;
+    padding-bottom: clamp(3rem, 5vw, 5rem);
   }
 
-  .stream-section {
-    min-height: auto;
-    margin-bottom: 6rem;
-  }
-  
-  /* Reset last child logic on mobile since it flows naturally */
-  .stream-section:last-child {
-    padding-top: 0;
-  }
-
-  .text-columns {
+  .ap-text-columns {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
 
-  .t-name {
-    font-size: 2.2rem;
+  .ap-team-item:hover {
+    padding-left: 0;
   }
 
-  .team-focus-list:hover .team-item {
-    opacity: 1;
-    filter: none;
+  .ap-team-item:hover .ap-t-name {
+    color: var(--color-ink, #0a0a0a);
   }
-  
-  .team-focus-list .team-item:hover {
+
+  /* Team portraits display inline on mobile */
+  .ap-hover-portrait {
+    position: static;
     transform: none;
-  }
-
-  .hover-portrait {
-    display: none;
+    opacity: 1;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3/4;
+    margin-top: 2rem;
+    display: none; /* Alternatively, could show it in flow, but let's keep it minimal for now */
   }
 }

@@ -1,162 +1,214 @@
-/* ProcessPage.css */
+/* ═══════════════════════════════════════════
+   PROCESS PAGE — Inner Page Redesign
+   ═══════════════════════════════════════════ */
 
-.process-page-container {
-  width: 100%;
-  /* overflow-x: hidden; */
-  background-color: #f9f9f9;
-  color: #111;
-}
-
-/* Vertical Steps Section */
-.vertical-steps-section {
-  position: relative;
-  padding-bottom: 10vh;
-  /* Reduced from 20vh */
-}
-
-/* Step Card Base */
-.step-card {
+.pp-container {
+  background: var(--color-surface, #f7f5f0);
+  color: var(--color-ink, #0a0a0a);
   min-height: 100vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  /* Add top padding for fixed navbar */
+  padding-top: clamp(80px, 10vh, 120px);
+}
+
+.pp-mask {
+  display: block;
   overflow: hidden;
 }
 
-.step-content-wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 1600px;
+/* --- Hero --- */
+.pp-hero {
+  padding: clamp(3rem, 5vw, 6rem) clamp(1.5rem, 3vw, 3rem);
+  max-width: var(--max-width, 1440px);
   margin: 0 auto;
-  position: relative;
-  gap: 3rem;
-  /* Added gap for mobile flex stack */
 }
 
-.step-text-col {
+.pp-hero-content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding: 0;
-  /* Removed padding for tighter fit */
+  gap: 2rem;
 }
 
-.step-image-container {
+.pp-hero-title {
+  font-size: var(--text-display, clamp(4rem, 10vw, 10rem));
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.pp-hero-line {
+  display: block;
+}
+
+.pp-indent {
+  padding-left: clamp(2rem, 10vw, 12rem);
+}
+
+.pp-hero-sub {
+  font-size: var(--text-body, 1.1rem);
+  line-height: 1.6;
+  max-width: 500px;
+  margin-top: clamp(2rem, 5vw, 4rem);
+  color: #444;
+}
+
+/* --- Intro --- */
+.pp-intro-section {
+  padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 3vw, 3rem);
+  max-width: var(--max-width, 1440px);
+  margin: 0 auto;
+  border-top: 1px solid var(--color-border, #e0ddd6);
+  margin-top: clamp(2rem, 5vw, 5rem);
+}
+
+.pp-intro-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.pp-intro-main {
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.pp-intro-accent {
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--color-muted, #888);
+  font-style: italic;
+}
+
+.pp-indent-small {
+  padding-left: clamp(1.5rem, 5vw, 4rem);
+}
+
+.pp-indent-large {
+  padding-left: clamp(3rem, 10vw, 10rem);
+}
+
+.pp-intro-desc-wrapper {
+  margin-top: clamp(2rem, 5vw, 4rem);
+  align-self: flex-end;
+  max-width: 400px;
+}
+
+.pp-intro-desc {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #555;
+  margin: 0;
+}
+
+/* --- Steps Row Layout --- */
+.pp-steps-wrapper {
+  padding: 0 0 clamp(4rem, 8vw, 8rem) 0;
+}
+
+.pp-steps-container {
+  max-width: var(--max-width, 1440px);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 3vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 10vw, 12rem);
+}
+
+.pp-step-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: start;
+}
+
+/* Left: Sticky Number */
+.pp-step-left {
+  position: relative;
+  height: 100%;
+}
+
+.pp-step-sticky {
+  position: sticky;
+  top: clamp(100px, 20vh, 150px);
+}
+
+.pp-step-number {
+  font-family: monospace;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-accent, #c5a47e);
+  letter-spacing: -0.05em;
+}
+
+/* Right: Content & Image */
+.pp-step-right {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-top: 1rem;
+}
+
+.pp-step-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem 0;
+  line-height: 1.1;
+}
+
+.pp-step-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+  max-width: 600px;
+  margin: 0;
+}
+
+.pp-step-img-wrapper {
   width: 100%;
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/10;
   overflow: hidden;
-  border-radius: 4px;
   position: relative;
 }
 
-.step-image {
+.pp-step-img {
   width: 100%;
-  height: 120%;
+  height: 100%;
   object-fit: cover;
   will-change: transform;
 }
 
-/* Typography */
-.step-title {
-  font-size: clamp(2rem, 5vw, 5rem);
-  /* Slightly smaller clamp min */
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.step-description {
-  font-size: clamp(1rem, 1.5vw, 1.3rem);
-  line-height: 1.6;
-  color: #555;
-  max-width: 40ch;
-}
-
-/* =========================================
-   DESKTOP (Large Screens)
-   ========================================= */
-@media (min-width: 1024px) {
-  .step-content-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 6rem;
-    align-items: center;
+/* Mobile */
+@media (max-width: 900px) {
+  .pp-step-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  /* Alternating Layout */
-  .step-card:nth-child(even) .step-content-wrapper {
-    grid-template-columns: 1.2fr 1fr;
+  .pp-step-left {
+    height: auto;
   }
 
-  .step-card:nth-child(even) .step-text-col {
-    order: 2;
+  .pp-step-sticky {
+    position: static;
   }
 
-  .step-text-col {
-    padding: 2rem 0;
-    gap: 2rem;
-  }
-}
-
-/* =========================================
-   TABLET (768px - 1023px)
-   ========================================= */
-@media (max-width: 1024px) and (min-width: 768px) {
-  .step-card {
-    min-height: auto;
-    padding: 6rem 3rem;
-    /* Reduce height constraint, add spacing */
-  }
-
-  .step-content-wrapper {
-    gap: 3rem;
-  }
-
-  .step-title {
-    font-size: 3rem;
-  }
-}
-
-/* =========================================
-   MOBILE (< 768px)
-   ========================================= */
-@media (max-width: 767px) {
-  .vertical-steps-section {
-    padding-bottom: 5rem;
-  }
-
-  .step-card {
-    min-height: auto;
-    /* ❌ Disable full height on mobile */
-    padding: 3rem 1.5rem;
-    /* Tighter padding */
+  .pp-step-number {
+    font-size: 3.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border, #e0ddd6);
     display: block;
-    /* Align top */
-  }
-
-  .step-content-wrapper {
-    flex-direction: column-reverse;
-    /* Image top, Text bottom? Or keep Text top? */
-    /* Let's keep Text top for flow: Number -> Title -> Desc -> Image */
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  /* For "Mobile Cinema" maybe Image first is better? 
-       No, "01" -> "Title" -> Image is standard. 
-    */
-
-  .step-image-container {
-    aspect-ratio: 3/2;
-    /* Wider on mobile */
-  }
-
-  .step-number-display {
-    /* If we want to style the number on mobile specifically */
-    font-size: 80px !important;
     margin-bottom: 1rem;
+  }
+
+  .pp-step-right {
+    padding-top: 0;
   }
 }

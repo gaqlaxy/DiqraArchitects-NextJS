@@ -1,180 +1,175 @@
-/* Container & Section */
-.testimonials-section {
-  padding: 80px 24px;
-  background-color: #ffffff;
-  overflow: hidden; /* Prevents horizontal scroll on mobile */
+/* ═══════════════════════════════════════════
+   TESTIMONIALS — Editorial Quote
+   ═══════════════════════════════════════════ */
+
+.test-section {
+  background: var(--color-surface, #f7f5f0);
+  padding: var(--space-section, 120px) 0;
 }
 
-.testimonials-container {
-  max-width: 1400px;
+.test-container {
+  max-width: var(--max-width, 1440px);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 3vw, 3rem);
+}
+
+.test-header {
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.test-title {
+  font-size: var(--text-h1, clamp(2.8rem, 5vw, 5rem));
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0.5rem 0 0;
+}
+
+/* Quote */
+.test-content {
+  max-width: 900px;
   margin: 0 auto;
 }
 
-/* Header Layout */
-.testimonials-header {
+.test-quote-wrapper {
+  position: relative;
+  padding-left: clamp(2rem, 4vw, 4rem);
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.test-quote-mark {
+  position: absolute;
+  top: -0.3em;
+  left: 0;
+  font-size: clamp(4rem, 8vw, 8rem);
+  font-weight: 300;
+  color: var(--color-accent, #c5a47e);
+  line-height: 1;
+  opacity: 0.4;
+  font-style: italic;
+  user-select: none;
+}
+
+.test-quote {
+  font-size: clamp(1.3rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-ink, #0a0a0a);
+  margin: 0;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+/* Footer */
+.test-footer {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 50px;
-  flex-wrap: wrap;
-  gap: 20px;
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+  padding-top: 2rem;
 }
 
-/* Typography */
-.overline {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: #666;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-
-.overline::before {
-  content: "";
-  display: block;
-  width: 20px;
-  height: 2px;
-  background-color: #000;
-}
-
-.heading {
-  font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive font scaling */
-  line-height: 1.1;
-  font-weight: 500;
-  color: #111;
-  margin: 0;
-}
-
-/* Controls */
-.carousel-controls {
+.test-author-block {
   display: flex;
-  gap: 12px;
+  align-items: flex-start;
+  gap: 1.5rem;
 }
 
-.control-btn {
-  width: 56px;
-  height: 56px;
+.test-author-line {
+  width: 40px;
+  height: 1px;
+  background: var(--color-ink, #0a0a0a);
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+}
+
+.test-author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.test-category {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent, #c5a47e);
+  font-weight: 600;
+}
+
+.test-author {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-ink, #0a0a0a);
+}
+
+.test-location {
+  font-size: 0.85rem;
+  color: var(--color-muted, #888);
+}
+
+/* Navigation */
+.test-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.test-counter {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--color-muted, #888);
+  font-family: monospace;
+}
+
+.test-nav-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.test-nav-btn {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--color-border, #e0ddd6);
   background: transparent;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-  color: #111;
+  transition: all 0.25s ease;
+  color: var(--color-ink, #0a0a0a);
 }
 
-.control-btn:hover:not(:disabled) {
-  background-color: #111;
-  border-color: #111;
+.test-nav-btn:hover:not(:disabled) {
+  background: var(--color-ink, #0a0a0a);
+  border-color: var(--color-ink);
   color: #fff;
 }
 
-.control-btn:disabled {
-  opacity: 0.3;
+.test-nav-btn:disabled {
+  opacity: 0.25;
   cursor: default;
-  border-color: #eee;
 }
 
-/* Card Design - Using CSS Grid for robust layout */
-.testimonial-card {
-  display: grid;
-  grid-template-columns: 1fr;
-  background-color: #fff;
-  border: 1px solid #f0f0f0; /* Subtle border */
-  border-radius: 16px;
-  overflow: hidden;
-  height: 100%;
-}
-
-.card-image {
-  width: 100%;
-  /* Fallback height for older browsers */
-  min-height: 300px; 
-  /* Modern aspect ratio: maintains shape on all devices */
-  aspect-ratio: 4/3; 
-  background-size: cover;
-  background-position: center;
-}
-
-.card-content {
-  padding: 32px;
-  background-color: #faf8f5;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.card-category {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #888;
-  margin-bottom: 16px;
-}
-
-.card-text {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  color: #333;
-  margin-bottom: 32px;
-  font-style: italic;
-}
-
-.card-footer {
-  margin-top: auto;
-}
-
-.card-author {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #000;
-  margin: 0 0 4px 0;
-}
-
-.card-location {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* Tablet & Desktop Breakpoints */
-@media (min-width: 768px) {
-  .testimonial-card {
-    /* Switch to side-by-side layout */
-    grid-template-columns: 40% 60%;
-  }
-
-  .card-image {
-    height: 100%;
-    min-height: auto;
-    aspect-ratio: auto; /* Let flex/grid handle height matches */
-  }
-  
-  .card-content {
-    padding: 40px;
-  }
-}
-
+/* Mobile */
 @media (max-width: 768px) {
-  .testimonials-section {
-    padding: 40px 16px;
+  .test-quote-wrapper {
+    padding-left: 2rem;
   }
-  
-  .heading {
-    margin-bottom: 20px;
-  }
-  
-  .testimonials-header {
+
+  .test-footer {
     flex-direction: column;
     align-items: flex-start;
+    gap: 2rem;
   }
-  
-  /* Hide buttons on mobile if you prefer swipe only, 
-     otherwise leave them. Currently left visible. */
+
+  .test-nav {
+    align-self: flex-end;
+  }
 }
+
+/* Rebuild trigger */
