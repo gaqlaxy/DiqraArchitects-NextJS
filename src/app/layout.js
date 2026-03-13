@@ -20,7 +20,7 @@ export const metadata = {
     icon: "/diqrawhite.ico",
   },
   description:
-    "A modern architecture studio crafting intentional, functional, and elegant spaces. Based in Urapakkam, Tamil Nadu.",
+    "A visionary architectural firm dedicated to the art of Design, Innovation, Quality, and Resourcefulness in Architecture. We believe that stunning designs start with a simple idea, a pen and paper. We are a team of design enthusiasts dedicated to your goals and vision. Through our wide range of services we’ll make sure that your expectations are not just met, but exceeded",
   keywords: [
     "architecture in Urapakkam",
     "architects in Urapakkam",
@@ -48,7 +48,7 @@ export const metadata = {
   openGraph: {
     title: "DIQRA | Intentional Architecture & Modern Design",
     description:
-      "Modern, functional and intentional architecture crafting elegant spaces in Urapakkam.",
+      "A visionary architectural firm dedicated to the art of Design, Innovation, Quality, and Resourcefulness in Architecture. We believe that stunning designs start with a simple idea, a pen and paper. We are a team of design enthusiasts dedicated to your goals and vision. Through our wide range of services we’ll make sure that your expectations are not just met, but exceeded",
     url: "https://diqraarchitects.com",
     siteName: "DIQRA Architects",
     images: [
