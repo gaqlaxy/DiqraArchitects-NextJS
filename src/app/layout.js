@@ -36,16 +36,17 @@ export const metadata = {
     canonical: "/",
   },
   robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-    googleBot: {
-      index: false,
-      follow: false,
-      noimageindex: true,
-      nosnippet: true,
-    },
+  index: true,
+  follow: true,
+  nocache: false,
+  googleBot: {
+    index: true,
+    follow: true,
+    maxSnippet: -1,
+    maxImagePreview: "large",
+    maxVideoPreview: -1,
   },
+}
   openGraph: {
     title: "DIQRA | Intentional Architecture & Modern Design",
     description:
