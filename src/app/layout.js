@@ -112,16 +112,23 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en" className={myFont.className}>
-    <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CJLJ5HRL5S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+      <head>
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-CJLJ5HRL5S"
+          strategy="afterInteractive"
+        />
 
-  gtag('config', 'G-CJLJ5HRL5S');
-</script>
-    </head>
+        {/* Initialize gtag */}
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-CJLJ5HRL5S');
+          `}
+        </Script>
+      </head>
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content
