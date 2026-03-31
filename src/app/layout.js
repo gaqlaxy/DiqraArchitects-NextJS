@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import SmoothScroll from "./components/SmoothScroll";
 import PreloaderWrapper from "./components/PreloaderWrapper";
 import localFont from "next/font/local";
+import Script from 'next/script';
 
 // const myFont = localFont({
 //   src: "./Geom-Regular.ttf",
@@ -111,15 +112,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en" className={myFont.className}>
-      <body>
-        <a className="skip-link" href="#main-content">
-          Skip to content
-        </a>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-          <!-- Google tag (gtag.js) -->
+    <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CJLJ5HRL5S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -128,6 +121,17 @@ export default function RootLayout({ children }) {
 
   gtag('config', 'G-CJLJ5HRL5S');
 </script>
+    </head>
+      <body>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      
+
         <SmoothScroll>
           <PreloaderWrapper />
           <Navbar />
