@@ -43,7 +43,7 @@ export const metadata = {
     maxImagePreview: "large",
     maxVideoPreview: -1,
   },
-}
+},
 
   openGraph: {
     title: "DIQRA | Intentional Architecture & Modern Design",
