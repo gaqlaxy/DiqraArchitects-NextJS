@@ -7,6 +7,7 @@ import Footer from "@/app/components/Footer";
 import SlideUpButton from "@/app/components/SlideUpButton";
 import "../styles/ServicesPage.css";
 import Link from "next/link";
+import categoriesData from "@/app/data/categories.json";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -190,6 +191,45 @@ const ServicesPage = () => {
             </div>
           </div>
           
+        </div>
+      </section>
+      
+      {/* Specialized Services Directory */}
+      <section className="sp-directory">
+        <div className="sp-directory-inner">
+          <div className="sp-directory-header">
+            <h2 className="sp-directory-title">Specific Expertise</h2>
+            <p className="sp-directory-subtitle">Focused solutions for niche architectural and construction requirements.</p>
+          </div>
+          <div className="sp-directory-grid">
+            {categoriesData
+              .filter(cat => [
+                "construction-companies",
+                "architects",
+                "interior-designers",
+                "residential-builders",
+                "commercial-builders",
+                "building-contractors",
+                "civil-contractors",
+                "architects-for-residential",
+                "architects-for-office",
+                "interior-designers-for-office",
+                "architects-for-apartment",
+                "industrial-construction-companies",
+                "architects-for-landscape",
+                "builders-and-developers",
+                "architects-for-building",
+              ].includes(cat.slug))
+              .map((service) => (
+                <Link key={service.slug} href={`/services/${service.slug}`} className="sp-directory-item">
+                  <div className="sp-dir-content">
+                    <span className="sp-dir-title">{service.title}</span>
+                    <span className="sp-dir-tag">{service.tagline.split('.')[0]}</span>
+                  </div>
+                  <span className="sp-dir-arrow">↗</span>
+                </Link>
+              ))}
+          </div>
         </div>
       </section>
 
