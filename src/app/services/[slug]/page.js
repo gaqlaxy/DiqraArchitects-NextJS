@@ -1,9 +1,10 @@
 import ServiceDetailPage from "@/app/components/ServiceDetailPage";
 import categoriesData from "@/app/data/categories.json";
+import { servicesData, allServiceSlugs } from "@/app/data/servicesData";
 import { notFound } from "next/navigation";
 
-// The 15 curated high-traffic categories
-const selectedSlugs = [
+// The legacy curated high-traffic categories from categories.json
+const legacySlugs = [
   "construction-companies",
   "architects",
   "interior-designers",
@@ -21,71 +22,79 @@ const selectedSlugs = [
   "architects-for-building",
 ];
 
+/**
+ * Static generation for all known service slugs
+ */
 export async function generateStaticParams() {
-  return selectedSlugs.map((slug) => ({
+  // Combine unique slugs from both sources
+  const combined = Array.from(new Set([...legacySlugs, ...allServiceSlugs]));
+  return combined.map((slug) => ({
     slug: slug,
   }));
 }
 
+/**
+ * Dynamic metadata based on the rich servicesData or legacy categories
+ */
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const category = categoriesData.find((cat) => cat.slug === slug);
   
-  if (!category) {
+  // 1. Try rich servicesData first
+  const service = servicesData[slug];
+  if (service) {
+    const metaDescription = service.metaDescription || service.subtitle;
     return {
-      title: "Service Not Found | DIQRA Architects",
+      title: service.metaTitle || `${service.title} | Best Architectural Services in Chennai | Diqra`,
+      description: metaDescription,
+      alternates: {
+        canonical: `https://www.diqraarchitects.com/services/${slug}`,
+      },
+      openGraph: {
+        title: service.title,
+        description: metaDescription,
+        images: [{ url: service.hero }],
+      }
     };
   }
 
-  const metaDescription = category.description || `Professional ${category.title.toLowerCase()} services in Chennai by DIQRA Architects. Expert design and execution for your projects.`;
-  const canonicalUrl = `https://diqraarchitects.com/services/${slug}`;
+  // 2. Fallback to categoriesData for SEO landing pages
+  const category = categoriesData.find((cat) => cat.slug === slug);
+  if (!category) {
+    return { title: "Service Not Found | Diqra Architects" };
+  }
 
+  const metaDescription = category.description || `Professional ${category.title.toLowerCase()} services in Chennai by Diqra Architects.`;
   return {
-    title: `${category.title} | Best ${category.title.toLowerCase()} in Chennai | DIQRA`,
+    title: `${category.title} | Best ${category.title.toLowerCase()} in Chennai | Diqra`,
     description: metaDescription,
-    keywords: [
-      category.title.toLowerCase(),
-      "architects in Chennai",
-      "architecture services",
-      "design services",
-      `${category.title.toLowerCase()} services`,
-    ],
     alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      title: `${category.title} | DIQRA Architects`,
-      description: metaDescription,
-      url: canonicalUrl,
-      type: "website",
-      images: [
-        {
-          url: category.image || "https://diqraarchitects.com/Hero1.jpeg",
-          width: 1200,
-          height: 630,
-          alt: `${category.title} - DIQRA Architects`,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${category.title} | DIQRA Architects`,
-      description: metaDescription,
-      images: [category.image || "https://diqraarchitects.com/Hero1.jpeg"],
+      canonical: `https://www.diqraarchitects.com/services/${slug}`,
     },
   };
 }
 
+/**
+ * Main Page Component
+ */
 export default async function CategoryPage({ params }) {
   const { slug } = await params;
-  const category = categoriesData.find((cat) => cat.slug === slug);
 
-  if (!category || !selectedSlugs.includes(slug)) {
+  // Priority 1: High-fidelity Service Data
+  if (servicesData[slug]) {
+    // ServiceDetailPage now handles its own data lookup if we pass the slug
+    return <ServiceDetailPage service={slug} slug={slug} />;
+  }
+
+  // Priority 2: Structured Category Data (legacy fallback)
+  const category = categoriesData.find((cat) => cat.slug === slug);
+  
+  // Ensure the slug is either in our curated legacy list or our rich data list
+  if (!category || !legacySlugs.includes(slug)) {
     notFound();
   }
 
-  // Map JSON data to ServiceDetailPage expected format
-  const customData = {
+  // Map legacy JSON format to ServiceDetailPage expected format
+  const mappedData = {
     title: category.title,
     subtitle: category.tagline,
     hero: category.image || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070",
@@ -99,62 +108,5 @@ export default async function CategoryPage({ params }) {
     stats: category.stats || [],
   };
 
-  // Generate Service and LocalBusiness structured data
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": `https://diqraarchitects.com/services/${slug}#service`,
-    name: category.title,
-    description: category.description,
-    provider: {
-      "@type": "LocalBusiness",
-      "@id": "https://diqraarchitects.com/#organization",
-      name: "DIQRA Architects",
-      url: "https://diqraarchitects.com",
-    },
-    areaServed: {
-      "@type": "City",
-      name: "Chennai",
-    },
-    image: category.image || "https://diqraarchitects.com/Hero1.jpeg",
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://diqraarchitects.com",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Services",
-        item: "https://diqraarchitects.com/services",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: category.title,
-        item: `https://diqraarchitects.com/services/${slug}`,
-      },
-    ],
-  };
-
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <ServiceDetailPage customData={customData} service={slug} />
-    </>
-  );
+  return <ServiceDetailPage customData={mappedData} service={slug} slug={slug} />;
 }

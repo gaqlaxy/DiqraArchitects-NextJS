@@ -1,33 +1,19 @@
-// import ServiceDetailPage from "@/app/components/ServiceDetailPage";
-
-// export default function Page() {
-//   return <ServiceDetailPage service="exterior" />;
-// }
-
 import ServiceDetailPage from "@/app/components/ServiceDetailPage";
+import { servicesData } from "@/app/data/servicesData";
+
+const slug = "exterior-design";
 
 export function generateMetadata() {
+  const service = servicesData[slug];
   return {
-    title: "Exterior Design | DIQRA Studio",
-    description:
-      "Transform your property with bold, refined exterior architecture crafted by DIQRA Studio.",
-    openGraph: {
-      title: "Exterior Design | DIQRA Studio",
-      description:
-        "Bold, refined exteriors crafted with visual harmony and architectural precision.",
-      images: [
-        "https://images.unsplash.com/photo-1712806377231-256e4a1f0a8e?q=80",
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "Exterior Design | DIQRA Studio",
-      description:
-        "Architecture-led exterior design that elevates every project.",
+    title: service?.metaTitle || "Exterior Design | Diqra Architects",
+    description: service?.metaDescription || "Bold, refined exterior design in Chennai.",
+    alternates: {
+      canonical: `https://www.diqraarchitects.com/services/${slug}`,
     },
   };
 }
 
 export default function Page() {
-  return <ServiceDetailPage service="exterior" />;
+  return <ServiceDetailPage service={slug} slug={slug} />;
 }

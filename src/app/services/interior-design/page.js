@@ -1,25 +1,19 @@
 import ServiceDetailPage from "@/app/components/ServiceDetailPage";
+import { servicesData } from "@/app/data/servicesData";
+
+const slug = "interior-design";
+
 export function generateMetadata() {
+  const service = servicesData[slug];
   return {
-    title: "Interior Design | DIQRA Studio",
-    description:
-      "Transform your property with bold, refined interior architecture crafted by DIQRA Studio.",
-    openGraph: {
-      title: "Interior Design | DIQRA Studio",
-      description:
-        "Bold, refined interior crafted with visual harmony and architectural precision.",
-      images: [
-        "https://images.unsplash.com/photo-1712806377231-256e4a1f0a8e?q=80",
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "Exterior Design | DIQRA Studio",
-      description:
-        "Architecture-led exterior design that elevates every project.",
+    title: service?.metaTitle || "Interior Design | Diqra Architects",
+    description: service?.metaDescription || "Bespoke interior design services in Chennai.",
+    alternates: {
+      canonical: `https://www.diqraarchitects.com/services/${slug}`,
     },
   };
 }
+
 export default function Page() {
-  return <ServiceDetailPage service="interior" />;
+  return <ServiceDetailPage service={slug} slug={slug} />;
 }
