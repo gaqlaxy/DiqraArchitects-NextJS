@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Option 2 — Immersive Cinematic | ServiceDetailPage Wireframe</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Comic Sans MS', 'Chalkboard SE', cursive; background: #fff; color: #222; }
+
+  .legend { position: fixed; top: 12px; right: 12px; background: #fff; border: 2px solid #999; padding: 10px 14px; font-size: 11px; z-index: 9999; line-height: 1.8; font-family: Arial, sans-serif; }
+  .legend-reuse { background: #4CAF50; color: #fff; padding: 2px 6px; border-radius: 3px; font-weight: bold; }
+  .legend-new { background: #FF9800; color: #fff; padding: 2px 6px; border-radius: 3px; font-weight: bold; }
+  .option-label { position: fixed; top: 12px; left: 12px; background: #222; color: #fff; padding: 8px 14px; font-size: 12px; font-family: Arial, sans-serif; font-weight: bold; z-index: 9999; }
+
+  .badge-reuse { position: absolute; top: 6px; right: 6px; background: #4CAF50; color: #fff; padding: 2px 7px; border-radius: 3px; font-size: 10px; font-family: Arial, sans-serif; font-weight: bold; z-index: 10; white-space: nowrap; }
+  .badge-new { position: absolute; top: 6px; right: 6px; background: #FF9800; color: #fff; padding: 2px 7px; border-radius: 3px; font-size: 10px; font-family: Arial, sans-serif; font-weight: bold; z-index: 10; white-space: nowrap; }
+  .rel { position: relative; }
+
+  h1, h2, h3, h4 { font-family: Georgia, serif; }
+  .section-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #999; font-family: Arial, sans-serif; margin-bottom: 8px; }
+
+  /* === MINIMAL NAV === */
+  .navbar { display: flex; align-items: center; justify-content: space-between; padding: 18px 48px; position: absolute; top: 0; left: 0; right: 0; z-index: 100; }
+  .navbar-logo { font-family: Georgia, serif; font-size: 20px; font-weight: bold; letter-spacing: 4px; color: #fff; }
+  .navbar-back { font-size: 11px; color: #ddd; letter-spacing: 1px; font-family: Arial, sans-serif; cursor: pointer; }
+
+  /* === SPLIT HERO: image left 60%, title right 40% === */
+  .hero { display: grid; grid-template-columns: 60fr 40fr; height: 100vh; border-bottom: 3px solid #111; }
+  .hero-image-col { background: #c0c0c0; position: relative; display: flex; align-items: flex-end; }
+  .hero-image-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #888; font-size: 14px; font-style: italic; font-family: Arial, sans-serif; }
+  .hero-text-col { display: flex; flex-direction: column; justify-content: center; padding: 64px 56px 64px 48px; border-left: 3px solid #111; }
+  .hero-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #aaa; font-family: Arial, sans-serif; margin-bottom: 20px; }
+  .hero-title { font-size: 60px; font-weight: 900; line-height: 1.0; letter-spacing: -2px; font-family: Georgia, serif; }
+  .hero-tagline { margin-top: 20px; font-size: 15px; line-height: 1.6; color: #555; font-style: italic; max-width: 320px; }
+  .hero-cta { margin-top: 40px; display: inline-block; border: 2px solid #222; padding: 12px 28px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif; cursor: pointer; width: fit-content; }
+  .hero-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); font-size: 10px; color: #888; font-family: Arial, sans-serif; text-align: center; }
+
+  /* === DARK TAGLINE BAND: stats inline === */
+  .stats-band { background: #111; color: #fff; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; align-items: center; padding: 0; border-bottom: 3px solid #111; }
+  .stats-band-tagline { padding: 36px 48px; font-size: 18px; font-style: italic; font-family: Georgia, serif; color: #ccc; border-right: 1px solid #444; }
+  .stats-band-metric { padding: 36px 32px; border-right: 1px solid #333; text-align: center; }
+  .stats-band-metric:last-child { border-right: none; }
+  .stats-band-value { font-size: 36px; font-weight: 900; font-family: Georgia, serif; color: #fff; }
+  .stats-band-label { font-size: 9px; color: #888; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif; margin-top: 4px; }
+
+  /* === ALTERNATING FEATURE ROWS === */
+  .features-section { }
+  .feature-row { display: grid; grid-template-columns: 1fr 1fr; min-height: 420px; border-bottom: 2px solid #ddd; }
+  .feature-row.reverse { }
+  .feature-row-image { background: #d0d0d0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 13px; font-style: italic; font-family: Arial, sans-serif; }
+  .feature-row-content { padding: 64px 56px; display: flex; flex-direction: column; justify-content: center; }
+  .feature-row-num { font-size: 72px; font-weight: 900; color: #ebebeb; font-family: Georgia, serif; line-height: 1; margin-bottom: -16px; }
+  .feature-row-title { font-size: 28px; font-weight: bold; font-family: Georgia, serif; margin-bottom: 16px; }
+  .feature-row-desc { font-size: 15px; line-height: 1.7; color: #555; max-width: 380px; }
+
+  /* === VERTICAL STEPPER PROCESS === */
+  .process-section { padding: 80px 0; border-top: 3px solid #111; background: #fafafa; display: grid; grid-template-columns: 1fr 1fr; }
+  .process-left { padding: 0 0 0 80px; display: flex; flex-direction: column; justify-content: center; border-right: 2px solid #ddd; }
+  .process-right { padding: 0 80px; }
+  .process-step-row { display: flex; gap: 32px; padding: 28px 0; border-bottom: 1px solid #e0e0e0; align-items: flex-start; }
+  .process-step-row:last-child { border-bottom: none; }
+  .process-step-num { font-size: 48px; font-weight: 900; color: #e0e0e0; font-family: Georgia, serif; line-height: 1; flex-shrink: 0; width: 60px; }
+  .process-step-content { }
+  .process-step-title { font-size: 18px; font-weight: bold; font-family: Georgia, serif; margin-bottom: 6px; }
+  .process-step-desc { font-size: 13px; color: #777; font-family: Arial, sans-serif; line-height: 1.5; }
+  .process-vertical-line { width: 2px; background: #ddd; flex-shrink: 0; align-self: stretch; margin: 0 28px; display: none; }
+
+  /* === MASONRY PORTFOLIO === */
+  .masonry-section { padding: 80px 60px; border-top: 3px solid #111; }
+  .masonry-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 16px; margin-top: 40px; }
+  .masonry-item { background: #d0d0d0; display: flex; align-items: flex-end; border: 2px solid #ccc; position: relative; cursor: pointer; }
+  .masonry-item:nth-child(1) { grid-row: span 2; min-height: 480px; }
+  .masonry-item:nth-child(2) { min-height: 220px; }
+  .masonry-item:nth-child(3) { min-height: 220px; }
+  .masonry-item:nth-child(4) { min-height: 220px; }
+  .masonry-item:nth-child(5) { min-height: 220px; }
+  .masonry-item-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px; font-style: italic; font-family: Arial, sans-serif; }
+  .masonry-item-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.92); padding: 12px 16px; border-top: 1px solid #ccc; }
+  .masonry-cat { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #aaa; font-family: Arial, sans-serif; }
+  .masonry-title { font-size: 14px; font-weight: bold; font-family: Georgia, serif; }
+  .gsap-note { display: inline-block; background: #eee; border: 1px solid #bbb; padding: 2px 8px; font-size: 9px; color: #666; font-family: Arial, sans-serif; border-radius: 2px; margin-left: 8px; }
+
+  /* === RELATED: Large hover cards === */
+  .related-section { padding: 80px 60px; border-top: 3px solid #111; }
+  .related-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 40px; }
+  .related-card { border: 2px solid #ddd; padding: 40px 32px; cursor: pointer; }
+  .related-card-arrow { font-size: 28px; color: #ccc; margin-bottom: 16px; }
+  .related-card-title { font-size: 20px; font-family: Georgia, serif; font-weight: bold; }
+  .related-card-hint { font-size: 11px; color: #aaa; font-family: Arial, sans-serif; margin-top: 8px; letter-spacing: 1px; }
+
+  /* === CTA + FOOTER === */
+  .cta-section { background: #111; color: #fff; padding: 100px 80px; text-align: center; position: relative; }
+  .cta-title { font-size: 52px; font-family: Georgia, serif; line-height: 1.1; max-width: 680px; margin: 0 auto 32px; }
+  .cta-sub { font-size: 14px; color: #aaa; font-family: Arial, sans-serif; margin-bottom: 40px; }
+  .cta-btn { border: 2px solid #fff; padding: 16px 40px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif; cursor: pointer; background: transparent; color: #fff; }
+  .footer { background: #1a1a1a; color: #888; padding: 36px 80px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-family: Arial, sans-serif; }
+</style>
+</head>
+<body>
+
+<div class="option-label">Option 2 — Immersive Cinematic</div>
+<div class="legend">
+  <div style="margin-bottom:4px;font-weight:bold;font-family:Arial,sans-serif">Component Legend</div>
+  <span class="legend-reuse">[REUSE]</span> Existing component<br>
+  <span class="legend-new">[NEW]</span> New component needed
+</div>
+
+<!-- SPLIT HERO -->
+<!-- NEW COMPONENT: SplitHero -->
+<section class="hero rel" style="position:relative;">
+  <span class="badge-new" style="top:6px;right:6px;z-index:200;" title="New: SplitHero — split-screen hero">[NEW] SplitHero</span>
+
+  <!-- NAVBAR overlaid on hero -->
+  <!-- REUSABLE: Navbar from src/app/components/Navbar.jsx -->
+  <nav class="navbar rel">
+    <span class="badge-reuse" style="top:50%;transform:translateY(-50%);right:-8px;" title="src/app/components/Navbar.jsx">[REUSE] Navbar</span>
+    <div class="navbar-logo">DIQRA</div>
+    <div class="navbar-back">← All Services</div>
+  </nav>
+
+  <div class="hero-image-col">
+    <div class="hero-image-label">[Hero image — 60vw × 100vh — category.image]</div>
+    <div class="hero-scroll" style="color:#eee;">↓ &nbsp; Scroll</div>
+  </div>
+  <div class="hero-text-col">
+    <div class="hero-eyebrow">Architecture &amp; Design · Chennai</div>
+    <h1 class="hero-title">Archi-<br>tects</h1>
+    <p class="hero-tagline">Award-Winning Designs that Redefine Premium Living.</p>
+    <div class="hero-cta">Explore Service</div>
+  </div>
+</section>
+
+<!-- DARK STATS BAND -->
+<!-- NEW COMPONENT: StatsBand -->
+<div class="stats-band rel">
+  <span class="badge-new" title="New: StatsBand component">[NEW] StatsBand</span>
+  <div class="stats-band-tagline">"Transforming abstract ideas into buildable blueprints since 2009."</div>
+  <div class="stats-band-metric">
+    <div class="stats-band-value">20+</div>
+    <div class="stats-band-label">Awards</div>
+  </div>
+  <div class="stats-band-metric">
+    <div class="stats-band-value">1000+</div>
+    <div class="stats-band-label">Designs</div>
+  </div>
+  <div class="stats-band-metric">
+    <div class="stats-band-value">15 Yrs</div>
+    <div class="stats-band-label">Experience</div>
+  </div>
+</div>
+
+<!-- ALTERNATING FEATURE ROWS -->
+<!-- NEW COMPONENT: FeatureRows -->
+<section class="features-section rel">
+  <span class="badge-new" style="top:6px;right:6px;" title="New: FeatureRows — alternating image-text rows">[NEW] FeatureRows</span>
+  <div class="section-label" style="padding: 32px 60px 0; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#999; font-family:Arial,sans-serif;">Key Expertise</div>
+
+  <!-- Row 1: image left, text right -->
+  <div class="feature-row">
+    <div class="feature-row-image">[Feature image — Concept Design]</div>
+    <div class="feature-row-content">
+      <div class="feature-row-num">01</div>
+      <h3 class="feature-row-title">Concept Design</h3>
+      <p class="feature-row-desc">Initial sketches, mood boards and spatial studies that establish the complete design vision before a single brick is laid.</p>
+    </div>
+  </div>
+
+  <!-- Row 2: text left, image right -->
+  <div class="feature-row" style="direction:rtl;">
+    <div class="feature-row-image" style="direction:ltr;">[Feature image — 3D Visualization]</div>
+    <div class="feature-row-content" style="direction:ltr;">
+      <div class="feature-row-num">02</div>
+      <h3 class="feature-row-title">3D Visualization</h3>
+      <p class="feature-row-desc">Photo-realistic renders and immersive walkthroughs that let clients experience the space before construction begins.</p>
+    </div>
+  </div>
+
+  <!-- Row 3 -->
+  <div class="feature-row">
+    <div class="feature-row-image">[Feature image — Working Drawings]</div>
+    <div class="feature-row-content">
+      <div class="feature-row-num">03</div>
+      <h3 class="feature-row-title">Working Drawings</h3>
+      <p class="feature-row-desc">Complete GFC drawing sets, specifications and schedules for seamless contractor handover and site execution.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS: Vertical stepper -->
+<!-- NEW COMPONENT: VerticalStepper -->
+<section class="process-section rel">
+  <span class="badge-new" style="top:6px;right:6px;" title="New: VerticalStepper — process timeline">[NEW] VerticalStepper</span>
+
+  <div class="process-left">
+    <div class="section-label">Methodology</div>
+    <h2 style="font-size:42px;font-family:Georgia,serif;font-weight:900;letter-spacing:-1px;line-height:1.1;">Our<br>Process</h2>
+    <p style="margin-top:16px;font-size:14px;color:#777;font-family:Arial,sans-serif;max-width:280px;line-height:1.6;">A rigorous design process refined over 15 years and 1000+ projects.</p>
+  </div>
+
+  <div class="process-right">
+    <div class="process-step-row">
+      <div class="process-step-num">01</div>
+      <div class="process-step-content">
+        <div class="process-step-title">Brief</div>
+        <div class="process-step-desc">Client meeting, site analysis and programme brief to establish scope.</div>
+      </div>
+    </div>
+    <div class="process-step-row">
+      <div class="process-step-num">02</div>
+      <div class="process-step-content">
+        <div class="process-step-title">Concept</div>
+        <div class="process-step-desc">Multiple schematic options with massing, flow and renders.</div>
+      </div>
+    </div>
+    <div class="process-step-row">
+      <div class="process-step-num">03</div>
+      <div class="process-step-content">
+        <div class="process-step-title">Develop</div>
+        <div class="process-step-desc">Detailed design with material specs and structural coordination.</div>
+      </div>
+    </div>
+    <div class="process-step-row">
+      <div class="process-step-num">04</div>
+      <div class="process-step-content">
+        <div class="process-step-title">Permit &amp; Deliver</div>
+        <div class="process-step-desc">Approvals, GFC drawings, site supervision and handover.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MASONRY PORTFOLIO GRID -->
+<!-- NEW COMPONENT: MasonryPortfolio -->
+<section class="masonry-section rel">
+  <span class="badge-new" title="New: MasonryPortfolio — masonry grid portfolio">[NEW] MasonryPortfolio</span>
+  <div style="display:flex;justify-content:space-between;align-items:baseline;">
+    <div>
+      <div class="section-label">Portfolio</div>
+      <h2 style="font-size:36px;font-family:Georgia,serif;font-weight:900;letter-spacing:-1px;">Recent Projects <span class="gsap-note">GSAP scroll</span></h2>
+    </div>
+    <span style="font-size:11px;text-decoration:underline;color:#888;font-family:Arial,sans-serif;">View All →</span>
+  </div>
+  <div class="masonry-grid">
+    <div class="masonry-item">
+      <div class="masonry-item-label">[Project Image — tall 480px]</div>
+      <div class="masonry-item-overlay">
+        <div class="masonry-cat">Residential</div>
+        <div class="masonry-title">Jaloura House</div>
+      </div>
+    </div>
+    <div class="masonry-item">
+      <div class="masonry-item-label">[Project Image 220px]</div>
+      <div class="masonry-item-overlay"><div class="masonry-cat">Structure</div><div class="masonry-title">Myrtle Pavilion</div></div>
+    </div>
+    <div class="masonry-item">
+      <div class="masonry-item-label">[Project Image 220px]</div>
+      <div class="masonry-item-overlay"><div class="masonry-cat">Commercial</div><div class="masonry-title">Urban Loft</div></div>
+    </div>
+    <div class="masonry-item">
+      <div class="masonry-item-label">[Project Image 220px]</div>
+      <div class="masonry-item-overlay"><div class="masonry-cat">Residential</div><div class="masonry-title">The Grove Villa</div></div>
+    </div>
+    <div class="masonry-item">
+      <div class="masonry-item-label">[Project Image 220px]</div>
+      <div class="masonry-item-overlay"><div class="masonry-cat">Commercial</div><div class="masonry-title">Apex HQ</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED: Large hover cards -->
+<!-- NEW COMPONENT: RelatedServiceCards -->
+<section class="related-section rel">
+  <span class="badge-new" title="New: RelatedServiceCards — hover card grid">[NEW] RelatedServiceCards</span>
+  <div class="section-label">Explore More</div>
+  <h2 style="font-size:36px;font-family:Georgia,serif;font-weight:900;letter-spacing:-1px;">Related Services</h2>
+  <div class="related-cards">
+    <div class="related-card">
+      <div class="related-card-arrow">→</div>
+      <div class="related-card-title">Interior Designers</div>
+      <div class="related-card-hint">Boutique interiors · Chennai</div>
+    </div>
+    <div class="related-card">
+      <div class="related-card-arrow">→</div>
+      <div class="related-card-title">Building Contractors</div>
+      <div class="related-card-hint">Turnkey execution</div>
+    </div>
+    <div class="related-card">
+      <div class="related-card-arrow">→</div>
+      <div class="related-card-title">Architects for Residential</div>
+      <div class="related-card-hint">Bespoke villas &amp; bungalows</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<!-- REUSABLE: CtaSection from src/app/components/CtaSection.jsx -->
+<section class="cta-section rel">
+  <span class="badge-reuse" title="src/app/components/CtaSection.jsx">[REUSE] CtaSection</span>
+  <h2 class="cta-title">Ready to Build Something Remarkable?</h2>
+  <p class="cta-sub">Let's create architecture that endures. DIQRA Architects · Chennai</p>
+  <button class="cta-btn">Start a Conversation</button>
+</section>
+
+<!-- FOOTER -->
+<!-- REUSABLE: Footer from src/app/components/Footer.jsx -->
+<footer class="footer rel">
+  <span class="badge-reuse" style="top:6px;right:6px;" title="src/app/components/Footer.jsx">[REUSE] Footer</span>
+  <div>© 2025 DIQRA Architects</div>
+  <div style="display:flex;gap:28px;"><span>Services</span><span>Projects</span><span>About</span><span>Contact</span></div>
+</footer>
+
+</body>
+</html>
