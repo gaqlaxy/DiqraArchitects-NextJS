@@ -1,26 +1,16 @@
-import projectsData from "@/app/data/projects-data.json";
+import { allServiceSlugs } from "@/app/data/servicesData";
 
 const baseUrl = "https://diqraarchitects.com";
 
 const staticRoutes = [
   "",
   "/about",
-  "/contact",
-  "/gallery",
-  "/interiorworks",
-  "/process",
   "/services",
-  "/services/consultation",
-  "/services/design-planning",
-  "/services/exterior-design",
-  "/services/interior-design",
-  "/services/renovation",
-  "/works",
+  "/contact",
 ];
 
-const uniqueProjectSlugs = [...new Set(projectsData.projects.map((project) => project.slug))];
-
-const selectedSlugs = [
+// The legacy curated high-traffic categories from categories.json
+const legacySlugs = [
   "construction-companies",
   "architects",
   "interior-designers",
@@ -38,6 +28,8 @@ const selectedSlugs = [
   "architects-for-building",
 ];
 
+const selectedSlugs = [...new Set([...legacySlugs, ...allServiceSlugs])];
+
 export default async function sitemap() {
   const lastModified = new Date();
 
@@ -48,13 +40,6 @@ export default async function sitemap() {
     priority: route === "" ? 1.0 : 0.7,
   }));
 
-  const projectPages = uniqueProjectSlugs.map((slug) => ({
-    url: `${baseUrl}/project/${slug}`,
-    lastModified,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
-
   const categoryPages = selectedSlugs.map((slug) => ({
     url: `${baseUrl}/services/${slug}`,
     lastModified,
@@ -62,5 +47,5 @@ export default async function sitemap() {
     priority: 0.8,
   }));
 
-  return [...pages, ...projectPages, ...categoryPages];
+  return [...pages, ...categoryPages];
 }

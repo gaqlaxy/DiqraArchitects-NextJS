@@ -17,28 +17,28 @@ const servicesData = [
     title: "Exterior Design",
     description: "Bold, refined exteriors that balance form, function, and visual harmony.",
     image: "https://images.unsplash.com/photo-1712806377231-256e4a1f0a8e?q=80&w=1332&auto=format&fit=crop",
-    link: "/services/exterior-design",
+    link: "/services/exterior",
   },
   {
     id: "02",
-    title: "Design & Planning",
+    title: "Design and Planning",
     description: "From conceptual layouts to detailed drawings, focusing on spatial flow.",
     image: "https://images.unsplash.com/photo-1721244654394-36a7bc2da288?q=80&w=1017&auto=format&fit=crop",
-    link: "/services/design-planning",
+    link: "/services/architectural",
   },
   {
     id: "03",
     title: "Consultation",
     description: "Expert guidance to help you make confident design decisions.",
     image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop",
-    link: "/services/consultation",
+    link: "/services/consultancy",
   },
   {
     id: "04",
     title: "Interior Design",
     description: "Creating interiors that feel balanced, elegant, and purposeful.",
     image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2058&auto=format&fit=crop",
-    link: "/services/interior-design",
+    link: "/services/interiors",
   },
   {
     id: "05",
@@ -204,21 +204,11 @@ const ServicesPage = () => {
           <div className="sp-directory-grid">
             {categoriesData
               .filter(cat => [
-                "construction-companies",
-                "architects",
-                "interior-designers",
-                "residential-builders",
-                "commercial-builders",
-                "building-contractors",
-                "civil-contractors",
-                "architects-for-residential",
-                "architects-for-office",
-                "interior-designers-for-office",
-                "architects-for-apartment",
-                "industrial-construction-companies",
-                "architects-for-landscape",
-                "builders-and-developers",
-                "architects-for-building",
+                "exterior",
+                "architectural",
+                "consultancy",
+                "interiors",
+                "renovation",
               ].includes(cat.slug))
               .map((service) => (
                 <Link key={service.slug} href={`/services/${service.slug}`} className="sp-directory-item">

@@ -1,5 +1,93 @@
 [
   {
+    "slug": "interiors",
+    "title": "Interiors",
+    "tagline": "Bespoke Interior Design for Modern Living.",
+    "description": "Creating immersive interior environments that reflect your personality.",
+    "image": "/images/services/interiors.jpg",
+    "thumbnail": "/images/services/interiors.jpg"
+  },
+  {
+    "slug": "modular-kitchen",
+    "title": "Modular Kitchen",
+    "tagline": "High-Performance Culinary Spaces.",
+    "description": "Ergonomic and aesthetic kitchen solutions for the modern home.",
+    "image": "/images/services/modular-kitchen.jpg",
+    "thumbnail": "/images/services/modular-kitchen.jpg"
+  },
+  {
+    "slug": "renovation",
+    "title": "Renovation",
+    "tagline": "Reimagining Existing Spaces with Sensitivity.",
+    "description": "Expert home and building renovation services in Chennai.",
+    "image": "/images/services/renovation.jpg",
+    "thumbnail": "/images/services/renovation.jpg"
+  },
+  {
+    "slug": "construction",
+    "title": "Construction",
+    "tagline": "Design-Led Turnkey Construction.",
+    "description": "Building luxury homes and commercial spaces with architectural precision.",
+    "image": "/images/services/construction.jpg",
+    "thumbnail": "/images/services/construction.jpg"
+  },
+  {
+    "slug": "exterior",
+    "title": "Exterior",
+    "tagline": "Bold Façades that Command Attention.",
+    "description": "Architectural exterior design and material selection.",
+    "image": "/images/services/exterior.jpg",
+    "thumbnail": "/images/services/exterior.jpg"
+  },
+  {
+    "slug": "architectural",
+    "title": "Architectural",
+    "tagline": "Spatial Clarity and Precision Documentation.",
+    "description": "Comprehensive architectural design and planning services.",
+    "image": "/images/services/architectural.jpg",
+    "thumbnail": "/images/services/architectural.jpg"
+  },
+  {
+    "slug": "consultancy",
+    "title": "Consultancy",
+    "tagline": "Expert Guidance for Confident Decisions.",
+    "description": "Independent architectural and construction consultancy.",
+    "image": "/images/services/consultancy.jpg",
+    "thumbnail": "/images/services/consultancy.jpg"
+  },
+  {
+    "slug": "engineering",
+    "title": "Engineering",
+    "tagline": "Structural Integrity and Technical Truth.",
+    "description": "Expert structural and civil engineering solutions.",
+    "image": "/images/services/engineering.jpg",
+    "thumbnail": "/images/services/engineering.jpg"
+  },
+  {
+    "slug": "project-management",
+    "title": "Project Management",
+    "tagline": "On-Time, On-Budget, On-Quality Delivery.",
+    "description": "Professional construction project management and oversight.",
+    "image": "/images/services/project-management.jpg",
+    "thumbnail": "/images/services/project-management.jpg"
+  },
+  {
+    "slug": "architecture",
+    "title": "Architecture",
+    "tagline": "Grounded and Intentional Spatial Design.",
+    "description": "Designing culturally rooted architecture for the modern world.",
+    "image": "/images/services/architecture.jpg",
+    "thumbnail": "/images/services/architecture.jpg"
+  },
+  {
+    "slug": "architect",
+    "title": "Architect",
+    "tagline": "Professional Registration and Principal-Led Oversight.",
+    "description": "Registered architect-led design and legal compliance services.",
+    "image": "/images/services/architect.jpg",
+    "thumbnail": "/images/services/architect.jpg"
+  },
+  {
     "slug": "construction-companies",
     "title": "Construction Companies",
     "tagline": "Military-Grade Precision for Large-Scale Industrial Projects.",
