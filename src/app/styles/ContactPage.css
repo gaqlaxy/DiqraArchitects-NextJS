@@ -100,13 +100,37 @@
   line-height: 1.2;
 }
 
+/* FORM SECTIONS */
+.cp-form-section-group {
+  margin-bottom: clamp(40px, 6vw, 60px);
+}
+
+.cp-form-section-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-muted, #888);
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+/* FORM DIVIDER */
+.cp-form-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border, #e0ddd6);
+  margin: clamp(40px, 6vw, 60px) 0;
+}
+
+/* INPUT GRID */
 .cp-input-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  margin-bottom: 40px;
+  margin-bottom: clamp(30px, 4vw, 50px);
 }
 
+/* FORM GROUP */
 .cp-form-group {
   position: relative;
   padding-bottom: 10px;
@@ -118,7 +142,8 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--color-muted, #888);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  font-weight: 500;
 }
 
 .cp-form-group input,
@@ -135,6 +160,11 @@
   border-radius: 0;
 }
 
+.cp-form-group input::placeholder,
+.cp-form-group textarea::placeholder {
+  color: var(--color-muted-light, #b5b5b5);
+}
+
 .cp-form-group input:focus,
 .cp-form-group textarea:focus {
   outline: none;
@@ -142,9 +172,15 @@
   padding-left: 10px;
 }
 
-/* CUSTOM BUTTON */
+.cp-form-group textarea {
+  padding: 15px 0;
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* SUBMIT BUTTON */
 .cp-submit-wrapper {
-  margin-top: 60px;
+  margin-top: clamp(50px, 6vw, 80px);
   display: flex;
   justify-content: flex-start;
 }
@@ -153,20 +189,32 @@
   background: var(--color-ink, #0a0a0a);
   color: var(--color-surface, #f7f5f0);
   border: none;
-  padding: 25px 60px;
+  padding: 16px 48px;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 13px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s var(--ease-out);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cp-arch-btn:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   background: #222;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.cp-arch-btn:active {
+  transform: translateY(0);
+}
+
+.cp-arch-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* FAQ SECTION */
@@ -228,6 +276,7 @@
 @media (max-width: 1024px) {
   .cp-arch-grid {
     grid-template-columns: 1fr;
+    gap: clamp(2rem, 4vw, 40px);
   }
   .cp-sticky-info {
     position: relative;
@@ -235,15 +284,32 @@
     flex-wrap: wrap;
     top: 0;
     margin-bottom: 60px;
+    gap: clamp(30px, 5vw, 50px);
+  }
+  .cp-input-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 768px) {
   .cp-input-grid {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
   .cp-sticky-info {
     flex-direction: column;
     gap: 40px;
+  }
+  .cp-form-group input,
+  .cp-form-group textarea {
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+  .cp-arch-btn {
+    padding: 14px 40px;
+    font-size: 12px;
+  }
+  .cp-form-divider {
+    margin: clamp(30px, 4vw, 40px) 0;
   }
 }

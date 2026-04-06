@@ -4,8 +4,10 @@ import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "../components/Footer";
+import ServiceSelector from "../components/ServiceSelector";
 import { Instagram, Facebook } from "lucide-react";
 import "@/app/styles/ContactPage.css";
+import "@/app/styles/ServiceSelector.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,6 +17,7 @@ export default function ContactPage() {
     lastName: "",
     email: "",
     phone: "",
+    selectedServices: [],
     message: "",
   });
 
@@ -77,6 +80,7 @@ export default function ContactPage() {
         lastName: "",
         email: "",
         phone: "",
+        selectedServices: [],
         message: "",
       });
       btn.innerText = originalText;
@@ -85,6 +89,10 @@ export default function ContactPage() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleServicesChange = (services) => {
+    setFormData({ ...formData, selectedServices: services });
   };
 
   // GSAP Powered FAQ Toggle
@@ -203,66 +211,88 @@ export default function ContactPage() {
             </p>
 
             <form ref={formRef} onSubmit={handleSubmit}>
-              <div className="cp-input-grid">
+              {/* SECTION 1: CONTACT INFORMATION */}
+              <div className="cp-form-section-group">
+                <h3 className="cp-form-section-label">Your Information</h3>
+                
+                <div className="cp-input-grid">
+                  <div className="cp-form-group">
+                    <label>First Name</label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      placeholder="John"
+                      required
+                    />
+                  </div>
+                  <div className="cp-form-group">
+                    <label>Last Name</label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      placeholder="Doe"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="cp-input-grid">
+                  <div className="cp-form-group">
+                    <label>Email Address</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="john@example.com"
+                      required
+                    />
+                  </div>
+                  <div className="cp-form-group">
+                    <label>Phone (Optional)</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="+91..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="cp-form-divider"></div>
+
+              {/* SECTION 2: PROJECT DETAILS */}
+              <div className="cp-form-section-group">
+                <h3 className="cp-form-section-label">Project Details</h3>
+
                 <div className="cp-form-group">
-                  <label>01. First Name</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    placeholder="John"
-                    required
+                  <label>Services of Interest</label>
+                  <ServiceSelector 
+                    value={formData.selectedServices} 
+                    onChange={handleServicesChange} 
                   />
                 </div>
+
                 <div className="cp-form-group">
-                  <label>02. Last Name</label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
+                  <label>Project Description</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
                     onChange={handleChange}
-                    placeholder="Doe"
+                    placeholder="Tell us about the space, timeline, budget, and vision..."
+                    rows={5}
                     required
                   />
                 </div>
               </div>
 
-              <div className="cp-input-grid">
-                <div className="cp-form-group">
-                  <label>03. Email Address</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="john@example.com"
-                    required
-                  />
-                </div>
-                <div className="cp-form-group">
-                  <label>04. Phone (Optional)</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+91..."
-                  />
-                </div>
-              </div>
-
-              <div className="cp-form-group">
-                <label>05. Project Details</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Tell us about the space, timeline, and vision..."
-                  rows={4}
-                  required
-                />
-              </div>
+              <div className="cp-form-divider"></div>
 
               <div className="cp-submit-wrapper">
                 <button type="submit" className="cp-arch-btn">
