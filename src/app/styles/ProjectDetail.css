@@ -1,208 +1,338 @@
-/* ========================
-   RESET & VARIABLES
-   ======================== */
-:root {
-  --bg-color: #f2f2f2; /* Soft Gallery Grey */
-  --text-primary: #111111;
-  --text-secondary: #757575;
-  --divider: rgba(0, 0, 0, 0.08);
-  --gap: 20px; /* Base grid gap */
-}
+/* ═══════════════════════════════════════════════════════════════
+   PROJECT DETAIL PAGE — Editorial Luxury Minimal Design
+   Using design tokens from globals.css
+   ═══════════════════════════════════════════════════════════════ */
 
+@import "tailwindcss";
+
+/* --- PAGE CONTAINER --- */
 .minimal-project-page {
-  background-color: var(--bg-color);
-  color: var(--text-primary);
+  background-color: var(--color-white);
+  color: var(--color-ink);
   width: 100%;
   min-height: 100vh;
-  padding: 0 4vw; /* Global side padding */
+  padding: 0 clamp(1.5rem, 3vw, 3rem);
 }
 
-/* ========================
-   HEADER
-   ======================== */
+/* ═══════════════════════════════════════════
+   HERO HEADER SECTION
+   ═══════════════════════════════════════════ */
+
 .project-header {
-  padding-top: 12rem;
-  padding-bottom: 6rem;
+  padding-top: clamp(80px, 10vh, 120px);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
   display: flex;
   flex-direction: column;
+  max-width: var(--max-width, 1440px);
+  margin: 0 auto;
 }
 
 .header-top {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid var(--text-primary);
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
-  font-family: "Courier New", Courier, monospace; /* Tech feel */
-  font-size: 0.85rem;
-  text-transform: uppercase;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1.5rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .back-btn {
   text-decoration: none;
-  color: var(--text-primary);
-  transition: opacity 0.3s;
-}
-.back-btn:hover {
-  opacity: 0.6;
+  color: var(--color-ink);
+  font-size: clamp(0.8rem, 1vw, 0.9rem);
+  letter-spacing: 0.05em;
+  transition: color var(--duration-fast) ease;
+  display: inline-flex;
+  align-items: center;
 }
 
+.back-btn:hover {
+  color: var(--color-muted);
+}
+
+.header-year {
+  font-size: clamp(0.8rem, 1vw, 0.9rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-left: auto;
+}
+
+/* --- TITLE --- */
 .project-title {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: clamp(3rem, 7vw, 8rem);
-  font-weight: 400; /* Regular weight, not bold */
+  font-size: var(--text-display);
+  font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 0.95;
-  margin: 0 0 4rem 0;
+  margin: 0 0 clamp(2rem, 5vw, 4rem) 0;
   text-transform: uppercase;
-  color: var(--text-primary);
+  color: var(--color-ink);
 }
 
 .title-line {
-  overflow: hidden; /* For animation reveal */
+  overflow: hidden;
   display: block;
 }
+
 .title-line span {
   display: block;
   will-change: transform;
 }
 
+/* --- METADATA GRID --- */
 .header-meta {
-  display: flex;
-  gap: 4rem;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-top: clamp(2rem, 3vw, 3rem);
+  border-top: 1px solid var(--color-border);
 }
 
 .meta-row {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 
 .meta-label {
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-secondary);
-  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  font-weight: 600;
 }
 
 .meta-value {
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: var(--text-body);
+  color: var(--color-ink);
+  font-weight: 400;
+  line-height: 1.5;
 }
 
-/* ========================
-   HERO IMAGE
-   ======================== */
+/* ═══════════════════════════════════════════
+   HERO IMAGE SECTION
+   ═══════════════════════════════════════════ */
+
 .hero-section {
   width: 100%;
-  margin-bottom: 8rem;
+  max-width: var(--max-width, 1440px);
+  margin: 0 auto clamp(6rem, 10vw, 10rem);
 }
 
 .hero-img-wrapper {
   width: 100%;
-  height: 85vh;
+  height: clamp(50vh, 85vh, 90vh);
   overflow: hidden;
   position: relative;
-  /* Start with a clip-path for animation */
   will-change: clip-path;
+  background: var(--color-surface);
 }
 
 .hero-img {
   width: 100%;
-  height: 120%; /* Taller for parallax */
+  height: 120%;
   object-fit: cover;
+  object-position: center;
   will-change: transform;
 }
 
-/* ========================
-   CONTENT GRID (The Swiss Layout)
-   ======================== */
+/* ═══════════════════════════════════════════
+   CONTENT GRID (Sticky Sidebar + Flow)
+   ═══════════════════════════════════════════ */
+
 .content-grid {
+  max-width: var(--max-width, 1440px);
+  margin: 0 auto clamp(8rem, 12vw, 12rem);
   display: grid;
-  grid-template-columns: 1fr 2fr; /* 1/3 sidebar, 2/3 content */
-  gap: 6rem;
-  border-top: 1px solid var(--divider);
-  padding-top: 4rem;
+  grid-template-columns: 1fr 2fr;
+  gap: clamp(3rem, 6vw, 8rem);
+  border-top: 1px solid var(--color-border);
+  padding-top: clamp(4rem, 6vw, 6rem);
   position: relative;
-  margin-bottom: 10rem;
 }
 
-/* LEFT SIDEBAR (Sticky) */
+/* --- LEFT SIDEBAR (STICKY) --- */
 .content-sidebar {
   position: relative;
 }
 
 .sidebar-sticky-inner {
   position: sticky;
-  top: 7rem;
+  top: clamp(80px, 10vh, 120px);
 }
 
 .sidebar-label {
-  font-size: 0.75rem;
+  font-size: var(--text-caption);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  color: var(--color-muted);
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
   display: block;
+  font-weight: 600;
 }
 
 .project-description {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  font-weight: 400;
-  margin-bottom: 4rem;
-  max-width: 90%;
-  color: #333;
+  font-size: var(--text-body);
+  line-height: 1.8;
+  color: var(--color-ink);
+  margin-bottom: clamp(3rem, 5vw, 4rem);
+  max-width: 95%;
+}
+
+/* --- TECH STACK / TAGS --- */
+.tech-stack {
+  margin-bottom: clamp(3rem, 5vw, 4rem);
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
 .minimal-tag {
   display: inline-block;
-  font-size: 0.8rem;
-  border: 1px solid var(--divider);
-  padding: 0.4rem 0.8rem;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-  border-radius: 4px;
-  color: var(--text-secondary);
+  font-size: var(--text-caption);
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 1rem;
+  color: var(--color-muted);
+  transition: all var(--duration-fast) ease;
+  text-transform: capitalize;
 }
 
-/* RIGHT CONTENT FLOW */
+.minimal-tag:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* --- RIGHT CONTENT FLOW --- */
 .content-flow {
   display: flex;
   flex-direction: column;
-  gap: 8rem; /* Big spacing between images */
+  gap: clamp(6rem, 10vw, 10rem);
 }
 
 .content-image-wrapper {
   width: 100%;
-  height: auto;
   overflow: hidden;
   position: relative;
-  /* Optional: Make some landscape, some portrait based on child img? 
-     For now, full width of container */
+  aspect-ratio: auto;
+  will-change: transform;
 }
 
 .content-image-wrapper img {
   display: block;
   width: 100%;
   height: auto;
-  /* Minimal parallax scale effect */
-  transform: scale(1.1);
-  transition: opacity 0.3s;
+  will-change: transform;
 }
 
-/* ========================
- 
+/* ═══════════════════════════════════════════
+   NEXT PROJECT SECTION
+   ═══════════════════════════════════════════ */
 
-/* ========================
-   RESPONSIVE
-   ======================== */
+.next-project-section {
+  max-width: var(--max-width, 1440px);
+  margin: clamp(8rem, 12vw, 12rem) auto;
+}
+
+.next-project-link {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  padding: clamp(6rem, 10vw, 8rem) clamp(1.5rem, 3vw, 3rem);
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-white);
+  overflow: hidden;
+  cursor: pointer;
+  will-change: color;
+  transition: all var(--duration-med) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.next-project-content {
+  position: relative;
+  z-index: 2;
+}
+
+.next-label {
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+  display: block;
+  transition: color var(--duration-med) ease;
+  font-weight: 600;
+}
+
+.next-title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  margin: 0;
+  transition: transform var(--duration-med) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- BACKGROUND IMAGE CONTAINER --- */
+.next-project-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity var(--duration-med) ease, 
+              transform var(--duration-slow) cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.next-project-bg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3), rgba(10, 10, 10, 0.6));
+  pointer-events: none;
+}
+
+.next-project-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- HOVER INTERACTIONS --- */
+.next-project-link:hover .next-project-bg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.next-project-link:hover .next-label,
+.next-project-link:hover .next-title {
+  color: var(--color-white);
+}
+
+.next-project-link:hover .next-title {
+  transform: scale(1.02);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ═══════════════════════════════════════════ */
+
 @media (max-width: 1024px) {
   .content-grid {
-    grid-template-columns: 1fr; /* Stack on tablet */
-    gap: 4rem;
+    grid-template-columns: 1fr;
+    gap: clamp(3rem, 5vw, 4rem);
   }
 
   .sidebar-sticky-inner {
@@ -213,147 +343,66 @@
   .project-description {
     max-width: 100%;
   }
+
+  .header-meta {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
+  .minimal-project-page {
+    padding: 0 clamp(1rem, 2vw, 1.5rem);
+  }
+
   .project-header {
-    padding-top: 8rem;
+    padding-top: clamp(60px, 8vh, 80px);
+  }
+
+  .header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    border: none;
+    padding-bottom: 0;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .header-year {
+    margin-left: 0;
+    order: -1;
+  }
+
+  .project-title {
+    font-size: clamp(2rem, 6vw, 3rem);
   }
 
   .header-meta {
-    gap: 2rem;
-  }
-
-  .content-flow {
-    gap: 4rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
   }
 
   .hero-img-wrapper {
     height: 50vh;
   }
-}
 
-/* ========================
- /* ========================
-   NEXT PROJECT (TYPOGRAPHIC REVEAL)
-   ======================== */
-.next-project-section {
-  width: 100%;
-  margin-top: 8rem;
-  /* No top border, the link itself will have it */
-}
+  .content-flow {
+    gap: clamp(3rem, 6vw, 5rem);
+  }
 
-.next-project-link {
-  display: block;
-  position: relative;
-  text-decoration: none;
-  padding: 8rem 4vw; /* Generous padding for a large clickable area */
-  text-align: center;
-  border-top: 1px solid var(--divider);
-  background-color: var(--bg-color); /* Matches the page background */
-  overflow: hidden; /* Important for containing the background image */
-  cursor: pointer;
-  will-change: color;
-  transition: color 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* The content container for text */
-.next-project-content {
-  position: relative;
-  z-index: 2; /* Sits on top of the background image */
-}
-
-.next-label {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
-  display: block;
-  transition: color 0.5s ease;
-}
-
-.next-title {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: clamp(3.5rem, 8vw, 10rem); /* Make it HUGE */
-  font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-  color: var(--text-primary);
-  margin: 0;
-  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* The underline that draws on hover */
-.next-title::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: #fff;
-  margin-top: 1rem;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* Background image container */
-.next-project-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: 0; /* Hidden by default */
-  transform: scale(1.1); /* Slightly zoomed in */
-  transition: opacity 0.6s ease, transform 1s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* Dark overlay for text readability */
-.next-project-bg::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(10, 10, 10, 0.5);
-}
-
-.next-project-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* --- HOVER INTERACTIONS --- */
-
-.next-project-link:hover .next-project-bg {
-  opacity: 1;
-  transform: scale(1); /* Zooms out to normal scale */
-}
-
-/* Invert text colors */
-.next-project-link:hover .next-label,
-.next-project-link:hover .next-title {
-  color: #fff;
-}
-
-/* Animate the underline */
-.next-project-link:hover .next-title::after {
-  transform: scaleX(1);
-}
-
-/* Optional: a subtle lift effect on the title */
-.next-project-link:hover .next-title {
-  transform: scale(1.02);
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
   .next-project-link {
-    padding: 6rem 4vw;
+    padding: clamp(4rem, 8vw, 6rem) 1.5rem;
+  }
+
+  .next-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .next-project-link,
+  .next-project-bg,
+  .minimal-tag {
+    transition: none;
   }
 }
