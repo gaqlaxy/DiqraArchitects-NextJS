@@ -353,11 +353,26 @@ const Navbar = () => {
                 <a href="https://www.instagram.com/diqraarchitects/" target="_blank" rel="noopener noreferrer" className="Navbar-overlay-footer-link">
                   <AnimatedText>INSTAGRAM</AnimatedText>
                 </a>
-                <Link href="#" className="Navbar-overlay-footer-link">
+                <Link
+                  href="/privacy"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="Navbar-overlay-footer-link"
+                >
                   <AnimatedText>PRIVACY POLICY</AnimatedText>
                 </Link>
-                <Link href="#" className="Navbar-overlay-footer-link">
+                <Link
+                  href="/terms"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="Navbar-overlay-footer-link"
+                >
                   <AnimatedText>TERMS OF SERVICE</AnimatedText>
+                </Link>
+                <Link
+                  href="/license"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="Navbar-overlay-footer-link"
+                >
+                  <AnimatedText>LICENSE</AnimatedText>
                 </Link>
               </div>
             </div>
@@ -488,11 +503,26 @@ const Navbar = () => {
               <a href="https://www.instagram.com/diqraarchitects/" target="_blank" rel="noopener noreferrer" className="Navbar-overlay-footer-link">
                 <AnimatedText>INSTAGRAM</AnimatedText>
               </a>
-              <Link href="#" className="Navbar-overlay-footer-link">
+              <Link
+                href="/privacy"
+                onClick={() => setIsMenuOpen(false)}
+                className="Navbar-overlay-footer-link"
+              >
                 <AnimatedText>PRIVACY POLICY</AnimatedText>
               </Link>
-              <Link href="#" className="Navbar-overlay-footer-link">
+              <Link
+                href="/terms"
+                onClick={() => setIsMenuOpen(false)}
+                className="Navbar-overlay-footer-link"
+              >
                 <AnimatedText>TERMS OF SERVICE</AnimatedText>
+              </Link>
+              <Link
+                href="/license"
+                onClick={() => setIsMenuOpen(false)}
+                className="Navbar-overlay-footer-link"
+              >
+                <AnimatedText>LICENSE</AnimatedText>
               </Link>
             </div>
           </div>

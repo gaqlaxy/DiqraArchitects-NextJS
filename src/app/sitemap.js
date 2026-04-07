@@ -7,6 +7,9 @@ const staticRoutes = [
   "/about",
   "/services",
   "/contact",
+  "/privacy",
+  "/terms",
+  "/license",
 ];
 
 // The legacy curated high-traffic categories from categories.json

@@ -191,7 +191,9 @@ export default function Footer() {
               Email
             </div>
             <div className="contact-info">
-              <a href="mailto:info@example.io">info@diqraarchitecture.com</a>
+              <a href="mailto:info@diqraarchitects.com">
+                info@diqraarchitects.com
+              </a>
             </div>
           </div>
 
