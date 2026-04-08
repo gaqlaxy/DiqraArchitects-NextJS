@@ -43,7 +43,7 @@ const Services = () => {
         </div>
 
         <div className="services-grid">
-          <Link href="/services/exterior-design" className="service-card">
+          <Link href="/services/exterior" className="service-card">
             <div className="service-icon">
               <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.2">
                 <rect x="20" y="40" width="25" height="35" />
@@ -69,7 +69,7 @@ const Services = () => {
             <span className="service-arrow">→</span>
           </Link>
 
-          <Link href="/services/design-planning" className="service-card">
+          <Link href="/services/construction" className="service-card">
             <div className="service-icon">
               <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.2">
                 <circle cx="35" cy="45" r="18" />
@@ -78,7 +78,7 @@ const Services = () => {
               </svg>
             </div>
             <div className="service-body">
-              <h3 className="service-name">Design & Planning</h3>
+              <h3 className="service-name">Construction</h3>
               <p className="service-desc">
                 Conceptual layouts to detailed drawings — shaped with precision and clarity.
               </p>
@@ -86,7 +86,7 @@ const Services = () => {
             <span className="service-arrow">→</span>
           </Link>
 
-          <Link href="/services/consultation" className="service-card">
+          <Link href="/services/consultancy" className="service-card">
             <div className="service-icon">
               <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.2">
                 <path d="M 25 45 L 50 25 L 75 45 L 75 75 L 25 75 Z" />
@@ -98,7 +98,7 @@ const Services = () => {
               </svg>
             </div>
             <div className="service-body">
-              <h3 className="service-name">Consultation</h3>
+              <h3 className="service-name">Consultancy</h3>
               <p className="service-desc">
                 Expert guidance to help you make confident design decisions at every stage.
               </p>
