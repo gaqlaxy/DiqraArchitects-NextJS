@@ -332,72 +332,73 @@ export const servicesData = {
       { q: "Can you fix a dull façade?", a: "Yes, we handle façade refurbishment as part of our renovation services." },
     ],
     relatedServices: [
-      { slug: "architectural", title: "Architectural", hint: "Full design" },
+      { slug: "architects", title: "Architects", hint: "Full design" },
       { slug: "construction",  title: "Construction",  hint: "Turnkey build" },
     ],
   },
 
-  /* 06 — ARCHITECTURAL */
-  "architectural": {
-    title: "Architectural",
-    titleLine1: "Architectural",
-    titleLine2: "Services",
-    metaTitle: "Architectural Design Services in Chennai | Diqra Architects",
-    metaDescription: "Comprehensive architectural services in Chennai — concept design, floor planning, working drawings, and CMDA/DTCP approval support.",
-    subtitle: "From the first sketch to the last approval drawing — spatial clarity and precision documentation.",
+  /* 06 — ARCHITECTS */
+  "architects": {
+    title: "Architects",
+    titleLine1: "Award-Winning",
+    titleLine2: "Architects",
+    metaTitle: "Best Architects in Chennai | Diqra Architects – Award Winning Design",
+    metaDescription: "Registered COA architects in Chennai delivering bespoke residential architecture, luxury villas, and commercial designs with technical precision and spatial clarity.",
+    subtitle: "Registered COA professionals delivering intentional architecture shaped by cultural richness and technical mastery — built for Chennai.",
     statsQuote: "Architecture is the precise resolution of complex human needs into buildable space.",
     hero: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2000",
     stats: [
+      { value: "COA",  label: "Registered" },
       { value: "100%", label: "Approval Rate" },
-      { value: "15yr",  label: "Experience" },
-      { value: "1k+",  label: "Drawings Issued" },
+      { value: "15yr", label: "Experience" },
     ],
     overviewHeading: "Architecture That Begins with <em>Clarity</em>",
-    overview: `Good architecture is not decoration; it is the thoughtful arrangement of space. Our architectural practice covers residential, commercial, and institutional projects across Tamil Nadu. We manage the journey from site analysis and concept layouts to structural coordination and approval-ready blueprints.\n\nEvery plan we produce is drawn with an awareness of how people move through it — focusing on ventilation, light, and intuitive circulation.`,
+    overview: `Architecture at Diqra Architects is about more than making things look good. It's about grounding a building in its site, its climate, and the lives of its occupants. Our practice covers residential, commercial, and institutional projects across Tamil Nadu, merging artistic vision with COA-registered accountability.\n\nEvery plan we produce is drawn with an awareness of how people move through it — focusing on ventilation, light, and intuitive circulation while ensuring 100% compliance with CMDA and DTCP regulations.`,
     overviewAside: `
       <strong>Expertise</strong>
       Concept · Planning · MEP · Approval
-      <strong>Regulation</strong>
-      CMDA · DTCP · Local Body
+      <strong>Registration</strong>
+      Council of Architecture (COA)
       <strong>Focus</strong>
-      Urban Residences · Small Plots · Villas
+      Urban Residences · Luxury Villas · Commercial
     `,
     features: [
       {
-        title: "Spatial Planning",
-        desc: "Creating floor plans that feel generous and intuitive, regardless of plot size.",
-        img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200",
-      },
-      {
-        title: "3D Massing",
-        desc: "Visualizing the building's volume and height ratios before detailed design.",
+        title: "Visionary Design",
+        desc: "Applying deep design knowledge to solve complex spatial problems creatively and culturally.",
         img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200",
       },
       {
-        title: "Approval Documentation",
-        desc: "Comprehensive drawing sets prepared to strict local body and CMDA standards.",
-        img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200",
+        title: "Spatial Planning",
+        desc: "Creating floor plans that feel generous and intuitive, maximizing ventilation and light.",
+        img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200",
       },
       {
-        title: "GFC Drawings",
-        desc: "Good-For-Construction drawings including every structural and service detail.",
-        img: "https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?w=1200",
+        title: "Code Compliance",
+        desc: "Ensuring plans meet every local body and CMDA regulation with certified authority sign-off.",
+        img: "https://images.unsplash.com/photo-1600607687889-13809df77a4c?w=1200",
+      },
+      {
+        title: "Sustainability",
+        desc: "Passive cooling, rain harvesting, and light-well integration as core architectural features.",
+        img: "https://images.unsplash.com/photo-1600612239202-9c1a30c5728d?w=1200",
       },
     ],
     process: [
-      { step: "01", title: "Briefing",       desc: "Defining project goals, budget, and timeline." },
-      { step: "02", title: "Concept",        desc: "Preliminary spatial layouts and silhouette studies." },
-      { step: "03", title: "Refined Design", desc: "Detailed floor plans, sections, and elevations." },
-      { step: "04", title: "Coordination",  desc: "Integrating structural, electrical, and plumbing data." },
-      { step: "05", title: "Submission",    desc: "Preparation and filing for building approvals." },
-      { step: "06", title: "Issuance",      desc: "Final drawing set delivered to your contractor." },
+      { step: "01", title: "Discovery",       desc: "Defining your vision, life-patterns, and project goals." },
+      { step: "02", title: "Concept",        desc: "Preliminary spatial layouts and massing studies in 3D." },
+      { step: "03", title: "Approval",       desc: "Preparation and filing for building approvals (CMDA/DTCP)." },
+      { step: "04", title: "Refining",        desc: "Integrating structure, MEP services, and detailed elevations." },
+      { step: "05", title: "GFC Drawings",    desc: "Issuing scaled reinforcement and detailed construction sheets." },
+      { step: "06", title: "Supervision",     desc: "Acting as the legal authority on-site for quality check and certification." },
     ],
     faqs: [
-      { q: "What is a GFC drawing?", a: "GFC stands for 'Good for Construction' — the final, detailed drawing set used on-site." },
-      { q: "Do you handle Vastu?", a: "Yes, we integrate Vastu principles while maintaining modern design integrity." },
+      { q: "Why hire a registered architect?", a: "Only registered architects (COA) can sign off on the plans required for government building approval and ensure professional accountability." },
+      { q: "What is a GFC drawing?", a: "GFC stands for 'Good for Construction' — the final, detailed drawing set used on-site for execution." },
+      { q: "Do you handle Vastu?", a: "Yes, we integrate Vastu principles while maintaining modern design integrity and spatial flow." },
     ],
     relatedServices: [
-      { slug: "architecture", title: "Architecture", hint: "Design philosophy" },
+      { slug: "interiors", title: "Interiors", hint: "Holistic design" },
       { slug: "consultancy",  title: "Consultancy",  hint: "Expert advice" },
     ],
   },
@@ -462,7 +463,7 @@ export const servicesData = {
       { q: "Is the first consultation free?", a: "General introductory calls are free; technical assessments are fee-based." },
     ],
     relatedServices: [
-      { slug: "architectural", title: "Architectural", hint: "Full design" },
+      { slug: "architects", title: "Architects", hint: "Full design" },
       { slug: "project-management", title: "Project Management", hint: "On-site help" },
     ],
   },
@@ -528,7 +529,7 @@ export const servicesData = {
     ],
     relatedServices: [
       { slug: "construction", title: "Construction", hint: "Building it right" },
-      { slug: "architectural", title: "Architectural", hint: "Integrated design" },
+      { slug: "architects", title: "Architects", hint: "Integrated design" },
     ],
   },
 
@@ -593,137 +594,7 @@ export const servicesData = {
     ],
     relatedServices: [
       { slug: "construction", title: "Construction", hint: "Execution partner" },
-      { slug: "consultancy",  title: "Consultancy",  hint: "Expert guidance" },
-    ],
-  },
-
-  /* 10 — ARCHITECTURE */
-  "architecture": {
-    title: "Architecture",
-    titleLine1: "Grounded",
-    titleLine2: "Architecture",
-    metaTitle: "Architects in Chennai | Diqra Architects – Award Winning Design",
-    metaDescription: "Grounded, culturally rooted architecture in Chennai — designing intentional spaces that reflect life, climate, and site in Tamil Nadu.",
-    subtitle: "Intentional architecture shaped by cultural richness and refined modern craftsmanship — built for Chennai.",
-    statsQuote: "Architecture is the will of an epoch translated into space.",
-    hero: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000",
-    stats: [
-      { value: "100+", label: "Delivered" },
-      { value: "15yr",  label: "Practice" },
-      { value: "Unique", label: "Always" },
-    ],
-    overviewHeading: "Designing <em>With Intent</em>",
-    overview: `Architecture at Diqra Architects is about more than making things look good. It's about grounding a building in its site, its climate, and the lives of its occupants. We believe every project should be a unique response to its environment — creating a sense of 'place' rather than just a structure.\n\nOur philosophy blends modern minimalism with traditional wisdom, ensuring homes are ventilated, bright, and deeply connected to nature even in dense urban settings like Chennai.`,
-    overviewAside: `
-      <strong>Philosophy</strong>
-      Site-Responsive · Minimalist · Authentic
-      <strong>Practice</strong>
-      Residential · Institutional · Commercial
-      <strong>Credentials</strong>
-      Registered Architect · COA India
-    `,
-    features: [
-      {
-        title: "Cultural Context",
-        desc: "Designing buildings that feel at home in Tamil Nadu's rich architectural heritage.",
-        img: "https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?w=1200",
-      },
-      {
-        title: "Sustainability",
-        desc: "Passive cooling, rain harvesting, and light-well integration as standard features.",
-        img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200",
-      },
-      {
-        title: "Human Centric",
-        desc: "Spaces planned around rituals of daily life — from shared meals to quiet study.",
-        img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200",
-      },
-      {
-        title: "Material Sincerity",
-        desc: "Celebrating honest materials: exposed brick, polished stone, and raw concrete.",
-        img: "https://images.unsplash.com/photo-1600612239202-9c1a30c5728d?w=1200",
-      },
-    ],
-    process: [
-      { step: "01", title: "Discovery",       desc: "Defining your vision and life-patterns." },
-      { step: "02", title: "Site Reading",     desc: "Understanding the sun, wind, and neighbors." },
-      { step: "03", title: "Conceptualizing",  desc: "Sketching the soul of your building." },
-      { step: "04", title: "Refining",        desc: "Translating concepts into buildable forms." },
-      { step: "05", title: "Collaborating",   desc: "Integrating structure and services seamlessly." },
-      { step: "06", title: "Supervising",     desc: "Ensuring the vision is built to perfection." },
-    ],
-    faqs: [
-      { q: "What is your design style?", a: "We lean towards modern minimalism, but our 'style' is always a response to your needs and the site." },
-      { q: "Is architectural design expensive?", a: "It is an investment that increases property value and livability significantly." },
-    ],
-    relatedServices: [
-      { slug: "interiors", title: "Interiors", hint: "Holistic design" },
-      { slug: "exterior",  title: "Exterior",  hint: "Defining Presence" },
-    ],
-  },
-
-  /* 11 — ARCHITECT */
-  "architect": {
-    title: "Architect",
-    titleLine1: "Registered",
-    titleLine2: "Professional",
-    metaTitle: "Registered Architect in Chennai | Diqra Architects",
-    metaDescription: "Professional architect-led services in Chennai — registered with the Council of Architecture. We provide certified drawings and principal oversight for all projects.",
-    subtitle: "Professional registration and principal-led oversight — ensuring your project meets the highest industry standards.",
-    statsQuote: "A registered architect brings legal accountability and design mastery to your project.",
-    hero: "https://images.unsplash.com/photo-1503387762-592dee58ca3b?q=80&w=2000",
-    stats: [
-      { value: "COA", label: "Registered" },
-      { value: "15yr", label: "Experience" },
-      { value: "1-1",  label: "Principal Attention" },
-    ],
-    overviewHeading: "Expertise With <em>Accountability</em>",
-    overview: `Engaging a registered architect is a legal and quality requirement for any significant building project. At Diqra Architects, every project is personally overseen by a principal architect registered with the Council of Architecture (COA) India.\n\nWe bring a balance of artistic vision, technical knowledge, and project management skills to ensures your investment is safe, compliant with CMDA/DTCP rules, and spatially optimized for long-term value.`,
-    overviewAside: `
-      <strong>Registration</strong>
-      Council of Architecture (COA)
-      <strong>Responsibility</strong>
-      Design · Code · Supervision
-      <strong>Service</strong>
-      Principal-Led Oversight
-    `,
-    features: [
-      {
-        title: "Code Compliance",
-        desc: "Ensuring your plans meet every local body and CMDA regulation from day one.",
-        img: "https://images.unsplash.com/photo-1600607687889-13809df77a4c?w=1200",
-      },
-      {
-        title: "Professional Ethics",
-        desc: "Working with transparency in fees, contracts, and vendor recommendations.",
-        img: "https://images.unsplash.com/photo-1600585154340-be6161a46a0c?w=1200",
-      },
-      {
-        title: "Visionary Design",
-        desc: "Applying deep design knowledge to solve complex spatial problems creatively.",
-        img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200",
-      },
-      {
-        title: "Authority Sign-off",
-        desc: "Providing the certified drawings required for all government building permits.",
-        img: "https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?w=1200",
-      },
-    ],
-    process: [
-      { step: "01", title: "Identity",     desc: "Verification of registration and previous track record." },
-      { step: "02", title: "Strategy",     desc: "Setting the roadmap for design and approval." },
-      { step: "03", title: "Drafting",     desc: "Preparing scaled layouts and technical data." },
-      { step: "04", title: "Submission",   desc: "Signing off on plans for official approvals." },
-      { step: "05", title: "Supervision",  desc: "Acting as the legal authority on-site for quality check." },
-      { step: "06", title: "Completion",   desc: "Issuing completion certificates and occupancy aid." },
-    ],
-    faqs: [
-      { q: "Why hire a registered architect?", a: "Only registered architects can sign off on the plans required for government building approval." },
-      { q: "Is the principal involved in my project?", a: "Yes, at Diqra Architects, the principal leads every key design meeting." },
-    ],
-    relatedServices: [
-      { slug: "architecture", title: "Architecture", hint: "Full design philosophy" },
-      { slug: "consultancy",  title: "Consultancy",  hint: "Expert opinions" },
+      { slug: "architects",  title: "Architects",  hint: "Expert guidance" },
     ],
   },
 

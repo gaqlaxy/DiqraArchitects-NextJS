@@ -24,7 +24,7 @@ const servicesData = [
     title: "Design and Planning",
     description: "From conceptual layouts to detailed drawings, focusing on spatial flow.",
     image: "https://images.unsplash.com/photo-1721244654394-36a7bc2da288?q=80&w=1017&auto=format&fit=crop",
-    link: "/services/architectural",
+    link: "/services/architects",
   },
   {
     id: "03",
@@ -205,7 +205,7 @@ const ServicesPage = () => {
             {categoriesData
               .filter(cat => [
                 "exterior",
-                "architectural",
+                "architects",
                 "consultancy",
                 "interiors",
                 "renovation",

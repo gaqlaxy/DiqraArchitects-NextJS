@@ -40,12 +40,44 @@
     "thumbnail": "/images/services/exterior.jpg"
   },
   {
-    "slug": "architectural",
-    "title": "Architectural",
-    "tagline": "Spatial Clarity and Precision Documentation.",
-    "description": "Comprehensive architectural design and planning services.",
-    "image": "/images/services/architectural.jpg",
-    "thumbnail": "/images/services/architectural.jpg"
+    "slug": "architects",
+    "title": "Architects",
+    "tagline": "Award-Winning Designs that Redefine Premium Living.",
+    "description": "Transforming abstract ideas into buildable blueprints with COA-registered precision.",
+    "image": "/images/services/architects.jpg",
+    "thumbnail": "/images/services/architects.jpg",
+    "features": [
+      {
+        "title": "Concept",
+        "desc": "Initial sketches and massing studies."
+      },
+      {
+        "title": "3D Visualization",
+        "desc": "Realistic renders and virtual walkthroughs."
+      }
+    ],
+    "process": [
+      {
+        "step": "01",
+        "name": "Discovery",
+        "detail": "Client briefing and vision setting."
+      },
+      {
+        "step": "02",
+        "name": "Design",
+        "detail": "Detailed drawings and technical coordination."
+      }
+    ],
+    "stats": [
+      {
+        "label": "Projects",
+        "value": "1000+"
+      },
+      {
+        "label": "Awards",
+        "value": "20+"
+      }
+    ]
   },
   {
     "slug": "consultancy",
@@ -70,22 +102,6 @@
     "description": "Professional construction project management and oversight.",
     "image": "/images/services/project-management.jpg",
     "thumbnail": "/images/services/project-management.jpg"
-  },
-  {
-    "slug": "architecture",
-    "title": "Architecture",
-    "tagline": "Grounded and Intentional Spatial Design.",
-    "description": "Designing culturally rooted architecture for the modern world.",
-    "image": "/images/services/architecture.jpg",
-    "thumbnail": "/images/services/architecture.jpg"
-  },
-  {
-    "slug": "architect",
-    "title": "Architect",
-    "tagline": "Professional Registration and Principal-Led Oversight.",
-    "description": "Registered architect-led design and legal compliance services.",
-    "image": "/images/services/architect.jpg",
-    "thumbnail": "/images/services/architect.jpg"
   },
   {
     "slug": "construction-companies",
@@ -484,46 +500,6 @@
       {
         "label": "Campuses",
         "value": "8"
-      }
-    ]
-  },
-  {
-    "slug": "architects",
-    "title": "Architects",
-    "tagline": "Award-Winning Designs that Redefine Premium Living.",
-    "description": "Transforming abstract ideas into buildable blueprints.",
-    "image": "/images/services/architects.jpg",
-    "thumbnail": "/images/services/architects.jpg",
-    "features": [
-      {
-        "title": "Concept",
-        "desc": "Initial sketches."
-      },
-      {
-        "title": "3D",
-        "desc": "Realistic renders."
-      }
-    ],
-    "process": [
-      {
-        "step": "01",
-        "name": "Brief",
-        "detail": "Client meeting"
-      },
-      {
-        "step": "02",
-        "name": "Draft",
-        "detail": "CAD drawings"
-      }
-    ],
-    "stats": [
-      {
-        "label": "Awards",
-        "value": "20+"
-      },
-      {
-        "label": "Designs",
-        "value": "1000+"
       }
     ]
   },

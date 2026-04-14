@@ -1,4 +1,5 @@
 import { allServiceSlugs } from "@/app/data/servicesData";
+import projectsData from "@/app/data/projects-data.json";
 
 const baseUrl = "https://diqraarchitects.com";
 
@@ -31,8 +32,6 @@ const legacySlugs = [
   "architects-for-building",
 ];
 
-const selectedSlugs = [...new Set([...legacySlugs, ...allServiceSlugs])];
-
 export default async function sitemap() {
   const lastModified = new Date();
 
@@ -45,6 +44,7 @@ export default async function sitemap() {
   }));
 
   // 2. Dynamic Service Pages (including Geo-Variants)
+  const selectedSlugs = [...new Set([...legacySlugs, ...allServiceSlugs])];
   const categoryPages = selectedSlugs.map((slug) => {
     // Give base services a slightly higher priority than geo-variants
     const isGeoVariant = slug.endsWith("-chennai") || slug.endsWith("-urapakkam");
@@ -57,5 +57,13 @@ export default async function sitemap() {
     };
   });
 
-  return [...pages, ...categoryPages];
+  // 3. Dynamic Project Pages (Portfolio)
+  const projectPages = projectsData.projects.map((project) => ({
+    url: `${baseUrl}/project/${project.slug}`,
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...pages, ...categoryPages, ...projectPages];
 }
