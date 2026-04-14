@@ -36,6 +36,7 @@ const selectedSlugs = [...new Set([...legacySlugs, ...allServiceSlugs])];
 export default async function sitemap() {
   const lastModified = new Date();
 
+  // 1. Static Routes (Home, About, etc.)
   const pages = staticRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified,
@@ -43,12 +44,18 @@ export default async function sitemap() {
     priority: route === "" ? 1.0 : 0.7,
   }));
 
-  const categoryPages = selectedSlugs.map((slug) => ({
-    url: `${baseUrl}/services/${slug}`,
-    lastModified,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
+  // 2. Dynamic Service Pages (including Geo-Variants)
+  const categoryPages = selectedSlugs.map((slug) => {
+    // Give base services a slightly higher priority than geo-variants
+    const isGeoVariant = slug.endsWith("-chennai") || slug.endsWith("-urapakkam");
+    
+    return {
+      url: `${baseUrl}/services/${slug}`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: isGeoVariant ? 0.8 : 0.9,
+    };
+  });
 
   return [...pages, ...categoryPages];
 }

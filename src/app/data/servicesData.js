@@ -729,11 +729,72 @@ export const servicesData = {
 
 };
 
-export const allServiceSlugs = Object.keys(servicesData);
+/* ─────────────────────────────────────────────────────────────
+   GEO-LOCATION VARIANTS — Local SEO
+   Automatically creates /services/<slug>-chennai and
+   /services/<slug>-urapakkam for every base service entry.
+   Add more locations to _geoLocations to scale instantly.
+───────────────────────────────────────────────────────────── */
+const _geoLocations = [
+  { slug: "chennai",    label: "Chennai"    },
+  { slug: "urapakkam", label: "Urapakkam"  },
+];
+
+function _createGeoVariant(base, baseSlug, locSlug, locLabel) {
+  // Rewrite meta fields to be location-specific
+  const geoDesc = base.metaDescription
+    .replace(/\bin Chennai\b/gi, `in ${locLabel}`)
+    .replace(/\bChennai\b/g, locLabel);
+
+  const geoTitle = base.metaTitle
+    ? base.metaTitle
+        .replace(/\bin Chennai\b/gi, `in ${locLabel}`)
+        .replace(/\bChennai\b/g, locLabel)
+        .replace(/\bUrapakkam\b/g, locLabel)
+    : `${base.title} in ${locLabel} | Diqra Architects`;
+
+  return {
+    ...base,
+    // ── SEO fields (location-specific) ──────────────────────
+    metaTitle:       geoTitle,
+    metaDescription: geoDesc,
+    // Canonical will be set by the page.js to /services/<geo-slug>
+
+    // ── Related services: base page + sibling geo-variants ──
+    relatedServices: [
+      { slug: baseSlug, title: base.title, hint: "All locations" },
+      ..._geoLocations
+        .filter((l) => l.slug !== locSlug)
+        .map((l) => ({
+          slug:  `${baseSlug}-${l.slug}`,
+          title: `${base.title} – ${l.label}`,
+          hint:  `Serving ${l.label}`,
+        })),
+    ],
+  };
+}
+
+// Inject geo-variants into the shared servicesData map.
+// (Object mutation on a const is valid JS — const guards the binding, not contents.)
+const _baseSlugs = Object.keys(servicesData);
+_baseSlugs.forEach((baseSlug) => {
+  const base = servicesData[baseSlug];
+  _geoLocations.forEach(({ slug: locSlug, label: locLabel }) => {
+    servicesData[`${baseSlug}-${locSlug}`] = _createGeoVariant(
+      base,
+      baseSlug,
+      locSlug,
+      locLabel
+    );
+  });
+});
 
 /* ─────────────────────────────────────────────────────────────
-   Helper — get data for a slug with safe fallback
+   Exports — defined AFTER geo-injection so the new slugs
+   are included in allServiceSlugs automatically.
 ───────────────────────────────────────────────────────────── */
+export const allServiceSlugs = Object.keys(servicesData);
+
 export function getServiceData(slug) {
   return servicesData[slug] || null;
 }
