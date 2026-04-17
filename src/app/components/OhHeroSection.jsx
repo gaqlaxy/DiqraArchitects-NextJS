@@ -165,7 +165,7 @@ export default function OhHeroSection() {
             <img
               ref={previewImageRef}
               src={featuredProject.images[1] || featuredProject.thumbnail}
-              alt={`${featuredProject.title} preview`}
+              alt={`Architectural project: ${featuredProject.title}`}
               className="oh-preview-image"
             />
           </div>
@@ -173,7 +173,7 @@ export default function OhHeroSection() {
           {/* Main Hero Content */}
           <div className="oh-hero-content">
             {/* Left: Headline */}
-            <div className="oh-hero-headline">
+            <h1 className="oh-hero-headline">
               <div className="oh-line-mask">
                 <span className="oh-line">Strong, Grounded</span>
               </div>
@@ -185,7 +185,7 @@ export default function OhHeroSection() {
                   Shaped by Culture &amp; Elegance
                 </span>
               </div>
-            </div>
+            </h1>
 
             {/* Right: Meta Info */}
             <div className="oh-hero-meta">

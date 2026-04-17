@@ -27,9 +27,6 @@ export const metadata = {
     "modern architecture Chennai",
   ],
   metadataBase: new URL("https://diqraarchitects.com"),
-  alternates: {
-    canonical: "/",
-  },
 
   // ✅ FIXED ROBOTS (IMPORTANT)
   robots: {

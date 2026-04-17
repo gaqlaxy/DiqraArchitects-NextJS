@@ -1,4 +1,3 @@
-"use client";
 import OhHerosection from "@/app/components/OhHeroSection";
 import FeaturedWorks from "@/app/components/FeaturedWorks";
 import ProcessSection from "@/app/components/ProcessSection";

@@ -38,22 +38,33 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  
+
   // 1. Try rich servicesData first
   const service = servicesData[slug];
   if (service) {
     const metaDescription = service.metaDescription || service.subtitle;
     return {
-      title: service.metaTitle || `${service.title} | Best Architectural Services in Chennai | Diqra`,
+      title:
+        service.metaTitle ||
+        `${service.title} | Best Architectural Services in Chennai | Diqra`,
       description: metaDescription,
       alternates: {
         canonical: `https://www.diqraarchitects.com/services/${slug}`,
       },
       openGraph: {
+        title: service.metaTitle || service.title,
+        description: metaDescription,
+        url: `https://diqraarchitects.com/services/${slug}`,
+        siteName: "DIQRA Architects",
+        images: [{ url: service.hero, width: 1200, height: 630 }],
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
         title: service.title,
         description: metaDescription,
-        images: [{ url: service.hero }],
-      }
+        images: [service.hero],
+      },
     };
   }
 
@@ -63,12 +74,27 @@ export async function generateMetadata({ params }) {
     return { title: "Service Not Found | Diqra Architects" };
   }
 
-  const metaDescription = category.description || `Professional ${category.title.toLowerCase()} services in Chennai by Diqra Architects.`;
+  const metaDescription =
+    category.description ||
+    `Professional ${category.title.toLowerCase()} services in Chennai by Diqra Architects.`;
   return {
     title: `${category.title} | Best ${category.title.toLowerCase()} in Chennai | Diqra`,
     description: metaDescription,
     alternates: {
       canonical: `https://www.diqraarchitects.com/services/${slug}`,
+    },
+    openGraph: {
+      title: category.title,
+      description: metaDescription,
+      url: `https://diqraarchitects.com/services/${slug}`,
+      siteName: "DIQRA Architects",
+      images: [{ url: category.image || "/Hero1.jpeg" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: category.title,
+      description: metaDescription,
+      images: [category.image || "/Hero1.jpeg"],
     },
   };
 }
@@ -79,34 +105,39 @@ export async function generateMetadata({ params }) {
 export default async function CategoryPage({ params }) {
   const { slug } = await params;
 
+  let pageData = null;
+  let isRichService = false;
+
   // Priority 1: High-fidelity Service Data
   if (servicesData[slug]) {
-    // ServiceDetailPage now handles its own data lookup if we pass the slug
-    return <ServiceDetailPage service={slug} slug={slug} />;
+    pageData = servicesData[slug];
+    isRichService = true;
+  } else {
+    // Priority 2: Structured Category Data (legacy fallback)
+    const category = categoriesData.find((cat) => cat.slug === slug);
+    if (!category || !legacySlugs.includes(slug)) {
+      notFound();
+    }
+    pageData = {
+      title: category.title,
+      subtitle: category.tagline,
+      hero:
+        category.image ||
+        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070",
+      description: category.description,
+      features: category.features || [],
+      process: (category.process || []).map((p) => ({
+        step: p.step,
+        title: p.name,
+        desc: p.detail,
+      })),
+      stats: category.stats || [],
+    };
   }
 
-  // Priority 2: Structured Category Data (legacy fallback)
-  const category = categoriesData.find((cat) => cat.slug === slug);
-  
-  // Ensure the slug is either in our curated legacy list or our rich data list
-  if (!category || !legacySlugs.includes(slug)) {
-    notFound();
-  }
-
-  // Map legacy JSON format to ServiceDetailPage expected format
-  const mappedData = {
-    title: category.title,
-    subtitle: category.tagline,
-    hero: category.image || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070",
-    description: category.description,
-    features: category.features || [],
-    process: (category.process || []).map((p) => ({
-      step: p.step,
-      title: p.name,
-      desc: p.detail,
-    })),
-    stats: category.stats || [],
-  };
-
-  return <ServiceDetailPage customData={mappedData} service={slug} slug={slug} />;
+  return isRichService ? (
+    <ServiceDetailPage service={slug} slug={slug} />
+  ) : (
+    <ServiceDetailPage customData={pageData} service={slug} slug={slug} />
+  );
 }

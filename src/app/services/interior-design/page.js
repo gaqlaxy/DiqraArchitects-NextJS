@@ -1,19 +1,28 @@
 import ServiceDetailPage from "@/app/components/ServiceDetailPage";
-import { servicesData } from "@/app/data/servicesData";
+import { notFound } from "next/navigation";
+import {
+  buildServiceMetadata,
+  getServiceRouteData,
+} from "../serviceRouteData";
 
 const slug = "interior-design";
 
 export function generateMetadata() {
-  const service = servicesData[slug];
-  return {
-    title: service?.metaTitle || "Interior Design | Diqra Architects",
-    description: service?.metaDescription || "Bespoke interior design services in Chennai.",
-    alternates: {
-      canonical: `https://www.diqraarchitects.com/services/${slug}`,
-    },
-  };
+  return buildServiceMetadata(slug);
 }
 
 export default function Page() {
-  return <ServiceDetailPage service={slug} slug={slug} />;
+  const resolved = getServiceRouteData(slug);
+
+  if (!resolved) {
+    notFound();
+  }
+
+  return (
+    <ServiceDetailPage
+      customData={resolved.data}
+      service={resolved.sourceSlug}
+      slug={slug}
+    />
+  );
 }
