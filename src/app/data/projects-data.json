@@ -22,7 +22,11 @@
         "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop",
         "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&h=800&fit=crop"
       ],
-      "tags": ["Modern", "Residential", "Sustainable"]
+      "tags": [
+        "Modern",
+        "Residential",
+        "Sustainable"
+      ]
     },
     {
       "id": 2,
@@ -46,7 +50,11 @@
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
         "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&h=800&fit=crop"
       ],
-      "tags": ["Minimalist", "Guest House", "Contemporary"]
+      "tags": [
+        "Minimalist",
+        "Guest House",
+        "Contemporary"
+      ]
     },
     {
       "id": 3,
@@ -65,8 +73,16 @@
         "status": "Completed",
         "architect": "Diqra Architects"
       },
-      "images": ["/HeroMain.webp", "/About.jpg", "/About1.jpg"],
-      "tags": ["Luxury", "Pool House", "Indoor-Outdoor"]
+      "images": [
+        "/HeroMain.webp",
+        "/About.jpg",
+        "/About1.jpg"
+      ],
+      "tags": [
+        "Luxury",
+        "Pool House",
+        "Indoor-Outdoor"
+      ]
     },
     {
       "id": 4,
@@ -90,7 +106,11 @@
         "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1200&h=800&fit=crop",
         "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=800&fit=crop"
       ],
-      "tags": ["Urban", "Contemporary", "Bold Design"]
+      "tags": [
+        "Urban",
+        "Contemporary",
+        "Bold Design"
+      ]
     },
     {
       "id": 5,
@@ -114,7 +134,11 @@
         "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop",
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop"
       ],
-      "tags": ["Coastal", "Views", "Natural Light"]
+      "tags": [
+        "Coastal",
+        "Views",
+        "Natural Light"
+      ]
     },
     {
       "id": 6,
@@ -138,7 +162,11 @@
         "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&h=800&fit=crop",
         "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200&h=800&fit=crop"
       ],
-      "tags": ["Traditional", "Timeless", "Functional"]
+      "tags": [
+        "Traditional",
+        "Timeless",
+        "Functional"
+      ]
     },
     {
       "id": 7,
@@ -162,7 +190,11 @@
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
         "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200&h=800&fit=crop"
       ],
-      "tags": ["Urban Oasis", "Pavilion", "Innovative"]
+      "tags": [
+        "Urban Oasis",
+        "Pavilion",
+        "Innovative"
+      ]
     },
     {
       "id": 8,
@@ -186,7 +218,11 @@
         "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200&h=800&fit=crop",
         "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&h=800&fit=crop"
       ],
-      "tags": ["Valley Views", "Natural", "Landscape"]
+      "tags": [
+        "Valley Views",
+        "Natural",
+        "Landscape"
+      ]
     },
     {
       "id": 9,
@@ -210,7 +246,11 @@
         "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&h=800&fit=crop",
         "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1200&h=800&fit=crop"
       ],
-      "tags": ["Studio", "Garden", "Creative Space"]
+      "tags": [
+        "Studio",
+        "Garden",
+        "Creative Space"
+      ]
     },
     {
       "id": 10,
@@ -234,7 +274,11 @@
         "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=800&fit=crop",
         "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 11,
@@ -263,7 +307,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 12,
@@ -292,7 +340,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 13,
@@ -321,7 +373,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 14,
@@ -350,7 +406,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 15,
@@ -379,7 +439,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 16,
@@ -408,7 +472,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 17,
@@ -437,7 +505,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 18,
@@ -466,7 +538,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 19,
@@ -495,7 +571,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 20,
@@ -524,7 +604,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 21,
@@ -553,7 +637,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 22,
@@ -582,7 +670,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 23,
@@ -611,7 +703,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 24,
@@ -640,9 +736,12 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
-
     {
       "id": 25,
       "slug": "mrs-yamini-residence",
@@ -670,7 +769,11 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Hillside",
+        "Panoramic Views"
+      ]
     },
     {
       "id": 26,
@@ -699,7 +802,39 @@
         "/Int7.jpg",
         "/Int8.jpg"
       ],
-      "tags": ["Retreat", "Hillside", "Panoramic Views"]
+      "tags": [
+        "Retreat",
+        "Panoramic Views"
+      ]
+    },
+    {
+      "id": 27,
+      "slug": "kanchipuram-residence",
+      "title": "Kanchipuram Residence",
+      "year": "2024",
+      "category": "Residential",
+      "projectType": "architecture",
+      "location": "Kanchipuram",
+      "thumbnail": "/images/projects/architecture/kanchipuram_residence/1.webp",
+      "featured": true,
+      "description": "A secluded retreat designed to embrace panoramic hillside vistas.",
+      "details": {
+        "client": "Private Client",
+        "area": "360 sqm",
+        "status": "Completed",
+        "architect": "Your Studio Name"
+      },
+      "images": [
+        "/images/projects/architecture/kanchipuram_residence/1.webp",
+        "/images/projects/architecture/kanchipuram_residence/2.webp",
+        "/images/projects/architecture/kanchipuram_residence/3.webp",
+        "/images/projects/architecture/kanchipuram_residence/4.webp",
+        "/images/projects/architecture/kanchipuram_residence/5.webp"
+      ],
+      "tags": [
+        "Retreat",
+        "Panoramic Views"
+      ]
     }
   ]
 }
