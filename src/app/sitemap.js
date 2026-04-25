@@ -1,4 +1,5 @@
 import { allServiceSlugs } from "@/app/data/servicesData";
+import { serviceAreaPages, serviceAreaLocations } from "@/app/data/serviceAreas";
 import projectsData from "@/app/data/projects-data.json";
 import { dedicatedServiceRouteSlugs } from "@/app/services/serviceRouteData";
 
@@ -64,6 +65,17 @@ export default async function sitemap() {
     };
   });
 
+  const serviceAreaLandingPages = serviceAreaPages.map((page) => {
+    const location = serviceAreaLocations[page.location];
+
+    return {
+      url: `${baseUrl}/services/${page.service}/${page.location}`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: location?.priority || 0.8,
+    };
+  });
+
   // 3. Dynamic Project Pages (Portfolio)
   const projectPages = projectsData.projects.map((project) => ({
     url: `${baseUrl}/project/${project.slug}`,
@@ -72,5 +84,5 @@ export default async function sitemap() {
     priority: 0.6,
   }));
 
-  return [...pages, ...categoryPages, ...projectPages];
+  return [...pages, ...categoryPages, ...serviceAreaLandingPages, ...projectPages];
 }

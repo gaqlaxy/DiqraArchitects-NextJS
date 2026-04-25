@@ -10,6 +10,7 @@ import CtaSection from "@/app/components/CtaSection";
 import Footer from "@/app/components/Footer";
 
 import { servicesData } from "@/app/data/servicesData";
+import { getServiceAreaLinks } from "@/app/data/serviceAreas";
 import projectsSource from "@/app/data/projects-data.json";
 import "@/app/styles/ServiceDetailPage.css";
 
@@ -118,7 +119,23 @@ const projectFallbacks = (projectsSource.projects || [])
    SEO — JSON-LD Helper (Service + FAQ schema)
    Improves chances of rich snippets in Google Search
 ───────────────────────────────────────────────────────────── */
-const ServiceSchema = ({ service, slug, faqs = EMPTY_ARRAY }) => {
+const ServiceSchema = ({
+  service,
+  slug,
+  faqs = EMPTY_ARRAY,
+  locationData = null,
+}) => {
+  const pageUrl = `https://diqraarchitects.com/services/${slug}`;
+  const baseServiceSlug = String(slug || "").split("/")[0];
+  const areaServed = locationData
+    ? [
+        locationData.label,
+        ...(locationData.nearbyAreas || []),
+        locationData.city,
+        locationData.region,
+      ]
+    : ["Chennai", "Tamil Nadu"];
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -138,9 +155,9 @@ const ServiceSchema = ({ service, slug, faqs = EMPTY_ARRAY }) => {
         addressCountry: "IN",
       },
     },
-    areaServed: ["Chennai", "Tamil Nadu"],
+    areaServed,
     serviceType: service.title,
-    url: `https://diqraarchitects.com/services/${slug}`,
+    url: pageUrl,
   };
 
   const faqSchema =
@@ -179,8 +196,20 @@ const ServiceSchema = ({ service, slug, faqs = EMPTY_ARRAY }) => {
         "@type": "ListItem",
         position: 3,
         name: service.title,
-        item: `https://diqraarchitects.com/services/${slug}`,
+        item: locationData
+          ? `https://diqraarchitects.com/services/${baseServiceSlug}`
+          : pageUrl,
       },
+      ...(locationData
+        ? [
+            {
+              "@type": "ListItem",
+              position: 4,
+              name: locationData.label,
+              item: pageUrl,
+            },
+          ]
+        : []),
     ],
   };
 
@@ -254,6 +283,8 @@ const ServiceDetailPage = ({
   relatedServices = EMPTY_ARRAY,
   projectsData = EMPTY_ARRAY,
   faqs = EMPTY_ARRAY,
+  locationData = null,
+  routeServiceSlug = null,
 }) => {
   const containerRef = useRef(null);
 
@@ -266,6 +297,18 @@ const ServiceDetailPage = ({
       : lookupKey
         ? servicesData[lookupKey] || {}
         : {};
+  const effectiveRouteServiceSlug =
+    routeServiceSlug || String(slug || "").split("/")[0] || service;
+  const localServiceAreaLinks = getServiceAreaLinks(
+    effectiveRouteServiceSlug,
+    locationData?.slug || null,
+  ).slice(0, 6);
+  const breadcrumbServiceTitle = locationData
+    ? String(currentService.titleLine1 || currentService.title || "Service").replace(
+        /^Best\s+/i,
+        "",
+      )
+    : currentService.title;
 
   /* ── Default fallbacks ── */
   const _relatedServices =
@@ -306,6 +349,8 @@ const ServiceDetailPage = ({
   const _faqs =
     faqs.length > 0
       ? faqs
+      : currentService.faqs && currentService.faqs.length > 0
+        ? currentService.faqs
       : [
           {
             q: `What does Diqra Architects offer for ${currentService.title || "this service"} in Chennai?`,
@@ -505,7 +550,12 @@ const ServiceDetailPage = ({
   return (
     <>
       {/* ── SEO Structured Data ── */}
-      <ServiceSchema service={currentService} slug={slug} faqs={_faqs} />
+      <ServiceSchema
+        service={currentService}
+        slug={slug}
+        faqs={_faqs}
+        locationData={locationData}
+      />
 
       <div
         ref={containerRef}
@@ -551,10 +601,20 @@ const ServiceDetailPage = ({
                 <span aria-hidden="true">›</span>
                 <Link href="/services">Services</Link>
                 <span aria-hidden="true">›</span>
-                <span aria-current="page">{currentService.title}</span>
+                {locationData ? (
+                  <>
+                    <Link href={`/services/${effectiveRouteServiceSlug}`}>
+                      {breadcrumbServiceTitle}
+                    </Link>
+                    <span aria-hidden="true">›</span>
+                    <span aria-current="page">{locationData.label}</span>
+                  </>
+                ) : (
+                  <span aria-current="page">{currentService.title}</span>
+                )}
               </nav>
               <div className="sd-label">
-                Architecture &amp; Design · Chennai
+                Architecture &amp; Design · {locationData?.label || "Chennai"}
               </div>
             </div>
 
@@ -786,6 +846,45 @@ const ServiceDetailPage = ({
           </ul>
         </section>
 
+        {localServiceAreaLinks.length > 0 && (
+          <section
+            className="sd-related-section sd-area-section"
+            aria-labelledby="sd-area-heading"
+          >
+            <div className="sd-related-header">
+              <div>
+                <div className="sd-label" style={{ marginBottom: "12px" }}>
+                  Service Areas
+                </div>
+                <h2 id="sd-area-heading" className="sd-related-title">
+                  {locationData ? "Nearby Areas" : "Popular Local Pages"}
+                </h2>
+              </div>
+            </div>
+
+            <nav aria-label="Service area pages" className="sd-related-cards">
+              {localServiceAreaLinks.slice(0, 3).map((area, i) => (
+                <Link
+                  key={area.href}
+                  href={area.href}
+                  className="sd-related-card"
+                >
+                  <div className="sd-card-num">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div className="sd-card-title">
+                    {breadcrumbServiceTitle} in {area.title}
+                  </div>
+                  <div className="sd-card-hint">{area.hint}</div>
+                  <div className="sd-card-arrow" aria-hidden="true">
+                    →
+                  </div>
+                </Link>
+              ))}
+            </nav>
+          </section>
+        )}
+
         {/* ════════════════════════════════════════════
             RELATED SERVICES
         ════════════════════════════════════════════ */}
@@ -808,7 +907,7 @@ const ServiceDetailPage = ({
             {_relatedServices.map((rel, i) => (
               <Link
                 key={rel.slug}
-                href={`/services/${rel.slug}`}
+                href={rel.href || `/services/${rel.slug}`}
                 className="sd-related-card"
               >
                 <div className="sd-card-num">
