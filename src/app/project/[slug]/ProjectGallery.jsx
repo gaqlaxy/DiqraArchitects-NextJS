@@ -81,6 +81,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import "@/app/styles/ProjectGallery.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -144,8 +145,15 @@ export default function ProjectGallery({ images = [] }) {
         <div className="pg-column pg-column-left">
           {leftImages.map((src, idx) => (
             <div className="pg-item pg-item-tall" key={`left-${idx}`}>
-              <div className="pg-image-wrapper">
-                <img src={src} alt="" className="pg-img" />
+              <div className="pg-image-wrapper" style={{ position: "relative" }}>
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  className="pg-img"
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
             </div>
           ))}
@@ -155,8 +163,15 @@ export default function ProjectGallery({ images = [] }) {
         <div className="pg-column pg-column-right">
           {rightImages.map((src, idx) => (
             <div className="pg-item pg-item-medium" key={`right-${idx}`}>
-              <div className="pg-image-wrapper">
-                <img src={src} alt="" className="pg-img" />
+              <div className="pg-image-wrapper" style={{ position: "relative" }}>
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  className="pg-img"
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
             </div>
           ))}

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import Footer from "@/app/components/Footer";
 import projectsData from "@/app/data/projects-data.json";
@@ -89,8 +90,14 @@ export default function InteriorWorks() {
                 href={`/project/${project.slug}`}
                 className={`project-card ${idx % 2 === 0 ? "tall" : "wide"}`}
               >
-                <div className="project-inner">
-                  <img src={project.thumbnail} alt={project.title} />
+                <div className="project-inner" style={{ position: "relative" }}>
+                  <Image
+                    src={project.thumbnail}
+                    alt={project.title}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                  />
                   <div className="overlay" />
                   <div className="project-title-container">
                     <h3>{project.title}</h3>

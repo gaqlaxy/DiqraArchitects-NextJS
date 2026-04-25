@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Head from "next/head";
+import Image from "next/image";
 import CtaSection from "@/app/components/CtaSection";
 import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
@@ -39,7 +40,7 @@ const ServiceSchema = ({ service, slug, faqs = [] }) => {
         "addressCountry": "IN"
       }
     },
-    "areaServed": ["Chennai", "Tamil Nadu", "Lahore"],
+    "areaServed": ["Chennai", "Tamil Nadu"],
     "serviceType": service.title,
     "url": `https://www.diqraarchitects.com/services/${slug}`
   };
@@ -247,12 +248,14 @@ const ServiceDetailPage = ({
           {/* Visual column */}
           <div className="sd-hero-visual">
             {currentService.hero ? (
-              <img
+              <Image
                 src={currentService.hero}
                 alt={`${currentService.title} – Diqra Architects, Chennai`}
                 className="sd-hero-img"
-                loading="eager"
-                fetchpriority="high"
+                fill
+                priority
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 1024px) 100vw, 55vw"
               />
             ) : (
               <div className="sd-feature-placeholder">Hero Image</div>
@@ -362,10 +365,12 @@ const ServiceDetailPage = ({
               >
                 <div className="sd-feature-visual" aria-hidden="true">
                   {feature.img ? (
-                    <img
+                    <Image
                       src={feature.img}
                       alt={`${feature.title} – Diqra Architects`}
-                      loading="lazy"
+                      fill
+                      style={{ objectFit: "cover" }}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   ) : (
                     <div className="sd-feature-placeholder">{feature.title}</div>
@@ -434,11 +439,13 @@ const ServiceDetailPage = ({
                 className={`sd-masonry-item sd-item-${i + 1}`}
                 aria-label={`View ${project.title} – ${project.cat} project`}
               >
-                <img
+                <Image
                   src={project.img}
                   alt={`${project.title} – ${project.cat} architecture by Diqra, Chennai`}
+                  fill
                   className="sd-masonry-img"
-                  loading="lazy"
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="sd-masonry-overlay" aria-hidden="true">
                   <div className="sd-masonry-cat">{project.cat}</div>

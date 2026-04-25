@@ -2,6 +2,7 @@
 
 import React, { useLayoutEffect, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import projectsData from "@/app/data/projects-data.json";
 import Footer from "@/app/components/Footer";
 import { gsap } from "gsap";
@@ -166,11 +167,15 @@ export default function ProjectDetailClient({ slug }) {
 
         {/* HERO IMAGE */}
         <div className="hero-section">
-          <div className="hero-img-wrapper">
-            <img
+          <div className="hero-img-wrapper" style={{ position: "relative" }}>
+            <Image
               src={project.images[0]}
               alt={project.title}
+              fill
+              priority
               className="hero-img"
+              style={{ objectFit: "cover" }}
+              sizes="100vw"
             />
           </div>
         </div>
@@ -221,11 +226,14 @@ export default function ProjectDetailClient({ slug }) {
           {/* RIGHT: Flowing Images */}
           <div className="content-flow">
             {project.images.slice(1).map((imgUrl, idx) => (
-              <div key={idx} className="content-image-wrapper">
-                <img
+              <div key={idx} className="content-image-wrapper" style={{ position: "relative", aspectRatio: "3/2" }}>
+                <Image
                   src={imgUrl}
                   alt={`${project.title} detail ${idx + 1}`}
-                  loading="lazy"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  className="content-img-asset"
                 />
               </div>
             ))}
@@ -240,9 +248,12 @@ export default function ProjectDetailClient({ slug }) {
               className="next-project-link"
             >
               <div className="next-project-bg">
-                <img
+                <Image
                   src={nextProject.thumbnail || nextProject.images[0]}
                   alt=""
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="100vw"
                 />
               </div>
 

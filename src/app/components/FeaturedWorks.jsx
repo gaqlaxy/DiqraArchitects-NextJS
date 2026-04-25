@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+import Image from "next/image";
 import projectsData from "../data/projects-data.json";
 import "../styles/FeaturedWorks.css";
 import SlideUpButton from "./SlideUpButton";
@@ -79,7 +80,13 @@ const FeaturedWorks = () => {
             key={work.id}
           >
             <div className="work-image">
-              <img src={work.thumbnail} alt={work.title} loading="lazy" />
+              <Image
+                src={work.thumbnail}
+                alt={work.title}
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
               <div className="work-overlay">
                 <span className="work-view">View →</span>
               </div>

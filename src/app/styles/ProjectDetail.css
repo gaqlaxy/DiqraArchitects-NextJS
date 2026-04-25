@@ -217,7 +217,7 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  aspect-ratio: auto;
+  aspect-ratio: 16/9;
   will-change: transform;
 }
 

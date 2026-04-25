@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
+import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import projectsData from "../data/projects-data.json";
 import "../styles/OhHeroSection.css";
@@ -21,24 +22,7 @@ export default function OhHeroSection() {
   const featuredProject =
     projectsData.projects.find((p) => p.featured) || projectsData.projects[0];
   const HERO_IMG = featuredProject.images[0];
-
-  // Preload hero image
-  useEffect(() => {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = HERO_IMG;
-    const onLoad = () => setHeroLoaded(true);
-    const onError = () => {
-      setHeroLoaded(true);
-      console.warn("Hero image failed to load, continuing anyway.");
-    };
-    img.addEventListener("load", onLoad);
-    img.addEventListener("error", onError);
-    return () => {
-      img.removeEventListener("load", onLoad);
-      img.removeEventListener("error", onError);
-    };
-  }, [HERO_IMG]);
+  const PREVIEW_IMG = featuredProject.images[1] || featuredProject.thumbnail;
 
   // GSAP animations after image load
   useEffect(() => {
@@ -143,13 +127,15 @@ export default function OhHeroSection() {
         >
           {/* Background Image with Parallax */}
           <div className="oh-hero-bg-wrapper">
-            <div
+            <Image
+              src={HERO_IMG}
+              alt="DIQRA Architecture Hero Background"
+              fill
+              priority
               className={`oh-hero-bg ${heroLoaded ? "loaded" : ""}`}
-              ref={heroBgRef}
-              style={{
-                backgroundImage: `url(${HERO_IMG})`,
-              }}
-              aria-hidden="true"
+              onLoad={() => setHeroLoaded(true)}
+              style={{ objectFit: "cover" }}
+              sizes="100vw"
             />
           </div>
 
@@ -162,12 +148,15 @@ export default function OhHeroSection() {
             ref={hoverPreviewRef}
             aria-hidden="true"
           >
-            <img
-              ref={previewImageRef}
-              src={featuredProject.images[1] || featuredProject.thumbnail}
-              alt={`Architectural project: ${featuredProject.title}`}
-              className="oh-preview-image"
-            />
+            <div ref={previewImageRef} className="oh-preview-image-wrapper">
+              <Image
+                src={PREVIEW_IMG}
+                alt={`Architectural project: ${featuredProject.title}`}
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
           </div>
 
           {/* Main Hero Content */}

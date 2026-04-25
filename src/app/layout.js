@@ -83,10 +83,10 @@ export default function RootLayout({ children }) {
       "@type": "PostalAddress",
       addressLocality: "Chennai",
       addressRegion: "Tamil Nadu",
-      postalCode: "603210",
+      postalCode: "603202",
       addressCountry: "IN",
     },
-    areaServed: ["Chennai", "Urapakkam"],
+    areaServed: ["Chennai", "Tamil Nadu", "Urapakkam"],
   };
 
   return (

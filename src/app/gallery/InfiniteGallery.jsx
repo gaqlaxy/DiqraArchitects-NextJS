@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { gsap } from "gsap";
 import { CustomEase } from "gsap/CustomEase";
+import NextImage from "next/image";
 import OptimizedGalleryImage from "@/app/components/OptimizedGalleryImage";
 
 gsap.registerPlugin(CustomEase);
@@ -101,6 +102,8 @@ const InfiniteGallery = () => {
     hasMoved: false,
   });
 
+  const rafRef = useRef(null);
+
   const stateRef = useRef({
     canDrag: true,
     lastUpdateTime: 0,
@@ -178,23 +181,20 @@ const InfiniteGallery = () => {
     forceRender((n) => n + 1);
   }, [cellWidth, cellHeight]);
 
-  const handleItemClick = (itemData) => {
+  const handleItemClick = (e, itemData) => {
     if (dragRef.current.hasMoved || dragRef.current.isDragging) return;
 
     if (isExpanded) {
       closeExpandedItem();
     } else {
-      expandItem(itemData);
+      expandItem(e.currentTarget, itemData);
     }
   };
 
-  const expandItem = (itemData) => {
+  const expandItem = (itemElement, itemData) => {
     setIsExpanded(true);
     stateRef.current.canDrag = false;
 
-    const itemElement = document.getElementById(
-      `GallerySectionitem-${itemData.id}`
-    );
     if (!itemElement) return;
 
     const rect = itemElement.getBoundingClientRect();
@@ -213,7 +213,6 @@ const InfiniteGallery = () => {
 
     // Animate title
     if (titleRef.current) {
-      titleRef.current.textContent = itemData.title;
       gsap.fromTo(
         titleRef.current,
         { y: 50, opacity: 0 },
@@ -222,11 +221,13 @@ const InfiniteGallery = () => {
     }
 
     // Fade out other items
-    document.querySelectorAll(".GallerySectionitem").forEach((el) => {
-      if (el.id !== `GallerySectionitem-${itemData.id}`) {
-        gsap.to(el, { opacity: 0, duration: SETTINGS.overlayEaseDuration });
-      }
-    });
+    if (canvasRef.current) {
+      canvasRef.current.querySelectorAll(".GallerySectionitem").forEach((el) => {
+        if (el.getAttribute("data-id") !== itemData.id) {
+          gsap.to(el, { opacity: 0, duration: SETTINGS.overlayEaseDuration });
+        }
+      });
+    }
   };
 
   const closeExpandedItem = () => {
@@ -249,13 +250,15 @@ const InfiniteGallery = () => {
     }
 
     // Fade in other items
-    document.querySelectorAll(".GallerySectionitem").forEach((el) => {
-      gsap.to(el, {
-        opacity: 1,
-        duration: SETTINGS.overlayEaseDuration,
-        delay: 0.3,
+    if (canvasRef.current) {
+      canvasRef.current.querySelectorAll(".GallerySectionitem").forEach((el) => {
+        gsap.to(el, {
+          opacity: 1,
+          duration: SETTINGS.overlayEaseDuration,
+          delay: 0.3,
+        });
       });
-    });
+    }
 
     setTimeout(() => setExpandedData(null), SETTINGS.zoomDuration * 1000);
   };
@@ -286,7 +289,7 @@ const InfiniteGallery = () => {
         stateRef.current.lastUpdateTime = now;
       }
     }
-    requestAnimationFrame(animate);
+    rafRef.current = requestAnimationFrame(animate);
   }, [updateVisibleItems]);
 
   const handleMouseDown = (e) => {
@@ -374,7 +377,9 @@ const InfiniteGallery = () => {
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("resize", updateVisibleItems);
       window.removeEventListener("resize", updateViewport);
-      // NOTE: animate loop is still running; if you want, we can refactor to store RAF id and cancel it here.
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
   }, [animate, updateVisibleItems]);
 
@@ -708,7 +713,8 @@ const InfiniteGallery = () => {
                 left: `${item.position.x}px`,
                 top: `${item.position.y}px`,
               }}
-              onClick={() => handleItemClick(item)}
+              data-id={item.id}
+              onClick={(e) => handleItemClick(e, item)}
             >
               <div className="GallerySectionitem-image-container">
                 {/* <img src={item.image} alt={item.title} /> */}
@@ -733,7 +739,7 @@ const InfiniteGallery = () => {
       </div>
 
       <div className="GallerySectionproject-title">
-        <p ref={titleRef}></p>
+        <p ref={titleRef}>{expandedData?.title || ""}</p>
       </div>
 
       {expandedData && viewportWidth > 0 && (
@@ -742,6 +748,7 @@ const InfiniteGallery = () => {
           ref={expandedItemRef}
           onClick={closeExpandedItem}
           style={{
+            position: "fixed",
             width: `${viewportWidth * SETTINGS.expandedScale}px`,
             height: `${
               viewportWidth *
@@ -751,7 +758,13 @@ const InfiniteGallery = () => {
             transform: "translate(-50%, -50%)",
           }}
         >
-          <img src={expandedData.image} alt={expandedData.title} />
+          <NextImage
+            src={expandedData.image}
+            alt={expandedData.title}
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 1024px) 100vw, 40vw"
+          />
         </div>
       )}
 

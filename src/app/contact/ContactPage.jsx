@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import Footer from "../components/Footer";
 import ServiceSelector from "../components/ServiceSelector";
 import { Instagram, Facebook } from "lucide-react";
@@ -155,15 +156,11 @@ export default function ContactPage() {
         {/* HEADER */}
         <header className="cp-page-header">
           <div className="cp-title-wrapper">
-            <h1 className="cp-reveal-text">Let's build</h1>
-          </div>
-          <div className="cp-title-wrapper">
-            <h1 className="cp-reveal-text" style={{ paddingLeft: "clamp(2rem, 5vw, 6rem)" }}>
-              Something
+            <h1 className="cp-reveal-text">
+              Let's build <br />
+              <span style={{ paddingLeft: "clamp(2rem, 5vw, 6rem)" }}>Something</span> <br />
+              Concrete.
             </h1>
-          </div>
-          <div className="cp-title-wrapper">
-            <h1 className="cp-reveal-text">Concrete.</h1>
           </div>
         </header>
 
@@ -302,11 +299,14 @@ export default function ContactPage() {
             </form>
 
             {/* PARALLAX IMAGE BREAK */}
-            <div className="cp-image-container">
-              <img
+            <div className="cp-image-container" style={{ position: "relative" }}>
+              <Image
                 src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80"
                 className="cp-parallax-img"
                 alt="Architecture Detail"
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="100vw"
               />
             </div>
 

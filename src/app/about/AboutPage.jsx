@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import Services from "@/app/components/Services";
 import Footer from "@/app/components/Footer";
 import CtaSection from "@/app/components/CtaSection";
@@ -125,11 +126,15 @@ export default function AboutPage() {
           
           {/* STEP 01: HERO */}
           <section className="ap-stream-section" data-step="01">
-            <div className="ap-hero-image-wrapper">
-              <img 
+            <div className="ap-hero-image-wrapper" style={{ position: "relative" }}>
+              <Image 
                 src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2070" 
                 alt="Studio Main" 
+                fill
+                priority
                 className="ap-parallax-img"
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 1024px) 100vw, 66vw"
               />
             </div>
             <div className="ap-intro-text ap-text-reveal">
@@ -155,11 +160,14 @@ export default function AboutPage() {
               </p>
             </div>
             
-            <div className="ap-secondary-image-wrap">
-              <img 
+            <div className="ap-secondary-image-wrap" style={{ position: "relative" }}>
+              <Image 
                 src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" 
                 alt="Material Detail" 
+                fill
                 className="ap-parallax-img"
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 768px) 100vw, 40vw"
               />
               <span className="ap-caption">Fig. A — Material Honesty</span>
             </div>
@@ -183,8 +191,14 @@ export default function AboutPage() {
                 <h3 className="ap-t-name">Naveen</h3>
                 
                 {/* Hover Portrait */}
-                <div className="ap-hover-portrait">
-                  <img src="https://images.unsplash.com/photo-1581094480465-4e6c25fb4a52?w=600&q=80" alt="Naveen" />
+                <div className="ap-hover-portrait" style={{ position: "relative" }}>
+                  <Image 
+                    src="https://images.unsplash.com/photo-1581094480465-4e6c25fb4a52?w=600&q=80" 
+                    alt="Naveen" 
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="300px"
+                  />
                 </div>
               </div>
 
@@ -197,8 +211,14 @@ export default function AboutPage() {
                 <h3 className="ap-t-name">Jafar Sathik</h3>
                 
                 {/* Hover Portrait */}
-                <div className="ap-hover-portrait">
-                  <img src="https://plus.unsplash.com/premium_photo-1664300982961-f57190dca362?w=600&q=80" alt="Jafar Sathik" />
+                <div className="ap-hover-portrait" style={{ position: "relative" }}>
+                  <Image 
+                    src="https://plus.unsplash.com/premium_photo-1664300982961-f57190dca362?w=600&q=80" 
+                    alt="Jafar Sathik" 
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="300px"
+                  />
                 </div>
               </div>
 

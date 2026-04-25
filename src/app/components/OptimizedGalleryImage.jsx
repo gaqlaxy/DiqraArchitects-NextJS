@@ -1,75 +1,10 @@
-// "use client";
-// import { useState } from "react";
-
-// export default function OptimizedGalleryImage({ full, blur, alt }) {
-//   const [loaded, setLoaded] = useState(false);
-
-//   return (
-//     <div style={{ width: "100%", height: "100%", position: "relative" }}>
-//       {/* Blur Placeholder */}
-//       <img
-//         src={blur}
-//         alt=""
-//         style={{
-//           position: "absolute",
-//           width: "100%",
-//           height: "100%",
-//           objectFit: "cover",
-//           filter: "blur(20px)",
-//           transform: "scale(1.1)",
-//           opacity: loaded ? 0 : 1,
-//           transition: "opacity 0.5s ease-out",
-//         }}
-//       />
-
-//       {/* Full Resolution Image */}
-//       <img
-//         src={full}
-//         alt={alt}
-//         draggable="false"
-//         onLoad={() => setLoaded(true)}
-//         style={{
-//           width: "100%",
-//           height: "100%",
-//           objectFit: "cover",
-//           opacity: loaded ? 1 : 0,
-//           transition: "opacity 0.7s ease-out",
-//         }}
-//       />
-//     </div>
-//   );
-// }
-
 "use client";
-import { useState, useRef, useEffect } from "react";
+import React from "react";
+import Image from "next/image";
 
 export default function OptimizedGalleryImage({ full, blur, alt }) {
-  const [shouldLoad, setShouldLoad] = useState(false);
-  const imgRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setShouldLoad(true);
-            observer.disconnect(); // stop observing once loaded
-          }
-        });
-      },
-      {
-        rootMargin: "300px", // preload slightly before visible
-      }
-    );
-
-    if (imgRef.current) observer.observe(imgRef.current);
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <div
-      ref={imgRef}
       style={{
         width: "100%",
         height: "100%",
@@ -78,38 +13,16 @@ export default function OptimizedGalleryImage({ full, blur, alt }) {
         backgroundColor: "#111",
       }}
     >
-      {/* Blur Placeholder */}
-      <img
-        src={blur}
-        alt=""
+      <Image
+        src={full}
+        alt={alt}
+        fill
+        draggable={false}
         style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
           objectFit: "cover",
-          filter: "blur(20px)",
-          transform: "scale(1.1)",
-          opacity: shouldLoad ? 0 : 1,
-          transition: "opacity 0.5s ease-out",
         }}
+        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
       />
-
-      {/* Only load FULL image when in view */}
-      {shouldLoad && (
-        <img
-          src={full}
-          alt={alt}
-          draggable={false}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: 1,
-            transition: "opacity 0.7s ease-out",
-          }}
-        />
-      )}
     </div>
   );
 }

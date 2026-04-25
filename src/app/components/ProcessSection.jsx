@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import "../styles/ProcessSection.css";
 import SlideUpButton from "./SlideUpButton";
 
@@ -83,14 +84,16 @@ const ProcessSection = () => {
         <div className="proc-layout">
           {/* Visual Column */}
           <div className="proc-visual">
-            <div className="proc-image-stack">
+            <div className="proc-image-stack" style={{ position: "relative" }}>
               {processSteps.map((step, index) => (
-                <img
+                <Image
                   key={step.id}
                   src={step.img}
                   alt={step.title}
+                  fill
                   className={`proc-img ${activeStep === index ? "active" : ""}`}
-                  loading="lazy"
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 768px) 100vw, 40vw"
                 />
               ))}
               <div className="proc-img-overlay" />

@@ -10,6 +10,34 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "plus.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.diqraarchitects.com",
+      },
+      {
+        protocol: "https",
+        hostname: "diqraarchitects.com",
+      },
+      {
+        protocol: "https",
+        hostname: "website-data-pluckwalk.s3-ap-south-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.cosmos.so",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

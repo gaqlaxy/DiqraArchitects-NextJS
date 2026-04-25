@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import Footer from "@/app/components/Footer";
 import "../styles/ProcessPage.css";
 import CtaSection from "@/app/components/CtaSection";
@@ -193,8 +194,15 @@ export default function ProcessPage() {
                   <h3 className="pp-step-title">{card.title}</h3>
                   <p className="pp-step-desc">{card.copy}</p>
                 </div>
-                <div className="pp-step-img-wrapper">
-                  <img src={card.image} alt={card.title} className="pp-step-img" loading="lazy" />
+                <div className="pp-step-img-wrapper" style={{ position: "relative" }}>
+                  <Image
+                    src={card.image}
+                    alt={card.title}
+                    className="pp-step-img"
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </div>
               </div>
             </div>

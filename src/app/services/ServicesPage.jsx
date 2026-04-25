@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import CtaSection from "@/app/components/CtaSection";
 import Footer from "@/app/components/Footer";
 import SlideUpButton from "@/app/components/SlideUpButton";
@@ -178,12 +179,15 @@ const ServicesPage = () => {
                 <div
                   key={service.id}
                   className={`sp-image-frame ${hoveredIndex === index ? "active" : ""}`}
+                  style={{ position: "relative" }}
                 >
-                  <img
+                  <Image
                     src={service.image}
                     alt={service.title}
+                    fill
                     className="sp-image-asset"
-                    loading="lazy"
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                   <div className="sp-image-overlay"></div>
                 </div>

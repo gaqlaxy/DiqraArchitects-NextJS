@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "@/app/styles/Works.css";
@@ -96,8 +97,14 @@ export default function WorksPage() {
               href={`/project/${project.slug}`}
               className={`wp-project-card ${idx % 3 === 0 ? "large" : "standard"}`}
             >
-              <div className="wp-image-wrapper">
-                <img src={project.thumbnail} alt={project.title} loading="lazy" />
+              <div className="wp-image-wrapper" style={{ position: "relative" }}>
+                <Image
+                  src={project.thumbnail}
+                  alt={project.title}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
                 <div className="wp-overlay"></div>
                 <div className="wp-meta-hover">
                   <span className="wp-meta-year">{project.year || "2024"}</span>
