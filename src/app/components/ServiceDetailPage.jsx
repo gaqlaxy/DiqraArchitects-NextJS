@@ -426,6 +426,34 @@ const ServiceDetailPage = ({
         });
 
       // Process steps
+      const processSection = containerRef.current?.querySelector(
+        ".sd-process-section",
+      );
+      const processLeft = processSection?.querySelector(".sd-process-left");
+      const processRight = processSection?.querySelector(".sd-process-right");
+
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 1101px)", () => {
+        if (processSection && processLeft && processRight) {
+          ScrollTrigger.create({
+            trigger: processSection,
+            start: "top top",
+            end: () => {
+              const rightHeight = processRight.offsetHeight;
+              const viewportHeight = window.innerHeight;
+              const scrollDistance = Math.max(rightHeight - viewportHeight, 0);
+
+              return `+=${scrollDistance}`;
+            },
+            pin: processLeft,
+            pinSpacing: false,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          });
+        }
+      });
+
       gsap.fromTo(
         ".sd-step-row",
         { x: 24, opacity: 0 },
@@ -466,6 +494,8 @@ const ServiceDetailPage = ({
           scrollTrigger: { trigger: ".sd-faq-section", start: "top 75%" },
         },
       );
+
+      return () => mm.revert();
     }, containerRef);
 
     return () => ctx.revert();
