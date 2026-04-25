@@ -58,7 +58,7 @@ export default function OhHeroSection() {
           stagger: 0.15,
           ease: "power4.out",
           delay: 0.3,
-        }
+        },
       );
 
       // Meta elements entrance
@@ -73,7 +73,7 @@ export default function OhHeroSection() {
           stagger: 0.1,
           ease: "power3.out",
           delay: 1,
-        }
+        },
       );
 
       // Scroll indicator pulse
@@ -103,7 +103,7 @@ export default function OhHeroSection() {
           duration: 1.4,
           ease: "power3.out",
         },
-        "-=0.7"
+        "-=0.7",
       );
 
       ScrollTrigger.refresh();

@@ -11,6 +11,9 @@ export const metadata = {
     "Jafar Sathik architect",
     "modern design studio Chennai",
   ],
+  alternates: {
+    canonical: "https://diqraarchitects.com/about",
+  },
   openGraph: {
     title: "About DIQRA | Architecture Studio Philosophy & Team",
     description:

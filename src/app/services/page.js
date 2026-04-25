@@ -11,6 +11,9 @@ export const metadata = {
     "modern house planning",
     "Diqra services",
   ],
+  alternates: {
+    canonical: "https://diqraarchitects.com/services",
+  },
   openGraph: {
     title: "Professional Architecture & Design Services | DIQRA",
     description:

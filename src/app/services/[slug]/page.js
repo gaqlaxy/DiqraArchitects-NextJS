@@ -49,7 +49,7 @@ export async function generateMetadata({ params }) {
         `${service.title} | Best Architectural Services in Chennai | Diqra`,
       description: metaDescription,
       alternates: {
-        canonical: `https://www.diqraarchitects.com/services/${slug}`,
+        canonical: `https://diqraarchitects.com/services/${slug}`,
       },
       openGraph: {
         title: service.metaTitle || service.title,
@@ -81,7 +81,7 @@ export async function generateMetadata({ params }) {
     title: `${category.title} | Best ${category.title.toLowerCase()} in Chennai | Diqra`,
     description: metaDescription,
     alternates: {
-      canonical: `https://www.diqraarchitects.com/services/${slug}`,
+      canonical: `https://diqraarchitects.com/services/${slug}`,
     },
     openGraph: {
       title: category.title,

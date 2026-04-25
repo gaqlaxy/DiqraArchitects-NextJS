@@ -4,6 +4,9 @@ import "../styles/SlideUpLink.css";
 import Link from "next/link";
 
 export default function Footer() {
+  // Footer add dynamic year
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer>
       <div className="footer-container">
@@ -11,7 +14,7 @@ export default function Footer() {
         <div className="footer-content">
           <div className="footer-brand">
             <h1>Diqra Architects</h1>
-            <p>© 2025 Diqra Architects.</p>
+            <p>© {currentYear} Diqra Architects.</p>
           </div>
 
           <div className="footer-column">

@@ -1,5 +1,6 @@
 import { allServiceSlugs } from "@/app/data/servicesData";
 import projectsData from "@/app/data/projects-data.json";
+import { dedicatedServiceRouteSlugs } from "@/app/services/serviceRouteData";
 
 const baseUrl = "https://diqraarchitects.com";
 
@@ -7,6 +8,10 @@ const staticRoutes = [
   "",
   "/about",
   "/services",
+  "/works",
+  "/gallery",
+  "/process",
+  "/interiorworks",
   "/contact",
   "/privacy",
   "/terms",
@@ -44,7 +49,9 @@ export default async function sitemap() {
   }));
 
   // 2. Dynamic Service Pages (including Geo-Variants)
-  const selectedSlugs = [...new Set([...legacySlugs, ...allServiceSlugs])];
+  const selectedSlugs = [
+    ...new Set([...legacySlugs, ...allServiceSlugs, ...dedicatedServiceRouteSlugs]),
+  ];
   const categoryPages = selectedSlugs.map((slug) => {
     // Give base services a slightly higher priority than geo-variants
     const isGeoVariant = slug.endsWith("-chennai") || slug.endsWith("-urapakkam");

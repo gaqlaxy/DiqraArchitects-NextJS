@@ -29,7 +29,7 @@ const ServiceSchema = ({ service, slug, faqs = [] }) => {
     "provider": {
       "@type": "LocalBusiness",
       "name": "Diqra Architects",
-      "url": "https://www.diqraarchitects.com",
+      "url": "https://diqraarchitects.com",
       "telephone": "+917871772428",
       "address": {
         "@type": "PostalAddress",
@@ -42,7 +42,7 @@ const ServiceSchema = ({ service, slug, faqs = [] }) => {
     },
     "areaServed": ["Chennai", "Tamil Nadu"],
     "serviceType": service.title,
-    "url": `https://www.diqraarchitects.com/services/${slug}`
+    "url": `https://diqraarchitects.com/services/${slug}`
   };
 
   const faqSchema = faqs.length > 0 ? {
@@ -62,9 +62,9 @@ const ServiceSchema = ({ service, slug, faqs = [] }) => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.diqraarchitects.com" },
-      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.diqraarchitects.com/services" },
-      { "@type": "ListItem", "position": 3, "name": service.title, "item": `https://www.diqraarchitects.com/services/${slug}` }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://diqraarchitects.com" },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://diqraarchitects.com/services" },
+      { "@type": "ListItem", "position": 3, "name": service.title, "item": `https://diqraarchitects.com/services/${slug}` }
     ]
   };
 
@@ -145,7 +145,7 @@ const ServiceDetailPage = ({
 
 
   const _projectsData = projectsData.length > 0 ? projectsData : [
-    { id: 1, slug: "mohans-house", title: "Mohan's House", cat: "Residential", img: "https://www.diqraarchitects.com/HeroMain.webp" },
+    { id: 1, slug: "mohans-house", title: "Mohan's House", cat: "Residential", img: "https://diqraarchitects.com/HeroMain.webp" },
     { id: 2, slug: "esake-residence", title: "Mr. Esake Residence", cat: "Residential", img: "https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?w=1200" },
     { id: 3, slug: "manikandan-residence", title: "Manikandan Residence", cat: "Residential", img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200" },
     { id: 4, slug: "ranga-residence", title: "Mr. Ranga Residence", cat: "Residential", img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200" },

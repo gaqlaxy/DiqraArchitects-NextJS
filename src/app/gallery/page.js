@@ -10,6 +10,9 @@ export const metadata = {
     "architectural photography",
     "DIQRA project gallery",
   ],
+  alternates: {
+    canonical: "https://diqraarchitects.com/gallery",
+  },
   openGraph: {
     title: "Architecture Gallery | Visualizing Spaces & Details",
     description: "Explore textures, light, and form in DIQRA's architectural project gallery.",

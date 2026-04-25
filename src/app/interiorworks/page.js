@@ -11,6 +11,9 @@ export const metadata = {
     "DIQRA interior works",
     "minimalist interior design",
   ],
+  alternates: {
+    canonical: "https://diqraarchitects.com/interiorworks",
+  },
   openGraph: {
     title: "Interior Design Portfolio | Crafting Elegant Spaces",
     description: "Explore sanctuaries that breathe and evolve. DIQRA's signature interior works.",

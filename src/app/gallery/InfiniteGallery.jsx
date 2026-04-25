@@ -39,16 +39,6 @@ const items = [
   "Zenith Flow",
 ];
 
-const imageUrls = [
-  "https://cdn.cosmos.so/0f164449-f65e-4584-9d62-a9b3e1f4a90a?format=jpeg",
-  "https://cdn.cosmos.so/74ccf6cc-7672-4deb-ba13-1727b7dc6146?format=jpeg",
-  "https://cdn.cosmos.so/2f49a117-05e7-4ae9-9e95-b9917f970adb?format=jpeg",
-  "https://cdn.cosmos.so/7b5340f5-b4dc-4c08-8495-c507fa81480b?format=jpeg",
-  "https://cdn.cosmos.so/f733585a-081e-48e7-a30e-e636446f2168?format=jpeg",
-  "https://cdn.cosmos.so/47caf8a0-f456-41c5-98ea-6d0476315731?format=jpeg",
-  "https://cdn.cosmos.so/f99f8445-6a19-4a9a-9de3-ac382acc1a3f?format=jpeg",
-];
-
 // pulled out of component to avoid re-creating every render
 const SETTINGS = {
   baseWidth: 400,
@@ -216,17 +206,19 @@ const InfiniteGallery = () => {
       gsap.fromTo(
         titleRef.current,
         { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, delay: 0.5, ease: "power3.out" }
+        { y: 0, opacity: 1, duration: 1, delay: 0.5, ease: "power3.out" },
       );
     }
 
     // Fade out other items
     if (canvasRef.current) {
-      canvasRef.current.querySelectorAll(".GallerySectionitem").forEach((el) => {
-        if (el.getAttribute("data-id") !== itemData.id) {
-          gsap.to(el, { opacity: 0, duration: SETTINGS.overlayEaseDuration });
-        }
-      });
+      canvasRef.current
+        .querySelectorAll(".GallerySectionitem")
+        .forEach((el) => {
+          if (el.getAttribute("data-id") !== itemData.id) {
+            gsap.to(el, { opacity: 0, duration: SETTINGS.overlayEaseDuration });
+          }
+        });
     }
   };
 
@@ -251,13 +243,15 @@ const InfiniteGallery = () => {
 
     // Fade in other items
     if (canvasRef.current) {
-      canvasRef.current.querySelectorAll(".GallerySectionitem").forEach((el) => {
-        gsap.to(el, {
-          opacity: 1,
-          duration: SETTINGS.overlayEaseDuration,
-          delay: 0.3,
+      canvasRef.current
+        .querySelectorAll(".GallerySectionitem")
+        .forEach((el) => {
+          gsap.to(el, {
+            opacity: 1,
+            duration: SETTINGS.overlayEaseDuration,
+            delay: 0.3,
+          });
         });
-      });
     }
 
     setTimeout(() => setExpandedData(null), SETTINGS.zoomDuration * 1000);
@@ -278,7 +272,7 @@ const InfiniteGallery = () => {
       const now = Date.now();
       const distMoved = Math.sqrt(
         Math.pow(positionRef.current.currentX - stateRef.current.lastX, 2) +
-          Math.pow(positionRef.current.currentY - stateRef.current.lastY, 2)
+          Math.pow(positionRef.current.currentY - stateRef.current.lastY, 2),
       );
 
       // Throttled update to avoid too many re-renders

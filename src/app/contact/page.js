@@ -10,6 +10,9 @@ export const metadata = {
     "DIQRA office location",
     "hire building contractors Chennai",
   ],
+  alternates: {
+    canonical: "https://diqraarchitects.com/contact",
+  },
   openGraph: {
     title: "Contact DIQRA Architects | Architecture Studio in Chennai",
     description: "Get in touch for your next architectural project in Chennai and beyond.",

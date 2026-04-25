@@ -11,6 +11,9 @@ export const metadata = {
     "modern house designs India",
     "commercial architecture portfolio",
   ],
+  alternates: {
+    canonical: "https://diqraarchitects.com/works",
+  },
   openGraph: {
     title: "Architecture Portfolio | Selected Works & Projects",
     description:

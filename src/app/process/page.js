@@ -11,6 +11,9 @@ export const metadata = {
     "DIQRA methodology",
     "project management in architecture",
   ],
+  alternates: {
+    canonical: "https://diqraarchitects.com/process",
+  },
   openGraph: {
     title: "Our Architectural Process | From Concept to Construction",
     description: "A structured approach to architecture: Discovery, Designing, and Deployment.",

@@ -42,8 +42,10 @@ const SERVICE_ROUTE_OVERRIDES = {
   },
 };
 
+export const dedicatedServiceRouteSlugs = Object.keys(SERVICE_ROUTE_OVERRIDES);
+
 function getCanonicalUrl(routeSlug) {
-  return `https://www.diqraarchitects.com/services/${routeSlug}`;
+  return `https://diqraarchitects.com/services/${routeSlug}`;
 }
 
 export function getServiceRouteData(routeSlug) {
