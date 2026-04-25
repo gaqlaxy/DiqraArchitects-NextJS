@@ -1,26 +1,124 @@
 "use client";
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useId, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import Head from "next/head";
 import Image from "next/image";
+import { Cormorant_Garamond, DM_Mono } from "next/font/google";
 import CtaSection from "@/app/components/CtaSection";
 import Footer from "@/app/components/Footer";
 
 import { servicesData } from "@/app/data/servicesData";
+import projectsSource from "@/app/data/projects-data.json";
 import "@/app/styles/ServiceDetailPage.css";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const serviceSerif = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-sd-serif",
+});
+
+const serviceMono = DM_Mono({
+  subsets: ["latin"],
+  weight: ["300", "400"],
+  display: "swap",
+  variable: "--font-sd-mono",
+});
+
+const EMPTY_ARRAY = [];
+const EMPTY_OBJECT = {};
+const allowedInlineTagPattern = /(<\/?(?:em|strong)>)/g;
+const serializeJsonLd = (value) => JSON.stringify(value).replace(/</g, "\\u003c");
+
+const renderInlineMarkup = (value) => {
+  const tokens = String(value || "").split(allowedInlineTagPattern);
+  const stack = [{ tag: null, children: [] }];
+
+  tokens.forEach((token) => {
+    if (!token) return;
+
+    const openMatch = token.match(/^<(em|strong)>$/);
+    if (openMatch) {
+      stack.push({ tag: openMatch[1], children: [] });
+      return;
+    }
+
+    const closeMatch = token.match(/^<\/(em|strong)>$/);
+    if (closeMatch && stack.length > 1) {
+      const node = stack.pop();
+      const Element = node.tag;
+      stack[stack.length - 1].children.push(
+        <Element key={`${node.tag}-${stack[stack.length - 1].children.length}`}>
+          {node.children}
+        </Element>,
+      );
+      return;
+    }
+
+    stack[stack.length - 1].children.push(token);
+  });
+
+  while (stack.length > 1) {
+    const node = stack.pop();
+    stack[stack.length - 1].children.push(...node.children);
+  }
+
+  return stack[0].children;
+};
+
+const renderOverviewAside = (value) =>
+  String(value || "")
+    .split("\n")
+    .flatMap((line) => {
+      const trimmed = line.trim();
+      return trimmed ? [trimmed] : [];
+    })
+    .map((line, index, lines) => {
+      const strongMatch = line.match(/^<strong>(.*?)<\/strong>$/);
+      if (strongMatch) {
+        return (
+          <strong key={`aside-heading-${strongMatch[1]}`}>
+            {strongMatch[1]}
+          </strong>
+        );
+      }
+
+      return (
+        <React.Fragment key={`aside-copy-${line}`}>
+          {renderInlineMarkup(line)}
+          {index < lines.length - 1 ? <br /> : null}
+        </React.Fragment>
+      );
+    });
+
+const normalizeProject = (project) => ({
+  id: project.id || project.slug,
+  slug: project.slug,
+  title: project.title,
+  cat: project.cat || project.category || project.projectType || "Project",
+  img: project.img || project.thumbnail || project.images?.[0],
+});
+
+const knownProjectSlugs = new Set(
+  (projectsSource.projects || []).map((project) => project.slug),
+);
+
+const projectFallbacks = (projectsSource.projects || [])
+  .map(normalizeProject)
+  .filter((project) => project.slug && project.title && project.img);
+
 /* ─────────────────────────────────────────────────────────────
    SEO — JSON-LD Helper (Service + FAQ schema)
    Improves chances of rich snippets in Google Search
 ───────────────────────────────────────────────────────────── */
-const ServiceSchema = ({ service, slug, faqs = [] }) => {
+const ServiceSchema = ({ service, slug, faqs = EMPTY_ARRAY }) => {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -90,18 +188,21 @@ const ServiceSchema = ({ service, slug, faqs = [] }) => {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
+        suppressHydrationWarning
+      >
+        {serializeJsonLd(serviceSchema)}
+      </script>
       {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
+        <script type="application/ld+json" suppressHydrationWarning>
+          {serializeJsonLd(faqSchema)}
+        </script>
       )}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+        suppressHydrationWarning
+      >
+        {serializeJsonLd(breadcrumbSchema)}
+      </script>
     </>
   );
 };
@@ -111,12 +212,17 @@ const ServiceSchema = ({ service, slug, faqs = [] }) => {
 ───────────────────────────────────────────────────────────── */
 const FaqItem = ({ q, a }) => {
   const [open, setOpen] = useState(false);
+  const answerId = useId();
+  const questionId = useId();
+
   return (
     <li className={`sd-faq-item${open ? " open" : ""}`}>
       <button
+        id={questionId}
         className="sd-faq-question"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
+        aria-controls={answerId}
       >
         <span>{q}</span>
         <em className="sd-faq-icon" aria-hidden>
@@ -124,7 +230,12 @@ const FaqItem = ({ q, a }) => {
         </em>
       </button>
       {/* Visible to search crawlers even when collapsed via CSS */}
-      <div className="sd-faq-answer" aria-hidden={!open}>
+      <div
+        id={answerId}
+        className="sd-faq-answer"
+        role="region"
+        aria-labelledby={questionId}
+      >
         {a}
       </div>
     </li>
@@ -137,12 +248,12 @@ const FaqItem = ({ q, a }) => {
    MAIN COMPONENT
 ───────────────────────────────────────────────────────────── */
 const ServiceDetailPage = ({
-  customData = {},
+  customData = EMPTY_OBJECT,
   service = "service",
   slug = "service",
-  relatedServices = [],
-  projectsData = [],
-  faqs = [],
+  relatedServices = EMPTY_ARRAY,
+  projectsData = EMPTY_ARRAY,
+  faqs = EMPTY_ARRAY,
 }) => {
   const containerRef = useRef(null);
 
@@ -180,46 +291,17 @@ const ServiceDetailPage = ({
             },
           ];
 
+  const suppliedProjects = projectsData
+    .map(normalizeProject)
+    .filter(
+      (project) =>
+        project.slug &&
+        project.title &&
+        project.img &&
+        knownProjectSlugs.has(project.slug),
+    );
   const _projectsData =
-    projectsData.length > 0
-      ? projectsData
-      : [
-          {
-            id: 1,
-            slug: "mohans-house",
-            title: "Mohan's House",
-            cat: "Residential",
-            img: "https://diqraarchitects.com/HeroMain.webp",
-          },
-          {
-            id: 2,
-            slug: "esake-residence",
-            title: "Mr. Esake Residence",
-            cat: "Residential",
-            img: "https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?w=1200",
-          },
-          {
-            id: 3,
-            slug: "manikandan-residence",
-            title: "Manikandan Residence",
-            cat: "Residential",
-            img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200",
-          },
-          {
-            id: 4,
-            slug: "ranga-residence",
-            title: "Mr. Ranga Residence",
-            cat: "Residential",
-            img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200",
-          },
-          {
-            id: 5,
-            slug: "apex-hq",
-            title: "Apex HQ",
-            cat: "Commercial",
-            img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200",
-          },
-        ];
+    suppliedProjects.length > 0 ? suppliedProjects : projectFallbacks;
 
   const _faqs =
     faqs.length > 0
@@ -245,6 +327,14 @@ const ServiceDetailPage = ({
 
   /* ── GSAP Animations ── */
   useLayoutEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReducedMotion) {
+      return undefined;
+    }
+
     const ctx = gsap.context(() => {
       // Hero
       gsap.fromTo(
@@ -387,7 +477,10 @@ const ServiceDetailPage = ({
       {/* ── SEO Structured Data ── */}
       <ServiceSchema service={currentService} slug={slug} faqs={_faqs} />
 
-      <div ref={containerRef} className="sd-master-container">
+      <div
+        ref={containerRef}
+        className={`sd-master-container ${serviceSerif.variable} ${serviceMono.variable}`}
+      >
         {/* ════════════════════════════════════════════
             SPLIT HERO
         ════════════════════════════════════════════ */}
@@ -461,8 +554,11 @@ const ServiceDetailPage = ({
             {currentService.statsQuote ||
               "Transforming abstract ideas into buildable blueprints since 2009."}
           </div>
-          {(currentService.stats || []).map((stat, i) => (
-            <div key={i} className="sd-stat-metric">
+          {(currentService.stats || []).map((stat) => (
+            <div
+              key={`${stat.value}-${stat.label}`}
+              className="sd-stat-metric"
+            >
               <div className="sd-stat-value">{stat.value}</div>
               <div className="sd-stat-label">{stat.label}</div>
             </div>
@@ -481,29 +577,22 @@ const ServiceDetailPage = ({
               <div className="sd-overview-sticky">
                 <div className="sd-overview-label sd-label">Overview</div>
                 {currentService.overviewAside && (
-                  <div
-                    className="sd-overview-aside"
-                    dangerouslySetInnerHTML={{
-                      __html: currentService.overviewAside,
-                    }}
-                  />
+                  <div className="sd-overview-aside">
+                    {renderOverviewAside(currentService.overviewAside)}
+                  </div>
                 )}
               </div>
             </div>
             <div className="sd-overview-right">
               {currentService.overviewHeading && (
-                <h2
-                  id="sd-overview-heading"
-                  className="sd-overview-heading"
-                  dangerouslySetInnerHTML={{
-                    __html: currentService.overviewHeading,
-                  }}
-                />
+                <h2 id="sd-overview-heading" className="sd-overview-heading">
+                  {renderInlineMarkup(currentService.overviewHeading)}
+                </h2>
               )}
               {currentService.overview && (
                 <div className="sd-overview-body">
-                  {currentService.overview.split("\n\n").map((para, i) => (
-                    <p key={i}>{para}</p>
+                  {currentService.overview.split("\n\n").map((para) => (
+                    <p key={para}>{para}</p>
                   ))}
                 </div>
               )}
@@ -522,8 +611,7 @@ const ServiceDetailPage = ({
             <div className="sd-features-header">
               <h2
                 id="sd-features-heading"
-                className="sd-label"
-                style={{ fontSize: "11px" }}
+                className="sd-label sd-features-heading-label"
               >
                 Key Expertise
               </h2>
@@ -535,7 +623,7 @@ const ServiceDetailPage = ({
 
             {currentService.features.map((feature, i) => (
               <article
-                key={i}
+                key={feature.title}
                 className={`sd-feature-row${i % 2 !== 0 ? " sd-reverse" : ""}`}
               >
                 <div className="sd-feature-visual" aria-hidden="true">
@@ -588,7 +676,7 @@ const ServiceDetailPage = ({
 
             <ol className="sd-process-right" style={{ listStyle: "none" }}>
               {currentService.process.map((step, i) => (
-                <li key={i} className="sd-step-row">
+                <li key={`${step.step || i}-${step.title}`} className="sd-step-row">
                   <div className="sd-step-num" aria-label={`Step ${i + 1}`}>
                     {step.step || String(i + 1).padStart(2, "0")}
                   </div>
@@ -662,8 +750,8 @@ const ServiceDetailPage = ({
           </div>
 
           <ul className="sd-faq-list" aria-label="Frequently asked questions">
-            {_faqs.map((faq, i) => (
-              <FaqItem key={i} q={faq.q} a={faq.a} />
+            {_faqs.map((faq) => (
+              <FaqItem key={faq.q} q={faq.q} a={faq.a} />
             ))}
           </ul>
         </section>

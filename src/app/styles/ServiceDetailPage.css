@@ -4,8 +4,6 @@
    Fonts: Cormorant Garamond (display) + DM Mono (labels)
    ═══════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap');
-
 :root {
   /* Diqra Palette */
   --sd-bg: #0a0a0a;
@@ -21,8 +19,8 @@
   --sd-accent-lt: rgba(200, 184, 154, 0.08);
 
   /* Typography */
-  --f-serif: 'Cormorant Garamond', Georgia, serif;
-  --f-mono: 'DM Mono', 'Courier New', monospace;
+  --f-serif: var(--font-sd-serif), Georgia, serif;
+  --f-mono: var(--font-sd-mono), 'Courier New', monospace;
 
   /* Spacing */
   --gutter: clamp(32px, 6vw, 96px);
@@ -30,20 +28,23 @@
 }
 
 /* ─── Reset ─────────────────────────────────── */
-*,
-*::before,
-*::after {
+.sd-master-container,
+.sd-master-container *,
+.sd-master-container *::before,
+.sd-master-container *::after {
   box-sizing: border-box;
+}
+
+.sd-master-container :where([class^="sd-"], [class*=" sd-"]) {
   margin: 0;
   padding: 0;
 }
 
-img {
-  display: block;
-  max-width: 100%;
-}
-
-a {
+.sd-hero-breadcrumb a,
+.sd-hero-cta,
+.sd-view-all,
+.sd-masonry-item,
+.sd-related-card {
   text-decoration: none;
   color: inherit;
 }
@@ -403,6 +404,10 @@ a {
   justify-content: space-between;
   border-bottom: 1px solid var(--sd-border);
   padding-bottom: 24px;
+}
+
+.sd-features-heading-label {
+  font-size: 11px;
 }
 
 .sd-feature-row {
