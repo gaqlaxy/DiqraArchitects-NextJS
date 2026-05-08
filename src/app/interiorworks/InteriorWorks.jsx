@@ -4,10 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 import Footer from "@/app/components/Footer";
-import projectsData from "@/app/data/projects-data.json";
 import "@/app/styles/InteriorWorks.css";
 
-export default function InteriorWorks() {
+export default function InteriorWorks({ projects: allProjects = [] }) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(
     typeof window !== "undefined" ? window.innerWidth < 768 : false
@@ -50,7 +49,7 @@ export default function InteriorWorks() {
   }, [isMobile]);
 
   // Filter only interior projects
-  const projects = projectsData.projects.filter(
+  const projects = allProjects.filter(
     (project) => project.projectType === "interior"
   );
 

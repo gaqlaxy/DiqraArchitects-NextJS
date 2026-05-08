@@ -7,11 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "@/app/styles/Works.css";
 
 import Footer from "@/app/components/Footer";
-import projectsData from "@/app/data/projects-data.json";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function WorksPage() {
+export default function WorksPage({ projects = [] }) {
   const [filter, setFilter] = useState("all");
   const [filteredProjects, setFilteredProjects] = useState([]);
   const containerRef = useRef(null);
@@ -22,12 +21,12 @@ export default function WorksPage() {
 
   // Filter Projects Logic
   useEffect(() => {
-    let filtered = projectsData.projects;
+    let filtered = projects;
     if (filter !== "all") {
       filtered = filtered.filter(p => p.projectType.toLowerCase() === filter);
     }
     setFilteredProjects(filtered);
-  }, [filter]);
+  }, [filter, projects]);
 
   // Handle GSAP Reveal when projects change
   useEffect(() => {

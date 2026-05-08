@@ -1,20 +1,21 @@
-import projectsData from "@/app/data/projects-data.json";
 import { notFound } from "next/navigation";
 import ProjectDetailClient from "./ProjectDetailClient";
-
-const projectsBySlug = new Map(
-  projectsData.projects.map((project) => [project.slug, project])
-);
+import {
+  getAllProjects,
+  getProjectBySlug,
+  getProjectSlugs,
+} from "@/sanity/lib/projects";
 
 export const dynamicParams = false;
 
-export function generateStaticParams() {
-  return [...projectsBySlug.keys()].map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  const slugs = await getProjectSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const project = projectsBySlug.get(slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     notFound();
@@ -52,7 +53,8 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { slug } = await params;
-  const project = projectsBySlug.get(slug);
+  const projects = await getAllProjects();
+  const project = projects.find((item) => item.slug === slug);
 
   if (!project) {
     notFound();
@@ -81,7 +83,7 @@ export default async function Page({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
       />
-      <ProjectDetailClient slug={slug} />
+      <ProjectDetailClient slug={slug} projects={projects} />
     </>
   );
 }

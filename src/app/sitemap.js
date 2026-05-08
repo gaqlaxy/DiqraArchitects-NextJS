@@ -1,7 +1,7 @@
 import { allServiceSlugs } from "@/app/data/servicesData";
 import { serviceAreaPages, serviceAreaLocations } from "@/app/data/serviceAreas";
-import projectsData from "@/app/data/projects-data.json";
 import { dedicatedServiceRouteSlugs } from "@/app/services/serviceRouteData";
+import { getAllProjects } from "@/sanity/lib/projects";
 
 const baseUrl = "https://diqraarchitects.com";
 
@@ -40,6 +40,7 @@ const legacySlugs = [
 
 export default async function sitemap() {
   const lastModified = new Date();
+  const projects = await getAllProjects();
 
   // 1. Static Routes (Home, About, etc.)
   const pages = staticRoutes.map((route) => ({
@@ -77,7 +78,7 @@ export default async function sitemap() {
   });
 
   // 3. Dynamic Project Pages (Portfolio)
-  const projectPages = projectsData.projects.map((project) => ({
+  const projectPages = projects.map((project) => ({
     url: `${baseUrl}/project/${project.slug}`,
     lastModified,
     changeFrequency: "monthly",

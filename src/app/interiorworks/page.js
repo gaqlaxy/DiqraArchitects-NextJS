@@ -1,4 +1,5 @@
 import InteriorWorks from "./InteriorWorks";
+import { getAllProjects } from "@/sanity/lib/projects";
 
 export const metadata = {
   title: "Interior Design Portfolio | Crafting Elegant Spaces",
@@ -30,10 +31,12 @@ export const metadata = {
   },
 };
 
-export default function Interior() {
+export default async function Interior() {
+  const projects = await getAllProjects();
+
   return (
     <>
-      <InteriorWorks />
+      <InteriorWorks projects={projects} />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import HomePage from "./Home/HomePage";
+import { getAllProjects } from "@/sanity/lib/projects";
 
 export const metadata = {
   title: "DIQRA | Intentional Architecture & Modern Studio in Chennai",
@@ -40,6 +41,8 @@ export const metadata = {
   },
 };
 
-export default function Home() {
-  return <HomePage />;
+export default async function Home() {
+  const projects = await getAllProjects();
+
+  return <HomePage projects={projects} />;
 }

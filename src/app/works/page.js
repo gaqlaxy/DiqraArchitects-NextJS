@@ -1,4 +1,5 @@
 import Works from "./Works";
+import { getAllProjects } from "@/sanity/lib/projects";
 
 export const metadata = {
   title: "Architecture Portfolio | Selected Works & Projects",
@@ -38,10 +39,12 @@ export const metadata = {
   },
 };
 
-export default function WorksPage() {
+export default async function WorksPage() {
+  const projects = await getAllProjects();
+
   return (
     <>
-      <Works />
+      <Works projects={projects} />
     </>
   );
 }

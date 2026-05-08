@@ -7,12 +7,12 @@ import CtaSection from "@/app/components/CtaSection";
 import Footer from "@/app/components/Footer";
 import AboutSection from "../components/About";
 
-export default function HomePage() {
+export default function HomePage({ projects = [] }) {
   return (
     <>
-      <OhHerosection />
+      <OhHerosection projects={projects} />
       <AboutSection />
-      <FeaturedWorks />
+      <FeaturedWorks projects={projects} />
       <Services />
       <ProcessSection />
       <Testimonials />

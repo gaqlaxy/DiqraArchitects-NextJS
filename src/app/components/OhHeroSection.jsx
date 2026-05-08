@@ -4,12 +4,11 @@ import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import projectsData from "../data/projects-data.json";
 import "../styles/OhHeroSection.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function OhHeroSection() {
+export default function OhHeroSection({ projects = [] }) {
   const heroRef = useRef(null);
   const heroBgRef = useRef(null);
   const hoverPreviewRef = useRef(null);
@@ -20,9 +19,10 @@ export default function OhHeroSection() {
   const [heroLoaded, setHeroLoaded] = useState(false);
 
   const featuredProject =
-    projectsData.projects.find((p) => p.featured) || projectsData.projects[0];
-  const HERO_IMG = featuredProject.images[0];
-  const PREVIEW_IMG = featuredProject.images[1] || featuredProject.thumbnail;
+    projects.find((project) => project.featured) || projects[0];
+  const HERO_IMG = featuredProject?.images?.[0] || featuredProject?.thumbnail;
+  const PREVIEW_IMG =
+    featuredProject?.images?.[1] || featuredProject?.thumbnail || HERO_IMG;
 
   // GSAP animations after image load
   useEffect(() => {
@@ -116,6 +116,8 @@ export default function OhHeroSection() {
   const handleMouseLeave = () => timelineRef.current?.reverse();
   const handleFocus = () => timelineRef.current?.play();
   const handleBlur = () => timelineRef.current?.reverse();
+
+  if (!featuredProject || !HERO_IMG) return null;
 
   return (
     <div className="oh-hero-body">

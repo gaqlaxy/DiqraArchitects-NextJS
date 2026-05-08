@@ -4,16 +4,15 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Image from "next/image";
-import projectsData from "../data/projects-data.json";
 import "../styles/FeaturedWorks.css";
 import SlideUpButton from "./SlideUpButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const FeaturedWorks = () => {
+const FeaturedWorks = ({ projects = [] }) => {
   const sectionRef = useRef(null);
 
-  const featuredWorks = projectsData.projects
+  const featuredWorks = projects
     .filter((project) => project.featured)
     .slice(0, 4);
 

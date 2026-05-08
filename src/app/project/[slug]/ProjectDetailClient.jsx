@@ -3,7 +3,6 @@
 import React, { useLayoutEffect, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import projectsData from "@/app/data/projects-data.json";
 import Footer from "@/app/components/Footer";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,16 +12,16 @@ import CTASection from "../../components/CtaSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ProjectDetailClient({ slug }) {
+export default function ProjectDetailClient({ slug, projects = [] }) {
   const containerRef = useRef(null);
 
   // --- DATA RETRIEVAL ---
-  const projectIndex = projectsData.projects.findIndex((p) => p.slug === slug);
-  const project = projectsData.projects[projectIndex];
+  const projectIndex = projects.findIndex((p) => p.slug === slug);
+  const project = projects[projectIndex];
 
   const nextProject =
     projectIndex !== -1
-      ? projectsData.projects[(projectIndex + 1) % projectsData.projects.length]
+      ? projects[(projectIndex + 1) % projects.length]
       : null;
 
   // --- ANIMATIONS ---
