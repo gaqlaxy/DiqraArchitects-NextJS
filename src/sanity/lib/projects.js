@@ -55,8 +55,9 @@ async function fetchProjectsFromSanity(query, params = {}) {
   if (!hasSanityConfig) return null;
 
   try {
+    const isDev = process.env.NODE_ENV === "development";
     return await client.fetch(query, params, {
-      next: { revalidate: 60 },
+      next: isDev ? { revalidate: 0 } : { revalidate: 60 },
     });
   } catch (error) {
     console.warn("Sanity project fetch failed; using local fallback.", error);

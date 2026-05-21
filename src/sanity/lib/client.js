@@ -6,4 +6,5 @@ export const client = createClient({
   dataset,
   apiVersion,
   useCdn: process.env.NODE_ENV === "production",
+  token: process.env.SANITY_API_WRITE_TOKEN,
 });

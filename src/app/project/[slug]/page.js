@@ -6,7 +6,7 @@ import {
   getProjectSlugs,
 } from "@/sanity/lib/projects";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const slugs = await getProjectSlugs();
