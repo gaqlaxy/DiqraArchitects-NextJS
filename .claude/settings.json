@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/ -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/ -A \"meta-externalagent/1.1\")",
+      "Bash(curl -s http://localhost:3000/ -A \"meta-externalagent/1.1\")",
+      "Bash(curl -s http://localhost:3000/robots.txt)",
+      "Bash(powershell -Command 'Get-Process node -ErrorAction SilentlyContinue | Where-Object {$_.MainWindowTitle -eq '\\\\'''\\\\''} | Stop-Process -Force')",
+      "Bash(taskkill //F //IM node.exe)"
+    ]
+  }
+}

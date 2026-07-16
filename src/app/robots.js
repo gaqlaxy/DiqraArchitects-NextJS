@@ -18,6 +18,10 @@ export default function robots() {
         allow: "/",
         disallow: ["/api/", "/admin/"], // if needed
       },
+      {
+        userAgent: "meta-externalagent",
+        disallow: "/",
+      },
     ],
     sitemap: "https://diqraarchitects.com/sitemap.xml",
   };
