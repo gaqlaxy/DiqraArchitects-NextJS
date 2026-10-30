@@ -28,6 +28,7 @@ export default function OhHeroSection({ projects = [] }) {
   useEffect(() => {
     if (!heroLoaded) return;
 
+    let onReveal;
     const ctx = gsap.context(() => {
       // Fade in the hero
       gsap.set(heroRef.current, { autoAlpha: 0 });
@@ -46,45 +47,56 @@ export default function OhHeroSection({ projects = [] }) {
         pinSpacing: false,
       });
 
-      // Staggered text entrance
       const heroLines = heroRef.current.querySelectorAll(".oh-line");
-      gsap.fromTo(
-        heroLines,
-        { y: "100%", opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.15,
-          ease: "power4.out",
-          delay: 0.3,
-        },
-      );
-
-      // Meta elements entrance
       const metaEls = heroRef.current.querySelectorAll(".oh-meta-item");
-      gsap.fromTo(
-        metaEls,
-        { y: 20, opacity: 0 },
-        {
+      const scrollLine = heroRef.current.querySelector(".oh-scroll-line");
+      gsap.set(metaEls, { y: 20, opacity: 0 });
+
+      const entrance = () => {
+        // Staggered text entrance
+        gsap.fromTo(
+          heroLines,
+          { y: "100%", opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power4.out",
+            delay: 0.3,
+          },
+        );
+
+        // Meta elements entrance
+        gsap.to(metaEls, {
           y: 0,
           opacity: 1,
           duration: 0.8,
           stagger: 0.1,
           ease: "power3.out",
           delay: 1,
-        },
-      );
-
-      // Scroll indicator pulse
-      const scrollLine = heroRef.current.querySelector(".oh-scroll-line");
-      if (scrollLine) {
-        gsap.to(scrollLine, {
-          scaleY: 1,
-          duration: 1.2,
-          ease: "power2.inOut",
-          delay: 1.5,
         });
+
+        // Scroll indicator pulse
+        if (scrollLine) {
+          gsap.to(scrollLine, {
+            scaleY: 1,
+            duration: 1.2,
+            ease: "power2.inOut",
+            delay: 1.5,
+          });
+        }
+      };
+
+      // Hold the entrance while the preloader covers the page; play it as it leaves
+      const preloading =
+        document.querySelector(".preloader") &&
+        document.documentElement.dataset.preloader !== "revealed";
+      if (preloading) {
+        onReveal = () => ctx.add(entrance);
+        window.addEventListener("preloader:reveal", onReveal, { once: true });
+      } else {
+        entrance();
       }
 
       // Hover preview timeline
@@ -109,7 +121,10 @@ export default function OhHeroSection({ projects = [] }) {
       ScrollTrigger.refresh();
     }, heroRef);
 
-    return () => ctx.revert();
+    return () => {
+      if (onReveal) window.removeEventListener("preloader:reveal", onReveal);
+      ctx.revert();
+    };
   }, [heroLoaded]);
 
   const handleMouseEnter = () => timelineRef.current?.play();

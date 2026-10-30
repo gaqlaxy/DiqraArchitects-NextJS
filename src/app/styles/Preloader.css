@@ -35,6 +35,17 @@
     linear-gradient(0deg, rgba(20, 14, 8, 0.35) 0%, rgba(20, 14, 8, 0) 22%);
 }
 
+/* Same as .oh-hero-vignette, faded in at the end so the last frame matches the homepage hero */
+.preloader-vignette {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 35%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 50%),
+    linear-gradient(to right, rgba(0, 0, 0, 0.3) 0%, transparent 30%);
+}
+
 .preloader-meta {
   position: absolute;
   bottom: 48px;
