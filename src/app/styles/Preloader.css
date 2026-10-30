@@ -1,24 +1,95 @@
+/* Preloader — full-screen cuts through the work, logo in white over the top */
 .preloader {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  inset: 0;
   z-index: 9999;
+  overflow: hidden;
+  background: #f3ece0;
+  font-family: var(--f-mono, ui-monospace, "SFMono-Regular", Menlo, monospace);
+}
+
+/* Clipped from JS: lifts away upward to reveal the photos */
+.preloader-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #e9dfcc;
+  clip-path: inset(100% 0% 0% 0%);
+}
+
+.preloader-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform, clip-path;
+}
+
+/* Keeps the white logo and captions legible on any photo */
+.preloader-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 55% at 50% 50%, rgba(20, 14, 8, 0.32) 0%, rgba(20, 14, 8, 0) 100%),
+    linear-gradient(0deg, rgba(20, 14, 8, 0.35) 0%, rgba(20, 14, 8, 0) 22%);
+}
+
+.preloader-meta {
+  position: absolute;
+  bottom: 48px;
+  display: flex;
+  gap: 16px;
+  color: #fffaf0;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.preloader-meta.l { left: 56px; }
+.preloader-meta.r { right: 56px; }
+
+/* Logo */
+.preloader-center {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+/* Hidden until the timeline brings it in, so nothing flashes before hydration */
+.preloader-logo {
+  width: min(78vw, 560px);
+  opacity: 0;
+}
+
+.preloader-logo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.preloader-logo path {
+  stroke: #fff;
+  stroke-width: 1.1;
+  fill: transparent;
+}
+
+html.is-preloading,
+html.is-preloading body {
   overflow: hidden;
 }
 
-.logo-container {
-  width: 100%;
-  max-width: 600px;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
-}
-
-.logo-container svg {
-  width: 100%;
-  height: auto;
+@media (max-width: 640px) {
+  .preloader-meta {
+    bottom: 28px;
+    gap: 10px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+  }
+  .preloader-meta.l { left: 20px; }
+  .preloader-meta.r { right: 20px; }
 }
